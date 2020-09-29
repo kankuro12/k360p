@@ -278,8 +278,8 @@ class ProductController extends Controller
 
         $categories = Category::get();
         $brands = Brand::get();
-        $branddropdown = "";
-        $categorydropdown = "";
+        $branddropdown = "<option></option>";
+        $categorydropdown = "<option></option>";
         $categories = Category::get();
         $brands = Brand::get();
         $branddropdown = "";
