@@ -10,6 +10,6 @@ class Municipality extends Model
 
     public function areas()
     {
-        return $this->hasMany('\App\Shippingarea');
+        return $this->hasMany('\App\ShippingArea');
     }
 }
