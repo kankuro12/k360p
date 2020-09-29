@@ -27,6 +27,11 @@
                             <i class="material-icons">help_outline</i> Help Center
                         </a>
                     </li>
+                    <li class="">
+                        <a href="#msg" role="tab" data-toggle="tab" aria-expanded="false">
+                            <i class="material-icons">help_outline</i> Messages
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -206,6 +211,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="msg">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Messages</h4>
+                          
+                        </div>
+                        <div class="card-content">
+                            @include('admin.vendor.message',$vendordetails)
+                        </div>
+                    </div>
+                </div>
             </div>
             <button onclick="goback(this);" class="btn btn-danger">Go Back</button>
         </div>
@@ -376,5 +392,18 @@
             });
         }
 
+
+        function sendMsg(){
+            $.ajax({
+                type: 'post',
+                url: '{{route('admin.vendor-message')}}',
+                data: $('#message_form').serialize(),
+                success: function(data){
+                    $("#message").val('');
+                    
+                },
+
+            });
+        }
     </script>
 @endsection

@@ -104,7 +104,7 @@
                                         $('#w_class').text($(this).find(':selected').attr('data-wclass'));
                                         $('.d_class').text($(this).find(':selected').attr('data-dclass'));
                                         ">
-                                        @foreach (App\Shippingclass::all() as $item)
+                                        @foreach (App\ShippingClass::all() as $item)
                                             <option  data-wclass="{{ $item->weightclass }}" data-dclass="{{$item->dimensionclass}}" value="{{ $item->id }}" >
                                                 {{ $item->name}}</option>
                                         @endforeach

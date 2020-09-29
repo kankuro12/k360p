@@ -1,33 +1,45 @@
 @extends('layouts.sellerlayouts.seller-design')
 @section('content')
+    <style>
+        .card-alert {
+
+            background-color: #f55a4e;
+            color: #ffffff;
+            border-radius: 3px;
+            box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(244, 67, 54, 0.4)
+        }
+
+        .text-white {
+            color: #ffffff;
+        }
+
+    </style>
     @if ($data->verified == 0)
         <div class="row">
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-12">
+                <div class="card card-alert">
+                    <div class="card-header color-white">
+                        <h4 class="card-title">
+                            <strong class="text-white">
+                                Account Not Verified
+                            </strong>
+                        </h4>
+
+                    </div>
                     <div class="card-header">
-                        <h4 class="card-title">Regular header</h4>
-                        <p class="category">Category subtitle</p>
+                        the message
                     </div>
-                    <div class="card-body">
-                        The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where
-                        you can enjoy the main night life in Barcelona...
-                    </div>
+                    <br>
                 </div>
+
+                
             </div>
 
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title">Full header coloured</h4>
-                        <p class="category">Category subtitle</p>
-                    </div>
-                    <div class="card-body">
-                        The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where
-                        you can enjoy the main night life in Barcelona...
-                    </div>
-                </div>
-            </div>
+
         </div>
 
     @endif
+
+
+    
 @endsection

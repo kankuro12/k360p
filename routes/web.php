@@ -329,6 +329,9 @@ Route::group(['prefix'=>'admin','middleware' => 'admin_auth'], function () {
         'as' => 'admin.vendor-verification',
         'uses' => 'admin\VendorController@verification'
     ]);
+
+    Route::post('/message', 'admin\VendorController@message')->name('admin.vendor-message');
+    
     Route::match(['get', 'post'], '/manage-tag', [
         'as'=> 'admin.manage-tag',
         'uses' => 'admin\TagController@manageTags'
