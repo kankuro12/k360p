@@ -30,7 +30,7 @@ class SignupActivate extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'slack',Aakash::class];
+        return ['mail',Aakash::class];
     }
 
     /**
