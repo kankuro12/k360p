@@ -290,7 +290,7 @@
                                 <a href="#" class="sf-with">Contact Us</a>
                             </li>
                             <li>
-                                <a href="blog.html" class="sf-with">Our Blog</a>
+                                <a href="/vendor/register" class="sf-with">Become A Vendor</a>
                             </li>
 
                         </ul><!-- End .menu -->
