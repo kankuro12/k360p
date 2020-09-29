@@ -76,7 +76,7 @@ class User extends Authenticatable
 
     public function status(){
 
-        return \App\Model\Vendor\Vendor::where('user_id',$this->id)->value('stage');
+        return \App\model\Vendor\Vendor::where('user_id',$this->id)->value('stage');
     }
 
     public function routeNotificationForSlack($notification)
