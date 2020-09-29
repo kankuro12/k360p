@@ -96,7 +96,7 @@
 
 <body style="min-height: 100vh;">
     <div class="container">
-        <div id="outPopUp">
+        <div id="outPopUp" style="width: 100%;">
             <div class="p-3">
                 <h3 class="text-center" style="font-weight: 500;color:#3C4858;">
     
