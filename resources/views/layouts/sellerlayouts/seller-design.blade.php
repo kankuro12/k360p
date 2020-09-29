@@ -143,7 +143,7 @@
                 });
                 //console.log($url+'/'+data.name);
                 $('#userphoto').attr("src", $url+'/'+data.logo);
-                document.getElementById("vendorname").innerHTML =  data.name ;
+                document.getElementById("vendorname").innerHTML =  "Hello! "+ data.name ;
             }
         });
     });

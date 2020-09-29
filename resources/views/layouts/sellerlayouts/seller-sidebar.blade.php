@@ -64,7 +64,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
 </div>
 <ul class="nav">
     <li >
-        <a href="./dashboard.html">
+        <a href="/vendor/dashboard">
             <i class="material-icons">dashboard</i>
             <p> Dashboard </p>
         </a>

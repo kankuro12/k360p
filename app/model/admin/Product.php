@@ -34,7 +34,7 @@ class Product extends Model
 
     public function routeNotificationForSlack($notification)
     {
-        return 'https://hooks.slack.com/services/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';
+        return 'https://hooks.slack.com/services/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';
     }
 
     public function variants(){
