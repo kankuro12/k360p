@@ -124,7 +124,7 @@
     
                 </div>
             </div>
-            <div class="p-3">
+            <div class="p-3" style="padding:2rem;">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

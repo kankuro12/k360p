@@ -31,7 +31,7 @@ class SetupController extends Controller
                 $vendor->save();
                 return redirect()->route('vendor.step-2');
             } else {
-                return redirect()->back()->withErrors(['User Not Found']);
+                return redirect()->back()->withErrors(['Inorrect Verification Code']);
             }
         } else {
             $user = $request->user();
