@@ -280,6 +280,10 @@ class ProductController extends Controller
         $brands = Brand::get();
         $branddropdown = "";
         $categorydropdown = "";
+        $categories = Category::get();
+        $brands = Brand::get();
+        $branddropdown = "";
+        $categorydropdown = "";
         $productdetail = Product::where('product_id', $id)->first();
         $productimages = Product_image::where('product_id', $id)->get();
         $category = Category::where('cat_id', $productdetail->category_id)->firstOrFail();
@@ -312,9 +316,31 @@ class ProductController extends Controller
             $productdetail->brand_name = "No Brand";
         }
 
+        foreach ($categories as $category) {
+            $sel=($productdetail->category_id==$category->cat_id?"selected":"");
+            if ($category->parent_id == Null) {
+                $categorydropdown .= "<option value='" . $category->cat_id . "' ".$sel.">" . $category->cat_name . "</option>";
+            } else {
+                $child = $category->cat_id;
+                $parents = Category::defaultOrder()->ancestorsOf($child);
+                //dd(json_decode($parents));
+                $parentlists = "";
+                foreach ($parents as $parent) {
+                    $parentlist = $parent->cat_name;
+                    $parentlists .= $parentlist . " > ";
+                }
+                $parentlists .= $category->cat_name;
+                $categorydropdown .= "<option value='" . $category->cat_id . "' ".$sel.">" . $parentlists . "</option>";
+            }
+        }
+
+        foreach ($brands as $brand) {
+            $selbrand=$brand->brand_id==$productdetail->brand_id?"selected" :"";
+            $branddropdown .= "<option value='" . $brand->brand_id . "' ".$selbrand.">" . $brand->brand_name . "</option>";
+        }
 
         // dd(compact('productdetail','productimages'));
-        return view('admin.viewproduct')->with(compact('productdetail', 'productimages','categorydropdown'));
+        return view('admin.viewproduct')->with(compact('productdetail', 'productimages','categorydropdown','branddropdown'));
     }
 
     public function editProduct($id)
