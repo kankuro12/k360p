@@ -30,7 +30,7 @@
 				<div class="image-holder">
 					<img src="{{ asset('images/bg2.jpg') }}" alt="">
 				</div>
-				<form id="login-form" action="{{ route('user.postLogin') }}" method="POST">
+				<form id="login-form" action="{{ route('vendor.postLogin') }}" method="POST">
                     <h3>Seller Login</h3>
                     @csrf
                     <div id="statusBox"></div>
