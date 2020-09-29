@@ -69,6 +69,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             <p> Dashboard </p>
         </a>
     </li>
+    @if(Auth::user()->vendor->verified==1)
     <li>
         <a data-toggle="collapse" href="#componentsExamples">
             <i class="material-icons">business_center</i>
@@ -135,6 +136,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             </ul>
         </div>
     </li>
+    @endif
 </ul>
 </div>
 </div>
