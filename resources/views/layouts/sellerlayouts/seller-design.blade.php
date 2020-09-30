@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('images/backend_images/apple-icon.png') }}" />
     <link rel="icon" type="image/png" href="{{ asset('images/backend_images/favicon.png') }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Vendor :: Dashboard</title>
+    <title>Vendor :: Dashboard :: {{Auth::user()->vendor->name}}</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -80,7 +80,7 @@
         </div>
     </div>
 
-</body>
+
 <!--   Core JS Files   -->
 
 <script src="{{ asset('js/backend-js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
@@ -160,6 +160,41 @@
 
     
  </script>
+
 @yield('scripts');
 
+<script type="text/javascript">
+    var Tawk_API=Tawk_API || {};
+    var Tawk_LoadStart=new Date();
+
+    @if (auth()->check())
+    
+
+    @php 
+        $name="--";
+        $user=auth()->user();
+       
+        if($user->role_id==1){
+            $name='Customer: ' .$user->vendoruser->fname.' '.$user->vendoruser->lname;
+        }else{
+            $name='Vendor: '.$user->vendor->name .'-'.$user->vendor->phone_number;
+        }
+    @endphp
+    Tawk_API.visitor = {
+        name  : '{{$name}}',
+        email : '{{auth()->user()->email}}',
+        hash  : '{{hash_hmac("sha256", auth()->user()->email, config("services.tawk.api-key"))}}'
+    };
+    @endif
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/{{config("services.tawk.site-id")}}/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+
+</body>
 </html>

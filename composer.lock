@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2ddc096dcc038fac3ab7e1512499a54",
+    "content-hash": "6d0868f9d010feda4d6050c986fb7a33",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -745,6 +745,56 @@
                 }
             ],
             "time": "2020-09-07T11:48:52+00:00"
+        },
+        {
+            "name": "genealabs/laravel-tawk",
+            "version": "7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GeneaLabs/laravel-tawk.git",
+                "reference": "146db6ac5b0deec8d3ba530280ba634365a1fcc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GeneaLabs/laravel-tawk/zipball/146db6ac5b0deec8d3ba530280ba634365a1fcc4",
+                "reference": "146db6ac5b0deec8d3ba530280ba634365a1fcc4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^7.0",
+                "illuminate/view": "^7.0"
+            },
+            "type": "laravel-package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "GeneaLabs\\LaravelTawk\\Providers\\Service"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GeneaLabs\\LaravelTawk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bronner",
+                    "email": "mike@genealabs.com"
+                }
+            ],
+            "description": "Integrate Tawk.to into yoru Laravel and Nova apps.",
+            "funding": [
+                {
+                    "url": "https://github.com/mikebronner",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-04-12T17:25:25+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

@@ -331,7 +331,6 @@ Route::group(['prefix'=>'admin','middleware' => 'admin_auth'], function () {
     ]);
 
     Route::post('/message', 'admin\VendorController@message')->name('admin.vendor-message');
-    
     Route::match(['get', 'post'], '/manage-tag', [
         'as'=> 'admin.manage-tag',
         'uses' => 'admin\TagController@manageTags'
@@ -713,11 +712,12 @@ Route::group(['prefix'=>'vendor','middleware'=>['authen','type'],'type'=>['vendo
        Route::post('product-stock/add/{pid}','vendor\VariantController@add_Stock');
        Route::post('product-stock/update/{stock}','vendor\VariantController@update_Stock');
        Route::post('product-shipping/{product}','Vendor\VariantController@product_shipping');
-       Route::post('product-option/{product}','vendor\VariantController@product_option');
+       Route::post('product-option/{product}','Vendor\VariantController@product_option');
        
-       Route::post('product/update/{product}','vendor\ProductController@update')->name('vendor.update-product');
+       Route::post('product/update/{product}','Vendor\ProductController@update')->name('vendor.update-product');
 
-       
+        
+       Route::post('/message/seen/{message}', 'Vendor\DashBoardController@message')->name('vendor.markread-message');
    
   
 });

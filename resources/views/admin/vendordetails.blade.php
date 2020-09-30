@@ -400,7 +400,8 @@
                 data: $('#message_form').serialize(),
                 success: function(data){
                     $("#message").val('');
-                    
+                    html='<div class="card card-alert" style="padding:2rem;margin:5px;">'+data.message+'</div>';
+                    $('#messages').prepend(html);
                 },
 
             });

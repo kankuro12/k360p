@@ -12,6 +12,7 @@ use App\model\admin\Brand;
 use App\model\Coupon;
 use App\model\Coupon_setting;
 use App\User;
+use App\VendorMessage;
 
 class VendorController extends Controller
 {
@@ -81,5 +82,14 @@ class VendorController extends Controller
         $vendor->verified=$status;
         $vendor->save();
         return redirect()->back();
+    }
+
+    public function message(Request $request){
+
+        $msg=new VendorMessage();
+        $msg->vendor_id=$request->vendor_id;
+        $msg->message=$request->message;
+        $msg->save();
+        return response()->json($msg);
     }
 }

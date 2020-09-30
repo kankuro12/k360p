@@ -332,6 +332,7 @@
 @section('scripts')
     <script src="{{ asset('js/backend-js/ckeditor/ckeditor.js') }}"></script>
     <script>
+        CKEDITOR.replace('product-desc');
          CKEDITOR.replace('refundablepolicy');
         
         function selectLink(){
