@@ -22,4 +22,8 @@ class DashBoardController extends Controller
         $message->save();
         return redirect()->back();
     }
+
+    public function messages(){
+        return view('vendor.messages');
+    }
 }

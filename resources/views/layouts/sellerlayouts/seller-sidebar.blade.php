@@ -7,8 +7,10 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
 <div class="logo">
 
 <a href="#" class="simple-text logo-normal">
-    <span class="sidebar-mini"> ME</span>
-    Multi Ecom 
+
+    <span class="sidebar-normal " style="
+    padding-left: 2rem;
+">  Multi Ecom  </span>
     @if(Auth::user()->vendor->verified==1)
     <span style="color:#0bb51c;">
 
@@ -16,7 +18,8 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             verified_user
         </span>
     </span>
-    @endif
+@endif
+    
 </a>
 </div>
 <div class="sidebar-wrapper">
@@ -63,6 +66,12 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                     <a href="{{ route('vendor.verification') }}">
                         <span class="sidebar-mini"> Ss </span>
                         <span class="sidebar-normal"> Update Verification Detail </span>
+                    </a>
+                </li>
+                <li >
+                    <a href="/vendor/messages">
+                        <span class="sidebar-mini"> Ms </span>
+                        <span class="sidebar-normal"> Messages </span>
                     </a>
                 </li>
             </ul>

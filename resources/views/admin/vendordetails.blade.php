@@ -42,6 +42,7 @@
                             <h4 class="card-title">Vendor Details</h4>
                             <p class="category">
                                 View Vendor information here
+                                <br>
                             </p>
                             <div class="row">
                                 <div class="col-md-6">

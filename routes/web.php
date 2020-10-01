@@ -722,6 +722,7 @@ Route::group(['prefix'=>'vendor','middleware'=>['authen','type'],'type'=>['vendo
 
         
        Route::post('/message/seen/{message}', 'Vendor\DashBoardController@message')->name('vendor.markread-message');
+       Route::get('/messages', 'Vendor\DashBoardController@messages')->name('vendor.messagea');
    
   
 });

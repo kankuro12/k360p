@@ -5,6 +5,8 @@ namespace App\model\Vendor;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\User;
+use App\VendorMessage;
+
 class Vendor extends Model
 {
     use Sluggable;
@@ -48,5 +50,13 @@ class Vendor extends Model
 
     public function option(){
         return $this->hasMany("\App\VendorOptions");
+    }
+
+
+    public function messageCount(){
+        return VendorMessage::where('seen',0)->count();
+    }
+    public function messages(){
+        return VendorMessage::orderBy('id','desc')->take(5)->get();
     }
 }
