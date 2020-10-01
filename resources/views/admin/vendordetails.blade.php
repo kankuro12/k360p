@@ -29,7 +29,8 @@
                     </li>
                     <li class="">
                         <a href="#msg" role="tab" data-toggle="tab" aria-expanded="false">
-                            <i class="material-icons">help_outline</i> Messages
+                            <i class="material-icons">email
+                            </i> Messages
                         </a>
                     </li>
                 </ul>
@@ -38,30 +39,38 @@
                 <div class="tab-pane active" id="description">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Description</h4>
+                            <h4 class="card-title">Vendor Details</h4>
                             <p class="category">
-                                More information here
+                                View Vendor information here
                             </p>
-                            <h5>
-                                @if ($vendordetails->active ==1)
-                                    <span class="label label-success">Active</span>
-                                    <a  style="color:red;" href="{{url('/admin/vendor-status/'.$vendordetails->user_id.'/status/0')}}">Deactivate Account</a>
-                                @else
-                                    <span class="label label-danger">Inactive</span>
-                                    <a href="{{url('/admin/vendor-status/'.$vendordetails->user_id.'/status/1')}}">Activate Account</a>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @if ($vendordetails->active ==1)
+                                        <span class="label label-success">Active</span>
+                                        <a  style="color:red;text-decoration:underline;" href="{{url('/admin/vendor-status/'.$vendordetails->user_id.'/status/0')}}">Deactivate Account</a>
+                                    @else
+                                        <span class="label label-danger">Inactive</span>
+                                        <a style="text-decoration:underline;" href="{{url('/admin/vendor-status/'.$vendordetails->user_id.'/status/1')}}">Activate Account</a>
 
-                                @endif
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    @if ($vendordetails->verified == 1)
+                                        <span class="label label-primary">Verified</span>
+                                        <a style="color:red;text-decoration:underline;" href="{{url('/admin/vendor-verification/'.$vendordetails->id.'/verification/0')}}">Unverify Account</a>
+
+                                    @else
+                                        <span class="label label-danger">Not Verified</span>
+                                        <a style="text-decoration:underline;" href="{{url('/admin/vendor-verification/'.$vendordetails->id.'/verification/1')}}">Verify Account</a>
+
+                                    @endif
+                                </div>
+                            </div>
+                            {{-- <h5>
+                                
                                 <hr>
-                                @if ($vendordetails->verified == 1)
-                                    <span class="label label-primary">Verified</span>
-                                    <a style="color:red;" href="{{url('/admin/vendor-verification/'.$vendordetails->id.'/verification/0')}}">Unverify Account</a>
-
-                                @else
-                                    <span class="label label-danger">Not Verified</span>
-                                    <a  href="{{url('/admin/vendor-verification/'.$vendordetails->id.'/verification/1')}}">Unverify Account</a>
-
-                                @endif
-                            </h5>
+                               
+                            </h5> --}}
                         </div>
                         <div class="card-content">
                            <div class="row">

@@ -5,11 +5,18 @@ Tip 2: you can also add an image using data-image tag
 Tip 3: you can change the color of the sidebar with data-background-color="white | black"
 -->
 <div class="logo">
-<a href="#" class="simple-text logo-mini">
-    PS
-</a>
+
 <a href="#" class="simple-text logo-normal">
-    Multi Ecom
+    <span class="sidebar-mini"> ME</span>
+    Multi Ecom 
+    @if(Auth::user()->vendor->verified==1)
+    <span style="color:#0bb51c;">
+
+        <span class="material-icons">
+            verified_user
+        </span>
+    </span>
+    @endif
 </a>
 </div>
 <div class="sidebar-wrapper">
@@ -55,7 +62,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 <li>
                     <a href="{{ route('vendor.verification') }}">
                         <span class="sidebar-mini"> Ss </span>
-                        <span class="sidebar-normal"> Update Shipping Detail </span>
+                        <span class="sidebar-normal"> Update Verification Detail </span>
                     </a>
                 </li>
             </ul>

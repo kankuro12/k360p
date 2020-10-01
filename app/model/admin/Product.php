@@ -3,6 +3,7 @@
 namespace App\model\admin;
 
 use App\model\ProductAttributeItem;
+use App\Setting\VendorOption;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -53,6 +54,29 @@ class Product extends Model
             return true;
         }else{
             return false;
+        }
+    }
+
+    public function ownerShipping(){
+        if($this->vendor_id==null){
+            $data= DefaultShipping::first();
+            
+        }else{
+            $data=VendorOption::where('vendor_id',$this->vendor_id)->first();
+            
+
+            
+        }
+
+        if($data!=null){
+            return [
+                'p_id'=>$data->province_id,
+                'd_id'=>$data->district_id,
+                'm_id'=>$data->municipality_id,
+                'a_id'=>$data->shipping_area_id,
+            ];
+        }else{
+            return null;
         }
     }
 }

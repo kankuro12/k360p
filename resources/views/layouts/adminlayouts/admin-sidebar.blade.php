@@ -45,6 +45,12 @@
                                 <span class="sidebar-normal"> Settings </span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{route('admin.store-shipping')}}">
+                                <span class="sidebar-mini"> S </span>
+                                <span class="sidebar-normal"> Shipping Address </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

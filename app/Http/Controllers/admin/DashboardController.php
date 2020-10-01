@@ -10,6 +10,7 @@ use App\model\admin\Brand;
 use App\model\admin\Product;
 use App\model\admin\Category;
 use App\model\admin\Collection;
+use App\model\admin\DefaultShipping;
 use App\model\vendor\Vendor;
 
 class DashboardController extends Controller
@@ -29,5 +30,24 @@ class DashboardController extends Controller
         $featpro = Product::where('featured',1)->get();
         $featno = count($featpro);
         return view('admin.dashboard')->with(compact('brandno','productno','categoryno','collectionno','vendorno','featno'));
+    }
+
+    public function shipping(Request $request){
+       if($request->getMethod()=="GET"){
+            return view('admin.shipping.address');
+       }else{
+            $option=DefaultShipping::first();
+            if($option==null){
+                $option=new DefaultShipping();
+
+            }
+            $option->province_id=$request->province_id;
+            $option->district_id=$request->district_id;
+            $option->municipality_id=$request->municipality_id;
+            $option->shipping_area_id=$request->shipping_area_id;
+            $option->isdefault=1;
+            $option->save();
+            return redirect()->back();
+       }
     }
 }

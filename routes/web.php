@@ -412,7 +412,11 @@ Route::group(['prefix'=>'admin','middleware' => 'admin_auth'], function () {
     Route::post('product/update/{product}','admin\ProductController@update')->name('admin.update-product');
 
 
-    //Home Page Setting
+    //Store Shipping Address
+    Route::match(['get', 'post'], '/shipping', [
+        'as' => 'admin.store-shipping',
+        'uses' => 'admin\DashboardController@shipping'
+    ]);
         
 
 });
@@ -755,7 +759,7 @@ Route::group(['prefix'=>'admin/element','middleware' => 'admin_auth'], function 
 });
 
 //admin ordermanagement
-Route::group(['prefix'=>'admin/element','middleware' => 'admin_auth'], function () {
-    Route::get('','Elements\ElementController@index')->name('elements');
+Route::group(['prefix'=>'admin/orders','middleware' => 'admin_auth'], function () {
+    Route::get('/{status}','admin\order\OrderController@index')->name('admin.orders');
 
 });
