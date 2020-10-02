@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3  ">
+                <div class="col-md-6  ">
                     <div class="form-group label-floating">
                         <div>
                             <h3>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 ">
+                <div class="col-md-6">
                     <div class="form-group label-floating">
                         <div>
                             <h3>
@@ -75,9 +75,13 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <a href="{{route('vendor.step-3.skip')}}">I will add verification Information later</a>
+           
+            <div class="col-md-8 text-right">
+                <a href="{{route('vendor.step-3.skip')}}" > 
+                    <strong>
+                        Skip Now, I will add verification Information later
+                    </strong> 
+                </a>
             </div>
             <div class="col-md-4  text-center">
                 <div class="form-group ">
