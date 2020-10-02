@@ -77,7 +77,7 @@
         <div class="row">
            
             <div class="col-md-8 text-right">
-                <div class="form-control">
+                <div class="form-group">
                     <div style="padding: 12px 30px;margin: 10px 1px;">
 
                         <a href="{{route('vendor.step-3.skip')}}" > 
