@@ -30,7 +30,7 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('promo')->default(0);
             $table->tinyInteger('featured')->default(0);
             $table->integer('quantity')->nullable();
-            $table->integer('vendorid')->default(0);
+            $table->integer('vendor_id')->default(0);
             $table->timestamps();
         });
     }

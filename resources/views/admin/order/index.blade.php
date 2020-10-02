@@ -76,6 +76,11 @@
 @endsection
 @section('scripts')
     <script>
-
+        function loadimage(id){
+            elements=document.querySelectorAll('.sid-'+id);
+            elements.forEach(element => {
+                element.src=element.dataset.src;
+            });
+        }
     </script>
 @endsection

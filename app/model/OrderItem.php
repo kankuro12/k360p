@@ -18,10 +18,11 @@ class OrderItem extends Model
             return "Default";
         }else{
             $variant=VariantManager::codeToString($this->variant_code);
-        
+            $str='';
             foreach ($variant as $key => $value) {
-                
+               $str.=  $value['attribute']->name.': '.$value['item']->name ;
             }
+            return $str;
         }
 
     }

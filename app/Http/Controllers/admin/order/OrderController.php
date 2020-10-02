@@ -18,6 +18,7 @@ class OrderController extends Controller
             $data=[];
             $data['shipping']=ShippingDetail::find($key);
             $data['items']=$value;
+            $data['search']=$value->select('')
             $data['count']=count($value);
             array_push($all,$data);
         }
