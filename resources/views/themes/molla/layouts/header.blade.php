@@ -216,10 +216,16 @@
                                 @if (empty(Auth::check()))
                                 <h6 class="mt-1 ml-4"><i class="icon-user"></i> Hello ! Guest</h6>
                                 @else
-                                @php
-                                $user = \App\model\vendoruser\VendorUser::where('user_id',Auth::user()->id)->first();
-                                @endphp
-                                <h6 class="mt-1 ml-4"> <i class="icon-user"></i> Hello ! {{ $user->fname }} {{ $user->lname }} </h6>
+                                <h6 class="mt-1 ml-4"> <i class="icon-user"></i>
+                                    @if (Auth::user()->user_id==1)
+                                    @php
+                                    $user = \App\model\vendoruser\VendorUser::where('user_id',Auth::user()->id)->first();
+                                    @endphp
+                                    Hello ! {{ $user->fname }} {{ $user->lname }} 
+                                    @else
+                                    Hello ! {{Auth::user()->vendor->name}}
+                                    @endif
+                                </h6>
                                 @endif
                                 @foreach ($cats as $attr)
                                 <ul class="menu-vertical sf-arrows">
