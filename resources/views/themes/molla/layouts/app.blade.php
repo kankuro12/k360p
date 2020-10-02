@@ -27,7 +27,7 @@
     @yield('css')
 </head>
 @php
-   $cats = \App\Model\Admin\Category::with('subcat')->where('parent_id',null)->get();
+   $cats = \App\model\admin\Category::with('subcat')->where('parent_id',null)->get();
 @endphp
 
 <body>
