@@ -14,7 +14,9 @@ use App\model\admin\Product_attribute;
 use App\model\admin\Attribute;
 use App\model\admin\Attribute_group;
 use App\Setting\HomePage;
+use App\Setting\VariantManager;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {

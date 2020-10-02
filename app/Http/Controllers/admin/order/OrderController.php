@@ -25,6 +25,3 @@ class OrderController extends Controller
         return view('admin.order.index',compact('all','status','stages'));
     }
 }
-9852027897
-
-info@propeace.org.np

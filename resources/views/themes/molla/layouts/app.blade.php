@@ -102,7 +102,7 @@
             </div><!-- End .modal-content -->
         </div><!-- End .modal-dialog -->
     </div><!-- End .modal --> 
-
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     {!! \App\Setting\HomePage::renderJS()!!}
     
     @yield('js')

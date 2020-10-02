@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\model\admin\Product;
 use App\model\admin\Product_attribute;
 use App\model\ProductAttributeItem;
+use App\model\ProductStock;
 
 class VariantManager
 {
@@ -63,4 +64,11 @@ class VariantManager
         $code="prod_".$pid .">".$semi;
         return $code;
     }
+
+    public static function hasStock(string $variant){
+       return ProductStock::where('code',$variant)->count()>0;
+    }
+    public static function stock(string $variant){
+        return ProductStock::where('code',$variant)->first();
+     }
 }

@@ -69,6 +69,27 @@ Route::match(['get','post'], '/apply-coupon',[
     'uses' => 'user\CartController@applyCoupon'
 ]);
 
+//collections
+
+Route::match(['get','post'], '/collection-product',[
+    'as' => 'public.collection',
+    'uses' => 'CommonController@collectionProduct'
+]);
+
+Route::match(['get','post'], '/collection-product/{id}',[
+    'as' => 'collection.detail',
+    'uses' => 'CommonController@collectionProductDetail'
+]);
+
+Route::match(['get','post'], '/sale-product',[
+    'as' => 'public.sale',
+    'uses' => 'CommonController@saleProduct'
+]);
+
+Route::match(['get','post'], '/sale-product/{id}',[
+    'as' => 'public.sale.detail',
+    'uses' => 'CommonController@saleProductDetail'
+]);
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
@@ -419,6 +440,18 @@ Route::group(['prefix'=>'admin','middleware' => 'admin_auth'], function () {
     ]);
         
 
+    // blog routes
+    Route::get('blogs','BlogController@index');
+    Route::post('blog/store','BlogController@store')->name('blog.store');
+    Route::match(['GET','POST'],'blog/edit/{id}','BlogController@blogEdit')->name('blog.edit');
+    Route::get('blog/delete/{id}','BlogController@blogDelete')->name('blog.delete');
+
+    // footer head and link
+    Route::get('footer-head','FooterheadController@index');
+    Route::post('footer-head/{id}','FooterheadController@update')->name('header.update');
+    Route::post('footer-link','FooterheadController@footerLinkStore')->name('link.store');
+    Route::get('footer-link-delete/{id}','FooterheadController@footerLinkDelete')->name('link.delete');
+
 });
 
 // Route::group(['prefix'=>'user','middleware'=>'guest'],function(){
@@ -568,6 +601,21 @@ Route::group(['prefix'=>'user','middleware'=>['authen','type'],'type'=>['user']]
     Route::match(['get', 'post'], '/postcheckout', [
         'uses' => 'user\CheckoutController@postCheckout',
         'as' => 'user.postcheckout'
+    ]);
+
+    Route::match(['get', 'post'], '/wishlist', [
+        'uses' => 'user\DashboardController@wishlist',
+        'as' => 'user.wishlist.page'
+    ]);
+
+    Route::match(['get', 'post'], '/wishlist/{product_id}', [
+        'uses' => 'user\DashboardController@wishlistProduct',
+        'as' => 'user.wishlist'
+    ]);
+
+    Route::match(['get', 'post'], '/wishlist/remove/{id}', [
+        'uses' => 'user\DashboardController@wishlistProductRemove',
+        'as' => 'user.wishlist.remove'
     ]);
 	
 });

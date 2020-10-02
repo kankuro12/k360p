@@ -62,7 +62,7 @@
                                     <div class="row">
                                         <div class="col-md-12 pr-md-1">
                                             <div class="form-group label-floating">
-                                                <h4 class="card-title">Button Links</h4>
+                                                <h4 class="card-title">Button Link</h4>
                                             </div>
                                             <div>
                                                 <h4>
@@ -74,22 +74,21 @@
                                                 <hr>
                                             </div>
                                             <div class="row">
-                                                <div class="radio col-md-4">
+                                                <div class="col-md-4">
                                                     <label>
                                                         <input type="radio" name="linkradio" value="1" onchange="organize()"
                                                             id="customlinkradio"> Custom Link
                                                     </label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <div class="form-group label-floating">
-                                                        <label>Custom Link</label>
+                                                   
                                                         <input type="text" class="form-control" id="customlink" value=""
                                                             name="link" disabled>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="radio col-md-4">
+                                                <div class="col-md-4">
                                                     <label>
                                                         <input type="radio" name="linkradio" value="2" onchange="organize()"
                                                             id="brandradio"> Brand
@@ -108,7 +107,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="radio col-md-4">
+                                                <div class="col-md-4">
                                                     <label>
                                                         <input type="radio" name="linkradio" value="3" onchange="organize()"
                                                             id="collectionradio"> Collection
@@ -127,7 +126,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="radio col-md-4">
+                                                <div class="col-md-4">
                                                     <label>
                                                         <input type="radio" name="linkradio" value="4" onchange="organize()"
                                                             id="saleradio"> Sale
@@ -146,7 +145,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="radio col-md-4">
+                                                <div class="col-md-4">
                                                     <label>
                                                         <input type="radio" name="linkradio" value="5" onchange="organize()"
                                                             id="categoryradio"> Category
