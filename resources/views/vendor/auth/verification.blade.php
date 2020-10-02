@@ -62,7 +62,7 @@
                                                     <div style="position: absolute;top:0px;right:0px;">
                                                         <span class="btn btn-danger" onclick="
                                                                                             document.getElementById('gal').value = null;
-                                                                                            document.getElementById('gal_img').src='{{$verification!=null?asset($verification->registration:'')}}';
+                                                                                            document.getElementById('gal_img').src='{{asset($verification!=null?$verification->registration:'')}}';
                                                                                             ">Clear</span>
                                                     </div>
                                                     @endif
