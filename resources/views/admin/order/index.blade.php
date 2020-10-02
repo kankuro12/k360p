@@ -37,11 +37,37 @@
                             </div>
                             <div class="card-content">
                                 <div class="content-view">
+
+                                    <div style="margin: 1.5rem 0rem;">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label >
+                                                    <strong>
+
+                                                        Product Search
+                                                    </strong>
+                                                    <br>
+                                                </label>
+                                                <input type="text"  id="searchinput" class="form-control" onkeyup="myFunction()" placeholder="Search using Product">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <style>
+                                        #ordertable > tbody > tr>td{
+                                            padding: 10px 0;
+                                            border-bottom: 1px solid #f1f1f1;
+                                        }
+                                        #ordertable > tbody > tr>th{
+                                            padding: 10px 0;
+                                            border-bottom: 1px solid #f1f1f1;
+                                        }
+                                    </style>
                                     <div class="table-responsive">
 
-                                        <table class="table">
+                                        <table  id="ordertable" style="width: 100%;">
                                             <tr>
-                                                <th>SN</th>
+                                                <th>SID</th>
                                                 <th>Name</th>
                                                 <th>Address</th>
                                                 <th>Email</th>
@@ -73,6 +99,23 @@
     <!-- Edit Attribute Modal -->
 
 
+    @foreach ($all as $data)
+    
+        @php
+            $shipping=$data['shipping'];
+        @endphp
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="order-{{$shipping->id}}" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                @foreach ($data['items'] as $order)
+                        <div >
+                        @include('admin.order.singleorder',['order'=>$order,'sid'=>$shipping->id])
+                        </div>
+                @endforeach
+              </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 @section('scripts')
     <script>
@@ -82,5 +125,25 @@
                 element.src=element.dataset.src;
             });
         }
-    </script>
+    
+        function myFunction() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("searchinput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("ordertable");
+          tr = table.querySelectorAll('.search');
+            
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+              txtValue = tr[i].dataset.search;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            
+          }
+        }
+        </script>
 @endsection

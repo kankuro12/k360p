@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\order;
 
 use App\Http\Controllers\Controller;
+use App\model\admin\Product;
 use App\model\OrderItem;
 use App\model\ShippingDetail;
 use App\Setting\OrderManager;
@@ -18,7 +19,12 @@ class OrderController extends Controller
             $data=[];
             $data['shipping']=ShippingDetail::find($key);
             $data['items']=$value;
-            $data['search']=$value->select('')
+            $ids=[];
+            foreach ($value as $id) {
+               array_push($ids,$id->product_id);
+            }
+            $para=Product::whereIn('product_id',$ids)->select('product_name')->get()->implode('product_name',',');
+            $data['search']=$para;
             $data['count']=count($value);
             array_push($all,$data);
         }

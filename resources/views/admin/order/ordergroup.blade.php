@@ -1,8 +1,14 @@
 @php
     $shipping=$data['shipping'];
 @endphp
-<tr>
-    <td >{{$i}}</td>
+<tr data-search="{{$data['search']}}" class="search">
+    <td >
+        <a data-toggle="modal" onclick="loadimage({{$shipping->id}});" href="#order-{{$shipping->id}}" aria-expanded="false" aria-controls="collapseExample">
+            <strong>
+                #{{$shipping->id}}
+            </strong> 
+        </a>
+    </td>
     <td>
         {{$shipping->name}}
         <br>
@@ -20,22 +26,31 @@
         {{$shipping->phone}}
     </td>
     <td>
-        {{$data['count']}}  Items
-        <br>
-    <a data-toggle="collapse" onclick="loadimage({{$shipping->id}});" href="#order-{{$shipping->id}}" aria-expanded="false" aria-controls="collapseExample">
-            View Items
-          </a>
+        <a data-toggle="modal" onclick="loadimage({{$shipping->id}});" href="#order-{{$shipping->id}}" aria-expanded="false" aria-controls="collapseExample">
+            <div style="border-bottom: 1px #f1f1f1 solid;">
+                {{$data['count']}}  Item{{$data['count']>1?"s":""}}
+            </div>
+            
+            <div style="border-bottom: 1px #f1f1f1 solid;">
+                
+                <strong style="color:#0acf21;">{{$data['search']}}</strong>
+            </div>
+            <div>
+                View Items
+            </div>
+                
+        </a>
     </td>
 </tr>
 
-<tr>
+{{-- @foreach ($data['items'] as $order)
+<tr data-search="{{$data['search']}}" class="search">
     <td colspan="6">
         <div class="collapse" id="order-{{$shipping->id}}">
-            @foreach ($data['items'] as $order)
                 <div >
                    @include('admin.order.singleorder',['order'=>$order,'sid'=>$shipping->id])
                 </div>
-             @endforeach
-          </div>
-    </td>
-</tr>
+            </div>
+        </td>
+    </tr>
+@endforeach --}}
