@@ -76,23 +76,30 @@
 
     @endif
 
-    @php
-        
+    @if ($data->islaunched==0)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-alert">
+                <div class="card-header color-white">
+                    <h4 class="card-title">
+                        <strong class="text-white">
+                            You store is in Draft Mode. Publish you Store to Make it visible to customers.
+                        </strong>
+                    </h4>
 
-    @endphp
-    <?php $messages = \App\VendorMessage::where('vendor_id', $data->id)
-    ->where('seen', 0)
-    ->get(); ?>
-    @foreach ($messages as $message)
-        <div class="card card-info" style="padding:2rem 1rem 1rem 2rem;margin:5px;">
-            {{ $message->message }}
-            <p>
-                <form action="{{route('vendor.markread-message',['message'=>$message->id])}}" method="post">
-                @csrf
-                <input type="submit" value="Mark As Read" style="color:white;text-decoration: underline;border:none;background:transparent;">
-                </form>
-            </p>
+                </div>
+                <div class="card-header">
+                    <a href="{{route('vendor.launch')}}">Click Here To Publish Your Store</a>
+                </div>
+                <br>
+            </div>
+
+
         </div>
-    @endforeach
+
+
+    </div>
+    @endif
+    
 
 @endsection

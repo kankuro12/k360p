@@ -149,4 +149,12 @@ class SetupController extends Controller
         return response()->redirectToRoute('vendor.dashboard');
 
     }
+
+    public function launch(Request $request){
+        $user = $request->user();
+        $vendor=$user->vendor;
+        $vendor->islaunched=1;
+        $vendor->save();
+        return response()->redirectToRoute('vendor.dashboard');
+    }
 }
