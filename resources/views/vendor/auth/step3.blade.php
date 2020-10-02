@@ -77,11 +77,17 @@
         <div class="row">
            
             <div class="col-md-8 text-right">
-                <a href="{{route('vendor.step-3.skip')}}" > 
-                    <strong>
-                        Skip Now, I will add verification Information later
-                    </strong> 
-                </a>
+                <div class="form-control">
+                    <div style="padding: 12px 30px;margin: 10px 1px;">
+
+                        <a href="{{route('vendor.step-3.skip')}}" > 
+        
+                            <strong>
+                                Skip Now, I will add verification Information later
+                            </strong> 
+                        </a> 
+                    </div>
+                </div>
             </div>
             <div class="col-md-4  text-center">
                 <div class="form-group ">
