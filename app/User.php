@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\model\admin\Role;
+use App\model\Vendor\Vendor;
+use App\model\VendorUser\VendorUser;
 use App\Notifications\CustomResetPasswordNotification;
 
 class User extends Authenticatable
@@ -59,10 +61,10 @@ class User extends Authenticatable
         return false;
     }
     public function vendoruser(){
-        return $this->hasOne('App\Model\VendorUser\VendorUser','user_id');
+        return $this->hasOne(VendorUser::class,'user_id');
     }
     public function vendor(){
-        return $this->hasOne('App\Model\Vendor\Vendor','user_id');
+        return $this->hasOne(Vendor::class,'user_id');
     }
     public function sendPasswordResetNotification($token){
         $this->notify(new CustomResetPasswordNotification($token));
