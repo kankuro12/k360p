@@ -74,7 +74,7 @@
 
     <div class="footer-bottom">
         <div class="container-fluid">
-            <p class="footer-copyright">Copyright © 2020 Nestaska.com All Rights Reserved.</p><!-- End .footer-copyright -->
+            <p class="footer-copyright">Copyright © 2020 {{env('APP_NAME',"your")}} All Rights Reserved.</p><!-- End .footer-copyright -->
             <div class="social-icons social-icons-color">
                 <span class="social-label">Social Media</span>
                 <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
