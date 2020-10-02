@@ -26,7 +26,7 @@
                                     <div class="col-md-6">
                                         <div class="product-gallery">
                                             <figure class="product-main-image">
-                                                <span class="product-label label-top">Top</span>
+                                                <!-- <span class="product-label label-top">Top</span> -->
                                                 <img id="product-zoom" src="{{ asset($product->product_images) }}" data-zoom-image="{{ asset($product->product_images) }}" alt="product image">
 
                                                 <a href="#" id="btn-product-gallery" class="btn-product-gallery">
@@ -63,20 +63,21 @@
                                                 $maxprice = \App\model\ProductStock::where('product_id',$product->product_id)->max('price');
                                                 $minprice = \App\model\ProductStock::where('product_id',$product->product_id)->min('price');
                                             @endphp 
-                                            
+
                                             <div class="product-price" id="price">
                                              @if($product->stocktype == 1)
                                                 @if($maxprice == $minprice)
                                                    <span>NPR.{{ $maxprice }}</span>
                                                 @else
-                                                <span>NPR.{{ $minprice }}</span> <span class="p-4 text-warning">To</span>  <span>NPR.{{ $maxprice }}</span>
+                                                   <span>NPR.{{ $minprice }}</span> <span class="p-4 text-warning">To</span>  <span>NPR.{{ $maxprice }}</span>
                                                 @endif
                                              @else
                                                <span>NPR.{{ $product->mark_price }}</span>
                                              @endif
                                              
                                             </div><!-- End .product-price -->
-
+                                            
+                                            
                                             <div class="product-content">
                                                 <p>{{ $product->product_short_description }}</p>
                                             </div><!-- End .product-content -->
@@ -118,7 +119,7 @@
                                                     </div>
                                                 @endif
                                                 <div class="details-action-wrapper">
-                                                    <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                                    <a href="{{ route('user.wishlist',$product->product_id) }}" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
                                                     <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a>
                                                 </div><!-- End .details-action-wrapper -->
                                             </div><!-- End .product-details-action -->
@@ -127,7 +128,7 @@
                                             <div class="product-details-footer details-footer-col">
                                                 <div class="product-cat">
                                                     <span>Category:</span>
-                                                    <a href="#">Women</a>
+                                                    <a href="#">{{ $product->category->cat_name}}</a>
                                                 </div><!-- End .product-cat -->
 
                                                 <div class="social-icons social-icons-sm">
@@ -148,12 +149,12 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Additional information</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
-                                    </li>
+                                    </li> -->
                                     <li class="nav-item">
                                         <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
                                     </li>
@@ -162,14 +163,7 @@
                                     <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
                                         <div class="product-desc-content">
                                             <h3>Product Information</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. </p>
-                                            <ul>
-                                                <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. </li>
-                                                <li>Vivamus finibus vel mauris ut vehicula.</li>
-                                                <li>Nullam a magna porttitor, dictum risus nec, faucibus sapien.</li>
-                                            </ul>
-
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. </p>
+                                            {!! $product->product_description !!}
                                         </div><!-- End .product-desc-content -->
                                     </div><!-- .End .tab-pane -->
                                     <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
@@ -335,69 +329,25 @@
                                     <h4 class="widget-title">Related Product</h4><!-- End .widget-title -->
 
                                     <div class="products">
+                                        @foreach(\App\model\admin\Product::where('category_id',$product->category->cat_id)->inRandomOrder()->take(5)->get() as $p)
                                         <div class="product product-sm">
                                             <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="assets/images/products/single/sidebar/1.jpg" alt="Product image" class="product-image">
+                                                <a href="{{ route('product.detail',$p->product_id) }}">
+                                                    <img src="{{ asset($p->product_images) }}" alt="Product image" class="product-image">
                                                 </a>
                                             </figure>
 
                                             <div class="product-body">
-                                                <h5 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h5><!-- End .product-title -->
+                                                <h5 class="product-title"><a href="{{ route('product.detail',$p->product_id) }}">{{ $p->product_name}}</a></h5><!-- End .product-title -->
                                                 <div class="product-price">
-                                                    <span class="new-price">$50.00</span>
-                                                    <span class="old-price">$110.00</span>
+                                                    <span class="new-price">NPR.{{ $p->mark_price }}</span>
                                                 </div><!-- End .product-price -->
                                             </div><!-- End .product-body -->
                                         </div><!-- End .product product-sm -->
-
-                                        <div class="product product-sm">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="assets/images/products/single/sidebar/2.jpg" alt="Product image" class="product-image">
-                                                </a>
-                                            </figure>
-
-                                            <div class="product-body">
-                                                <h5 class="product-title"><a href="product.html">Yellow button front tea top</a></h5><!-- End .product-title -->
-                                                <div class="product-price">
-                                                    $56.00
-                                                </div><!-- End .product-price -->
-                                            </div><!-- End .product-body -->
-                                        </div><!-- End .product product-sm -->
-
-                                        <div class="product product-sm">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="assets/images/products/single/sidebar/3.jpg" alt="Product image" class="product-image">
-                                                </a>
-                                            </figure>
-
-                                            <div class="product-body">
-                                                <h5 class="product-title"><a href="product.html">Beige metal hoop tote bag</a></h5><!-- End .product-title -->
-                                                <div class="product-price">
-                                                    $50.00
-                                                </div><!-- End .product-price -->
-                                            </div><!-- End .product-body -->
-                                        </div><!-- End .product product-sm -->
-
-                                        <div class="product product-sm">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="assets/images/products/single/sidebar/4.jpg" alt="Product image" class="product-image">
-                                                </a>
-                                            </figure>
-
-                                            <div class="product-body">
-                                                <h5 class="product-title"><a href="product.html">Black soft RI weekend travel bag</a></h5><!-- End .product-title -->
-                                                <div class="product-price">
-                                                    $75.00
-                                                </div><!-- End .product-price -->
-                                            </div><!-- End .product-body -->
-                                        </div><!-- End .product product-sm -->
+                                        @endforeach
                                     </div><!-- End .products -->
 
-                                    <a href="category.html" class="btn btn-outline-dark-3"><span>View More Products</span><i class="icon-long-arrow-right"></i></a>
+                                    <a href="{{ url('shops') }}" class="btn btn-outline-dark-3"><span>View More Products</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .widget widget-products -->
 
                                 <div class="widget widget-banner-sidebar">

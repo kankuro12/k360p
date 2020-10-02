@@ -240,7 +240,7 @@
             <li>
                 <a data-toggle="collapse" href="#homepage">
                     <i class="material-icons">ballot</i>
-                    <p> Homepage Settings
+                    <p> Homepage 
                         <b class="caret"></b>
                     </p>
                 </a>
@@ -264,8 +264,21 @@
                                 <span class="sidebar-normal"> Contact Info </span>
                             </a>
                         </li>
+                        <li class="{{ (Request::is('admin/footer-head') ? ' active' : '') }}">
+                            <a href="{{ url('admin/footer-head') }}">
+                                <span class="sidebar-mini"> FL </span>
+                                <span class="sidebar-normal"> Footer Link </span>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
+            </li>
+            <li class="{{ (Request::is('admin/blogs') ? ' active' : '') }}">
+                <a href="{{ url('admin/blogs') }}">
+                  <i class="material-icons">create </i>
+                    <span class="sidebar-normal"> Blog </span>
+                </a>
             </li>
             <li>
                 <a data-toggle="collapse" href="#setting">

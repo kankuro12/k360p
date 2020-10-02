@@ -49,63 +49,25 @@
                     </div><!-- End .widget about-widget -->
                 </div><!-- End .col-sm-12 col-lg-4 -->
 
+                @foreach(\App\Footerhead::all() as $h)
                 <div class="col-sm-4 col-lg-2">
                     <div class="widget">
-                        <h4 class="widget-title">Know Us Better</h4><!-- End .widget-title -->
+                        <h4 class="widget-title">{{ $h->title }}</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Announcement</a></li>
-                            <li><a href="#">Career</a></li>
+                            @foreach($h->link as $l)
+                              <li><a href="{{ $l->link }}">{{ $l->title }}</a></li>
+                            @endforeach
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-4 col-lg-2 -->
+                @endforeach
 
-                <div class="col-sm-4 col-lg-2">
-                    <div class="widget">
-                        <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+                
 
-                        <ul class="widget-list">
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Returns and refund policy</a></li>
-                            <li><a href="#">Terms and conditions</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                        </ul><!-- End .widget-list -->
-                    </div><!-- End .widget -->
-                </div><!-- End .col-sm-4 col-lg-2 -->
+               
 
-                <div class="col-sm-4 col-lg-2">
-                    <div class="widget">
-                        <h4 class="widget-title">Need Our Help</h4><!-- End .widget-title -->
-
-                        <ul class="widget-list">
-                            <li><a href="#">Covid-19 detail of Nepal</a></li>
-                            <li><a href="#">Shipping Rates</a></li>
-                            <li><a href="{{ url('viewcart')}}">View Cart</a></li>
-                            <li><a href="#">Your Wishlist</a></li>
-                            <li><a href="{{ url('/user/order') }}">Your Order</a></li>
-                            <li><a href="#">Help</a></li>
-                        </ul><!-- End .widget-list -->
-                    </div><!-- End .widget -->
-                </div><!-- End .col-sm-4 col-lg-2 -->
-
-                <div class="col-sm-4 col-lg-2">
-                    <div class="widget widget-newsletter">
-                        <h4 class="widget-title">Sign Up to Newsletter</h4><!-- End .widget-title -->
-
-                        <p>Subcribe to get information about products and coupons</p>
-                        
-                        <form action="#">
-                            <div class="input-group">
-                                <input type="email" class="form-control" placeholder="Enter your Email Address" aria-label="Email Adress" required>
-                                <div class="input-group-append">
-                                    <button class="btn btn-dark" type="submit"><i class="icon-long-arrow-right"></i></button>
-                                </div><!-- .End .input-group-append -->
-                            </div><!-- .End .input-group -->
-                        </form>
-                    </div><!-- End .widget -->
-                </div><!-- End .col-sm-4 col-lg-2 -->
+                
             </div><!-- End .row -->
         </div><!-- End .container-fluid -->
     </div><!-- End .footer-middle -->

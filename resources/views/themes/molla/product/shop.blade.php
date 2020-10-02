@@ -4,16 +4,15 @@
 <main class="main">
         	<div class="page-header text-center" style="background-image: url('themes/molla/assets/images/page-header-bg.jpg')">
         		<div class="container">
-        			<h1 class="page-title">Boxed No Sidebar<span>Shop</span></h1>
+        			<h1 class="page-title">Product<span>Shop</span></h1>
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
                 <div class="container">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item"><a href="#">No Sidebar</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Boxed</li>
+                        <li class="breadcrumb-item"><a href="{{ url('/')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Product</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Shop</li>
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
@@ -58,7 +57,7 @@
                                         </a>
 
                                         <div class="product-action-vertical">
-                                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                            <a href="{{ route('user.wishlist',$p->product_id) }}" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                         </div><!-- End .product-action -->
                                         <form action="{{ route('public.cart') }}" method="POST">
                                             @csrf 
@@ -80,11 +79,11 @@
 
                                     <div class="product-body">
                                         <div class="product-cat">
-                                            <a href="#">Women</a>
+                                            <a href="#">{{ $p->category->cat_name }}</a>
                                         </div><!-- End .product-cat -->
                                         <h3 class="product-title"><a href="{{ route('product.detail',$p->product_id) }}">{{ $p->product_name }}</a></h3><!-- End .product-title -->
                                         <div class="product-price">
-                                            $50.00
+                                            NPR.{{$p->mark_price}}
                                         </div><!-- End .product-price -->
                                         <div class="ratings-container">
                                             <div class="ratings">
@@ -93,10 +92,6 @@
                                             <span class="ratings-text">( 0 Reviews )</span>
                                         </div><!-- End .rating-container -->
 
-                                        <div class="product-nav product-nav-dots">
-                                            <a href="#" style="background: #cc9966;"><span class="sr-only">Color name</span></a>
-                                            <a href="#" class="active" style="background: #ebebeb;"><span class="sr-only">Color name</span></a>
-                                        </div><!-- End .product-nav -->
                                     </div><!-- End .product-body -->
                                 </div><!-- End .product -->
                             </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->

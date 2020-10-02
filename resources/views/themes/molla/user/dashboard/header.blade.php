@@ -11,7 +11,7 @@
             <a href="{{ route('account.detail') }}" class="nav-link">Account Details</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">Wishlist</a>
+            <a href="{{ route('user.wishlist.page') }}" class="nav-link">Wishlist</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('user.getLogout') }}"> Logout</a>

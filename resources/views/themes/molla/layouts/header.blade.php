@@ -2,7 +2,7 @@
     <div class="header-top" style="background: #3d4273; color:white;">
         <div class="container">
             <div class="header-left">
-               
+              Some special product are onsale for certain time. <a href="{{ url('sale-product') }}" class="text-warning ml-2"> Shop Now </a>
             </div><!-- End .header-left -->
 
             <div class="header-right">
@@ -14,19 +14,11 @@
                             <li>
                                 <div class="header-dropdown">
                                     <a href="#">NPR</a>
-                                    <div class="header-menu">
-                                        
-                                    </div><!-- End .header-menu -->
                                 </div><!-- End .header-dropdown -->
                             </li>
                             <li>
                                 <div class="header-dropdown">
                                     <a href="#">Engligh</a>
-                                    <div class="header-menu">
-                                        <ul>
-                                            <li><a href="#">English</a></li>
-                                        </ul>
-                                    </div><!-- End .header-menu -->
                                 </div><!-- End .header-dropdown -->
                             </li>
                             @if (empty(Auth::check()))
@@ -38,8 +30,6 @@
                             <li>
                                 <div class="header-dropdown">
                                     <a href="{{ route('user.account') }}"><i class="icon-user"></i>Account</a>
-                                    <div class="header-menu">
-                                    </div><!-- End .header-menu -->
                                 </div><!-- End .header-dropdown -->
                             </li>
                             @endif
@@ -60,7 +50,7 @@
                         <i class="icon-bars"></i>
                     </button>
                     <a href="index.html" class="logo">
-                        <img src="assets/images/demos/demo-14/logo.png" alt=" Logo" width="105" height="25">
+                        <img src="assets/images/demos/demo-14/logo.png" alt="Molla Logo" width="105" height="25">
                     </a>
                 </div><!-- End .col-xl-3 col-xxl-2 -->
 
@@ -125,10 +115,18 @@
                                         </div>
                                     </div><!-- End .dropdown-menu -->
                                 </div><!-- End .compare-dropdown -->
-
-                                <a href="wishlist.html" class="wishlist-link">
+                                @php
+                                if(!empty(Auth::check())){
+                                $wishlistCount = \App\Wishlist::where('user_id',Auth::user()->id)->count();
+                                }
+                                @endphp
+                                <a href="{{ route('user.wishlist.page') }}" class="wishlist-link">
                                     <i class="icon-heart-o"></i>
-                                    <span class="wishlist-count">3</span>
+                                    @if(!empty(Auth::check()))
+                                    <span class="wishlist-count"> {{ $wishlistCount }} </span>
+                                    @else
+                                    <span class="wishlist-count"> 0 </span>
+                                    @endif
                                     <span class="wishlist-txt">Wishlist</span>
                                 </a>
 
@@ -208,20 +206,20 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-auto col-lg-3 col-xl-3 col-xxl-2 header-left">
-                    <div class="dropdown category-dropdown show is-on" data-visible="true">
+                    <div class="dropdown category-dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
                             Browse Categories
                         </a>
 
-                        <div class="dropdown-menu show">
+                        <div class="dropdown-menu">
                             <nav class="side-nav">
                                 @if (empty(Auth::check()))
-                                  <h6 class="mt-1 ml-4"><i class="icon-user"></i> Hello ! Guest</h6>
+                                <h6 class="mt-1 ml-4"><i class="icon-user"></i> Hello ! Guest</h6>
                                 @else
-                                    @php
-                                        $user = \App\model\vendoruser\VendorUser::where('user_id',Auth::user()->id)->first();
-                                    @endphp
-                                    <h6 class="mt-1 ml-4"> <i class="icon-user"></i> Hello ! {{ $user->fname }} {{ $user->lname }} </h6>
+                                @php
+                                $user = \App\model\vendoruser\VendorUser::where('user_id',Auth::user()->id)->first();
+                                @endphp
+                                <h6 class="mt-1 ml-4"> <i class="icon-user"></i> Hello ! {{ $user->fname }} {{ $user->lname }} </h6>
                                 @endif
                                 @foreach ($cats as $attr)
                                 <ul class="menu-vertical sf-arrows">
@@ -271,9 +269,11 @@
 
                         </div><!-- End .dropdown-menu -->
                     </div><!-- End .category-dropdown -->
+
+                   
                 </div><!-- End .col-xl-3 col-xxl-2 -->
 
-                <div class="col col-lg-6 col-xl-6 col-xxl-8 header-center">
+                <div class="col col-lg-6 col-xl-6 col-xxl-8 header-left">
                     <nav class="main-nav">
                         <ul class="menu sf-arrows">
                             <li class="megamenu-container active">
@@ -282,24 +282,29 @@
                             <li>
                                 <a href="{{ route('shops')}}" class="sf-with">Shop</a>
                             </li>
+                            <li>
+                                <a href="{{ url('collection-product') }}" class="sf-with">Our Collection</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ url('sale-product') }}" class="sf-with">Onsales</a>
+                            </li>
 
                             <li>
                                 <a href="#" class="sf-with">About Us</a>
                             </li>
+
                             <li>
                                 <a href="#" class="sf-with">Contact Us</a>
-                            </li>
-                            <li>
-                                <a href="/vendor/register" class="sf-with">Become A Vendor</a>
                             </li>
 
                         </ul><!-- End .menu -->
                     </nav><!-- End .main-nav -->
                 </div><!-- End .col-xl-9 col-xxl-10 -->
-
-                <div class="col col-lg-3 col-xl-3 col-xxl-2 header-right">
-                   
+                <div class="col col-lg-3 col-xl-3 col-xxl-2 header-center">
+                   <a href="{{ url('vendor/login')}}">Become a Seller</a>
                 </div>
+
             </div><!-- End .row -->
         </div><!-- End .container-fluid -->
     </div><!-- End .header-bottom -->
