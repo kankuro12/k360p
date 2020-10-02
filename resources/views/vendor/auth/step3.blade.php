@@ -76,9 +76,14 @@
 
         <div class="row">
            
-            <div class="col-md-8 text-right">
+            <div class="col-md-6 text-right">
                 <div class="form-group">
-                    <div style="padding: 12px 30px;margin: 10px 1px;">
+                   
+                </div>
+            </div>
+            <div class="col-md-6  text-center">
+                <div class="form-group ">
+                    <span style="padding: 12px 30px;margin: 10px 1px;">
 
                         <a href="{{route('vendor.step-3.skip')}}" > 
         
@@ -86,12 +91,7 @@
                                 Skip Now, I will add verification Information later
                             </strong> 
                         </a> 
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4  text-center">
-                <div class="form-group ">
-
+                    </span>
                     <input type="submit" class="btn btn-danger" value="Next">
                 </div>
             </div>
