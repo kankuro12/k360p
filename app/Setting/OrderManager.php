@@ -33,7 +33,7 @@ class OrderManager
                 return ['shipping'=>"inside District","Price"=>$shippingprice->amount_2,'type'=>$shippingprice->type_2];
 
             }
-            if($shipping['p_id']!=$p_id){
+            if($shipping['a_id']!=$a_id){
                 return ['shipping'=>"Inside Municipality","Price"=>$shippingprice->amount_1,'type'=>$shippingprice->type_1];
 
             }
