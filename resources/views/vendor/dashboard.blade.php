@@ -24,7 +24,7 @@
 
     @if ($data->verified == 0)
         @php
-            $verification=VendorVerification::where('vendor_id', $data->id)->first();
+            $verification=\App\VendorVerification::where('vendor_id', $data->id)->first();
         @endphp
         @if ($verification==null)
         <div class="row">
