@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VendorOption extends Model
 {
-    const deliverrange = ['Local Area', 'Inside Municipality', 'Inside District', "Inside Provice", "OutSide Province"];
+    const deliverrange = ['Local Area', 'Inside Municipality', 'Inside District', "Inside Province", "OutSide Province"];
     const shippingoption = [
         's101' => 'Free Shipping',
         's102' => 'Flat Rate',

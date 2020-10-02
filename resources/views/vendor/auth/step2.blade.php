@@ -77,6 +77,10 @@
                     </select>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <label >Street Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="Enter Street Address" required>
+                </div>
                 <div class="col-md-3  ">
                     <div class="form-group label-floating">
 

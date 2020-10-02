@@ -1,0 +1,1 @@
+{{$order->product->product_name}}

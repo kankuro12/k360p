@@ -12,8 +12,19 @@ class OrderController extends Controller
 {
     public function index($status){
         $stages=OrderManager::stages;
-        
-        $collection=ShippingDetail::where('shipping_status',$status)->get();
-        return view('admin.order.index',compact('collection','status','stages'));
+        $all=[];
+        $collection=OrderItem::where('stage',$status)->where('ismainstore',1)->get()->groupBy('shipping_detail_id');
+        foreach ($collection as $key => $value) {
+            $data=[];
+            $data['shipping']=ShippingDetail::find($key);
+            $data['items']=$value;
+            $data['count']=count($value);
+            array_push($all,$data);
+        }
+        // dd($all);
+        return view('admin.order.index',compact('all','status','stages'));
     }
 }
+9852027897
+
+info@propeace.org.np
