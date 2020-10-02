@@ -21,7 +21,36 @@
         }
 
     </style>
+
     @if ($data->verified == 0)
+        @php
+            $verification=VendorVerification::where('vendor_id', $data->id)->first();
+        @endphp
+        @if ($verification==null)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-alert">
+                    <div class="card-header color-white">
+                        <h4 class="card-title">
+                            <strong class="text-white">
+                                Verification Detail Not Found.
+                            </strong>
+                        </h4>
+
+                    </div>
+                    <div class="card-header">
+                        <a href="{{route('vendor.verification')}}">Click Here To Add Verification Details..</a>
+                    </div>
+                    <br>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <br>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-alert">
@@ -49,7 +78,7 @@
 
     @php
         
-        
+
     @endphp
     <?php $messages = \App\VendorMessage::where('vendor_id', $data->id)
     ->where('seen', 0)
