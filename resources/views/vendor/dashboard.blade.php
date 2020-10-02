@@ -39,7 +39,7 @@
 
                     </div>
                     <div class="card-header">
-                        <a href="{{route('vendor.verification')}}">Click Here To Add Verification Details..</a>
+                        <a href="{{route('vendor.verification')}}" style="color: white;text-decoration: underline;">Click Here To Add Verification Details..</a>
                     </div>
                     <br>
                 </div>
@@ -49,7 +49,7 @@
 
 
         </div>
-        <br>
+       
         @endif
         <div class="row">
             <div class="col-md-12">
@@ -89,7 +89,7 @@
 
                 </div>
                 <div class="card-header">
-                    <a href="{{route('vendor.launch')}}">Click Here To Publish Your Store</a>
+                    <a href="{{route('vendor.launch')}}" style="color: white;text-decoration: underline;">Click Here To Publish Your Store</a>
                 </div>
                 <br>
             </div>
