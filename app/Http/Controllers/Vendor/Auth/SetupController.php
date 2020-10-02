@@ -64,6 +64,7 @@ class SetupController extends Controller
             }
             $option->deliver_range=$request->deliver_range;
             $option->landmark=$request->landmark;
+            $option->address=$request->address;
             $option->province_id=$request->province_id;
             $option->district_id=$request->district_id;
             $option->municipality_id=$request->municipality_id;
@@ -138,5 +139,14 @@ class SetupController extends Controller
         $vendor->stage = 1;
         $vendor->save();
         return redirect()->route('vendor.step-1');
+    }
+
+    public function addlater(Request $request){
+        $user = $request->user();
+        $vendor=$user->vendor;
+        $vendor->stage=3;
+        $vendor->save();
+        return response()->redirectToRoute('vendor.dashboard');
+
     }
 }

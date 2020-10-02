@@ -696,6 +696,8 @@ Route::group(['prefix'=>'vendor','middleware'=>['authen','type'],'type'=>['vendo
         'uses' => 'Vendor\Auth\SetupController@step3'
     ]);
 
+    Route::get('step-3/addlater','Vendor\Auth\SetupController@addlater')->name('vendor.step-3.skip');
+
     Route::match(['get', 'post'], '/shipping', [
         'as' => 'vendor.shipping',
         'uses' => 'Vendor\ProfileController@shipping'

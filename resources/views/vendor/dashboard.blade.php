@@ -47,6 +47,10 @@
 
     @endif
 
+    @php
+        
+        
+    @endphp
     <?php $messages = \App\VendorMessage::where('vendor_id', $data->id)
     ->where('seen', 0)
     ->get(); ?>

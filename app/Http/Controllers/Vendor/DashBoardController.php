@@ -15,6 +15,7 @@ class DashBoardController extends Controller
         $id = Auth::user()->id;
         $data = Vendor::where('user_id',$id)->first();
         return view('vendor.dashboard')->with(compact('data'));
+        
     }
 
     public function message(VendorMessage $message){
@@ -24,6 +25,8 @@ class DashBoardController extends Controller
     }
 
     public function messages(){
+
+
         return view('vendor.messages');
     }
 }
