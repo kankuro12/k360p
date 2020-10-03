@@ -201,7 +201,7 @@ ul li, ol li {
 
 			<!-- content -->
 			<div class="content">
-				<div style="text-align: center;margin-bottom:30px"><img src="https://i.imgur.com/YXw70Vv.png" height="60px"></div>
+				<div style="text-align: center;margin-bottom:30px"><img  height="60px"></div>
 				<p>Welcome to {{env('APP_NAME')}}!,</p>
 				<p style="margin-top: 15px;" >Thanks for registering an account on The {{env('APP_NAME')}}!. We're excited to see you join the community!.</p>
 				
