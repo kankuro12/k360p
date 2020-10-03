@@ -83,6 +83,6 @@ class User extends Authenticatable
 
     public function routeNotificationForSlack($notification)
     {
-        return env('slack','');
+        return env('slackuser','');
     }
 }

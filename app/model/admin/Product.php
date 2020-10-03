@@ -35,7 +35,7 @@ class Product extends Model
 
     public function routeNotificationForSlack($notification)
     {
-        return env('slack','');
+        return env('slackuser','');
     }
 
     public function variants(){
