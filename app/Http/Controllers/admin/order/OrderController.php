@@ -13,8 +13,9 @@ class OrderController extends Controller
 {
     public function index($status){
         $stages=OrderManager::stages;
+        //where('ismainstore',1)->
         $all=[];
-        $collection=OrderItem::where('stage',$status)->where('ismainstore',1)->get()->groupBy('shipping_detail_id');
+        $collection=OrderItem::where('stage',$status)->get()->groupBy('shipping_detail_id');
         foreach ($collection as $key => $value) {
             $data=[];
             $data['shipping']=ShippingDetail::find($key);
@@ -30,5 +31,22 @@ class OrderController extends Controller
         }
         // dd($all);
         return view('admin.order.index',compact('all','status','stages'));
+    }
+
+    public function status($status , Request $request){
+        $request->validate([
+                'id.*' => 'exists:order_items,id',
+                'sid'=> 'exists:shipping_details,id',
+                'current'=>'required'
+            ]);
+            OrderItem::whereIn('id',$request->id)
+            ->update(['stage'=>$status]);
+
+            return response()->json(
+                [
+                    'id'=>$request->id,
+                    'count'=>OrderItem::where('shipping_detail_id',$request->sid)->where('stage',$request->current)->count(),
+                    'sid'=>$request->sid
+                ]);
     }
 }

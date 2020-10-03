@@ -813,5 +813,7 @@ Route::group(['prefix'=>'admin/element','middleware' => 'admin_auth'], function 
 //admin ordermanagement
 Route::group(['prefix'=>'admin/orders','middleware' => 'admin_auth'], function () {
     Route::get('/{status}','admin\order\OrderController@index')->name('admin.orders');
+    
+    Route::post('status/{status}','admin\order\OrderController@status')->name('admin.set-status');
 
 });

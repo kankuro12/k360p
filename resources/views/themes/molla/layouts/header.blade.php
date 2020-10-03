@@ -217,7 +217,7 @@
                                 <h6 class="mt-1 ml-4"><i class="icon-user"></i> Hello ! Guest</h6>
                                 @else
                                 <h6 class="mt-1 ml-4"> <i class="icon-user"></i>
-                                    @if (Auth::user()->user_id==1)
+                                    @if (Auth::user()->role_id==1)
                                     @php
                                     $user = \App\model\vendoruser\VendorUser::where('user_id',Auth::user()->id)->first();
                                     @endphp

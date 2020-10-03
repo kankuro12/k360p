@@ -1,9 +1,9 @@
 @php
     $shipping=$data['shipping'];
 @endphp
-<tr data-search="{{$data['search']}}" class="search">
+<tr data-search="{{$data['search']}}" class="search" id="orders-row-{{$shipping->id}}">
     <td >
-        <a data-toggle="modal" onclick="loadimage({{$shipping->id}});" href="#order-{{$shipping->id}}" aria-expanded="false" aria-controls="collapseExample">
+        <a data-toggle="modal" onclick="loadimage({{$shipping->id}});" href="#order-modal-{{$shipping->id}}" aria-expanded="false" aria-controls="collapseExample">
             <strong>
                 #{{$shipping->id}}
             </strong> 
@@ -26,7 +26,7 @@
         {{$shipping->phone}}
     </td>
     <td>
-        <a data-toggle="modal" onclick="loadimage({{$shipping->id}});" href="#order-{{$shipping->id}}" aria-expanded="false" aria-controls="collapseExample">
+        <a data-toggle="modal" onclick="loadimage({{$shipping->id}});" href="#order-modal-{{$shipping->id}}" aria-expanded="false" aria-controls="collapseExample">
             <div style="border-bottom: 1px #f1f1f1 solid;">
                 {{$data['count']}}  Item{{$data['count']>1?"s":""}}
             </div>

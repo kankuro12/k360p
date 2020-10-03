@@ -115,7 +115,13 @@ class SetupController extends Controller
             $verification->save();
             $vendor->stage=3;
             $vendor->save();
-            // $user->notify(new SetupFinished($user));
+            try {
+                
+                $user->notify(new SetupFinished($user));
+            } catch (\Throwable $th) {
+                //throw $th;
+                
+            }
             return response()->redirectToRoute('vendor.dashboard');
             
         }else{

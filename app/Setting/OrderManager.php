@@ -11,7 +11,7 @@ class OrderManager
     const stages=['Pending','Accecpted','On Delivery','Pickup','Delivered','Rejected','Returned'];
     const stageicons=['pending_actions','assignment_turned_in','local_shipping','pin_drop','verified','cancel','360'];
     const paymentstatus=['Pending','Completed','refunded'];
- 
+    const delivertype=['Express',"Normal"];
     
     public static function getShipping($product_id,$p_id,$d_id,$m_id,$a_id){
         $product=Product::find($product_id);

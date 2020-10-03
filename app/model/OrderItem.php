@@ -5,10 +5,12 @@ namespace App\model;
 use App\model\admin\Product;
 use App\Setting\VariantManager;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Notifications\Notifiable;
 
 class OrderItem extends Model
 {
+    use Notifiable;
+    
     public function product(){
         return $this->belongsTo(Product::class,'product_id');
     }
@@ -20,7 +22,8 @@ class OrderItem extends Model
             $variant=VariantManager::codeToString($this->variant_code);
             $str='';
             foreach ($variant as $key => $value) {
-               $str.=  $value['attribute']->name.': '.$value['item']->name ;
+                // dd($value);
+               $str.=  $value['attribute']['name'].': '.$value['item']['name'] ;
             }
             return $str;
         }

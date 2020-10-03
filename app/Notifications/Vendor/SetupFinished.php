@@ -38,7 +38,7 @@ class SetupFinished extends Notification
     {
        
         $vendor=$notifiable->vendor;
-        $vendor->url = 'http://192.168.100.101:8000/admin/vendor-details/'.$notifiable->id;
+        $vendor->url = route('admin.vendor-details',['id'=>$notifiable->id]);
 
         return (new SlackMessage)
                     ->success()

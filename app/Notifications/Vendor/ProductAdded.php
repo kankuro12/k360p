@@ -38,7 +38,7 @@ class ProductAdded extends Notification
     {
        
         $vendor=Vendor::find($notifiable->vendor_id);
-        $vendor->url = 'http://192.168.100.101:8000/admin/view-product/'.$notifiable->product_id;
+        $vendor->url = route('admin.view-product',['id'=>$notifiable->product_id]);
 
         return (new SlackMessage)
                     ->success()

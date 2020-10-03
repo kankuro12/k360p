@@ -100,11 +100,10 @@
 
 
     @foreach ($all as $data)
-    
         @php
             $shipping=$data['shipping'];
         @endphp
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="order-{{$shipping->id}}" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="order-modal-{{$shipping->id}}" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 @foreach ($data['items'] as $order)
@@ -112,38 +111,48 @@
                         @include('admin.order.singleorder',['order'=>$order,'sid'=>$shipping->id])
                         </div>
                 @endforeach
+
+                <div>
+                    <form id="orders-form-{{$shipping->id}}" action="" style="display:inline;">
+                        @csrf
+                        <input type="hidden" name="sid" value="{{$shipping->id}}">
+                        <input type="hidden" name="current" value="{{$status}}">
+
+                        @foreach ($data['items'] as $order)
+                            <input type="hidden" name="id[]" id="order-input-{{$order->id}}" value="{{$order->id}}">
+                        @endforeach
+                    </form>
+                </div>
+                <div style="margin: 5px 10px;">
+                    @if ($status==0)
+                        <span class="btn btn-success" onclick="acceptall({{$shipping->id}})">Accept All</span>
+                        <span class="btn btn-danger" onclick="rejectall({{$shipping->id}})">Reject All</span>
+                    @elseif($status==1)
+                        <span class="btn btn-success" onclick="deliveryall({{$shipping->id}})">Send All To delivery</span>
+                    @elseif($status==2)
+                        <span class="btn btn-success" onclick="pickupall({{$shipping->id}})">Mark All as pickup</span>
+                    @elseif($status==3)
+                        <span class="btn btn-success" onclick="deliveredall({{$shipping->id}})">Mark All as Delivered</span>
+                    @elseif($status==4)
+                        <span class="btn btn-success" onclick="returnedall({{$shipping->id}})">Mark All as Returned</span>
+                    @endif
+                </div>
               </div>
             </div>
         </div>
     @endforeach
 @endsection
 @section('scripts')
-    <script>
-        function loadimage(id){
-            elements=document.querySelectorAll('.sid-'+id);
-            elements.forEach(element => {
-                element.src=element.dataset.src;
-            });
-        }
-    
-        function myFunction() {
-          // Declare variables
-          var input, filter, table, tr, td, i, txtValue;
-          input = document.getElementById("searchinput");
-          filter = input.value.toUpperCase();
-          table = document.getElementById("ordertable");
-          tr = table.querySelectorAll('.search');
-            
-          // Loop through all table rows, and hide those who don't match the search query
-          for (i = 0; i < tr.length; i++) {
-              txtValue = tr[i].dataset.search;
-              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-              } else {
-                tr[i].style.display = "none";
-              }
-            
-          }
-        }
-        </script>
+<script>
+    var stage={{$status}};
+    var o="order-";
+    var r="orders-row-"
+    var os="orders-";
+    var osf="orders-form-";
+    var of="order-form-";
+    var om="order-modal-";
+    var oi="order-input-";
+    var url="{{route('admin.set-status',['status'=>'_s_'])}}";
+</script>
+<script src="{{asset('js\backend-js\order.js')}}"></script>
 @endsection
