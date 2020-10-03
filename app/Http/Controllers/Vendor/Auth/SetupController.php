@@ -64,7 +64,6 @@ class SetupController extends Controller
             }
             $option->deliver_range=$request->deliver_range;
             $option->landmark=$request->landmark;
-            $option->address=$request->address;
             $option->province_id=$request->province_id;
             $option->district_id=$request->district_id;
             $option->municipality_id=$request->municipality_id;
@@ -74,6 +73,7 @@ class SetupController extends Controller
             $option->bulkbuy=$request->bulkbuy??false;
             $option->vendor_id=$vendor->id;
             $option->save();
+            $vendor->address=$request->address;
             $vendor->stage=2;
             $vendor->save();
             return redirect()->route('vendor.step-3');
