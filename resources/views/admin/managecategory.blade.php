@@ -20,28 +20,28 @@
                 <div class="card-content">
                     <h4 class="card-title">Categories</h4>
                     <div class="toolbar">
-                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        <a href="{{route('admin.add-category')}}" class="btn btn-primary">Add Cateogry</a>
                     </div>
                     <div class="content-view">
                     <div class="material-datatables">
                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="text-center" >Name</th>
-                                    <th class="text-center">image</th>
-                                    <th class="text-center">Parent Category</th>
-                                    <th class="disabled-sorting text-center">Actions</th>
+                                    <th class="text-left" >Name</th>
+                                    <th class="text-left">image</th>
+                                    <th class="text-left">Parent Category</th>
+                                    <th class="disabled-sorting text-left">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($categories as $category)
                                 <tr>
-                                    <td class="text-center">{{ $category->cat_name }}</td>
-                                    <td class="text-center"><img style="max-width: 120px;" src="{{ asset('images/backend_images/categories/'. $category->cat_image) }}" alt=""></td>
-                                    <td class="text-center"><span class="label label-primary">{{ $category->parentlists }}</span></td>
-                                    <td class="text-center">
+                                    <td class="text-left">{{ $category->cat_name }}</td>
+                                    <td class="text-left"><img style="max-width: 120px;" src="{{ asset( $category->cat_image) }}" alt=""></td>
+                                    <td class="text-left"><span class="label label-primary">{{ $category->parentlists }}</span></td>
+                                    <td class="text-left">
                                         <a href="{{ url('admin/edit-category/'.$category->cat_id) }}" data-toggle="tooltip" data-placement="top" title="Edit" class="btn  btn-just-icon btn-round btn-primary"><i class="material-icons">border_color</i></a>
-                                        @if($category->parent_id==null)
+                                        {{-- @if($category->parent_id==null) --}}
                                         <a href="{{route('admin.closingcharges',['category'=>$category])}}" data-toggle="tooltip" data-placement="left" title="Closing Charges" class="btn  btn-just-icon btn-round btn-secondary"><i class="material-icons">attach_money</i></a>
                                         <span class="dropdown show" style="display: inline-block !important;">
                                             <a class="btn btn-secondary btn-just-icon btn-round btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" title="Shipping Methods" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,7 +56,7 @@
                                                 
                                             </div>
                                         </span>    
-                                        @endif
+                                        {{-- @endif --}}
                                     </td>
                                 </tr>
                                 @endforeach

@@ -3,15 +3,23 @@
 <div class="container-fluid">
 <div class="row">
         <div class="col-md-12">
-            <h3>{{ $collectionname }}</h3>
             <div class="card">
                 <div class="card-header card-header-icon" data-background-color="purple">
                     <i class="material-icons">assignment</i>
                 </div>
                 <div class="card-content">
-                    <h4 class="card-title">Products</h4>
+                    <h4 class="card-title">
+                         <strong> <a href="{{route('admin.manage-collection')}}">Collections</a> </strong>
+                        / {{ $collectionname }}
+                        / Products
+                    </h4>
+                    <div class="toolbar">
+                        <a  class="btn btn-primary " href="{{ url('admin/collection-product/'. $collection->collection_id) }}">Add Products</a>
+                    </div>
                     <div class="collection-images">
-                        <img src="{{ asset('images/backend_images/collections/'.$collectionimage) }}" alt="">
+                        <a href="{{ asset($collectionimage) }}" target="_blank">
+                            <img src="{{ asset($collectionimage) }}" alt="">
+                        </a>
                     </div>
                     <div class="content-view">
                     <div class="material-datatables">
@@ -40,7 +48,7 @@
                                 @foreach($abc as $ab)
                                 <tr class="product{{ $ab->product_id }}">
                                 @csrf
-                                    <td>{{ $ab->product_code }}</td>
+                                    <td>#{{ $ab->product_id }}</td>
                                     <td>{{ $ab->product_name }}</td>
                                     <td>{{ $ab->mark_price }}</td>
                                     <td>{{ $ab->sell_price }}</td>

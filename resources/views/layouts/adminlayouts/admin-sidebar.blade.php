@@ -62,6 +62,28 @@
                     <p> Dashboard </p>
                 </a>
             </li>
+         
+            <li >
+                <a data-toggle="collapse" href="#orders" >
+                    <i class="material-icons">shopping_cart
+                    </i>
+                    <p> Orders
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="orders">
+                    <ul class="nav">
+                        @for ($i = 0; $i < 7; $i++)
+                            <li class="{{ (Request::is('admin/orders/'.$i) ? ' active' : '') }}">
+                                <a href="{{route('admin.orders',['status'=>$i])}}">
+                                    <i class="material-icons">{{\App\Setting\OrderManager::stageicons[$i]}}</i>
+                                    <p> {{\App\Setting\OrderManager::stages[$i]}} orders </p>
+                                </a>
+                            </li>
+                        @endfor
+                    </ul>
+                </div>
+            </li>
             <li >
                 <a data-toggle="collapse" href="#catelogues" >
                     <i class="material-icons">image</i>
@@ -77,18 +99,18 @@
                                 <p> Brands </p>
                             </a>
                         </li>
-                        <li class="{{ (Request::is('admin/manage-tag') ? ' active' : '') }}">
+                        {{-- <li class="{{ (Request::is('admin/manage-tag') ? ' active' : '') }}">
                             <a href="{{ route('admin.manage-tag') }}">
                                 <i class="material-icons">local_offer</i>
                                 <p> Tags </p>
                             </a>
-                        </li>
-                        <li class="{{ (Request::is('admin/manage-attributes') ? ' active' : '') }}">
+                        </li> --}}
+                        {{-- <li class="{{ (Request::is('admin/manage-attributes') ? ' active' : '') }}">
                             <a href="{{ route('admin.manage-attributes') }}">
                                 <i class="material-icons">desktop_mac</i>
                                 <p> Attributes </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="{{ (Request::is('admin/manage-attribute-group') ? ' active' : '') }}">
                             <a href="{{ route('admin.manage-attribute-group') }}">
                                 <i class="material-icons">phonelink</i>

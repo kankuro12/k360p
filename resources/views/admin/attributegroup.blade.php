@@ -4,7 +4,6 @@
 <div class="container-fluid">
     <div class="row">
             <div class="col-md-12">
-                <button class="create-modal btn btn-fill btn-primary">Add Attribute Group</button>
                 @if(Session::has('flash_message'))
                 <div class="alert alert-success">
                     <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
@@ -20,6 +19,10 @@
                     </div>
                     <div class="card-content">
                         <h4 class="card-title">Attributes Group</h4>
+                        <div class="toolbar">
+                            <button class="create-modal btn btn-fill btn-primary">Add Attribute Group</button>
+
+                        </div>
                         <div class="content-view">
                         <div class="material-datatables">
                             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
@@ -39,6 +42,8 @@
                                     <td class="text-center">
                                         <button data-toggle="tooltip" data-placement="top" title="Edit" class="edit-modal btn btn-just-icon btn-round btn-primary" data-sn="{{ $sn }}" data-title="{{ $attribute_group->attribute_group_name }}" data-id="{{ $attribute_group->attribute_group_id }}"><i class="material-icons">border_color</i></button>
                                         <button data-toggle="tooltip" data-placement="left" title="Delete" class="delete-modal btn btn-just-icon btn-round btn-danger" data-id="{{ $attribute_group->attribute_group_id }}" data-title="{{ $attribute_group->attribute_group_name }}"><i class="material-icons">delete_forever</i></button>
+                                    <a  href="{{route('admin.manage-attributes',['group'=>$attribute_group->attribute_group_id])}}" data-toggle="tooltip" data-placement="left" title="Manage" class=" btn btn-just-icon btn-round btn-success" data-id="{{ $attribute_group->attribute_group_id }}" data-title="{{ $attribute_group->attribute_group_name }}"><i class="material-icons">assignment</i></a>
+
                                     </td>
                                     </tr>
                                     @endforeach

@@ -166,7 +166,7 @@ Route::group(['prefix'=>'admin','middleware' => 'admin_auth'], function () {
         'as' => 'admin.delete-attribute-group',
         'uses' => 'admin\AttributegroupController@deleteAttributegroup'
     ]);
-    Route::match(['get', 'post'], '/manage-attributes', [
+    Route::match(['get', 'post'], '/manage-attributes/{group}', [
         'as' => 'admin.manage-attributes',
         'uses' => 'admin\AttributeController@manageAttribute'
 

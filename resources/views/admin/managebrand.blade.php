@@ -3,13 +3,16 @@
 <div class="container-fluid">
 <div class="row">
         <div class="col-md-12">
-        <button class="create_modal btn btn-fill btn-primary" >Add Brand</button>
+        {{-- <button class="create_modal btn btn-fill btn-primary" >Add Brand</button> --}}
             <div class="card">
                 <div class="card-header card-header-icon" data-background-color="purple">
                     <i class="material-icons">assignment</i>
                 </div>
                 <div class="card-content">
                     <h4 class="card-title">Brands</h4>
+                    <div class="toolbar">
+                        <button class="create_modal btn btn-fill btn-primary" >Add Brand</button>
+                    </div>
                     <div class="content-view">
                     <div class="material-datatables">
                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">

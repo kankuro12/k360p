@@ -37,9 +37,9 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label >Lower value</label>
+                                    <label >Packaging Name</label>
                                     <input required type="text" name="name" id="name" 
-                            class="form-control" placeholder="Enter name">
+                            class="form-control" placeholder="Enter Package name">
                                 </div>
                                 
                                 <div class="col-md-6">

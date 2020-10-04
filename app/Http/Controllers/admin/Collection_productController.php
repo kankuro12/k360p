@@ -43,7 +43,7 @@ class Collection_productController extends Controller
             array_push($abc,$product);
         }
     //    dd($abc);
-        return view('admin.editproductcollection')->with(compact('abc','collectionname','collectionimage'));
+        return view('admin.editproductcollection')->with(compact('collection','abc','collectionname','collectionimage'));
     }
 
     public function deleteCollectionproduct(Request $request){

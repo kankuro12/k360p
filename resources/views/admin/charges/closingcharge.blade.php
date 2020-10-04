@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                         </form>
-<hr>
+    <hr>
     <h4>
         <strong>Closing Charges</strong>
     </h4>

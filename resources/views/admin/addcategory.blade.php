@@ -19,12 +19,15 @@
                     </div>
 
                     <div class="card-content">
-                        <h4 class="card-title">Add Category</h4>
+                        <h4 class="card-title">
+                             <strong>
+                                 <a href="{{route('admin.manage-category')}}">Categories</a>
+                            </strong> / Add Category</h4>
                         <form action="{{ route('admin.add-category') }}" enctype="multipart/form-data" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-4 col-sm-12">
-                                    <label for="">Image</label>
+                                    <label for="">Image (75 x 75 px)</label>
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail">
                                             <img src="{{ asset('images/backend_images/image_placeholder.jpg') }}" alt="...">

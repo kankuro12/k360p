@@ -33,7 +33,11 @@
                         <i class="material-icons">local_shipping</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title"><a href="{{ route('admin.shippings') }}">Shippings</a> /
+                        <h4 class="card-title">
+                            <strong>
+                                <a href="{{ route('admin.shippings') }}">Shippings</a> 
+                            </strong>
+                            /
                             {{ $shipping->name }}</h4>
                         <div class="toolbar">
                             <!--        Here you can write extra buttons/actions for the toolbar              -->

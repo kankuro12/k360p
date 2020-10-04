@@ -31,9 +31,9 @@ class AttributeController extends Controller
 
     }
 
-    public function manageAttribute(){
-        $attribute_groups = Attribute_group::get();
-        $attributes = Attribute::get();
+    public function manageAttribute(Attribute_group $group){
+       
+        $attributes = Attribute::where('attribute_group_id',$group->attribute_group_id)->get();
         //dd($attributes);
         /*$groupdropdown = "<option disabled>Select Attribute Group</option>";
         foreach($attribute_groups as $attribute_group){
@@ -42,9 +42,9 @@ class AttributeController extends Controller
         print_r($groupdropdown); die;*/
         foreach($attributes as $attribute){
             $attributeid = $attribute->attribute_group_id;
-            $attributegroup = Attribute_group::find($attributeid);
-            $attribute_group_name = $attributegroup->attribute_group_name;
-            $attribute->attribute_group_name = $attribute_group_name;
+            // $attributegroup = $group;
+            // $attribute_group_name = $attributegroup->attribute_group_name;
+            // $attribute->attribute_group_name = $attribute_group_name;
             if($attribute->attribute_status == 0 ){
                 $attribute->statusname = "InActive";
             }else{
@@ -52,7 +52,7 @@ class AttributeController extends Controller
             }
         }
         //dd($attributes);
-        return view('admin.manageattribute')->with(compact('attributes','attribute_groups'));
+        return view('admin.manageattribute')->with(compact('group','attributes'));
     }
 
     public function deleteAttribute(Request $request){

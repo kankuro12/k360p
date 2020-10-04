@@ -39,11 +39,21 @@
                     </div>
                     <div class="card-content">
                         <h4 class="card-title">
-                            <a href="{{ route('admin.shippings') }}"> <strong>Shippings</strong> </a>
+                            <strong>
+
+                                <a href="{{ route('admin.shippings') }}"> <strong>Shippings</strong> </a>
+                            </strong>
                             /
-                            {{ $shipping->name }}
+                            <strong>
+
+                                <a href="{{ route('admin.shipping-manage',['shipping'=>$shipping->id]) }}">  {{ $shipping->name }}</a>
+                            </strong>
+                           
                             /
-                            <a href="{{ route('admin.manage-category') }}"> <strong>Categories</strong> </a> 
+                            <strong>
+                                <a href="{{ route('admin.manage-category') }}"> <strong>Categories</strong> </a> 
+                            </strong>
+                            
                             /
                             {{ $category->cat_name }}
                         </h4>

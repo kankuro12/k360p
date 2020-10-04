@@ -28,8 +28,7 @@
      
         <div class="row">
             <div class="col-md-12">
-                <button id="create_modal" class="create_modal btn btn-fill btn-primary" >Add Shipping Class</button>
-                <a href="{{route('admin.shipping-zones')}}" class="btn btn-primary">Manage Shipping Zones</a>
+               
                 @if (Session::has('flash_message'))
                     <div class="alert alert-success">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
@@ -46,7 +45,8 @@
                     <div class="card-content">
                         <h4 class="card-title">Shipping</h4>
                         <div class="toolbar">
-                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            <button id="create_modal" class="create_modal btn btn-fill btn-primary" >Add Shipping Class</button>
+                            <a href="{{route('admin.shipping-zones')}}" class="btn btn-primary">Manage Shipping Zones</a>
                         </div>
                         <div class="content-view">
                             <div class="material-datatables">

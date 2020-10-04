@@ -4,13 +4,24 @@
 <div class="container-fluid">
 <div class="row">
         <div class="col-md-12">
-        <button class="create_modal btn btn-fill btn-primary" >Add Attribute</button>
+      
             <div class="card">
                 <div class="card-header card-header-icon" data-background-color="purple">
                     <i class="material-icons">assignment</i>
                 </div>
                 <div class="card-content">
-                    <h4 class="card-title">Attributes</h4>
+                    <h4 class="card-title">
+                        <strong>
+                            <a href="{{route('admin.manage-attribute-group')}}">Attribute Groups</a>
+                        </strong>
+                        /
+                        {{$group->attribute_group_name}}
+                        /
+                        Attributes
+                    </h4>
+                    <div class="toolbar">
+                        <button class="create_modal btn btn-fill btn-primary" >Add Attribute</button>
+                    </div>
                     <div class="content-view">
                     <div class="material-datatables">
                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
@@ -18,7 +29,7 @@
                                 <tr>
                                     <th>Sn.</th>
                                     <th>Name</th>
-                                    <th>Attribute Group</th>
+                                  
                                     <th>Status</th>
                                     <th class="disabled-sorting text-center">Actions</th>
                                 </tr>
@@ -29,7 +40,7 @@
                                 <tr class="attribute{{ $attribute->attribute_id }}">
                                     <td>{{ $sn = $no++ }}</td>
                                     <td>{{ $attribute->attribute_name }}</td>
-                                    <td>{{ $attribute->attribute_group_name }}</td>
+ 
                                     <td>{{ $attribute->statusname}}</td>
                                     <td class="text-center">
                                         <button  class="edit-modal btn btn-just-icon btn-round btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" data-sn="{{ $sn }}" data-group="{{ $attribute->attribute_group_id }}" data-status="{{ $attribute->attribute_status }}" data-title="{{ $attribute->attribute_name }}" data-id="{{ $attribute->attribute_id }}"><i class="material-icons">border_color</i></button>
@@ -72,13 +83,14 @@
             <div class="row">
                 <div class="col-md-8 pr-md-1">
                     <div class="form-group label-floating">
-                        <label class="">Attribute Group</label>
+                        <input type="hidden" name="attribute_group_id" id="attributegroups" value="{{$group->attribute_group_id}}">
+                        {{-- <label class="">Attribute Group</label>
                         <select class="selectpicker" data-live-search="true" id="attributegroups" name="attribute_group_id" data-style="btn btn-primary btn-round" title="Single Select" data-size="3">
                         <option disabled>Select Attribute Group</option>
                         @foreach($attribute_groups as $attribute_group)
                         <option value="{{ $attribute_group->attribute_group_id }}">{{ $attribute_group->attribute_group_name }}</option>
                         @endforeach
-                        </select>
+                        </select> --}}
                     </div>
                 </div>
             </div>
@@ -138,12 +150,13 @@
             <div class="row">
                 <div class="col-md-8 pr-md-1">
                     <div class="form-group label-floating">
-                        <label class="">Attribute Group</label>
+                        <input type="hidden" id="attributegroups1" name="attribute_group_id" value="{{$group->attribute_group_id}}">
+                        {{-- <label class="">Attribute Group</label>
                         <select class="selectpicker" data-live-search="true" id="attributegroups1" name="attribute_group_id" data-style="btn btn-primary btn-round" title="Single Select" data-size="3">
                         @foreach($attribute_groups as $attribute_group)
                         <option value="{{ $attribute_group->attribute_group_id }}">{{ $attribute_group->attribute_group_name }}</option>
                         @endforeach
-                        </select>
+                        </select> --}}
                     </div>
                 </div>
             </div>
@@ -283,7 +296,7 @@
                     $('#datatables').append("<tr class='attribute" + data.attribute_id + "'>"+
                     "<td>" + (sn++) + "</td>"+
                     "<td>" + data.attribute_name + "</td>"+
-                    "<td>" + data.attribute_group_name + "</td>"+
+                    // "<td>" + data.attribute_group_name + "</td>"+
                     "<td>" + data.attribute_status_name + "</td>"+
                     "<td class='text-center'><button data-toggle='modal tooltip' data-placement='top' title='Edit'  data-target='#editattribute' class='edit-modal btn btn-just-icon btn-round btn-primary' data-group='" + data.attribute_group_id + "' data-title='" + data.attribute_name + "' data-id='" + data.attribute_id + "'><i class='material-icons'>border_color</i></button>" +
                     "<button data-toggle='tooltip' data-placement='left' title='Delete'  class='delete-modal btn btn-just-icon btn-round btn-danger' data-id='" + data.attribute_id + "' data-title='" + data.attribute_name + "'><i class='material-icons'>delete_forever</i></button>" + 
@@ -346,7 +359,7 @@
                     $('.attribute' + data.attribute_id).replaceWith("<tr class='attribute" + data.attribute_id + "'>"+
                     "<td>" + data.sn + "</td>"+
                     "<td>" + data.attribute_name + "</td>"+
-                    "<td>" + data.attribute_group_name + "</td>"+
+                    // "<td>" + data.attribute_group_name + "</td>"+
                     "<td>" + data.attribute_status_name + "</td>"+
                     "<td class='text-center'><button data-toggle='modal tooltip' data-placement='top' title='Edit'  data-target='#editattribute' class='edit-modal btn btn-just-icon btn-round btn-primary' data-sn='"+ data.sn +"' data-title='" + data.attribute_name + "' data-id='" + data.attribute_id + "' data-group='" + data.attribute_group_id + "' data-status='" + data.attribute_status + "'><i class='material-icons'>border_color</i></button>" +
                     "<button data-toggle='tooltip' data-placement='left' title='Delete'  class='delete-modal btn btn-just-icon btn-round btn-danger' data-id='" + data.attribute_id + "' data-title='" + data.attribute_name + "'><i class='material-icons'>delete_forever</i></button>" + 
