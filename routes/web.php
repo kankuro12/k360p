@@ -735,7 +735,7 @@ Route::group(['prefix'=>'vendor','middleware'=>['authen','type'],'type'=>['vendo
         'as' => 'vendor.add-sale-products',
         'uses' => 'Vendor\OnsellController@addProducts'
     ]);
-    Route::match(['get', 'post'], '/edit-sale-products{id}', [
+    Route::match(['get', 'post'], '/edit-sale-products/{id}', [
         'as' => 'vendor.edit-sale-products',
         'uses' => 'Vendor\Sell_productController@editProduct'
     ]);
@@ -784,6 +784,11 @@ Route::group(['prefix'=>'vendor','middleware'=>['authen','type'],'type'=>['vendo
        
        Route::post('product/update/{product}','Vendor\ProductController@update')->name('vendor.update-product');
 
+       //extracharge
+       //product Extra charges
+    Route::post('product-extracharge','Vendor\VariantController@product_extracharge')->name('vendor.product-extracharge');
+    Route::post('product-extracharge/update/{extracharge}','Vendor\VariantController@product_extracharge_update')->name('vendor.product-extracharge-update');
+    Route::post('product-extracharge/{extracharge}/status/{status}','Vendor\VariantController@product_extracharge_status')->name('vendor.product-extracharge-status');
         
        Route::post('/message/seen/{message}', 'Vendor\DashBoardController@message')->name('vendor.markread-message');
        Route::get('/messages', 'Vendor\DashBoardController@messages')->name('vendor.messagea');

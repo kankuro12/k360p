@@ -250,7 +250,7 @@ class ProductController extends Controller
         $prod = [];
         foreach ($products as $product) {
             //dd($product->product_id);
-            if (Collection_product::where('collection_id', $data['collection_id'])->where('product_id', $product->product_id)->get()->toArray() == null) {
+            if (Collection_product::where('collection_id', $data['collection_id'])->where('product_id', $product->product_id)->count()==0) {
                 array_push($prod, $product);
             }
         }

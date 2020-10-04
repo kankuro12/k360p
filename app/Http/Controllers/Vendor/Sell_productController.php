@@ -12,6 +12,6 @@ class Sell_productController extends Controller
 
     }
     public function editProduct($id){
-
+        echo 'hello';
     }
 }

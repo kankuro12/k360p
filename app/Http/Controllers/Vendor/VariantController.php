@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\vendor;
 
+use App\ExtraCharge;
 use App\Http\Controllers\Controller;
 use App\model\admin\Product;
 use Illuminate\Http\Request;
@@ -216,4 +217,69 @@ class VariantController extends Controller
         ->back()
         ->with('sel', 5);
     }
+
+        //extracharge
+        public function product_extracharge(Request $request)
+        {
+            $validator1 = Validator::make($request->all(), [
+    
+                'product_id' => 'required|integer',
+                'name' => 'required',
+                'amount' => 'required'
+    
+            ]);
+    
+            if ($validator1->fails()) {
+                // dd($validator1->errors());
+                return redirect()
+                    ->back()
+                    ->withErrors($validator1)
+                    ->with('sel', 6);
+            }
+            $extracharge = new ExtraCharge();
+            $extracharge->product_id = $request->product_id;
+            $extracharge->name = $request->name;
+            $extracharge->amount = $request->amount;
+            $extracharge->enabled = 1;
+            $extracharge->save();
+            return redirect()
+                ->back()
+                ->with('sel', 6);
+        }
+    
+        public function product_extracharge_status (ExtraCharge $extracharge, $status)
+        {
+            $extracharge->enabled = $status;
+            $extracharge->save();
+            return redirect()
+                ->back()
+                ->with('sel', 6);
+        }
+    
+        public function product_extracharge_update(ExtraCharge $extracharge, Request $request)
+        {
+    
+            $validator1 = Validator::make($request->all(), [
+    
+                
+                'name' => 'required',
+                'amount' => 'required'
+    
+            ]);
+            
+            if ($validator1->fails()) {
+                // dd($validator1->errors());
+                return redirect()
+                    ->back()
+                    ->withErrors($validator1)
+                    ->with('sel', 6);
+            }
+            $extracharge->name = $request->name;
+            $extracharge->amount = $request->amount;
+    
+            $extracharge->save();
+            return redirect()
+                ->back()
+                ->with('sel', 6);
+        }
 }

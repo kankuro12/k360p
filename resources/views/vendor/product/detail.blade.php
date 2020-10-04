@@ -35,7 +35,7 @@
                     <label for=""> Warrenty Period Type</label>
 
                     <select class="selectpicker" title="Select a Period type" class="form-control" type="text"
-                        name="	warrentytime" id="	warrentytime">
+                        name="warrentytime" id="warrentytime">
                         <option value="Day"   {{ $option != null ? ($option->warrentytime == 'Day' ? 'selected' : '') : '' }}>Day</option>
                         <option value="Month"  {{ $option != null ? ($option->warrentytime == 'Month' ? 'selected' : '') : '' }}>Month</option>
                         <option value="Year" {{ $option != null ? ($option->warrentytime == 'Year' ? 'selected' : '') : '' }}>Year</option>

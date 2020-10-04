@@ -59,3 +59,12 @@
         </div>
     </form>
 </div>
+
+@if ($shipping!=null)
+    @php
+        $shippingprice=$shipping->shippingprice();
+    @endphp
+    @if ($shippingprice!=null)
+        @include('vendor.product.updateshippingprice',['$shippingprice'=>$shippingprice])
+    @endif
+@endif

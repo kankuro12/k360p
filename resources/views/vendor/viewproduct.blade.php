@@ -46,6 +46,12 @@
                                             <i class="material-icons">bento</i> Extra Details
                                         </a>
                                     </li>
+                                    <li class="{{$sel==6?"active":""}}">
+                                        <a href="#extracharge" role="tab" data-toggle="tab" aria-expanded="true">
+                                            <i class="material-icons">attach_money
+                                            </i> Extra Charges
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-md-10">
@@ -258,6 +264,10 @@
                                     <div class="tab-pane {{ $sel == 5 ? 'active' : '' }}" id="extra">
                                         @include('vendor.product.detail')
 
+                                    </div>
+                                    <div class="tab-pane {{$sel==6?"active":""}}" id="extracharge" >
+                                        @include('vendor.product.extracharge')
+                                        
                                     </div>
                                 </div>
                             </div>
