@@ -91,7 +91,7 @@
                                             $i=1;
                                             @endphp
                                             @foreach ($all as $data)
-                                                @include('admin.order.ordergroup',['data'=>$data,'i'=>$i])
+                                                @include('vendor.order.ordergroup',['data'=>$data,'i'=>$i])
                                                 @php
                                                 $i+=1;
                                                 @endphp
@@ -149,7 +149,7 @@
                     </div>
                     @foreach ($data['items'] as $order)
                             <div >
-                            @include('admin.order.singleorder',['order'=>$order,'sid'=>$shipping->id])
+                            @include('vendor.order.singleorder',['order'=>$order,'sid'=>$shipping->id])
                             </div>
                     @endforeach
 

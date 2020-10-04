@@ -142,12 +142,12 @@ class CartController extends Controller
                 $orderItem = new OrderItem();
                 $orderItem->shipping_detail_id = $shippingDetail->id;
                 $orderItem->product_id = $value->product_id;
-                $vendor_id=Product::where('id',$orderItem->product_id)->value('vendor_id');
+                $vendor_id=Product::where('product_id',$orderItem->product_id)->value('vendor_id');
                 if($vendor_id!=null){
                 $orderItem->vendor_id = $vendor_id;
 
                     if(!in_array($vendor_id,$vids)){
-                        array_push($vendor_id,$vids);
+                        array_push($vids,$vendor_id);
                     }
                 }
                 $orderItem->qty = $value->qty;

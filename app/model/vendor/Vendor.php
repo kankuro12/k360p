@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\User;
 use App\VendorMessage;
+use Illuminate\Notifications\Notifiable;
 
 class Vendor extends Model
 {
     use Sluggable;
+    use Notifiable;
 
     /**
      * Return the sluggable configuration array for this model.
@@ -59,5 +61,10 @@ class Vendor extends Model
     }
     public function messages(){
         return VendorMessage::where('seen',0)->where('vendor_id',$this->id)->take(5)->get();
+    }
+
+    public function routeNotificationForOneSignal()
+    {
+        return ['email' => $this->user->email];
     }
 }
