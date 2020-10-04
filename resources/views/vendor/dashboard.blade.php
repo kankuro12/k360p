@@ -191,7 +191,7 @@
                                     <tr>
                                        
                                         <td>
-                                            <a href="{{route('admin.orders',['status'=>$i])}}">
+                                            <a href="{{route('vendor.orders',['status'=>$i])}}">
                                                 <i class="material-icons">{{\App\Setting\OrderManager::stageicons[$i]}}</i> {{\App\Setting\OrderManager::stages[$i]}} orders
                                             </a>
                                         </td>
@@ -212,7 +212,7 @@
                             <h4 class="card-title"> 
                                 <strong>Latest Orders</strong> -  
                                 <strong>
-                                    <a href="{{route('admin.orders',['status'=>0])}}">View Orders</a>
+                                    <a href="{{route('vendor.orders',['status'=>0])}}">View Orders</a>
                                 </strong>
                             </h4>
                         </div>

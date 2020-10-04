@@ -43,6 +43,7 @@ class CheckoutController extends Controller
                 $orderItem->product_id = $value->product_id;
                 $vendor_id=Product::where('id',$orderItem->product_id)->value('vendor_id');
                 if($vendor_id!=null){
+                    $orderItem->vendor_id = $vendor_id;
                     if(!in_array($vendor_id,$vids)){
                         array_push($vendor_id,$vids);
                     }
