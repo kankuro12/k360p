@@ -20,6 +20,7 @@ use App\model\admin\Collection_product;
 use App\model\admin\Sell_product;
 use App\model\admin\Tag;
 use App\model\admin\Product_tag;
+use App\model\Vendor\Vendor;
 use App\ProductWeightClass;
 use App\Setting\ChargesManager;
 
@@ -57,11 +58,18 @@ class ProductController extends Controller
             }
         }
         foreach ($products as $product) {
-            if ($product->brand_id != null) {
+            if ($product->brand_id = null) {
 
                 $product->brand_name = Brand::find($product->brand_id)->brand_name;
             } else {
                 $product->brand_name = "No Brand";
+            }
+
+            if($product->vendor_id==null){
+                $product->vendor_name=env('APP_NAME','laravel')." Store" ;
+            }else{
+                $product->vendor_name=Vendor::where('id',$product->vendor_id)->select('name')->first()->name ;
+                
             }
         }
         //dd($products);

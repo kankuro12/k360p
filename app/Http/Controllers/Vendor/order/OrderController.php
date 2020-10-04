@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\order;
+namespace App\Http\Controllers\Vendor\order;
 
 use App\Http\Controllers\Controller;
 use App\model\admin\Product;
@@ -8,14 +8,16 @@ use App\model\OrderItem;
 use App\model\ShippingDetail;
 use App\Setting\OrderManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function index($status){
+        $vendor=Auth::user()->vendor;
         $stages=OrderManager::stages;
         //where('ismainstore',1)->
         $all=[];
-        $collection=OrderItem::where('stage',$status)->get()->groupBy('shipping_detail_id');
+        $collection=OrderItem::where('vendor_id',$vendor->id)->where('stage',$status)->get()->groupBy('shipping_detail_id');
         foreach ($collection as $key => $value) {
             $data=[];
             $data['shipping']=ShippingDetail::find($key);
@@ -30,7 +32,7 @@ class OrderController extends Controller
             array_push($all,$data);
         }
         // dd($all);
-        return view('admin.order.index',compact('all','status','stages'));
+        return view('vendor.order.index',compact('all','status','stages'));
     }
 
     public function status($status , Request $request){
@@ -51,6 +53,6 @@ class OrderController extends Controller
     }
 
     public function flash($status,$id){
-        return redirect()->route('admin.orders',['status'=>$status])->with('id',$id);
+        return redirect()->route('vendor.orders',['status'=>$status])->with('id',$id);
     }
 }

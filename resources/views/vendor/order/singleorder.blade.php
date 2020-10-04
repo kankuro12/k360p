@@ -65,14 +65,7 @@ $product=$order->product;
                     @if ($status==0)
                         <span class="btn btn-success" onclick="accept({{$order->id}})">Accept</span>
                         <span class="btn btn-danger" onclick="reject({{$order->id}})">Reject</span>
-                    @elseif($status==1)
-                        <span class="btn btn-success" onclick="delivery({{$order->id}})">Send To delivery</span>
-                    @elseif($status==2)
-                        <span class="btn btn-success" onclick="pickup({{$order->id}})">Mark As Pickup</span>
-                    @elseif($status==3)
-                        <span class="btn btn-success" onclick="delivered({{$order->id}})">Mark As Delivered</span>
-                    @elseif($status==4)
-                    <span class="btn btn-success" onclick="returned({{$order->id}})">Mark As Returned</span>
+                 
                     @endif
             </div>
         </div>

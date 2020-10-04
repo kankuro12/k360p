@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\model\Admin;
 use App\model\admin\Product;
 use Illuminate\Support\Facades\Session;
 use App\Setting\HomePage;
@@ -12,6 +13,8 @@ use App\model\Coupon;
 use App\model\OrderItem;
 use App\model\ProductStock;
 use App\model\ShippingDetail;
+use App\model\Vendor\Vendor;
+use App\Notifications\admin\OrderNotification;
 use Illuminate\Support\Str;
 
 
@@ -63,6 +66,9 @@ class CartController extends Controller
             $cartItem->session_id = $session_id;
             $cartItem->variant_code = $request->varient;
             $cartItem->save();
+
+           
+
             return redirect('/viewcart')->with('success','Product has been added to cart!');
         }
     }
@@ -131,10 +137,17 @@ class CartController extends Controller
             $shippingDetail->save();
             $session_id = Session::get('session_id');
             $cart = Cart::where('session_id',$session_id)->get();
+            $vids=[];
             foreach ($cart as $key => $value) {
                 $orderItem = new OrderItem();
                 $orderItem->shipping_detail_id = $shippingDetail->id;
                 $orderItem->product_id = $value->product_id;
+                $vendor_id=Product::where('id',$orderItem->product_id)->value('vendor_id');
+                if($vendor_id!=null){
+                    if(!in_array($vendor_id,$vids)){
+                        array_push($vendor_id,$vids);
+                    }
+                }
                 $orderItem->qty = $value->qty;
                 $orderItem->variant_code = $value->variant_code;
                 if($value->variant_code != null){
@@ -147,6 +160,17 @@ class CartController extends Controller
                   $stockStatus->save();
                 }
                 $orderItem->save();
+            }
+
+            try {
+                //code...
+                Admin::first()->notify(new \App\Notifications\admin\OrderNotification($shippingDetail));
+                foreach ($vids as $vid) {
+                    $vendor=Vendor::find($vid);
+                    $vendor->notify(new \App\Notifications\vendor\OrderNotification($shippingDetail));
+                }
+            } catch (\Throwable $th) {
+                //throw $th;
             }
             return redirect('/viewcart')->with('success','Your order placed successfully!');
         }else{

@@ -12,6 +12,19 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('testo', function () {
+    $date = \Carbon\Carbon::today()->subDays(7);
+    $orders=DB::table('order_items')->where('created_at', '>=', \Carbon\Carbon::now()->subDays(7))
+    ->groupBy('date')
+    ->orderBy('date', 'DESC')
+    ->get(array(
+        DB::raw('Date(created_at) as date'),
+        DB::raw('COUNT(*) as "views"')
+    ));
+    dd($orders,$date);
+});
+
+
 Route::get('/', [
     'uses' => 'HomeController@home',
     'as' => 'public.home'
@@ -649,7 +662,7 @@ Route::group(['prefix'=>'vendor','middleware'=>'guest'],function(){
 
 
 Route::group(['prefix'=>'vendor','middleware'=>['authen','type'],'type'=>['vendor']],function(){
-    Route::get('logout',[
+    Route::post('logout',[
 		'uses'=>'Vendor\Auth\LoginController@getLogout',
 		'as'=>'vendor.getLogout'
     ]);
@@ -813,7 +826,16 @@ Route::group(['prefix'=>'admin/element','middleware' => 'admin_auth'], function 
 //admin ordermanagement
 Route::group(['prefix'=>'admin/orders','middleware' => 'admin_auth'], function () {
     Route::get('/{status}','admin\order\OrderController@index')->name('admin.orders');
+    Route::get('/{status}/flash/{id}','admin\order\OrderController@flash')->name('admin.orders-flash');
     
     Route::post('status/{status}','admin\order\OrderController@status')->name('admin.set-status');
+
+});
+
+Route::group(['prefix'=>'vendor/orders','middleware'=>['authen','type'],'type'=>['vendor']], function () {
+    Route::get('/{status}','Vendor\order\OrderController@index')->name('vendor.orders');
+    Route::get('/{status}/flash/{id}','Vendor\order\OrderController@flash')->name('vendor.orders-flash');
+    
+    Route::post('status/{status}','Vendor\order\OrderController@status')->name('vendor.set-status');
 
 });

@@ -179,7 +179,7 @@
                                                 <hr>
                                                 <div>
                                                     <textarea id="product-desc" class="cc"
-                                                        name="product_description" required>{!!  $productdetail->description !!}</textarea>
+                                                        name="product_description" required>{!!  $productdetail->product_description !!}</textarea>
                                                 </div>
                                             </div>
                                             </p>

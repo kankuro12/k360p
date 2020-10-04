@@ -10,7 +10,7 @@
                         <i class="material-icons">mail_outline</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title">Add Product</h4>
+                    <h4 class="card-title"><Strong><a href="{{route('vendor.manage-product')}}">Products</a></Strong> / Add Product</h4>
                 <form action="{{ route('vendor.create-product') }}" method="post" enctype="multipart/form-data">
                    
                    @csrf
@@ -69,21 +69,21 @@
                     <div class="col-md-6 pr-md-1">
                         <div class="form-group label-floating">
                             <label ><strong>Product Mark Price</strong> </label>
-                            <input required type="text" class="form-control" value="" name="mark_price" placeholder="Enter Product Price">
+                            <input required type="number" step="0.01" class="form-control" value="" name="mark_price" placeholder="Enter Product Price">
                         </div>
                     </div>
                 
                     <div class="col-md-6 pr-md-1">
                         <div class="form-group label-floating">
                             <label ><strong>Product sale Price</strong> </label>
-                            <input required type="text" class="form-control" value="" name="sell_price" placeholder="Enter Product Promotional Price">
+                            <input required type="number" step="0.01" class="form-control" value="" name="sell_price" placeholder="Enter Product Promotional Price">
                         </div>
                     </div>
                 
                     <div class="col-md-6 pr-md-1">
                         <div class="form-group label-floating">
                             <label ><strong>Product Quantity</strong> </label>
-                            <input required type="text" class="form-control" value="0" name="quantity" placeholder="Enter Quantity">
+                            <input required type="number" step="0.01" class="form-control" value="0" name="quantity" placeholder="Enter Quantity">
                         </div>
                     </div>
                 </div>

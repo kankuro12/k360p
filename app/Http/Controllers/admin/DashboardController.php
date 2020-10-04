@@ -11,6 +11,7 @@ use App\model\admin\Product;
 use App\model\admin\Category;
 use App\model\admin\Collection;
 use App\model\admin\DefaultShipping;
+use App\model\OrderItem;
 use App\model\vendor\Vendor;
 
 class DashboardController extends Controller
@@ -29,7 +30,8 @@ class DashboardController extends Controller
         $vendorno = count($vendor);
         $featpro = Product::where('featured',1)->get();
         $featno = count($featpro);
-        return view('admin.dashboard')->with(compact('brandno','productno','categoryno','collectionno','vendorno','featno'));
+        $latest=OrderItem::orderBy('created_at', 'desc')->take(5)->get();
+        return view('admin.dashboard')->with(compact('latest','brandno','productno','categoryno','collectionno','vendorno','featno'));
     }
 
     public function shipping(Request $request){

@@ -20,6 +20,8 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    @include('layouts.sellerlayouts.onsignal')
     <style>
 #image-preview {
   width: 400px;
@@ -195,6 +197,21 @@
         s0.parentNode.insertBefore(s1,s0);
     })();
 </script>
-
+<script>
+    function logout(){
+        $.ajax({
+            type: 'post',
+            url: '{{route('vendor.getLogout')}}',
+            data: { '_token': '{{ csrf_token() }}'},
+            success: function(data){
+                
+                OneSignal.push(function() {
+                    OneSignal.logoutEmail();
+                });
+                location.reload();
+            }
+        });
+    }
+</script>
 </body>
 </html>

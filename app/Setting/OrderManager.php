@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderManager 
 {
-    const stages=['Pending','Accecpted','On Delivery','Pickup','Delivered','Rejected','Returned'];
+    const stages=['Pending','Accepted','On Delivery','Pickup','Delivered','Rejected','Returned'];
     const stageicons=['pending_actions','assignment_turned_in','local_shipping','pin_drop','verified','cancel','360'];
     const paymentstatus=['Pending','Completed','refunded'];
     const delivertype=['Express',"Normal"];

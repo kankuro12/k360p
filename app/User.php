@@ -41,48 +41,62 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role(){
-        return $this->hasOne(Role::class,'id','role_id');
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
 
-    public function checkIfUserRole($need_role){       
-        return (strtolower($need_role)==strtolower($this->role->name))?true:false;
+    public function checkIfUserRole($need_role)
+    {
+        return (strtolower($need_role) == strtolower($this->role->name)) ? true : false;
     }
-    public function hasRole($types){
-        if(is_array($types)){
+    public function hasRole($types)
+    {
+        if (is_array($types)) {
             foreach ($types as $type) {
-                if($this->checkIfUserRole($type)){
+                if ($this->checkIfUserRole($type)) {
                     return true;
                 }
             }
-        }else{
+        } else {
             return $this->checkIfUserRole($types);
         }
         return false;
     }
-    public function vendoruser(){
-        return $this->hasOne(VendorUser::class,'user_id');
+    public function vendoruser()
+    {
+        return $this->hasOne(VendorUser::class, 'user_id');
     }
-    public function vendor(){
-        return $this->hasOne(Vendor::class,'user_id');
+    public function vendor()
+    {
+        return $this->hasOne(Vendor::class, 'user_id');
     }
-    public function sendPasswordResetNotification($token){
+    public function sendPasswordResetNotification($token)
+    {
         $this->notify(new CustomResetPasswordNotification($token));
     }
-    public static function byEmail($email){
+    public static function byEmail($email)
+    {
         return static::where('email', $email);
     }
-    public function hasVerifiedEmail(){
+    public function hasVerifiedEmail()
+    {
         return $this->active;
     }
 
-    public function status(){
+    public function status()
+    {
 
-        return \App\model\Vendor\Vendor::where('user_id',$this->id)->value('stage');
+        return \App\model\Vendor\Vendor::where('user_id', $this->id)->value('stage');
     }
 
     public function routeNotificationForSlack($notification)
     {
-        return env('slackuser','');
+        return env('slackuser', '');
+    }
+
+    public function routeNotificationForOneSignal()
+    {
+        return ['email' => $this->email];
     }
 }

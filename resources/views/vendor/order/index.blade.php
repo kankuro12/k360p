@@ -1,4 +1,4 @@
-@extends('layouts.adminlayouts.admin-design')
+@extends('layouts.sellerlayouts.seller-design')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -13,7 +13,7 @@
                         @foreach ($stages as $stage)
 
                             <li class="{{ $i == $status ? 'active' : '' }}">
-                                <a href="{{ route('admin.orders', ['status' => $i]) }}" aria-expanded="true">
+                                <a href="{{ route('vendor.orders', ['status' => $i]) }}" aria-expanded="true">
                                     <i class="material-icons">{{ App\Setting\OrderManager::stageicons[$i] }}</i>{{ $stage }}
                                 </a>
                             </li>
@@ -168,14 +168,6 @@
                         @if ($status==0)
                             <span class="btn btn-success" onclick="acceptall({{$shipping->id}})">Accept All</span>
                             <span class="btn btn-danger" onclick="rejectall({{$shipping->id}})">Reject All</span>
-                        @elseif($status==1)
-                            <span class="btn btn-success" onclick="deliveryall({{$shipping->id}})">Send All To delivery</span>
-                        @elseif($status==2)
-                            <span class="btn btn-success" onclick="pickupall({{$shipping->id}})">Mark All as pickup</span>
-                        @elseif($status==3)
-                            <span class="btn btn-success" onclick="deliveredall({{$shipping->id}})">Mark All as Delivered</span>
-                        @elseif($status==4)
-                            <span class="btn btn-success" onclick="returnedall({{$shipping->id}})">Mark All as Returned</span>
                         @endif
                     </div>
               </div>
@@ -193,7 +185,7 @@
     var of="order-form-";
     var om="order-modal-";
     var oi="order-input-";
-    var url="{{route('admin.set-status',['status'=>'_s_'])}}";
+    var url="{{route('vendor.set-status',['status'=>'_s_'])}}";
 </script>
 <script src="{{asset('js\backend-js\order.js')}}"></script>
 @php

@@ -102,4 +102,108 @@
         </div>
     </div>
 </div>
+
+<style>
+    @media (min-width: 768px) {
+        .row.equal {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+</style>
+<div class="container-fluid">
+
+    <div class="row equal">
+        <div class="col-md-4" style="height: 100%">
+            <div class="card" style="height: 100%">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title"> <strong>Order Statistics</strong> </h4>
+                </div>
+                <hr style="margin-bottom: 0;">
+                <div class="card-body" style="padding:1.5rem;">
+                      <table class="table">
+                        @for ($i = 0; $i < 7; $i++)
+                            <tr>
+                               
+                                <td>
+                                    <a href="{{route('admin.orders',['status'=>$i])}}">
+                                        <i class="material-icons">{{\App\Setting\OrderManager::stageicons[$i]}}</i> {{\App\Setting\OrderManager::stages[$i]}} orders
+                                    </a>
+                                </td>
+                                <td class="text-right">
+                                    <strong>
+                                        {{App\model\OrderItem::where('stage',$i)->count()}}
+                                    </strong>
+                                </td>
+                            </tr>
+                        @endfor
+                      </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card" >
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title"> 
+                        <strong>Latest Orders</strong> -  
+                        <strong>
+                            <a href="{{route('admin.orders',['status'=>0])}}">View Orders</a>
+                        </strong>
+                    </h4>
+                </div>
+                <hr style="margin-bottom: 0;">
+                <div class="card-body" style="padding:1.5rem;">
+                      <table class="table">
+                          <tr>
+                              <th style="border: none;">
+                                  Product
+                              </th>
+                              <th style="border: none;">
+                                  Quantity
+                              </th>
+                              <th style="border: none;">
+                                  Attributes
+                              </th>
+                              <th style="border: none;">
+
+                              </th>
+                          </tr>
+                        @foreach ($latest as $order)
+                            @php
+                                $product=$order->product;
+                            @endphp
+                            <tr>
+                                <td>
+                                    {{$product->product_name}}
+                                    <br>
+                                    <strong style="color:#0acf21;">
+                                        {{$order->created_at->diffForHumans()}}
+                                    </strong>
+                                </td>
+                                <td>
+                                    {{$order->qty}} Pcs
+                                </td>
+                                <td>
+                                    {{ $order->variant() }}
+                                </td>
+                                <td>
+                                    <div>
+                                        {{\App\Setting\OrderManager::stages[$order->stage]}} 
+                                    </div>
+                                    <div>
+
+                                        <strong>
+                                            <a href="{{Route('admin.orders-flash',['status'=>$order->stage,'id'=>$order->shipping_detail_id])}}">Detail</a>
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection

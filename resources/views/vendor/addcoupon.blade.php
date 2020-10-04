@@ -10,7 +10,11 @@
                         <i class="material-icons">local_offer</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title">Add Coupon -
+                        <h4 class="card-title">
+                            <strong>
+                                <a href="{{route('vendor.manage-coupon')}}">Coupons</a>
+                            </strong>
+                            / Add Coupon -
                             <small class="category">Issue Coupon Here</small>
                         </h4>  
                         @csrf

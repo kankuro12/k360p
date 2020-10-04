@@ -4,7 +4,9 @@ use Illuminate\Foundation\Inspiring;
 use App\Setting\VendorOption;
 use \App\Province;
 use \App\District;
+use App\model\Admin;
 use \App\Municipality;
+use App\Notifications\TestNotification;
 use App\Notifications\Vendor\SetupFinished;
 use \App\Notifications\Vendor\SignupActivate;
 use \App\ShippingArea;
@@ -27,7 +29,7 @@ Artisan::command('inspire', function () {
 })->describe('Display an inspiring quote');
 
 Artisan::command('test:notification',function(){
-    $user=\App\User::find(11);
+    $user=\App\User::find(7);
     // $vendor=$user->vendor;
     // $url="https://aakashsms.com/admin/public/sms/v3/send";
     // $token="e3d8dccc23900f6d19cd76bcd4f7b5157de6e7312335d2da81c258037bbef9b4";
@@ -35,8 +37,10 @@ Artisan::command('test:notification',function(){
     // $data['auth_token']=$token;
     // $response = Http::post($url,$data);
     // dd($response);
-    $user->notify(new SignupActivate($user));
+    // $user->notify(new SignupActivate($user));
     // $user->notify(new SetupFinished($user));
+    Admin::first()->notify(new TestNotification());
+
 
 });
 Artisan::command('insert:zone', function () {

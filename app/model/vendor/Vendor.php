@@ -53,10 +53,11 @@ class Vendor extends Model
     }
 
 
+    
     public function messageCount(){
-        return VendorMessage::where('seen',0)->count();
+        return VendorMessage::where('seen',0)->where('vendor_id',$this->id)->count();
     }
     public function messages(){
-        return VendorMessage::orderBy('id','desc')->take(5)->get();
+        return VendorMessage::where('seen',0)->where('vendor_id',$this->id)->take(5)->get();
     }
 }

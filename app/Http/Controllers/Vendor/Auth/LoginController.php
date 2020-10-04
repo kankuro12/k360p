@@ -18,7 +18,7 @@ class LoginController extends Controller
 	public function getLogout()
 	{
 		Auth::logout();
-		return redirect('vendor/login');
+		return response()->json('success');
 	}
 	public function postLogin(Request $request)
 	{

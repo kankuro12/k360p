@@ -55,7 +55,10 @@
                             <a href="#">Setting</a>
                         </li>
                         <li>
-                            <a href="{{ route('vendor.getLogout') }}">Logout</a>
+                            <form action="" method="post">
+                                @csrf
+                            </form>
+                            <a href="#" onclick="logout()">Logout</a>
                         </li>
                     </ul>
                 </li>

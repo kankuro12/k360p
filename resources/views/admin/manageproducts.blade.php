@@ -40,29 +40,32 @@
                             </div>
                             <thead>
                                 <tr>
-                                    <th class="text-center">Product Code</th>
-                                    <th class="text-center">Name</th>
-                                    <th class="text-center">image</th>
-                                    <th class="text-center">Brand</th>
-                                    <th class="text-center">Quantity</th>
-                                    <th class="text-center">Featured</th>
-                                    <th class="disabled-sorting text-center">Actions</th>
+                                    <th class="text-left">Code</th>
+                                    
+                                    <th class="text-left">Store</th>
+                                    <th class="text-left">Name</th>
+                                    {{-- <th class="text-left">image</th> --}}
+                                    <th class="text-left">Brand</th>
+                                    <th class="text-left">Quantity</th>
+                                    <th class="text-left">Featured</th>
+                                    <th class="disabled-sorting text-left">Actions</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
                             @foreach($products as $product)
                                 <tr>
-                                    <td class="text-center">{{ $product->product_code }}</td>
-                                    <td class="text-center">{{ $product->product_name }}</td>
-                                    <td class="text-center"><img style="max-width: 120px;" src="{{ asset('images/backend_images/products/main_image/'.$product->product_images) }}" alt=""></td>
-                                    <td class="text-center">{{ $product->brand_name }}</td>
-                                    {{-- <td class="text-center">{{ $product->stock_status_name }}</td> --}}
-                                    <td class="text-center">{{ $product->quantity }}</td>
-                                    <td class="text-center"><input type="checkbox" name="featured" value='{{ $product->featured }}' onchange="setfet(this)" data-id ="{{ $product->product_id }}" @if($product->featured == 1) checked  @endif >
+                                    <td class="text-left">#{{ $product->product_id }}</td>
+                                    <td class="text-left">{{ $product->vendor_name }}</td>
+                                    <td class="text-left">{{ $product->product_name }}</td>
+                                    {{-- <td class="text-left"><img style="max-width: 120px;" src="{{ asset('images/backend_images/products/main_image/'.$product->product_images) }}" alt=""></td> --}}
+                                    <td class="text-left">{{ $product->brand_name }}</td>
+                                    {{-- <td class="text-left">{{ $product->stock_status_name }}</td> --}}
+                                    <td class="text-left">{{ $product->quantity }}</td>
+                                    <td class="text-left"><input type="checkbox" name="featured" value='{{ $product->featured }}' onchange="setfet(this)" data-id ="{{ $product->product_id }}" @if($product->featured == 1) checked  @endif >
                                         <span class="label label-primary @if ($product->featured == 0)hidden @endif">Featured</span> 
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-left">
                                         <a href="{{ url('/admin/view-product/'. $product->product_id) }}" data-toggle="tooltip" data-placement="top" title="View" class="btn  btn-just-icon btn-round btn-rose"><i class="material-icons">view_list</i></a>
                                         <a href="{{ url('/admin/edit-product/'.$product->product_id) }}" data-toggle="tooltip" data-placement="left" title="Edit" class="btn btn-just-icon  btn-round btn-primary"><i class="material-icons">border_color</i></a>
                                         <a href="#" data-toggle="tooltip" data-placement="left" title="Delete" class="btn btn-just-icon  btn-round btn-danger"><i class="material-icons">delete_forever</i></a>

@@ -25,7 +25,7 @@ class CouponController extends Controller
         //dd($data);
         $data['userid'] = Auth::user()->id;
         $coupon = new Coupon;
-        $coupon->vendorid = Auth::user()->id;
+        $coupon->vendorid = Auth::user()->vendor->id;
         $coupon->coupon_name = $data['coupon_name'];
         $coupon->start_time = $data['start_date'];
         $coupon->end_time = $data['end_date'];

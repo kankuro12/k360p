@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
     <link href="{{ asset('css/backend-css/bootstrap.min.css') }}" rel="stylesheet" />
+    
     <!--  Material Dashboard CSS    -->
     <link href="{{ asset('css/backend-css/material-dashboard.css?v=1.2.1') }}" rel="stylesheet" />
     <!--  CSS for Demo Purpose, don't include it in your project     -->
@@ -94,6 +95,9 @@
         }
 
     </style>
+
+@include('layouts.adminlayouts.onsignal')
+
 </head>
 
 <body>
