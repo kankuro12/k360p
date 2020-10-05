@@ -71,7 +71,7 @@ class ProductController extends Controller
             $data = $request->all();
             $product = new Product;
             $product->isverified = 0;
-            $product->vendor_id = Auth::user()->id;
+            $product->vendor_id = Auth::user()->vendor->id;
             $product->category_id = $data['category_id'];
             $product->brand_id = $data['brand_id'];
             $product->stocktype = $data['stocktype'];
