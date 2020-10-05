@@ -170,7 +170,7 @@ class CartController extends Controller
                 foreach ($vids as $vid) {
                     $vendor=Vendor::find($vid);
                     // dd($vendor->user);
-                    $vendor->notify(new \App\Notifications\vendor\OrderNotification($shippingDetail));
+                    $vendor->notify(new \App\Notifications\Vendor\OrderNotification($shippingDetail));
                 }
             // } catch (\Throwable $th) {
             //     //throw $th;
