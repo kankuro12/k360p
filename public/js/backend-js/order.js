@@ -110,6 +110,7 @@ function query(status, formid) {
     console.log(status, formid, statusurl);
     $.post(statusurl, $("#" + formid).serialize(), function (data, stat, xhr) {
         console.log("status", stat);
+        console.log("data", data);
         if (stat == "success") {
             data.id.forEach((_id) => {
                 $.notify(
@@ -127,9 +128,8 @@ function query(status, formid) {
             });
             if (data.count == 0) {
                 $("#" + r + data.sid).remove();
-                $("#" + om + data.sid)
-                    .modal("hide")
-                    .destroy();
+                $("#" + om + data.sid).modal("hide").destroy();
+                  
                 // $('#'+om+data.sid).remove();
             }
         } else {

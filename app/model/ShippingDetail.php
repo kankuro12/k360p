@@ -7,9 +7,12 @@ use App\Municipality;
 use App\Province;
 use App\ShippingArea;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class ShippingDetail extends Model
 {
+
+    use Notifiable;
     //
 
     public function province(){
@@ -27,4 +30,6 @@ class ShippingDetail extends Model
     public function area(){
         return $this->belongsTo(ShippingArea::class,'shipping_area_id','id');
     }
+
+    
 }

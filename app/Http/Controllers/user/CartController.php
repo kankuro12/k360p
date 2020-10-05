@@ -164,16 +164,17 @@ class CartController extends Controller
                 $orderItem->save();
             }
 
-            try {
+            // try {
                 //code...
                 Admin::first()->notify(new \App\Notifications\admin\OrderNotification($shippingDetail));
                 foreach ($vids as $vid) {
                     $vendor=Vendor::find($vid);
+                    dd($vendor->user);
                     $vendor->notify(new \App\Notifications\vendor\OrderNotification($shippingDetail));
                 }
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
+            // } catch (\Throwable $th) {
+            //     //throw $th;
+            // }
             return redirect('/viewcart')->with('success','Your order placed successfully!');
         }else{
             $session_id = Session::get('session_id');

@@ -11,10 +11,11 @@
         enable: false,
       },
     });
+    OneSignal.showSlidedownPrompt();
+    console.log('start one signal');
     OneSignal.setEmail("{{auth()->user()->email}}", {
         emailAuthHash: "{{hash_hmac("sha256", auth()->user()->email, config("services.tawk.api-key"))}}"
     });
    
-    OneSignal.showSlidedownPrompt();
   });
 </script>

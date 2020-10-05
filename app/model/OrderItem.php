@@ -29,4 +29,8 @@ class OrderItem extends Model
         }
 
     }
+
+    public function charges(){
+        return $this->hasMany(OrderItemCharge::class);
+    }
 }

@@ -5,8 +5,10 @@ use App\Setting\VendorOption;
 use \App\Province;
 use \App\District;
 use App\model\Admin;
+use App\model\ShippingDetail;
 use \App\Municipality;
 use App\Notifications\TestNotification;
+use App\Notifications\User\OrderComfirmation;
 use App\Notifications\Vendor\SetupFinished;
 use \App\Notifications\Vendor\SignupActivate;
 use \App\ShippingArea;
@@ -28,6 +30,8 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
 
+
+
 Artisan::command('test:notification',function(){
     $user=\App\User::find(7);
     // $vendor=$user->vendor;
@@ -39,8 +43,8 @@ Artisan::command('test:notification',function(){
     // dd($response);
     // $user->notify(new SignupActivate($user));
     // $user->notify(new SetupFinished($user));
-    Admin::first()->notify(new TestNotification());
-
+    // Admin::first()->notify(new TestNotification());
+    ShippingDetail::find(1)->notify(new OrderComfirmation([1,2]));
 
 });
 Artisan::command('insert:zone', function () {

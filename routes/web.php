@@ -1,4 +1,8 @@
 <?php
+
+use App\model\OrderItem;
+use App\model\ShippingDetail;
+use App\Notifications\User\OrderComfirmation;
 use Illuminate\Http\Request;
 
 /*
@@ -840,7 +844,16 @@ Route::group(['prefix'=>'admin/orders','middleware' => 'admin_auth'], function (
 Route::group(['prefix'=>'vendor/orders','middleware'=>['authen','type'],'type'=>['vendor']], function () {
     Route::get('/{status}','Vendor\order\OrderController@index')->name('vendor.orders');
     Route::get('/{status}/flash/{id}','Vendor\order\OrderController@flash')->name('vendor.orders-flash');
-    
     Route::post('status/{status}','Vendor\order\OrderController@status')->name('vendor.set-status');
+
+});
+
+Route::get('hello', function () {
+    // $sid=1;
+    // $ids=[1,2];
+    // $shipping=ShippingDetail::find($sid);
+    // $orders=OrderItem::whereIn('id',$ids)->get();
+    // return view('email.order.receipt',compact('ids','sid','shipping','orders'));
+    ShippingDetail::find(1)->notify(new OrderComfirmation([2]));
 
 });

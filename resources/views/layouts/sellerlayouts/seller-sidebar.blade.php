@@ -110,6 +110,27 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             </ul>
         </div>
     </li>
+    <li >
+        <a data-toggle="collapse" href="#orders" >
+            <i class="material-icons">shopping_cart
+            </i>
+            <p> Orders
+                <b class="caret"></b>
+            </p>
+        </a>
+        <div class="collapse" id="orders">
+            <ul class="nav">
+                @for ($i = 0; $i < 7; $i++)
+                    <li class="{{ (Request::is('vendor/orders/'.$i) ? ' active' : '') }}">
+                        <a href="{{route('vendor.orders',['status'=>$i])}}">
+                            <i class="material-icons">{{\App\Setting\OrderManager::stageicons[$i]}}</i>
+                            <p> {{\App\Setting\OrderManager::stages[$i]}} orders </p>
+                        </a>
+                    </li>
+                @endfor
+            </ul>
+        </div>
+    </li>
     <li>
         <a data-toggle="collapse" href="#promotion">
             <i class="material-icons">local_offer</i>

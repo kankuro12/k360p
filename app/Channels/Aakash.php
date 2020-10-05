@@ -18,9 +18,14 @@ class Aakash
      */
     public function send($notifiable, Notification $notification)
     {
-        $data = $notification->toAakash($notifiable);
-        $data['auth_token']=self::token;
-        $response = Http::post(self::url,$data);
+        // try {
+            //code...
+            $data = $notification->toAakash($notifiable);
+            $data['auth_token']=self::token;
+            $response = Http::post(self::url,$data);
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        // }
         // Send notification to the $notifiable instance...
     }
 }

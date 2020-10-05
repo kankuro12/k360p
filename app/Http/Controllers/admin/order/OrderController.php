@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\model\admin\Product;
 use App\model\OrderItem;
 use App\model\ShippingDetail;
+use App\Notifications\User\OrderComfirmation;
+use App\Notifications\User\RejectOrder;
 use App\Setting\OrderManager;
 use Illuminate\Http\Request;
 
@@ -42,6 +44,12 @@ class OrderController extends Controller
             OrderItem::whereIn('id',$request->id)
             ->update(['stage'=>$status]);
 
+            if($status==1){
+                ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
+            }
+            if ($status == 5) {
+                ShippingDetail::find($request->sid)->notify(new RejectOrder($request->id));
+            }
             return response()->json(
                 [
                     'id'=>$request->id,
