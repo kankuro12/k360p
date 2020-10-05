@@ -175,7 +175,7 @@ class CartController extends Controller
             // } catch (\Throwable $th) {
             //     //throw $th;
             // }
-            dd($shippingDetail);
+            // dd($shippingDetail);
             return redirect('/viewcart')->with('success','Your order placed successfully!');
         }else{
             $session_id = Session::get('session_id');
