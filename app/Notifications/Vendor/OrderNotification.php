@@ -68,7 +68,7 @@ class OrderNotification extends Notification
         return OneSignalMessage::create()
             ->setSubject("A New Order Added")
             ->setBody("Click here to see details.")
-            ->setUrl(route('admin.orders-flash',['status'=>0,'id'=>$this->order->id]));
+            ->setUrl(route('vendor.orders-flash',['status'=>0,'id'=>$this->order->id]));
           
     }
 }

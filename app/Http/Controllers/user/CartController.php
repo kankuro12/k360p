@@ -169,7 +169,7 @@ class CartController extends Controller
                 Admin::first()->notify(new \App\Notifications\admin\OrderNotification($shippingDetail));
                 foreach ($vids as $vid) {
                     $vendor=Vendor::find($vid);
-                    dd($vendor->user);
+                    // dd($vendor->user);
                     $vendor->notify(new \App\Notifications\vendor\OrderNotification($shippingDetail));
                 }
             // } catch (\Throwable $th) {
