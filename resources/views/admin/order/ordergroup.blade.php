@@ -31,7 +31,7 @@
                 {{$data['count']}}  Item{{$data['count']>1?"s":""}}
             </div>
             
-            <div style="border-bottom: 1px #f1f1f1 solid;">
+            <div style="border-bottom: 1px #f1f1f1 solid;max-width:200px;">
                 
                 <strong style="color:#0acf21;">{{$data['search']}}</strong>
             </div>

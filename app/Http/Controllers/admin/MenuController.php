@@ -4,36 +4,43 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\model\admin\Brand;
 use App\model\admin\Menu;
 use App\model\admin\Category;
+use App\model\admin\Onsell;
 
 class MenuController extends Controller
 {
-    public function manageMenu(){
-        $categories = Category::get();
+    public function manageMenu()
+    {
+        $categories = Category::whereNull('parent_id')->get();
+
         $menus = Menu::get();
-        // // dd($menus);
-        foreach($menus as $menu){
-            $result = Category::descendantsAndSelf($menu->category_id)->toTree()->first();
-            foreach($result->children as $child){
-                dd($child);
-            }
-            // dd($result);
-        }
-        $menuPrinter=new MenuPrinterController($menus);
-        return view('admin.managemenu')->with(compact('categories','menuPrinter'));
+        $collections = \App\model\admin\Collection::all();
+        $onsells = Onsell::all();
+        $brands = Brand::all();
+
+        return view('admin.managemenu')->with(compact('categories', 'menus', 'brands', 'collections', 'onsells'));
     }
-    
 
 
-    public function addMenu(Request $request){
+
+    public function addMenu(Request $request)
+    {
+        $request->validate([
+            'parent_id' => 'required|integer',
+            'type' => 'required|integer',
+            'menu_name' => 'required|integer',
+
+        ]);
         $data = $request->all();
         // dd($data);
         // $result = Category::descendantsAndSelf($data['category_id'])->toTree()->first();
         // dd($result->children);
         $menu = new Menu;
         $menu->menu_name = $data['menu_name'];
-        $menu->category_id = $data['category_id'];
+        $menu->parent_id = $data['parent_id'];
+        $menu->type = $data['type'];
         $menu->save();
         return redirect()->back();
     }

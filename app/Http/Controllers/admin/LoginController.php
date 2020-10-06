@@ -39,7 +39,7 @@ class LoginController extends Controller
         return view('auth.adminlogin');
     }
    public function login(Request $request){
-       $auth = Auth::guard('admin')->attempt(['email' =>$request->email, 'password' => $request->password]);
+       $auth = Auth::guard('admin')->attempt(['email' =>$request->email, 'password' => $request->password],1);
        if($auth){
            return redirect($this->redirectTo);
        }

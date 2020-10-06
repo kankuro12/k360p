@@ -11,6 +11,8 @@ use App\model\admin\Category;
 use App\model\admin\Brand;
 use App\model\Coupon;
 use App\model\Coupon_setting;
+use App\Notifications\Vendor\SendMessage;
+use App\Notifications\Vendor\Verified;
 use App\User;
 use App\VendorMessage;
 
@@ -81,6 +83,10 @@ class VendorController extends Controller
         $vendor=Vendor::find($id);
         $vendor->verified=$status;
         $vendor->save();
+        if($status==1){
+
+            $vendor->notify(new Verified());
+        }
         return redirect()->back();
     }
 
@@ -90,6 +96,7 @@ class VendorController extends Controller
         $msg->vendor_id=$request->vendor_id;
         $msg->message=$request->message;
         $msg->save();
+        Vendor::find($msg->vendor_id)->notify(new SendMessage($msg->message));
         return response()->json($msg);
     }
 }

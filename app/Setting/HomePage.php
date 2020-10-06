@@ -4,6 +4,8 @@ namespace App\Setting;
 
 class HomePage 
 {
+
+    const menutype=['Brand','Category','Collection','Sale'];
     //
     const collectionurl="/collection/";
     const producturl="/product/";

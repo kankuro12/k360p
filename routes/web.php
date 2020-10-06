@@ -369,6 +369,7 @@ Route::group(['prefix'=>'admin','middleware' => 'admin_auth'], function () {
     ]);
 
     Route::post('/message', 'admin\VendorController@message')->name('admin.vendor-message');
+    
     Route::match(['get', 'post'], '/manage-tag', [
         'as'=> 'admin.manage-tag',
         'uses' => 'admin\TagController@manageTags'
@@ -795,7 +796,7 @@ Route::group(['prefix'=>'vendor','middleware'=>['authen','type'],'type'=>['vendo
     Route::post('product-extracharge/{extracharge}/status/{status}','Vendor\VariantController@product_extracharge_status')->name('vendor.product-extracharge-status');
         
        Route::post('/message/seen/{message}', 'Vendor\DashBoardController@message')->name('vendor.markread-message');
-       Route::get('/messages', 'Vendor\DashBoardController@messages')->name('vendor.messagea');
+       Route::get('/messages', 'Vendor\DashBoardController@messages')->name('vendor.messages');
    
   
 });
@@ -837,7 +838,32 @@ Route::group(['prefix'=>'admin/orders','middleware' => 'admin_auth'], function (
     Route::get('/{status}','admin\order\OrderController@index')->name('admin.orders');
     Route::get('/{status}/flash/{id}','admin\order\OrderController@flash')->name('admin.orders-flash');
     
-    Route::post('status/{status}','admin\order\OrderController@status')->name('admin.set-status');
+    Route::post('/status/{status}','admin\order\OrderController@status')->name('admin.set-status');
+
+    Route::get('/data/pickup','admin\order\WarehouseController@index')->name('admin.orders-pickup');
+
+    Route::post('/data/pickup/load','admin\order\WarehouseController@load')->name('admin.load-pickup');
+    Route::post('/data/pickup/pickup','admin\order\WarehouseController@pickup')->name('admin.pickup-pickup');
+    Route::get('/data/pickup/picked','admin\order\WarehouseController@picked')->name('admin.pickup-pickup');
+
+    
+    
+});
+
+
+
+Route::group(['prefix'=>'admin/pickuppoint','middleware' => 'admin_auth'], function () {
+    
+    //pickupby admin
+    
+    Route::get('', 'admin\order\PickupController@index')->name('admin.pickup');
+    Route::get('/add', 'admin\order\PickupController@add')->name('admin.add-pickup');
+    Route::post('/add', 'admin\order\PickupController@add')->name('admin.save-pickup');
+    Route::get('/manage/{point}', 'admin\order\PickupController@manage')->name('admin.manage-pickup');
+    Route::post('/update/{point}', 'admin\order\PickupController@edit')->name('admin.update-pickup');
+  
+
+
 
 });
 
@@ -845,6 +871,8 @@ Route::group(['prefix'=>'vendor/orders','middleware'=>['authen','type'],'type'=>
     Route::get('/{status}','Vendor\order\OrderController@index')->name('vendor.orders');
     Route::get('/{status}/flash/{id}','Vendor\order\OrderController@flash')->name('vendor.orders-flash');
     Route::post('status/{status}','Vendor\order\OrderController@status')->name('vendor.set-status');
+
+    
 
 });
 

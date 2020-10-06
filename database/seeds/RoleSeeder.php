@@ -14,12 +14,18 @@ class RoleSeeder extends Seeder
     {
         $type1="user";
         $type2="vendor";
+        $type3="pickup";
         Role::create([
             'name'=>$type1,
             'created_at'=>'2018-01-12 03:33:57',
         ]);
         Role::create([
             'name'=>$type2,
+            'created_at'=>'2018-01-15 03:33:57',
+        ]);
+
+        Role::create([
+            'name'=>$type3,
             'created_at'=>'2018-01-15 03:33:57',
         ]);
 
