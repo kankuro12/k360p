@@ -20,6 +20,7 @@ class MenuController extends Controller
         $onsells = Onsell::all();
         $brands = Brand::all();
 
+       
         return view('admin.managemenu')->with(compact('categories', 'menus', 'brands', 'collections', 'onsells'));
     }
 
@@ -30,7 +31,7 @@ class MenuController extends Controller
         $request->validate([
             'parent_id' => 'required|integer',
             'type' => 'required|integer',
-            'menu_name' => 'required|integer',
+            'menu_name' => 'required',
 
         ]);
         $data = $request->all();

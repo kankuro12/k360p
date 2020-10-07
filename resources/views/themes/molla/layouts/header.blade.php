@@ -1,3 +1,8 @@
+<style>
+    .megamenu{
+        box-shadow: 1px 0px 20px 20px rgb(0 0 0 / 19%), -5px 10px 16px rgba(51, 51, 51, 0.05) !important;
+    }
+</style>
 <header class="header header-14">
     <div class="header-top" style="background: #3d4273; color:white;">
         <div class="container">
@@ -208,7 +213,7 @@
                 <div class="col-auto col-lg-3 col-xl-3 col-xxl-2 header-left">
                     <div class="dropdown category-dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
-                            Browse Categories
+                            {{env('browse','Browse Categories')}}
                         </a>
 
                         <div class="dropdown-menu">
@@ -227,49 +232,13 @@
                                     @endif
                                 </h6>
                                 @endif
-                                @foreach ($cats as $attr)
-                                <ul class="menu-vertical sf-arrows">
-                                    <li class="megamenu-container">
-                                        @if (count($attr->subcat) > 0)
-                                        <a class="sf-with-ul" href="{{ url('shops-by-category/'.$attr->id) }}"><i class="icon-blender"></i> {{ $attr->cat_name }}</a>
-                                        <div class="megamenu">
-                                            <div class="row no-gutters">
-                                                <div class="col-md-8">
-                                                    <div class="menu-col">
-                                                        <div class="row">
-                                                            @if (count($attr->subcat))
-                                                            @foreach ($attr->subcat as $item)
-                                                            <div class="col-md-6">
-                                                                <div class="menu-title"><a href="{{ url('shops-by-category/'.$item->id) }}"> {{ $item->cat_name }} </a></div><!-- End .menu-title -->
-                                                                @if (count($item->subcat))
-                                                                @foreach ($item->subcat as $item1)
-                                                                <ul>
-                                                                    <li><a href="{{ url('shops-by-category/'.$item1->id) }}"><strong>{{ $item1->cat_name }}</strong></a></li>
-                                                                </ul>
-                                                                @endforeach
-                                                                @endif
-                                                            </div><!-- End .col-md-6 -->
-                                                            @endforeach
-                                                            @endif
-                                                        </div><!-- End .row -->
-                                                    </div><!-- End .menu-col -->
-                                                </div><!-- End .col-md-8 -->
+                                @foreach (\App\model\admin\Menu::all() as $menu)
+                                    @if ($menu->type==1)
+                                        @include('themes.molla.elements.menu.category',['menu'=>$menu])
+                                        @elseif($menu->type==2)
+                                        @include('themes.molla.elements.menu.collection',['menu'=>$menu])
 
-                                                <div class="col-md-4">
-                                                    <div class="banner banner-overlay">
-                                                        <a href="category.html" class="banner banner-menu">
-                                                            <img src="{{asset('themes/molla/assets/images/demos/demo-13/menu/banner-2.jpg') }}" alt="Banner">
-                                                        </a>
-                                                    </div><!-- End .banner banner-overlay -->
-                                                </div><!-- End .col-md-4 -->
-                                            </div><!-- End .row -->
-                                        </div><!-- End .megamenu -->
-                                        @endif
-                                        @if (count($attr->subcat) == null)
-                                        <a href="{{ url('shops-by-category/'.$attr->id) }}"><i class="icon-blender"></i> {{ $attr->cat_name }}</a>
-                                        @endif
-                                    </li>
-                                </ul>
+                                    @endif
                                 @endforeach
                             </nav><!-- End .side-nav -->
 
