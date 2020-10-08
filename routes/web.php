@@ -840,11 +840,19 @@ Route::group(['prefix'=>'admin/orders','middleware' => 'admin_auth'], function (
     
     Route::post('/status/{status}','admin\order\OrderController@status')->name('admin.set-status');
 
+    //pickup
+
+
     Route::get('/data/pickup','admin\order\WarehouseController@index')->name('admin.orders-pickup');
 
     Route::post('/data/pickup/load','admin\order\WarehouseController@load')->name('admin.load-pickup');
     Route::post('/data/pickup/pickup','admin\order\WarehouseController@pickup')->name('admin.pickup-pickup');
     Route::get('/data/pickup/picked','admin\order\WarehouseController@picked')->name('admin.pickup-pickup');
+
+
+    //sendtodelivery
+    Route::get('/data/delivery','admin\order\WarehouseController@delivery')->name('admin.orders-delivery');
+    Route::get('/data/ondeliver','admin\order\WarehouseController@delivery')->name('admin.orders-delivery');
 
     
     
