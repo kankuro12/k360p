@@ -3,6 +3,7 @@ $(document).ready(function() {
     'use strict';
     $('.cat-owl').each(function () {
         var $this = $(this);
+        console.log($this);
         $this.owlCarousel({
             "nav": true, 
             "dots": true,

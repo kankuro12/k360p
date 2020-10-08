@@ -4,7 +4,6 @@ namespace App\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\model\Admin;
 use App\model\admin\Product;
 use Illuminate\Support\Facades\Session;
 use App\Setting\HomePage;
@@ -13,8 +12,9 @@ use App\model\Coupon;
 use App\model\OrderItem;
 use App\model\ProductStock;
 use App\model\ShippingDetail;
-use App\model\Vendor\Vendor;
-use App\Notifications\admin\OrderNotification;
+use App\ExatraChargeCart;
+use App\ExtraCharge;
+use App\model\OrderItemCharge;
 use Illuminate\Support\Str;
 
 
@@ -34,6 +34,24 @@ class CartController extends Controller
                 if($stockCheck->quantity>=$qty){
                     $cartData->qty = $qty;
                     $cartData->save();
+
+
+                    // extra feature update 
+                    if($request->has('extracharge')){
+                        foreach ($request->extracharge as $key => $value) {
+                            $chargeCount = ExatraChargeCart::where('extra_charge_id',$value)->where('cart_id',$cartData->id)->count();
+                            if($chargeCount == 0){
+                                $getChargeDetail = ExtraCharge::where('id',$value)->where('product_id',$request->product_id)->where('enabled',1)->first();
+                                $charge = new ExatraChargeCart();
+                                $charge->amount = $getChargeDetail->amount;
+                                $charge->title = $getChargeDetail->name;
+                                $charge->extra_charge_id = $value;
+                                $charge->cart_id = $cartData->id;
+                                $charge->save();
+                            }
+                        }
+                    }
+
                     return redirect('/viewcart')->with('success','Your order quantity has been updated!');
                 }else{
                     return redirect('/viewcart')->with('warning','Your order quantity is out of stock!');
@@ -45,6 +63,23 @@ class CartController extends Controller
                 if($stockCheck->qty>=$qty){
                     $cartData->qty = $qty;
                     $cartData->save();
+
+                    // extra feature update 
+                    if($request->has('extracharge')){
+                        foreach ($request->extracharge as $key => $value) {
+                            $chargeCount = ExatraChargeCart::where('extra_charge_id',$value)->where('cart_id',$cartData->id)->count();
+                            if($chargeCount == 0){
+                                $getChargeDetail = ExtraCharge::where('id',$value)->where('product_id',$request->product_id)->where('enabled',1)->first();
+                                $charge = new ExatraChargeCart();
+                                $charge->amount = $getChargeDetail->amount;
+                                $charge->title = $getChargeDetail->name;
+                                $charge->extra_charge_id = $value;
+                                $charge->cart_id = $cartData->id;
+                                $charge->save();
+                            }
+                        }
+                    }
+
                     return redirect('/viewcart')->with('success','Your order quantity has been updated!');
                 }else{
                     return redirect('/viewcart')->with('warning','Your order quantity is out of stock!');
@@ -63,12 +98,22 @@ class CartController extends Controller
             $cartItem->product_id = $request->product_id;
             $cartItem->type = $request->type;
             $cartItem->qty = $request->qty;
+            $cartItem->rate = $request->rate;
             $cartItem->session_id = $session_id;
             $cartItem->variant_code = $request->varient;
             $cartItem->save();
 
-           
-
+            if($request->has('extracharge')){
+                foreach ($request->extracharge as $key => $value) {
+                    $getChargeDetail = ExtraCharge::where('id',$value)->where('product_id',$request->product_id)->where('enabled',1)->first();
+                    $charge = new ExatraChargeCart();
+                    $charge->amount = $getChargeDetail->amount;
+                    $charge->title = $getChargeDetail->name;
+                    $charge->extra_charge_id = $value;
+                    $charge->cart_id = $cartItem->id;
+                    $charge->save();
+                }
+            }
             return redirect('/viewcart')->with('success','Product has been added to cart!');
         }
     }
@@ -117,6 +162,13 @@ class CartController extends Controller
         return redirect()->back()->with('success','Your cart item has been removed successfull!');
     }
 
+    public function cartFeatureItemRemove($id){
+        $item = ExatraChargeCart::where('id',$id)->first();
+        $item->delete();
+        return redirect()->back()->with('success','Feature item has been removed successfull!');
+
+    }
+
 
 
     // guest checkout 
@@ -137,21 +189,28 @@ class CartController extends Controller
             $shippingDetail->save();
             $session_id = Session::get('session_id');
             $cart = Cart::where('session_id',$session_id)->get();
-            $vids=[];
             foreach ($cart as $key => $value) {
+                $productDetail = Product::where('product_id',$value->product_id)->where('isverified',1)->first();
                 $orderItem = new OrderItem();
                 $orderItem->shipping_detail_id = $shippingDetail->id;
                 $orderItem->product_id = $value->product_id;
-                $vendor_id=Product::where('product_id',$orderItem->product_id)->value('vendor_id');
-                if($vendor_id!=null){
-                $orderItem->vendor_id = $vendor_id;
-
-                    if(!in_array($vendor_id,$vids)){
-                        array_push($vids,$vendor_id);
-                    }
-                }
                 $orderItem->qty = $value->qty;
                 $orderItem->variant_code = $value->variant_code;
+
+                if($productDetail->vendorid == 0){
+                    $orderItem->ismainstore = 1;
+                }else{
+                    $orderItem->ismainstore = 0;
+                    $orderItem->vendor_id = $productDetail->vendorid;
+                }
+                $orderItem->shippingcharge = $request->shipping_charge;
+                $orderItem->stage = 0;
+                $orderItem->issimple = $productDetail->stocktype;
+                $orderItem->rate = $value->rate;
+
+                $orderItem->discount = 0;
+                $orderItem->deliverytype = $request->delivery_type;
+
                 if($value->variant_code != null){
                     $variantStock = ProductStock::where('product_id',$value->product_id)->where('code',$value->variant_code)->select('qty')->first();
                     $variantStock->qty = $variantStock->qty - $value->qty;
@@ -162,20 +221,20 @@ class CartController extends Controller
                   $stockStatus->save();
                 }
                 $orderItem->save();
-            }
 
-            // try {
-                //code...
-                Admin::first()->notify(new \App\Notifications\admin\OrderNotification($shippingDetail));
-                foreach ($vids as $vid) {
-                    $vendor=Vendor::find($vid);
-                    // dd($vendor->user);
-                    $vendor->notify(new \App\Notifications\Vendor\OrderNotification($shippingDetail));
+                $extraChargeCount = ExatraChargeCart::where('cart_id',$value->id)->count();
+                if($extraChargeCount>0){
+                    $extraCharge = ExatraChargeCart::where('cart_id',$value->id)->get();
+                    foreach ($extraCharge as $key => $ec) {
+                        $orderCharge = new OrderItemCharge();
+                        $orderCharge->amount = $ec->amount;
+                        $orderCharge->title = $ec->title;
+                        $orderCharge->extra_charge_id = $ec->extra_charge_id;
+                        $orderCharge->order_item_id = $orderItem->id;
+                        $orderCharge->save();
+                    }
                 }
-            // } catch (\Throwable $th) {
-            //     //throw $th;
-            // }
-            // dd($shippingDetail);
+            }
             return redirect('/viewcart')->with('success','Your order placed successfully!');
         }else{
             $session_id = Session::get('session_id');

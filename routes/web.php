@@ -68,12 +68,20 @@ Route::match(['get','post'], '/viewcart',[
     'uses' => 'user\CartController@viewCart'
 ]);
 
+
+Route::get('shipping/charge/{p_id}/{d_id}/{m_id}/{shipping_area_id}','user\CheckoutController@getShippingCharge');
+Route::get('remove/feature/item/{id}','user\CartController@cartFeatureItemRemove');
 Route::get('cart/update-qty/{id}/{qty}','user\CartController@updateQtyOfCartItem');
 Route::get('remove/cart/item/{id}','user\CartController@cartItemRemove');
 
+// Route::match(['get', 'post'], '/checkout', [
+//     'as' => 'public.checkout',
+//     'uses' => 'user\CartController@checkout'
+// ]);
+
 Route::match(['get', 'post'], '/checkout', [
     'as' => 'public.checkout',
-    'uses' => 'user\CartController@checkout'
+    'uses' => 'user\CheckoutController@checkout'
 ]);
 
 Route::match(['get','post'], '/checkout-as-a-guest',[

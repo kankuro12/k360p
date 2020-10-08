@@ -10,7 +10,7 @@ use App\User;
 use App\model\VendorUser\VendorUser;
 use Session;
 use App\Setting\HomePage;
-
+use App\Wishlist;
 
 class DashboardController extends Controller
 {
@@ -55,4 +55,29 @@ class DashboardController extends Controller
            return view(HomePage::theme("user.dashboard.account_detail"));
         }
     }
+
+    public function wishlist(){
+        $wishlist = Wishlist::where('user_id',Auth::user()->id)->get();
+        return view(HomePage::theme("user.dashboard.wishlist"))->with(compact('wishlist'));
+    }
+
+    public function wishlistProduct($product_id){
+        $countWishlist = Wishlist::where('product_id',$product_id)->where('user_id',Auth::user()->id)->count();
+        if($countWishlist){
+            return redirect('user/wishlist')->with('warning','This product already exists in your wishlist!');
+        }else{
+            $wishlist = new Wishlist();
+            $wishlist->product_id = $product_id;
+            $wishlist->user_id = Auth::user()->id;
+            $wishlist->save();
+            return redirect('user/wishlist')->with('success','Product added to your wishlist successfully!');
+        }
+    }
+
+    public function wishlistProductRemove($id){
+        $wishlist = Wishlist::where('id',$id)->first();
+        $wishlist->delete();
+        return redirect()->back()->with('success','Product has been removed successfully!');
+    }
+
 }

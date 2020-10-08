@@ -4,7 +4,7 @@
     <div class="owl-carousel owl-full carousel-equal-height  cat-owl">
 
         @foreach ($item->products() as $product)
-
+           
             <div class="product text-center" id="b_product_{{ $product->id }}">
                 <figure class="product-media">
                     @if ($product->promo == 1)

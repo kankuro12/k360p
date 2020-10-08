@@ -18,29 +18,23 @@
 
     <div class="page-content">
         <div class="container">
-            <div class="products mb-3">
+            <div class="banner-group">
                 <div class="row">
-                  @foreach(\App\model\admin\Collection::all() as $col)
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product product-7 text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-new">Collection</span>
-                                <a href="{{ route('collection.detail',$col->collection_id) }}">
-                                    <img src="{{ asset($col->collection_image) }}" alt="Product image" class="product-image">
-                                </a>
+                @foreach(\App\model\admin\Collection::all() as $col)
+                    <div class="col-sm-6 col-lg-{{$col->rows}}">
+                        <div class="banner banner-overlay banner-lg">
+                            <a href="{{ route('collection.detail',$col->collection_id) }}">
+                                <img src="{{ asset($col->collection_image) }}" alt="Banner">
+                            </a>
 
-                                <div class="product-action">
-                                    <a href="{{ route('collection.detail',$col->collection_id) }}" class="btn-product btn-cart"><span>Shop Now</span></a>
-                                </div><!-- End .product-action -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <h3 class="product-title"><a href="{{ route('collection.detail',$col->collection_id) }}">{{ $col->collection_name }}</a></h3><!-- End .product-title -->
-                                <p>{{ $col->collection_description }}</p>
-                            </div><!-- End .product-body -->
-                        </div><!-- End .product -->
-                    </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
-                  @endforeach
+                            <div class="banner-content banner-content-bottom">
+                                <h3 class="banner-title text-white"><a href="{{ route('collection.detail',$col->collection_id) }}">{{ $col->collection_name }}</a></h3><!-- End .banner-title -->
+                                <h4 class="banner-subtitle text-white"><a >{{ $col->collection_description }}</a></h4><!-- End .banner-subtitle -->
+                                <a href="{{ route('collection.detail',$col->collection_id) }}" class="btn btn-outline-white banner-link mt-1">Shop Now</a>
+                            </div><!-- End .banner-content -->
+                        </div><!-- End .banner -->
+                    </div><!-- End .col-lg-4 -->
+                    @endforeach
                 </div><!-- End .row -->
             </div>
         </div><!-- End .container -->

@@ -56,7 +56,7 @@
 										<select class="form-control" data-live-search="true" id="province_id" name="province_id" data-style="btn btn-primary " title="Select a Province" data-size="7" required style="border:1px solid #b6b6b6;">
 											<option></option>
 											@foreach (\App\Province::all() as $province)
-											<option value="{{ $province->id }}" @if(!empty($user)) {{ $user->province_id == $province->id? 'selected' :'' }} @endif>{{ $province->name }}</option>
+											<option value="{{ $province->id }}">{{ $province->name }}</option>
 											@endforeach
 										</select>
 									</div>
@@ -113,6 +113,7 @@
 								@php
 								$simpletotal = 0;
 								$varianttotal = 0;
+								$extraCharge = 0;
 								$session_id = Session::get('session_id');
 								$cartItem = \App\model\Cart::where('session_id',$session_id)->get();
 								@endphp
@@ -145,37 +146,65 @@
 												x {{ $item->qty }}
 											</td>
 										</tr>
+										@php 
+										    $extraFeatureCount = \App\ExatraChargeCart::where('cart_id',$item->id)->count();
+											$extraFeature = \App\ExatraChargeCart::where('cart_id',$item->id)->get();
+											if($extraFeatureCount>0){
+												foreach($extraFeature as $f){
+													$extraCharge = $extraCharge + $f->amount;
+												}
+											}
+										@endphp
 										@endforeach
 										<tr class="summary-subtotal">
 											<td>Subtotal:</td>
 											<td>NPR.{{ $varianttotal + $simpletotal }}</td>
 										</tr><!-- End .summary-subtotal -->
+										@if($extraCharge>0)
+										<tr class="summary-subtotal">
+											<td>Extra Feature Charge:</td>
+											<td>NPR.{{ $extraCharge }}</td>
+										</tr><!-- End .summary-subtotal -->
+										@endif
 										<tr>
-											<td>Shipping:</td>
-											<td>Free shipping</td>
+											<td colspan="2">
+												<div id="shipping-charge" class="text-left">
+													<h6>Please Select Shipping Detail To View Shipping Charge.</h6>
+												</div>
+											</td>
 										</tr>
 										<tr class="summary-total">
-											<td>Total:</td>
-											<td>NPR.{{ $varianttotal + $simpletotal }}</td>
+											<td>Grand Total:</td>
+											<td id="showTotal">NPR.{{ $varianttotal + $simpletotal + $extraCharge }}</td>
+										</tr><!-- End .summary-total -->
+										<input type="hidden" id="gtotal" value="{{ $varianttotal + $simpletotal + $extraCharge }}">
+
+										<tr>
+											<td>Delivery Method</td>
+											<td>
+											    <select name="delivery_type" id="delivery_type">
+													<option value="0">Normal</option>
+													<option value="1">Express</option>
+												</select>
+											</td>
 										</tr><!-- End .summary-total -->
 									</tbody>
 								</table><!-- End .table table-summary -->
 
 								<div class="accordion-summary" id="accordion-payment">
 
-									<div class="card">
+									<!-- <div class="card">
 										<div class="card-header" id="heading-3">
 											<h2 class="card-title">
 												<a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-													Cash on delivery
+													
 												</a>
 											</h2>
-										</div><!-- End .card-header -->
+										</div>
 										<div id="collapse-3" class="collapse" aria-labelledby="heading-3" data-parent="#accordion-payment">
-											<div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.
-											</div><!-- End .card-body -->
-										</div><!-- End .collapse -->
-									</div><!-- End .card -->
+											
+										</div>
+									</div> -->
 
 								</div><!-- End .accordion -->
 
@@ -248,6 +277,29 @@
             $('#shipping_area_id').html(str);
 
         });
+
+		// get shipping charge
+
+		$('#shipping_area_id').on('change', function(e){
+		var p_id = $('#province_id').val();
+		var d_id = $('#district_id').val();
+		var m_id = $('#municipality_id').val();
+		var gTotal = parseInt($('#gtotal').val());
+		var shipping_area_id = e.target.value;
+		axios.get('/shipping/charge/'+p_id+'/'+d_id+'/'+m_id+'/'+shipping_area_id)
+		.then(function (response) {
+			var data = response.data;
+			$("#shipping-charge").html(data);
+		    var totalShipping = parseInt($('#totalShipping').val());
+            var grandTotal = gTotal+totalShipping;
+			$('#showTotal').text("NPR."+grandTotal);
+			
+		// console.log(data);
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
+	});
 
     </script>
 

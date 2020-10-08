@@ -31,6 +31,10 @@
                         <div class="tab-content">
 
                             <div class="tab-pane fade show active" id="tab-order" role="tabpanel" aria-labelledby="tab-order-link">
+                               @php 
+                                    $wishlistCount = \App\Wishlist::where('user_id',Auth::user()->id)->count();
+                               @endphp
+                               @if($wishlistCount>0)
                                 <table class="table table-wishlist table-mobile">
                                     <thead>
                                         <tr>
@@ -64,6 +68,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                               @else
+                                <p>Products are not added yet!!!!</p>
+                               @endif
                             </div><!-- .End .tab-pane -->
 
                         </div>

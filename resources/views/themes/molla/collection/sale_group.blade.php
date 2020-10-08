@@ -41,6 +41,7 @@
                                     <input type="hidden" name="product_id" value="{{ $p->product->product_id }}">
                                     <input type="hidden" name="type" value="{{ $p->product->stocktype }}">
                                     <input type="hidden" name="qty" value="1">
+                                    <input type="hidden" name="rate" value="{{ $p->product->mark_price }}">
                                     <div class="product-action action-icon-top">
                                         @if($p->product->stocktype == 0)
                                         <button class="btn-product btn-cart" style="border: none; background:white;"><span>add to cart</span></button>

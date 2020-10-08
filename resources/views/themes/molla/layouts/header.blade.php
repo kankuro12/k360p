@@ -54,8 +54,8 @@
                         <span class="sr-only">Toggle mobile menu</span>
                         <i class="icon-bars"></i>
                     </button>
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/demos/demo-14/logo.png" alt="{{env('APP_NAME',"your")}} Logo" width="105" height="25">
+                    <a href="/" class="logo">
+                        <img src="{{asset('logo.png')}}" alt="{{env('APP_NAME',"your")}} Logo" width="105" height="25">
                     </a>
                 </div><!-- End .col-xl-3 col-xxl-2 -->
 

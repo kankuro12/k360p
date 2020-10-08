@@ -21,7 +21,7 @@ $group=$data->getElement();
                 </figure><!-- End .slide-image --> --}}
 
                 <div class="intro-content">
-                    <h3 class="intro-subtitle">{!! $slider->secondary_text !!}</h3><!-- End .h3 intro-subtitle -->
+                    {{-- <h3 class="intro-subtitle">{!! $slider->secondary_text !!}</h3><!-- End .h3 intro-subtitle --> --}}
                     <h1 class="intro-title text-white">
                         {!! $slider->primary_text !!}
                     </h1><!-- End .intro-title -->

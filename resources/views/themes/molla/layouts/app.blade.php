@@ -33,11 +33,9 @@
 <body>
     <div class="page-wrapper">
         @include('themes.molla.layouts.header')
-       <main class="main">
-            <div class="container-fluid">
+               
                 @yield('contant')
-            </div>
-       </main>
+       
     </div><!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
 

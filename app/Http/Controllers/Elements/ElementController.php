@@ -28,6 +28,7 @@ class ElementController extends Controller
         $r->type = $request->type;
         $r->order = $request->order;
         $r->parent_id = $request->parent_id;
+        $r->boxed = $request->boxed;
         $r->row = $request->parent_id == -1 ? 12 : $request->row;
         $r->save();
         $r->addElement();

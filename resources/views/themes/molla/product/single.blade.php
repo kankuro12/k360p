@@ -88,6 +88,11 @@
                                                 <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                                                 <input type="hidden" name="type" value="{{ $product->stocktype }}">
                                                 <input type="hidden" name="varient" id="product_varient">
+                                                @if($product->stocktype == 0)
+                                                  <input type="hidden" name="rate" value="{{ $product->mark_price }}">
+                                                @else
+                                                   <input type="hidden" name="rate" id="rateofvariant">
+                                                @endif
                                             @foreach($product->variants() as $variant)
                                             <div class="details-filter-row details-row-size">
                                                 <label for="size">{{$variant->name}}</label>
@@ -115,7 +120,7 @@
                                                 </div><!-- End .details-action-col -->
                                                 @else
                                                     <div id="product-variant-stock" class="mb-1">
-                                                        something
+                                                        
                                                     </div>
                                                 @endif
                                                 <div class="details-action-wrapper">
@@ -123,7 +128,7 @@
                                                     <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a>
                                                 </div><!-- End .details-action-wrapper -->
                                             </div><!-- End .product-details-action -->
-                                            </form>
+                                           
 
                                             <div class="product-details-footer details-footer-col">
                                                 <div class="product-cat">
@@ -149,10 +154,10 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
                                     </li>
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Additional information</a>
-                                    </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" id="product-info-link" data-toggle="tab" href="#refund-policy" role="tab" aria-controls="product-info-tab" aria-selected="false">Refund Policy</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
                                     </li> -->
                                     <li class="nav-item">
@@ -166,23 +171,17 @@
                                             {!! $product->product_description !!}
                                         </div><!-- End .product-desc-content -->
                                     </div><!-- .End .tab-pane -->
-                                    <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                                    <div class="tab-pane fade" id="refund-policy" role="tabpanel" aria-labelledby="product-info-link">
                                         <div class="product-desc-content">
-                                            <h3>Information</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>
-
-                                            <h3>Fabric & care</h3>
-                                            <ul>
-                                                <li>Faux suede fabric</li>
-                                                <li>Gold tone metal hoop handles.</li>
-                                                <li>RI branding</li>
-                                                <li>Snake print trim interior </li>
-                                                <li>Adjustable cross body strap</li>
-                                                <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
-                                            </ul>
-
-                                            <h3>Size</h3>
-                                            <p>one size</p>
+                                        @php 
+                                            $productOptionCount = \App\ProductOption::where('product_id',$product->product_id)->count();
+                                            $productOption = \App\ProductOption::where('product_id',$product->product_id)->first();
+                                        @endphp 
+                                            @if($productOptionCount>0)
+                                                {!! $productOption->refundablepolicy !!}
+                                            @else 
+                                                <p class="text-warning">Refund policy is not available on this product</p>
+                                            @endif
                                         </div><!-- End .product-desc-content -->
                                     </div><!-- .End .tab-pane -->
                                     <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
@@ -326,8 +325,37 @@
                         <aside class="col-lg-3">
                             <div class="sidebar sidebar-product">
                                 <div class="widget widget-products">
-                                    <h4 class="widget-title">Related Product</h4><!-- End .widget-title -->
-
+                                    <div class="extra-feature">
+                                        @php
+                                            $extraChargeCount = \App\ExtraCharge::where('product_id',$product->product_id)->where('enabled',1)->count();
+                                            $extraCharge = \App\ExtraCharge::where('product_id',$product->product_id)->where('enabled',1)->get();
+                                         @endphp
+                                                @if($extraChargeCount>0)
+                                                <h4 class="widget-title">Product Extra Feature</h4><!-- End .widget-title -->
+                                                <div class=" mb-3">
+                                                    @foreach($extraCharge as $charge)
+                                                    <div class="custom-control custom-checkbox checkbox-inline">
+                                                        <input type="checkbox" class="custom-control-input" id="extracharge_{{$charge->id}}" name="extracharge[]" value="{{$charge->id}}">
+                                                        <label class="custom-control-label pr-4" for="extracharge_{{$charge->id}}"><strong>{{$charge->name}} <span class="text-danger"> (Rs.{{ $charge->amount }}) </span></strong></label>
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                                @endif
+                                    </div>
+                            </form>
+                                    @php 
+                                        $productOptionCount = \App\ProductOption::where('product_id',$product->product_id)->count();
+                                        $productOption = \App\ProductOption::where('product_id',$product->product_id)->first();
+                                    @endphp 
+                                    @if($productOptionCount>0)
+                                    <h4 class="widget-title">Product Options</h4><!-- End .widget-title -->
+                                    <div class="mb-3">
+                                        <strong>Product Warrenty : </strong> @if($productOption->warrenty == 1) No Warrenty @elseif($productOption->warrenty == 2) Local Warrenty @else Manufacturer Warrenty @endif <br>
+                                        <strong>Warrenty Time period : </strong> {{ $productOption->warrentyperiod }} {{ $productOption->warrentytime }} <br>
+                                        <strong>Refund Policy : </strong> @if($productOption->isrefundable==1) <span class="badge badge-primary">Yes</span>  @else <span class="badge badge-danger">No</span> @endif
+                                    </div>
+                                    @else
+                                     <h4 class="widget-title">Related Product</h4><!-- End .widget-title -->
                                     <div class="products">
                                         @foreach(\App\model\admin\Product::where('category_id',$product->category->cat_id)->inRandomOrder()->take(5)->get() as $p)
                                         <div class="product product-sm">
@@ -346,7 +374,7 @@
                                         </div><!-- End .product product-sm -->
                                         @endforeach
                                     </div><!-- End .products -->
-
+                                    @endif
                                     <a href="{{ url('shops') }}" class="btn btn-outline-dark-3"><span>View More Products</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .widget widget-products -->
 
@@ -402,6 +430,7 @@
 
                         $('#price').text("NPR."+innerdata.data.price);
                         $('#product_varient').val(innerdata.data.code);
+                        $('#rateofvariant').val(innerdata.data.price);
                     }else{
                         if(innerdata.type==1){
                             $('#product-variant-stock').text(innerdata.data);

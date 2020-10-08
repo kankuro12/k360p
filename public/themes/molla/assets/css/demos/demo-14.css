@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
 }
-.container,
+
 .container-fluid {
     width: 1800px;
     max-width: 100%;

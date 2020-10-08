@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <input type="hidden" name="parent_id" id="parent_id" value="" required>
                             <select class="selectpicker" data-live-search="true" id="type" name="type"
-                                data-style="btn btn-primary btn-round" title="Select Product Category" data-size="3">
+                                data-style="btn btn-primary btn-round" title="Select Product Category" data-size="5">
                                 @foreach (\App\Setting\Homepage::sectiontype as $key => $item)
                                     <option value="{{ $key }}">{{ $item }}</option>
                                 @endforeach
@@ -40,6 +40,14 @@
                                     <input placeholder="Enter Rows" type="number" min="1" max="12" name="row" id="row"
                                         class="form-control">
                                 </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label >Box Style</label>
+                                <select name="boxed" class="form-control">
+                                    <option value="0">Full Width</option>
+                                    <option value="1">Boxed</option>
+                                </select>
                             </div>
                         </div>
                     </form>
@@ -89,6 +97,13 @@
                                     <input placeholder="Enter Rows" type="number" min="1" max="12" name="row" id="e_row"
                                         class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label >Box Style</label>
+                                <select name="boxed" class="form-control">
+                                    <option value="0">Full Width</option>
+                                    <option value="1">Boxed</option>
+                                </select>
                             </div>
                         </div>
                     </form>

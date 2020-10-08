@@ -2,7 +2,7 @@
 @section('title','Shopping Cart')
 @section('contant')
 <main class="main">
-        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        	<div class="page-header text-center" style="background-image: url('themes/molla/assets/images/page-header-bg.jpg')">
         		<div class="container">
         			<h1 class="page-title">Shopping Cart<span>Shop</span></h1>
         		</div><!-- End .container -->
@@ -32,20 +32,26 @@
 											<th>Price</th>
 											<th>Quantity</th>
 											<th>Total</th>
+											<th>Extra Feature</th>
 											<th></th>
 										</tr>
 									</thead>
 									@php
 										$simpletotal = 0;
 										$varianttotal = 0;
+										$totalCharge = 0;
                                     @endphp
 									<tbody>
 										@foreach($cartItem as $item)
+										 @php 
+											$extraFeatureCount = \App\ExatraChargeCart::where('cart_id',$item->id)->count();
+											$extraFeature = \App\ExatraChargeCart::where('cart_id',$item->id)->get();
+										 @endphp
 										<tr>
 											<td class="product-col">
 												<div class="product">
 													<figure class="product-media">
-														<a href="#">
+														<a href="{{ route('product.detail',$item->product_id) }}">
 															<img src="{{ asset($item->product->product_images) }}" alt="Product image">
 														</a>
 													</figure>
@@ -53,12 +59,11 @@
 													<h3 class="product-title">
 														<a href="{{ route('product.detail',$item->product_id) }}">{{ $item->product->product_name }}</a><br>
 														@if($item->product->stocktype == 0)
-															<small class="ml-4">--This product has not any attributes.</small>
 														@else
 															@php 
 																$variant = \App\Setting\VariantManager::codeToString($item->variant_code);
 																	foreach ($variant as $key => $v) {
-																		echo '<small>'.$v['attribute']['name'].' :- '.$v['item']['name'].'</small><br>';
+																		echo '<small>'.$v['attribute']['name'].' : '.$v['item']['name'].'</small><br>';
 																	}
 															@endphp
 														@endif
@@ -89,6 +94,16 @@
 											@else
 											   <td class="total-col">NPR.{{ $price->price * $item->qty }} </td>
 											@endif
+											<td class="extra-feature">
+												@if($extraFeatureCount>0)
+													@foreach($extraFeature as $f)
+														<p>{{ $f->title }}  <span class="text-danger">(Rs.{{ $f->amount }})</span><a href="{{ url('remove/feature/item/'.$f->id) }}" class="btn-remove" title="Remove Feature"><i class="icon-close"></i></a> </p>
+														@php 
+														   $totalCharge = $totalCharge + $f->amount;
+														@endphp 
+													@endforeach
+												@endif
+											</td>
 											<td class="remove-col"><a href="{{ url('remove/cart/item/'.$item->id) }}" class="btn-remove" title="Remove"><i class="icon-close"></i></a></td>
 										</tr>
 										@php
@@ -125,11 +140,18 @@
 	                						<tr class="summary-subtotal">
 	                							<td>Subtotal:</td>
 	                							<td>NPR.{{ $varianttotal + $simpletotal }}</td>
-	                						</tr><!-- End .summary-subtotal -->
+											</tr><!-- End .summary-subtotal -->
+											
+											@if($totalCharge>0)
+											<tr class="summary-subtotal">
+	                							<td>Extra Feature Charge:</td>
+	                							<td>NPR.{{ $totalCharge }}</td>
+											</tr><!-- End .summary-subtotal -->
+											@endif
 	                						
 	                						<tr class="summary-total">
 	                							<td>Total:</td>
-	                							<td>NPR.{{ $varianttotal + $simpletotal }}</td>
+	                							<td>NPR.{{ $varianttotal + $simpletotal + $totalCharge }}</td>
 	                						</tr><!-- End .summary-total -->
 	                					</tbody>
 	                				</table><!-- End .table table-summary -->

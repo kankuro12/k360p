@@ -20,8 +20,7 @@
                                         "items":6,
                                         "nav": true
                                     }
-                                }
-                            }'>
+                                }}'>
     <a href="#" class="brand">
         <img src="{{ asset('themes/molla/assets/images/brands/1.png') }}" alt="Brand Name">
     </a>

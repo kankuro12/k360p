@@ -40,7 +40,26 @@
 										<option value="date">Date</option>
 									</select>
 								</div>
-        					</div><!-- End .toolbox-sort -->
+                            </div><!-- End .toolbox-sort -->
+                            <div class="toolbox-layout">
+                						<a href="#" class="btn-layout active">
+                							<svg width="16" height="10">
+                								<rect x="0" y="0" width="4" height="4"></rect>
+                								<rect x="6" y="0" width="10" height="4"></rect>
+                								<rect x="0" y="6" width="4" height="4"></rect>
+                								<rect x="6" y="6" width="10" height="4"></rect>
+                							</svg>
+                						</a>
+
+                						<a href="#" class="btn-layout">
+                							<svg width="10" height="10">
+                								<rect x="0" y="0" width="4" height="4"></rect>
+                								<rect x="6" y="0" width="4" height="4"></rect>
+                								<rect x="0" y="6" width="4" height="4"></rect>
+                								<rect x="6" y="6" width="4" height="4"></rect>
+                							</svg>
+                						</a>
+                					</div>
         				</div><!-- End .toolbox-right -->
         			</div><!-- End .toolbox -->
 
@@ -64,6 +83,7 @@
                                             <input type="hidden" name="product_id" value="{{ $p->product_id }}">
                                             <input type="hidden" name="type" value="{{ $p->stocktype }}">
                                             <input type="hidden" name="qty" value="1">
+                                            <input type="hidden" name="rate" value="{{ $p->mark_price }}">
                                         <div class="product-action action-icon-top">
                                             @if($p->stocktype == 0)
                                                <button class="btn-product btn-cart" style="border: none; background:white;"><span>add to cart</span></button>
