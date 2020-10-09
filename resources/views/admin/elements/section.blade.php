@@ -15,7 +15,7 @@
                             <input type="hidden" name="parent_id" id="parent_id" value="" required>
                             <select class="selectpicker" data-live-search="true" id="type" name="type"
                                 data-style="btn btn-primary btn-round" title="Select Element Type" data-size="5">
-                                @foreach (\App\Setting\Homepage::sectiontype as $key => $item)
+                                @foreach (\App\Setting\HomePage::sectiontype as $key => $item)
                                     <option value="{{ $key }}">{{ $item }}</option>
                                 @endforeach
                             </select>

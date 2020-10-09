@@ -26,7 +26,7 @@
                                                 @else
                                                 <strong id="sec_{{$item->id}}_name">{{$item->name}}</strong>
                                             @endif
-                                            ({{\App\Setting\Homepage::sectiontype[$item->type]}})
+                                            ({{\App\Setting\HomePage::sectiontype[$item->type]}})
                                         </div>
                                         <div class="col-md-2">
                                             <strong >Rows : </strong>
@@ -152,7 +152,7 @@
     const manageurl='{{route("elements.manage",['section'=>'_s_'])}}';
     const editurl='{{route("elements.edit")}}';
     const types=[
-        @foreach (\App\Setting\Homepage::sectiontype as $key=>$item)
+        @foreach (\App\Setting\HomePage::sectiontype as $key=>$item)
             '{{$item}}',
         @endforeach
 
