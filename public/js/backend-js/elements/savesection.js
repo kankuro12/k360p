@@ -44,6 +44,8 @@ function save(){
                 $('#section'+data.parent_id).append(template);
             }
             console.log(template);
+            $('#addsection_form')[0].reset();
+            $('#addsection').modal('hide')
         }
     });
 }
@@ -80,6 +82,8 @@ function saveedit(){
             $('#sec_'+response.id+'_name').text(response.name);
             $('#sec_'+response.id+'_order').text(response.order);
             $('#sec_'+response.id+'_row').text(response.row);
+            $('#editsection_form')[0].reset();
+            $('#editsection').modal('hide');  
         }
     });
 }

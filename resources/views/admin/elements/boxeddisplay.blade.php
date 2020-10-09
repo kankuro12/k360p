@@ -80,6 +80,33 @@
                                         <textarea name="mquery" id="query" cols="30" rows="10" style="width:100%;"></textarea>
                                     </div>
                                     <div class="col-md-12">
+                                        <div>
+                                            <h5><strong>No Of Shown Item In </strong></h5>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                            
+                                                    <label >mobile</label>
+                                                    <input type="number" name="mobile" value="1"  min="1" required class="form-control">
+                                                </div>
+                                                <div class="col-md-3">
+                            
+                                                    <label >tab</label>
+                                                    <input type="number" name="tab" min="1" value="2" required class="form-control">
+                                                </div>
+                                                <div class="col-md-3">
+                            
+                                                    <label >laptop</label>
+                                                    <input type="number" name="laptop" min="1" value="4"  required class="form-control">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label >tv</label>
+                                                    <input type="number" name="tv" min="1" value="5"  required class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="col-md-12">
                                         <input type="submit" value="Add New Section" class="btn btn-primary">
                                     </div>
                                 </div>

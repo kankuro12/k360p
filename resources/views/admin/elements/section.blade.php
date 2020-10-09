@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <input type="hidden" name="parent_id" id="parent_id" value="" required>
                             <select class="selectpicker" data-live-search="true" id="type" name="type"
-                                data-style="btn btn-primary btn-round" title="Select Product Category" data-size="5">
+                                data-style="btn btn-primary btn-round" title="Select Element Type" data-size="5">
                                 @foreach (\App\Setting\Homepage::sectiontype as $key => $item)
                                     <option value="{{ $key }}">{{ $item }}</option>
                                 @endforeach
@@ -47,6 +47,7 @@
                                 <select name="boxed" class="form-control">
                                     <option value="0">Full Width</option>
                                     <option value="1">Boxed</option>
+                                    <option value="2">Boxed-fluid</option>
                                 </select>
                             </div>
                         </div>
@@ -56,7 +57,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="save()">Add Section</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                    style="margin-bottom: 0px;">Close</button>
+                    style="margin-bottom: 0px;" onclick="$('#addsection_form')[0].reset();">Close</button>
             </div>
         </div>
     </div>
@@ -103,6 +104,7 @@
                                 <select name="boxed" class="form-control">
                                     <option value="0">Full Width</option>
                                     <option value="1">Boxed</option>
+                                    <option value="2">Boxed-fluid</option>
                                 </select>
                             </div>
                         </div>
@@ -110,7 +112,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="saveedit()">Add Section</button>
+                <button type="button" class="btn btn-primary" onclick="saveedit()">Update Section</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
                     style="margin-bottom: 0px;">Close</button>
             </div>

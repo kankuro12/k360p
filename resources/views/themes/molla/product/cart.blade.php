@@ -70,14 +70,10 @@
 													</h3><!-- End .product-title -->
 												</div><!-- End .product -->
 											</td>
-											@php 
-												$price = \App\model\ProductStock::where('product_id',$item->product_id)->where('code',$item->variant_code)->select('price')->first();
-											@endphp
-											@if($item->product->stocktype == 0)
-											  <td class="price-col">NPR.{{ $item->product->sell_price }}</td>
-											@else
-											   <td class="price-col">NPR.{{ $price->price }}</td>
-											@endif
+											
+										
+											<td class="price-col">NPR. {{ $item->rate+0 }}</td>
+										
 											<td class="quantity-col">
 												<div class="text-center">
 													<a href="{{ url('cart/update-qty/'.$item->id.'/1') }}" class="badge badge-secondary p-2">+</a>
@@ -89,11 +85,9 @@
 													@endif
 												</div>
 											</td>
-											@if($item->product->stocktype == 0)
-											   <td class="total-col">NPR.{{ $item->product->sell_price * $item->qty }} </td>
-											@else
-											   <td class="total-col">NPR.{{ $price->price * $item->qty }} </td>
-											@endif
+											
+											   <td class="total-col">NPR. {{ $item->rate * $item->qty }} </td>
+											
 											<td class="extra-feature">
 												@if($extraFeatureCount>0)
 													@foreach($extraFeature as $f)

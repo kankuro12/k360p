@@ -9,7 +9,7 @@
             @else
                 <strong id="sec_{{$data->id}}_name">{{ $data->name }}</strong>
             @endif
-            ({{ \App\Setting\Homepage::sectiontype[$item->type] }})
+            ({{ \App\Setting\Homepage::sectiontype[$data->type] }})
         </div>
         <div class="col-md-2">
             <strong>Rows : </strong> 

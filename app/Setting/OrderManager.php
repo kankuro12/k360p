@@ -17,7 +17,8 @@ class OrderManager
         $product=Product::find($product_id);
         $shipping=$product->ownerShipping();
         $shippingprice=ProductWeightClass::where('product_id',$product->product_id)->first();
-        if($shipping==null){
+        // dd($shippingprice);
+        if($shipping==null ){
             return ['shipping'=>"All Nepal","Price"=>0,'type'=>'s101'];
         }else{
             $i=0;

@@ -25,6 +25,11 @@
     <meta name="theme-color" content="#ffffff">
     {!! \App\Setting\HomePage::renderCSS()!!}
     @yield('css')
+
+    <style>
+        
+        
+    </style>
 </head>
 @php
    $cats = \App\model\admin\Category::with('subcat')->where('parent_id',null)->get();

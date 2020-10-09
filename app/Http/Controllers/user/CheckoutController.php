@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\ExatraChargeCart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\model\Admin;
 use App\model\admin\Product;
 use App\model\Cart;
 use App\model\OrderItem;
@@ -12,6 +13,7 @@ use App\model\OrderItemCharge;
 use App\model\ShippingDetail;
 use App\Setting\HomePage;
 use App\model\ProductStock;
+use App\model\Vendor\Vendor;
 use App\Setting\OrderManager;
 use App\Setting\VendorOption;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +39,7 @@ class CheckoutController extends Controller
             $shippingDetail->save();
             $session_id = Session::get('session_id');
             $cart = Cart::where('session_id',$session_id)->get();
+            $vids = [];
             foreach ($cart as $key => $value) {
                 $productDetail = Product::where('product_id',$value->product_id)->where('isverified',1)->first();
                 $orderItem = new OrderItem();
@@ -45,11 +48,15 @@ class CheckoutController extends Controller
                 $orderItem->qty = $value->qty;
                 $orderItem->variant_code = $value->variant_code;
 
-                if($productDetail->vendorid == 0){
-                    $orderItem->ismainstore = 1;
+                $vendor_id = $productDetail->vendor_id;
+                if ($vendor_id != null) {
+                    $orderItem->vendor_id = $vendor_id;
+
+                    if (!in_array($vendor_id, $vids)) {
+                        array_push($vids, $vendor_id);
+                    }
                 }else{
-                    $orderItem->ismainstore = 0;
-                    $orderItem->vendor_id = $productDetail->vendorid;
+                    $orderItem->ismainstore=1;
                 }
 
                 $orderItem->shippingcharge = $request->shipping_charge;
@@ -85,6 +92,12 @@ class CheckoutController extends Controller
                 }
             }
             Cart::where('user_email',Auth::user()->email)->delete();
+            Admin::first()->notify(new \App\Notifications\admin\OrderNotification($shippingDetail));	                
+            foreach ($vids as $vid) {
+                $vendor=Vendor::find($vid);	                        
+                // dd($vendor->user);	                        
+                $vendor->notify(new \App\Notifications\Vendor\OrderNotification($shippingDetail));
+            }
             return redirect('/viewcart')->with('success','Your order placed successfully!');
         }else{
             $session_id = Session::get('session_id');

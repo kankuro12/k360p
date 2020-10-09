@@ -5,6 +5,10 @@
                 <div class="container">
                     @include($item_1->render() ,['data'=>$item_1])
                 </div>
+            @elseif ($item_1->boxed == 2)
+                <div class="container-fluid">
+                    @include($item_1->render() ,['data'=>$item_1])
+                </div>
             @else
                 @include($item_1->render() ,['data'=>$item_1])
             @endif

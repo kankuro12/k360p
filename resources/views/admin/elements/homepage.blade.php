@@ -137,7 +137,7 @@
                 </span>
             </div>
             <div class="col-md-4">
-                <a href="{m}" >Manage</a>
+                <a href="{m}" target="_blank">Manage</a>
                 | <a href="#" onclick="del({id})">Del</a>
                 | <a href="#" onclick="edit({id})">Edit</a>
             </div>

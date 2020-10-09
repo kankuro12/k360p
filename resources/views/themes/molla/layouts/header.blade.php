@@ -5,12 +5,14 @@
 </style>
 <header class="header header-14">
     <div class="header-top" style="background: #3d4273; color:white;">
-        <div class="container">
+        <div class="container pt-1 pt-md-0 pb-1 pb-md-0">
             <div class="header-left">
-              Some special product are onsale for certain time. <a href="{{ url('sale-product') }}" class="text-warning ml-2"> Shop Now </a>
+                <span>
+                    Some special product are onsale for certain time... <a href="{{ url('sale-product') }}" class="text-warning ml-2"> Shop Now </a>
+                </span>
             </div><!-- End .header-left -->
 
-            <div class="header-right">
+            <div class="header-right d-none d-md-flex">
 
                 <ul class="top-menu">
                     <li>
@@ -33,7 +35,7 @@
                             @else
                             @if(Auth::user()->role_id == 1)
                             <li>
-                                <div class="header-dropdown">
+                                <div >
                                     <a href="{{ route('user.account') }}"><i class="icon-user"></i>Account</a>
                                 </div><!-- End .header-dropdown -->
                             </li>
@@ -102,7 +104,7 @@
                                         <span class="compare-txt">Compare</span>
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-menu dropdown-menu-right msp">
                                         <ul class="compare-products">
                                             <li class="compare-product">
                                                 <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>

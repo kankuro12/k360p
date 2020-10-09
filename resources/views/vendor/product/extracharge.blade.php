@@ -1,5 +1,5 @@
 <div>
-    <form action="{{ route('admin.product-extracharge') }}" method="post">
+    <form action="{{ route('vendor.product-extracharge') }}" method="post">
         @csrf
         <input type="hidden" name="product_id" value="{{ $productdetail->product_id }}">
         <div class="row">

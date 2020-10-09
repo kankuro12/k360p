@@ -9,12 +9,34 @@ $cat=$data->getElement();
     // dd($categories);
     @endphp
 
-
-    <div class="owl-carousel owl-full carousel-equal-height " data-owl="{
-        
-    }">
+    <div>
+    @if ($cat->showtitle==1)
+        <h3><strong>{{$data->name}}</strong></h3>
+    @endif
+    </div>
+    <div class="owl-carousel owl-full carousel-equal-height cat-owl" 
+    data-owl='{
+        "responsive":{
+            "0": {
+                "items":1               
+            },
+            "480": {
+                "items":{{$cat->mobile}}
+            },
+            "768": {
+                "items":{{$cat->tab}}
+            },
+            "992": {
+                "items":{{$cat->tab}}
+            },
+            "1200": {
+                "items":{{$cat->laptop}}
+            },
+            "1600": {
+                "items":{{$cat->tv}}
+            }
+        }}'>
         @foreach ($products as $product)
-
             @include('themes.molla.elements.product',$product)
         @endforeach
 

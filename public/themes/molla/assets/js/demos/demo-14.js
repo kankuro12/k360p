@@ -3,18 +3,18 @@ $(document).ready(function() {
     'use strict';
     $('.cat-owl').each(function () {
         var $this = $(this);
-        console.log($this);
-        $this.owlCarousel({
-            "nav": true, 
+        var def={
+            "nav": false, 
             "dots": true,
-            "margin": 20,
-            "loop": true,
+            "margin": 5,
+            "loop": false,
+            
             "responsive": {
                 "0": {
-                    "items":1.5
+                    "items":1               
                 },
                 "480": {
-                    "items":1.5
+                    "items":1
                 },
                 "768": {
                     "items":2
@@ -29,7 +29,20 @@ $(document).ready(function() {
                     "items":5
                 }
             }
-        });
+        };
+        console.log(this);
+        var data=undefined;
+        data=$this.data('owl');
+        if(data==undefined){
+            
+            $this.owlCarousel(def).trigger('refresh.owl.carousel');
+        }else{
+            console.log('data',data);
+            var newOwlSettings = $.extend({}, def, data);
+            console.log("new setting", newOwlSettings);
+            $this.owlCarousel(newOwlSettings).trigger('refresh.owl.carousel');
+        }
+        console.log($this);
         
     });   
 });

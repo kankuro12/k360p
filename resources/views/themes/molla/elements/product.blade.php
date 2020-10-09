@@ -28,6 +28,11 @@
                     <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                     <input type="hidden" name="type" value="{{ $product->stocktype }}">
                     <input type="hidden" name="qty" value="1">
+                    @if ($product->promo == 0)
+                        <input type="hidden" name="rate" value="{{ $product->mark_price }}"> 
+                    @else
+                        <input type="hidden" name="rate" value="{{ $product->sell_price }}"> 
+                    @endif
                     <button class="btn-product btn-cart w-100"><span>add to cart</span></button>
                     <!-- <span onclick="javascript:this.form.submit();" class="btn-product btn-cart"><span>add to cart</span></span> -->
                 </form>

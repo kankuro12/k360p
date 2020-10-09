@@ -15,11 +15,21 @@
                         $orderby="";
                         $order=0;
                         $count=8;
+                        $mobile=1;
+                        $tab=2;
+                        $laptop=3;
+                        $tv=5;
+                        $showtitle=false;
                         if($data!=null){
                             $category_id=$data->category_id;
                             $orderby=$data->orderby;
                             $order=$data->order;
                             $count=$data->count;
+                            $mobile=$data->mobile;
+                            $laptop=$data->laptop;
+                            $tab=$data->tab;
+                            $tv=$data->tv;
+                            $showtitle=$data->showtitle==1;
                         }
                         @endphp
                         <h4 class="card-title"> <a href="{{ route('elements') }}"><strong>Homepage Section</strong></a>/
@@ -61,6 +71,34 @@
                                         <div class="col-md-4">
                                             <label >No of Displayed Product</label>
                                             <input value="{{$count}}" min="1" type="number" name="count" id="count" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input value="1" type="checkbox" name="showtitle" id="showtitle" {{$showtitle?"checked":""}}> Show Title
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <h5><strong>No Of Shown Item In </strong></h5>
+                                        <div class="row">
+                                            <div class="col-md-3">
+
+                                                <label >mobile</label>
+                                                <input type="number" name="mobile" value="{{$mobile}}"  min="1" required class="form-control">
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <label >tab</label>
+                                                <input type="number" name="tab" min="1" value="{{$tab}}" required class="form-control">
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <label >laptop</label>
+                                                <input type="number" name="laptop" min="1" value="{{$laptop}}"  required class="form-control">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label >tv</label>
+                                                <input type="number" name="tv" min="1" value="{{$tv}}"  required class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">

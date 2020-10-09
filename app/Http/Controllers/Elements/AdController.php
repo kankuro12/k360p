@@ -65,6 +65,15 @@ class AdController extends Controller
         $data->orderby=$request->orderby;
         $data->order=$request->order;
         $data->count=$request->count;
+        $data->mobile=$request->mobile;
+        $data->tab=$request->tab;
+        $data->laptop=$request->laptop;
+        $data->tv=$request->tv;
+        $data->mobile=$request->mobile;
+        $data->tab=$request->tab;
+        $data->laptop=$request->laptop;
+        $data->tv=$request->tv;
+        $data->showtitle =$request->showtitle??0;
         $data->save();
         return redirect()->back();
     }
@@ -83,6 +92,12 @@ class AdController extends Controller
         $data->orderby=$request->orderby;
         $data->order=$request->order;
         $data->count=$request->count;
+        
+
+        $data->mobile=$request->mobile;
+        $data->tab=$request->tab;
+        $data->laptop=$request->laptop;
+        $data->tv=$request->tv;
 
         $data->save();
 
@@ -102,6 +117,12 @@ class AdController extends Controller
         $item->orderby=$request->orderby;
         $item->order=$request->order;
         $item->count=$request->count;
+
+        $item->mobile=$request->mobile;
+        $item->tab=$request->tab;
+        $item->tv=$request->tv;
+        $item->laptop=$request->laptop;
+
 
         $item->save();
 
