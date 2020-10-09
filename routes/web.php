@@ -66,6 +66,11 @@ Route::get('/shops', [
     'as' => 'shops'
 ]);
 
+Route::get('/shop-by-category/{id}', [
+    'uses' => 'HomeController@category',
+    'as' => 'shop-by-category'
+]);
+
 
 Route::get('/product/{id}', [
     'uses' => 'HomeController@productDetail',

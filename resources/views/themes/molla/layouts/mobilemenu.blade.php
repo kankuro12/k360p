@@ -49,17 +49,25 @@
                 <nav class="mobile-cats-nav">
                     <ul class="mobile-cats-menu">
                     @foreach ($cats as $item)
-                        <li><a class="mobile-cats-lead" href="{{ url('shop-by-category/'.$item->id)}}">{{ $item->cat_name }}</a></li>
+                        <li><a class="mobile-cats-lead" href="{{ url('shop-by-category/'.$item->cat_id)}}">{{ $item->cat_name }}</a>
                         @if (count($item->subcat))
-                          @foreach ($item->subcat as $item1)
-                            <li><a href="{{ url('shop-by-category/'.$item1->id)}}">-{{ $item1->cat_name }}</a></li>
-                            @if (count($item1->subcat))
-                                @foreach ($item1->subcat as $i)
-                                 <li><a href="{{ url('shop-by-category/'.$i->id)}}">--{{ $i->cat_name }}</a></li>
+                            <ul>
+
+                                @foreach ($item->subcat as $item1)
+                                  <li><a href="{{ url('shop-by-category/'.$item1->cat_id)}}">-{{ $item1->cat_name }}</a>
+                                  @if (count($item1->subcat))
+                                  <ul>
+
+                                      @foreach ($item1->subcat as $i)
+                                       <li><a href="{{ url('shop-by-category/'.$i->cat_id)}}">--{{ $i->cat_name }}</a>
+                                      @endforeach
+                                  </ul>
+                                  @endif
+                                  </li>
                                 @endforeach
-                            @endif
-                          @endforeach
+                            </ul>
                         @endif
+                        </li>
                     @endforeach
                     </ul><!-- End .mobile-cats-menu -->
                 </nav><!-- End .mobile-cats-nav -->

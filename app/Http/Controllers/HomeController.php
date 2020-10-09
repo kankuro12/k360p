@@ -13,6 +13,7 @@ use App\model\admin\Product_image;
 use App\model\admin\Product_attribute;
 use App\model\admin\Attribute;
 use App\model\admin\Attribute_group;
+use App\model\admin\Category;
 use App\Setting\HomePage;
 use App\Setting\VariantManager;
 use Auth;
@@ -97,6 +98,14 @@ class HomeController extends Controller
             return response()->json(['sucess'=>false,'data'=>"Stock Not Available",'type'=>'1']);
 
         }
+
+    }
+
+    public function category($id){
+        $cat=Category::find($id);
+        $ids=$cat->childList();
+        $products=Product::whereIn('id',$ids)->get();
+        return view(HomePage::theme("product.category"),compact('cat','products'));
 
     }
 }
