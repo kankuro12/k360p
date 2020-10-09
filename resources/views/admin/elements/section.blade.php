@@ -36,8 +36,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Rows</label>
-                                    <input placeholder="Enter Rows" type="number" min="1" max="12" name="row" id="row"
+                                    <label>Columns</label>
+                                    <input placeholder="Enter Columns" type="number" min="1" max="12" name="row" id="row"
                                         class="form-control">
                                 </div>
                             </div>
@@ -94,8 +94,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Rows</label>
-                                    <input placeholder="Enter Rows" type="number" min="1" max="12" name="row" id="e_row"
+                                    <label>Columns</label>
+                                    <input placeholder="Enter Columns" type="number" min="1" max="12" name="row" id="e_row"
                                         class="form-control">
                                 </div>
                             </div>
