@@ -50,6 +50,10 @@ class AdController extends Controller
 
             $ad->image1 = $request->file('image')->store('back/ad');
         }
+        if($request->hasFile('image2')){
+
+            $ad->image2 = $request->file('image2')->store('back/ad');
+        }
         $ad->save();
        return redirect()->back();
     }

@@ -34,9 +34,12 @@ class SliderController extends Controller
         $slider->primary_text = $request->primary_text;
         $slider->secondary_text = $request->secondary_text;
         $slider->button_text = $request->button_text;
+        $slider->button_bg = $request->button_bg;
+        $slider->button_color = $request->button_color;
         $slider->slider_group_id=$group->id;
    
         $slider->slider_image = $request->file('image')->store('back/sliders');
+        $slider->mobile = $request->file('mobile')->store('back/sliders');
         
         switch ($request->linkradio) {
             case 1:

@@ -22,11 +22,17 @@
                             <div id="root">
                                 @foreach ($data->sliders as $slider)
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-9">
                                             <img src="{{ asset($slider->slider_image) }}" alt="" srcset=""
                                                 style="width: 100%;">
+                                            
+                                            
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
+                                            <img src="{{ asset($slider->mobile) }}" alt="" srcset=""
+                                            style="width: 100%;">
+                                        </div>
+                                        <div class="col-md-12">
                                             <table class="table">
                                                 <tr>
                                                     <td>
@@ -54,6 +60,22 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
+                                                        <strong>Button Text color</strong>
+                                                    </td>
+                                                    <td>
+                                                        <div style="height:15px;background:{{$slider->button_color}}"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Button Background color</strong>
+                                                    </td>
+                                                    <td>
+                                                        <div style="height:15px;background:{{$slider->button_bg}}"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
                                                         <strong>link Text</strong>
                                                     </td>
                                                     <td>
@@ -61,6 +83,7 @@
                                                             href="{{ $slider->link_text }}">{{ $slider->link_text }}</a>
                                                     </td>
                                                 </tr>
+                                               
                                                 <tr>
                                                     <td colspan="2">
                                                         <form

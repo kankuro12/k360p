@@ -12,12 +12,14 @@
                         @php
                         $data=$section->getElement();
                         $image="";
+                        $image1="";
                         $text="";
                         $link="";
                         if($data!=null){
                             $image=$data->image1;
                             $text=$data->link2;
                             $link=$data->link1;
+                            $image1=$data->image2;
                         }
                         @endphp
                         <h4 class="card-title"> <a href="{{ route('elements') }}"><strong>Homepage Section</strong></a>/
@@ -30,8 +32,8 @@
                                 <form enctype="multipart/form-data" action="{{ route('elements.save-ad', ['section' => $section->id]) }}" method="post">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <label for="">Advertisment Image</label>
+                                        <div class="col-md-9 col-sm-12">
+                                            <label for="">Advertisment Image mobile</label>
                                             <div>
                                                 <div style="position: relative">
                                                     <div>
@@ -44,6 +46,25 @@
                                                         <span class="btn btn-danger" onclick="
                                                                                             document.getElementById('gal').value = null;
                                                                                             document.getElementById('gal_img').src='{{$image!=""?asset($image):'\images\backend_images\slider.png'}}';
+                                                                                            ">Clear</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-12">
+                                            <label for="">Advertisment Image mobile</label>
+                                            <div>
+                                                <div style="position: relative">
+                                                    <div>
+                                                        <input onchange="loadImage1(this)" style="display:none;" name="image2"
+                                                            type="file" id="gal1" accept="image/*"  />
+                                                        <img src="{{$image1!=""?asset($image1):'\images\backend_images\mobile_slider.png'}}" alt="..." id="gal_img1"
+                                                            onclick="document.getElementById('gal1').click();">
+                                                    </div>
+                                                    <div style="position: absolute;top:0px;right:0px;">
+                                                        <span class="btn btn-danger" onclick="
+                                                                                            document.getElementById('gal1').value = null;
+                                                                                            document.getElementById('gal_img1').src='{{$image1!=""?asset($image):'\images\backend_images\mobile_slider.png'}}';
                                                                                             ">Clear</span>
                                                     </div>
                                                 </div>
@@ -209,6 +230,27 @@
             if (FileSize > 3072) {
                 alert('Image Size Cannot Be Greater than 3mb');
                 document.getElementById('gal_img').src = '{{$image!=""?asset($image):'\images\backend_images\slider.png'}}';
+                input.value = null;
+                console.log(input.files);
+            } else {
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+    }
+
+    function loadImage1(input) {
+        console.log(input);
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#gal_img1').attr('src', e.target.result);
+            }
+            var FileSize = input.files[0].size / 1024;
+            if (FileSize > 3072) {
+                alert('Image Size Cannot Be Greater than 3mb');
+                document.getElementById('gal_img1').src = '{{$image1!=""?asset($image1):'\images\backend_images\mobile_slider.png'}}';
                 input.value = null;
                 console.log(input.files);
             } else {

@@ -13,12 +13,12 @@ $group=$data->getElement();
         }'>
         @foreach ($group->sliders as $slider)
             <div class="intro-slide">
-                <img src="{{ asset($slider->slider_image) }}" alt="Image Desc" style="width:100%;">
                 {{-- <figure class="slide-image">
-                    <picture>
-                        <source media="(max-width: 480px)" srcset="{{ asset($slider->slider_image) }}">
-                    </picture>
                 </figure><!-- End .slide-image --> --}}
+                <picture>
+                    <source media="(max-width: 480px)" srcset="{{ asset($slider->mobile) }}">
+                    <img src="{{ asset($slider->slider_image) }}" alt="Image Desc" style="width:100%;">
+                </picture>
 
                 <div class="intro-content">
                     {{-- <h3 class="intro-subtitle">{!! $slider->secondary_text !!}</h3><!-- End .h3 intro-subtitle --> --}}
@@ -30,7 +30,7 @@ $group=$data->getElement();
                         {!! $slider->secondary_text !!}
                     </div><!-- End .intro-text -->
 
-                    <a href="{{ $slider->link_text }}" class="btn btn-primary">
+                <a href="{{ $slider->link_text }}" class="btn btn-primary" style="color:{{$slider->button_color}};background:{{$slider->background_bg}}">
                         <span>{!! $slider->button_text !!}</span>
                         <i class="icon-long-arrow-right"></i>
                     </a>

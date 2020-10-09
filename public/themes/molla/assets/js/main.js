@@ -219,6 +219,7 @@ $(document).ready(function () {
     // Product countdown
     if ($.fn.countdown) {
         $(".product-countdown").each(function () {
+            
             var $this = $(this),
                 untilDate = $this.data("until"),
                 compact = $this.data("compact"),
@@ -260,16 +261,14 @@ $(document).ready(function () {
 
             // Split and created again for ie and edge
             if (!$this.data("relative")) {
-                var untilDateArr = untilDate.split(", "), // data-until 2019, 10, 8 - yy,mm,dd
-                    newDate = new Date(
-                        untilDateArr[0],
-                        untilDateArr[1] - 1,
-                        untilDateArr[2]
-                    );
+                // var untilDateArr = untilDate.split(", "), // data-until 2019, 10, 8 - yy,mm,dd
+                console.log('until',untilDate);
+                    newDate = new Date(untilDate );
             } else {
                 newDate = untilDate;
             }
 
+            console.log(newDate);
             $this.countdown({
                 until: newDate,
                 format: dateFormat,

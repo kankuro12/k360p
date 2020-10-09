@@ -1,5 +1,12 @@
 @extends('themes.molla.layouts.app')
 @section('title', 'Product Detail')
+@section('meta')
+    <meta property="og:url"           content="{{route('product.detail',['id'=>$product->product_id])}}" />
+    <meta property="og:type"          content="{{$product->product_name}}" />
+    <meta property="og:title"         content="{{env('APP_NAME',"LARAVEL")}}" />
+    <meta property="og:description"   content="{{ $product->product_short_description }}" />
+    <meta property="og:image"         content="{{ asset($product->product_images) }}" />
+@endsection
 @section('contant')
     <main class="main">
         <div class="page-header text-center"
@@ -133,8 +140,12 @@
                                                                 max="10" step="1" data-decimals="0" required>
                                                         </div><!-- End .product-details-quantity -->
 
-                                                        <button class="btn-product btn-cart"><span>add to
-                                                                cart</span></button>
+                                                        <button class="btn-product btn-cart text-white" style="color: white">
+                                                            <span class="text-white">
+                                                                add to
+                                                                cart
+                                                            </span>
+                                                        </button>
                                                     </div><!-- End .details-action-col -->
                                                 @else
                                                     <div id="product-variant-stock" class="mb-1">
@@ -143,9 +154,9 @@
                                                 @endif
                                                 <div class="details-action-wrapper">
                                                     <a href="{{ route('user.wishlist', $product->product_id) }}"
-                                                        class="btn-product btn-wishlist" title="Wishlist"><span>Add to
+                                                        class="btn-product btn-wishlist p-1 pr-3 pl-3" title="Wishlist"><span>Add to
                                                             Wishlist</span></a>
-                                                    <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to
+                                                    <a href="#" class="btn-product btn-compare p-1 pr-3 pl-3" title="Compare"><span>Add to
                                                             Compare</span></a>
                                                 </div><!-- End .details-action-wrapper -->
                                             </div><!-- End .product-details-action -->
@@ -159,8 +170,9 @@
 
                                                 <div class="social-icons social-icons-sm">
                                                     <span class="social-label">Share:</span>
-                                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i
-                                                            class="icon-facebook-f"></i></a>
+                                                    <a class="social-icon" href="https://www.facebook.com/sharer/sharer.php?u={{route('product.detail',['id'=>$product->product_id])}}" target="_blank">
+                                                        <i class="icon-facebook-f"></i>
+                                                    </a>
                                                     <a href="#" class="social-icon" title="Twitter" target="_blank"><i
                                                             class="icon-twitter"></i></a>
                                                     <a href="#" class="social-icon" title="Instagram" target="_blank"><i
@@ -542,4 +554,7 @@
     });
 
 </script>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="vEByKOut"></script>
 @endsection

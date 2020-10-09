@@ -2,6 +2,7 @@
 
 namespace App\model\admin;
 
+use App\model\OrderItem;
 use App\model\ProductAttributeItem;
 use App\Setting\VendorOption;
 use Carbon\Carbon;
@@ -78,5 +79,30 @@ class Product extends Model
         }else{
             return null;
         }
+    }
+
+    public function sale(){
+        $dt = Carbon::now();
+        $current =Onsell::where('started_at','<=',$dt)
+        ->where('end_at','>=',$dt)->select('sell_id')
+        ->get();
+        return  Sell_product::where('product_id',$this->product_id)->whereIn('sell_id',$current)->first();
+    }
+    public function onSale(){
+        $dt = Carbon::now();
+        $current =Onsell::where('started_at','<=',$dt)
+        ->where('end_at','>=',$dt)->select('sell_id')
+        ->get();
+        return  Sell_product::where('product_id',$this->product_id)->whereIn('sell_id',$current)->count()>0;
+                      
+    }
+
+    public function isTop(){
+        $count=env('top',100);
+        return OrderItem::where('product_id',$this->product_id)->sum('qty')>$count;
+    }
+
+    public function images(){
+        return $this->hasMany(Product_image::class,'product_id','product_id');
     }
 }

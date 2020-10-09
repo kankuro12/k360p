@@ -1,18 +1,32 @@
 <div class="product text-center">
     <figure class="product-media">
-        @if ($product->promo == 1)
-            <span class="product-label label-sale">Sale</span>
+        @php
+            $onsale=$product->onSale();
+        @endphp
+        @if ($product->promo == 1  || $onsale )
+            @if ($onsale)
+            @php
+                $sell=$product->sale()->onsale;
+            @endphp
+                <span class="product-label label-sale"><a href="{{ route('public.sale.detail',$sell->sell_id) }}" style="color:white;font-weight: 400">{{$sell->sell_name}}</a></span>
+            @else
+                <span class="product-label label-sale">sale</span>
+
+            @endif
+            
         @endif
         @if ($product->isnew())
             <span class="product-label label-new">New</span>
         @endif
-        <span class="product-label label-top">Top</span>
+        @if ($product->isTop())
+            <span class="product-label label-top">Top</span>
+        @endif
         <a href="/product/{{ $product->product_id }}">
             <img src="{{ asset($product->product_images) }}" alt="Product image" class="product-image">
         </a>
 
         <div class="product-action-vertical">
-            <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to
+            <a href="{{ route('user.wishlist', $product->product_id)}}" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to
                     wishlist</span></a>
             <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
                 title="Quick view"><span>Quick
@@ -55,13 +69,14 @@
         <!-- End .product-title -->
         <div class="product-price">
             @if ($product->stocktype == 0)
-                @if ($product->promo == 0)
+                @if ($product->promo == 0 && !$onsale)
                     Rs. {{ $product->mark_price }}
                 @else
                     <span class="new-price">Rs. {{ $product->sell_price }}</span>
-                    <span class="old-price">Was Rs. {{ $product->mark_price }}</span>
+                    <span class="old-price">Was <span style="text-decoration: line-through;">Rs. {{ $product->mark_price }}</span></span>
                 @endif
             @else
+                
             @endif
 
         </div><!-- End .product-price -->

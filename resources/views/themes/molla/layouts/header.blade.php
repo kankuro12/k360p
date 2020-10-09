@@ -5,8 +5,8 @@
 
 </style>
 <header class="header header-14">
-    <div class="header-top d-none d-md-flex" style="background: #3d4273; color:white;">
-        <div class="container pt-1 pt-md-0 pb-1 pb-md-0">
+    <div class="header-top d-none d-md-flex" style="background-color: #{{ env('secondaryheader_bg', '3d4273') }};color: #{{ env('secondaryheader_color', 'ffffff') }};">
+        <div class="container-fluid pt-1 pt-md-0 pb-1 pb-md-0">
             <div class="header-left">
                 <span>
                     Some special product are onsale for certain time... <a href="{{ url('sale-product') }}"
@@ -64,7 +64,7 @@
 
             <span>
                 <div >
-                    <a href="{{route('vendor.getRegister')}}" style="color: #FCB941" >Become A vendor</a>
+                    <a href="{{route('vendor.getRegister')}}" style="color: #FCB941" >Become A Seller</a>
                 </div>
             </span>
             <span>
@@ -332,7 +332,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ url('sale-product') }}" class="sf-with">Onsales</a>
+                                <a href="{{ url('sale-product') }}" class="sf-with">Buy Cheaper</a>
                             </li>
 
                             <li>

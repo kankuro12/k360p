@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class RegisterController extends Controller
 {
     public function getRegister(){
+       
     	return view(HomePage::theme("user.register"));
     }
     public function postRegister(Request $request){

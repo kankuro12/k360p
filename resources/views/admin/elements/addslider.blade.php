@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 col-sm-12">
+                        <div class="col-md-8 col-sm-12">
                             <label for="">Slider Image</label>
                             <div>
                                 <div style="position: relative">
@@ -58,12 +58,43 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4 col-sm-12">
+                            <label for="">Slider Mobile Image</label>
+                            <div>
+                                <div style="position: relative">
+                                    <div>
+                                        <input onchange="loadImage1(this)" style="display:none;" name="mobile" type="file"
+                                            id="gal1" accept="image/*" required />
+                                        <img src="\images\backend_images\mobile_slider.png" alt="..." id="gal_img1"
+                                            onclick="document.getElementById('gal1').click();">
+                                    </div>
+                                    <div style="position: absolute;top:0px;right:0px;">
+                                        <span class="btn btn-danger" onclick="
+                                                                        document.getElementById('gal1').value = null;
+                                                                        document.getElementById('gal_img1').src='\images\backend_images\mobile_slider.png';
+                                                                        ">Clear</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 pr-md-1">
+                        <div class="col-md-6">
                             <div class="form-group label-floating">
                             <label >Button Text</label>
                             <input required type="text" class="form-control"  value="" name="button_text">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 ">
+                            <div class="form-group label-floating">
+                            <label >Button Background</label>
+                            <input required type="color" class="form-control"  value="#FCB941" name="button_bg">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 ">
+                            <div class="form-group label-floating">
+                            <label >Button text Color</label>
+                            <input required type="color" class="form-control"  value="#333333" name="button_color">
                             </div>
                         </div>
                     </div>
@@ -181,6 +212,27 @@
                 if (FileSize > 3072) {
                     alert('Image Size Cannot Be Greater than 3mb');
                     document.getElementById('gal_img').src = '\images\backend_images\slider.png';
+                    input.value = null;
+                    console.log(input.files);
+                } else {
+
+                    reader.readAsDataURL(input.files[0]); // convert to base64 string
+                }
+            }
+        }
+
+        function loadImage1(input) {
+            console.log(input);
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#gal_img1').attr('src', e.target.result);
+                }
+                var FileSize = input.files[0].size / 1024;
+                if (FileSize > 3072) {
+                    alert('Image Size Cannot Be Greater than 3mb');
+                    document.getElementById('gal_img1').src = '\images\backend_images\mobile_slider.png';
                     input.value = null;
                     console.log(input.files);
                 } else {

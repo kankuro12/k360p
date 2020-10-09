@@ -75,7 +75,7 @@
                 <div class="col-md-8 pr-md-1">
                     <div class="form-group label-floating">
                     <label class="label-control">Start Date and Time</label>
-                    <input type="text" class="form-control datetimepicker" name="started_at" value="01/01/2019" />
+                    <input type="text" class="form-control datetimepicker" name="started_at" data-date-format="YYYY-MM-DD HH:mm:ss" />
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 <div class="col-md-8 pr-md-1">
                     <div class="form-group label-floating">
                     <label class="label-control">End Date and Time</label>
-                    <input type="text" class="form-control datetimepicker" name="end_at" value="01/01/2019" />
+                    <input type="text" class="form-control datetimepicker" name="end_at" data-date-format="YYYY-MM-DD HH:mm:ss" />
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@
                 <div class="col-md-8 pr-md-1">
                     <div class="form-group label-floating">
                     <label class="label-control">Start Date and Time</label>
-                    <input type="text" class="form-control datetimepicker" name="started_at" value=" " id="started_at1" />
+                    <input type="text" data-date-format="YYYY-MM-DD HH:mm:ss" class="form-control datetimepicker" name="started_at" value=" " id="started_at1" />
                     </div>
                 </div>
             </div>
@@ -142,7 +142,7 @@
                 <div class="col-md-8 pr-md-1">
                     <div class="form-group label-floating">
                     <label class="label-control">End Date and Time</label>
-                    <input type="text" class="form-control datetimepicker" name="end_at" value=" " id="end_at1" />
+                    <input type="text" class="form-control datetimepicker" data-date-format="YYYY-MM-DD HH:mm:ss" name="end_at" value=" " id="end_at1" />
                     </div>
                 </div>
             </div>
@@ -269,7 +269,8 @@
             next: 'fa fa-chevron-right',
             today: 'fa fa-screenshot',
             clear: 'fa fa-trash',
-            close: 'fa fa-remove'
+            close: 'fa fa-remove',
+            format: 'YYYY-MM-DD HH:mm:ss'
         }
         });
         $('#add').click(function(){

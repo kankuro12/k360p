@@ -23,6 +23,9 @@
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
+
+    @yield('meta')
+
     {!! \App\Setting\HomePage::renderCSS()!!}
     @yield('css')
 

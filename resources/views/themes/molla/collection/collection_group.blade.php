@@ -25,8 +25,8 @@
                 <div class="row">
                     @foreach($collection_group as $p)
 
-                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                        <div class="product">
+                    <div class="col-12 col-md-4 col-lg-4 col-xl-3">
+                        {{-- <div class="product">
                             <figure class="product-media">
                                 <span class="product-label label-new">New</span>
                                 <a href="{{ route('product.detail',$p->product->product_id) }}">
@@ -74,7 +74,8 @@
 
                                
                             </div><!-- End .product-body -->
-                        </div><!-- End .product -->
+                        </div><!-- End .product --> --}}
+                        @include(\App\Setting\HomePage::theme('elements.product'),['product'=>$p->product])
                     </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
                     @endforeach
 

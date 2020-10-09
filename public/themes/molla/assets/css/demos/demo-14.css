@@ -848,6 +848,20 @@
         transform: translateX(0);
     }
 
+    .product-action{
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .product{
+        box-shadow: 0 0 6px 4px #00000021;
+    }
+
+    .product-countdown{
+        left:0;right:0;
+    }
+
     html,body
         {
             width: 100%;

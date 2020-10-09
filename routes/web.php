@@ -1,9 +1,13 @@
 <?php
 
+use App\model\admin\Onsell;
+use App\model\admin\Sell_product;
 use App\model\OrderItem;
 use App\model\ShippingDetail;
 use App\Notifications\User\OrderComfirmation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +21,35 @@ use Illuminate\Http\Request;
 */
 
 Route::get('testo', function () {
-    $date = \Carbon\Carbon::today()->subDays(7);
-    $orders=DB::table('order_items')->where('created_at', '>=', \Carbon\Carbon::now()->subDays(7))
-    ->groupBy('date')
-    ->orderBy('date', 'DESC')
-    ->get(array(
-        DB::raw('Date(created_at) as date'),
-        DB::raw('COUNT(*) as "views"')
-    ));
-    dd($orders,$date);
+
+
+    foreach (Onsell::all() as $key => $value) {
+        $value->time();
+    }
+
+    // DB::enableQueryLog();
+
+    // $dt = Carbon::now();
+    // $current = Onsell::where('started_at','<=',$dt)
+    //     ->where('end_at','>=',$dt)->select('sell_id')
+    //     ->get();
+    // dd($current->toArray(),$dt,DB::getQueryLog()); 
+    // $date = \Carbon\Carbon::today()->subDays(7);
+    // $orders=DB::table('order_items')->where('created_at', '>=', \Carbon\Carbon::now()->subDays(7))
+    // ->groupBy('date')
+    // ->orderBy('date', 'DESC')
+    // ->get(array(
+    //     DB::raw('Date(created_at) as date'),
+    //     DB::raw('COUNT(*) as "views"')
+    // ));
+    // dd($orders,$date);
 });
 
+Route::get('grid/{id}', function ($id) {
+    session(['isgrid' => $id]);
+    // dd(session('isgrid'));
+    return redirect()->back();
+})->name('grid');
 
 Route::get('/', [
     'uses' => 'HomeController@home',
