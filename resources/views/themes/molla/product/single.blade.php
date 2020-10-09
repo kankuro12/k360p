@@ -2,8 +2,8 @@
 @section('title', 'Product Detail')
 @section('meta')
     <meta property="og:url"           content="{{route('product.detail',['id'=>$product->product_id])}}" />
-    <meta property="og:type"          content="{{$product->product_name}}" />
-    <meta property="og:title"         content="{{env('APP_NAME',"LARAVEL")}}" />
+    <meta property="og:type"          content="article" />
+    <meta property="og:title"         content="{{$product->product_name}}" />
     <meta property="og:description"   content="{{ $product->product_short_description }}" />
     <meta property="og:image"         content="{{ asset($product->product_images) }}" />
 @endsection
