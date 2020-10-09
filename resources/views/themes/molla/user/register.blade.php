@@ -84,13 +84,13 @@
                                     <form action="{{ route('user.postRegister') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
-                                            <div class="col md 6">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="name">First Name *</label>
                                                     <input type="text" class="form-control" id="name" placeholder="Enter First Name" name="fname" required>
                                                 </div><!-- End .form-group -->
                                             </div>
-                                            <div class="col md 6">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="name">Last Name *</label>
                                                     <input type="text" class="form-control" id="name" placeholder="Enter Last Name" name="lname" required>
