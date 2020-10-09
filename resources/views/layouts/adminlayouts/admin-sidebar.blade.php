@@ -292,6 +292,12 @@
                                 <span class="sidebar-normal"> Footer Link </span>
                             </a>
                         </li>
+                        <li class="{{ (Request::is('admin/footer-head') ? ' active' : '') }}">
+                            <a href="{{ url('admin/footer-head') }}">
+                                <span class="sidebar-mini"> EL </span>
+                                <span class="sidebar-normal"> Builder </span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>

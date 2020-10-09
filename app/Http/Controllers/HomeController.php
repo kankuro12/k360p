@@ -28,15 +28,24 @@ class HomeController extends Controller
         //dd(Auth::user()->id);
        $products = Product::where('featured',1)->get();
      
-       
-        return view(HomePage::theme("home.app"));
+       if(env('usebuilder',0)==1){
+           return view(HomePage::theme("home.app"));
+        }else{
+            return view(HomePage::theme("home.index"));
+
+       }
        
     }
 
     public function home(){
         //dd(Auth::user()->id);
         $products = Product::where('featured',1)->get();
-        return view(HomePage::theme("home.index"));
+        if(env('usebuilder',0)==1){
+            return view(HomePage::theme("home.app"));
+         }else{
+             return view(HomePage::theme("home.index"));
+ 
+        }
     }
 
     public function shops(){
