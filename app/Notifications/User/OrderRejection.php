@@ -2,23 +2,26 @@
 
 namespace App\Notifications\User;
 
+use App\Channels\Aakash;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\OneSignal\OneSignalMessage;
 
 class OrderRejection extends Notification
 {
     use Queueable;
 
+    protected $ids;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($_ids)
     {
-        //
+        $this->ids=$_ids;
     }
 
     /**
@@ -29,7 +32,7 @@ class OrderRejection extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return [Aakash::class,OneSignalMessage::class];
     }
 
     /**
@@ -57,5 +60,28 @@ class OrderRejection extends Notification
         return [
             //
         ];
+    }
+
+    public function toOneSignal($notifiable)
+    {
+        $text='';
+        for ($i=0; $i < count($this->ids); $i++) { 
+           $text.="\n".($i+1). ". #".$this->ids[$i];
+        }
+        $shipping=$notifiable;
+        return OneSignalMessage::create()
+            ->setSubject("A New Order Added")
+            ->setBody("Your Orders ".$text."\n Has Been Rejected.\nCheck Your Account\n.")
+            ->setUrl(route('user.order.item',['id'=>$shipping->id]));
+    }
+
+    public function toAakash($notifiable){
+        $text='';
+        for ($i=0; $i < count($this->ids); $i++) { 
+           $text.="\n".($i+1). ". #".$this->ids[$i];
+        }
+     
+
+        return ['to'=>$notifiable->phone,"text"=>"Your Orders ".$text."\n Has Been Rejected.\nCheck Your Account\n-".env('APP_NAME','laravel')];
     }
 }
