@@ -138,4 +138,9 @@ class CategoryController extends Controller
         return redirect()->route('admin.manage-category')->with('flash_message','Category Updated Successfully . . .');
         //dd($data);
     }
+
+    public function delCategory(Category $cat){
+        $cat->delete();
+        return redirect()->back();
+    }
 }

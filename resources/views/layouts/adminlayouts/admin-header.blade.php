@@ -13,7 +13,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <a href="{{route('admin.manage-category')}}" class="navbar-brand"><strong>Manage Categories</strong></a>
             
+            <a href="{{route('admin.manage-product')}}" class="navbar-brand"><strong>Manage Products</strong></a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">

@@ -62,7 +62,54 @@
                     <p> Dashboard </p>
                 </a>
             </li>
-         
+            <li >
+                <a data-toggle="collapse" href="#pagesExamples" >
+                    <i class="material-icons">image</i>
+                    <p> Category
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="pagesExamples">
+                    <ul class="nav">
+                        <li class="{{ (Request::is('admin/add-category') ? ' active' : '') }}">
+                            <a href="{{ route('admin.add-category') }}">
+                                <span class="sidebar-mini"> AC </span>
+                                <span class="sidebar-normal"> Add Category </span>
+                            </a>
+                        </li>
+                        <li class="{{ (Request::is('admin/manage-category') ? ' active' : '') }}">
+                            <a href="{{ route('admin.manage-category') }}">
+                                <span class="sidebar-mini"> MC </span>
+                                <span class="sidebar-normal"> Manage Category </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#componentsExamples">
+                    <i class="material-icons">business_center</i>
+                    <p> Products
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="componentsExamples">
+                    <ul class="nav">
+                        <li class="{{ (Request::is('admin/add-product') ? ' active' : '') }}">
+                            <a href="{{ route('admin.add-product') }}">
+                                <span class="sidebar-mini"> AP </span>
+                                <span class="sidebar-normal"> Add Product </span>
+                            </a>
+                        </li>
+                        <li class="{{ (Request::is('admin/manage-product') ? ' active' : '') }}">
+                            <a href="{{ route('admin.manage-product') }}">
+                                <span class="sidebar-mini"> MP </span>
+                                <span class="sidebar-normal"> Manage Products </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
             <li >
                 <a data-toggle="collapse" href="#orders" >
                     <i class="material-icons">shopping_cart
@@ -87,7 +134,7 @@
             <li >
                 <a data-toggle="collapse" href="#catelogues" >
                     <i class="material-icons">image</i>
-                    <p> Catalogues
+                    <p> Product Settings
                         <b class="caret"></b>
                     </p>
                 </a>
@@ -117,54 +164,8 @@
                                 <p> Attribute Groups </p>
                             </a>
                         </li>
-                        <li >
-                            <a data-toggle="collapse" href="#pagesExamples" >
-                                <i class="material-icons">image</i>
-                                <p> Category
-                                    <b class="caret"></b>
-                                </p>
-                            </a>
-                            <div class="collapse" id="pagesExamples">
-                                <ul class="nav">
-                                    <li class="{{ (Request::is('admin/add-category') ? ' active' : '') }}">
-                                        <a href="{{ route('admin.add-category') }}">
-                                            <span class="sidebar-mini"> AC </span>
-                                            <span class="sidebar-normal"> Add Category </span>
-                                        </a>
-                                    </li>
-                                    <li class="{{ (Request::is('admin/manage-category') ? ' active' : '') }}">
-                                        <a href="{{ route('admin.manage-category') }}">
-                                            <span class="sidebar-mini"> MC </span>
-                                            <span class="sidebar-normal"> Manage Category </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a data-toggle="collapse" href="#componentsExamples">
-                                <i class="material-icons">business_center</i>
-                                <p> Products
-                                    <b class="caret"></b>
-                                </p>
-                            </a>
-                            <div class="collapse" id="componentsExamples">
-                                <ul class="nav">
-                                    <li class="{{ (Request::is('admin/add-product') ? ' active' : '') }}">
-                                        <a href="{{ route('admin.add-product') }}">
-                                            <span class="sidebar-mini"> AP </span>
-                                            <span class="sidebar-normal"> Add Product </span>
-                                        </a>
-                                    </li>
-                                    <li class="{{ (Request::is('admin/manage-product') ? ' active' : '') }}">
-                                        <a href="{{ route('admin.manage-product') }}">
-                                            <span class="sidebar-mini"> MP </span>
-                                            <span class="sidebar-normal"> Manage Products </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                   
+                    
                     </ul>
                 </div>
             </li>           
@@ -292,7 +293,7 @@
                                 <span class="sidebar-normal"> Footer Link </span>
                             </a>
                         </li>
-                        <li class="{{ (Request::is('admin/element') ? ' active' : '') }}">
+                        <li class="{{ (Request::is('admin/footer-head') ? ' active' : '') }}">
                             <a href="{{ route('elements') }}">
                                 <span class="sidebar-mini"> EL </span>
                                 <span class="sidebar-normal"> Builder </span>
