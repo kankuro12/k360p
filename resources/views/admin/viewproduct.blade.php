@@ -183,6 +183,14 @@
                                             {{-- <p class="prod-desc"><strong>Stock Status:
                                                 </strong>{{ $productdetail->stockstatus }}</p>
                                             --}}
+                                            <p class="prod-desc"><strong>Cost Price (Rs) :</strong>
+                                                <input required type="number" min="0" name="costprice"
+                                                    value="{{ $productdetail->costprice }}" class="cc"
+                                                    placeholder="Enter Product Price">
+
+
+                                            </p>
+
                                             <p class="prod-desc"><strong>Mark Price (Rs) :</strong>
                                                 <input required type="number" step="0.01" name="mark_price"
                                                     value="{{ $productdetail->mark_price }}" class="cc"

@@ -40,6 +40,8 @@
 
 <body>
     <div class="page-wrapper">
+        @include('themes.molla.layouts.customcss')
+
         @include('themes.molla.layouts.header')
                
                 @yield('contant')

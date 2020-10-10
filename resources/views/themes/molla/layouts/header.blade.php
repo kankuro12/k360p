@@ -1,11 +1,6 @@
-<style>
-    .megamenu {
-        box-shadow: 1px 0px 20px 20px rgb(0 0 0 / 19%), -5px 10px 16px rgba(51, 51, 51, 0.05) !important;
-    }
 
-</style>
 <header class="header header-14">
-    <div class="header-top d-none d-md-flex" style="background-color: #{{ env('secondaryheader_bg', '3d4273') }};color: #{{ env('secondaryheader_color', 'ffffff') }};">
+    <div class="header-top d-none d-md-flex" style="background-color: {{ env('secondaryheader_bg', '#3d4273') }};color: {{ env('secondaryheader_color', '#ffffff') }};">
         <div class="container-fluid pt-1 pt-md-0 pb-1 pb-md-0">
             <div class="header-left">
                 <span>
@@ -59,12 +54,12 @@
     </div><!-- End .header-top -->
 
     <div class="header-top d-md-none d-block "
-        style="font-weight:500;background-color: #{{ env('secondaryheader_bg', '3d4273') }};color: #{{ env('secondaryheader_color', 'ffffff') }};">
+        style="font-weight:500;background-color: {{ env('secondaryheader_bg', '3d4273') }};color: {{ env('secondaryheader_color', 'ffffff') }};">
         <div class="container d-flex justify-content-between" style="padding:1rem 2rem;">
 
             <span>
                 <div >
-                    <a href="{{route('vendor.getRegister')}}" style="color: #FCB941" >Become A Seller</a>
+                    <a href="{{route('vendor.getRegister')}}" class="side-link" >Become A Seller</a>
                 </div>
             </span>
             <span>
@@ -138,7 +133,7 @@
                                         <input type="search" class="form-control" name="q" id="q"
                                             placeholder="Search product ..." required>
 
-                                        <button class="btn btn-primary" type="submit"><i
+                                        <button class="btn btn-primary btn-search" type="submit"><i
                                                 class="icon-search"></i></button>
                                     </div><!-- End .header-search-wrapper -->
                                 </form>
@@ -148,7 +143,7 @@
                         <div class="col-lg-4 col-xxl-5col d-flex justify-content-end align-items-center">
                             <div class="header-dropdown-link">
                                 <div class="dropdown compare-dropdown">
-                                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                                    <a href="#" class="dropdown-toggle " role="button" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false" data-display="static"
                                         title="Compare Products" aria-label="Compare Products">
                                         <i class="icon-random"></i>
@@ -183,14 +178,14 @@
                                 $wishlistCount = \App\Wishlist::where('user_id',Auth::user()->id)->count();
                                 }
                                 @endphp
-                                <a href="{{ route('user.wishlist.page') }}" class="wishlist-link">
+                                <a href="{{ route('user.wishlist.page') }}" class="wishlist-link btn-icon">
                                     <i class="icon-heart-o"></i>
                                     @if (!empty(Auth::check()))
                                         <span class="wishlist-count"> {{ $wishlistCount }} </span>
                                     @else
                                         <span class="wishlist-count"> 0 </span>
                                     @endif
-                                    <span class="wishlist-txt">Wishlist</span>
+                                    <span class=" btn-icon-text">Wishlist</span>
                                 </a>
 
                                 @php
@@ -202,11 +197,11 @@
                                 @endphp
 
                                 <div class="dropdown cart-dropdown">
-                                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                                    <a href="#" class="dropdown-toggle btn-icon" role="button" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false" data-display="static">
                                         <i class="icon-shopping-cart"></i>
                                         <span class="cart-count">{{ $cartCount }}</span>
-                                        <span class="cart-txt">Cart</span>
+                                        <span class="btn-icon-text">Cart</span>
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right">
@@ -259,10 +254,10 @@
                                         </div><!-- End .dropdown-cart-total -->
 
                                         <div class="dropdown-cart-action">
-                                            <a href="{{ route('public.viewcart') }}" class="btn btn-primary">View
+                                            <a href="{{ route('public.viewcart') }}" class="btn btn-primary btn-search">View
                                                 Cart</a>
                                             <a href="{{ url('user/checkout') }}"
-                                                class="btn btn-outline-primary-2"><span>Checkout</span><i
+                                                class="btn btn-outline-primary-2 btn-search-outline"><span>Checkout</span><i
                                                     class="icon-long-arrow-right"></i></a>
                                         </div><!-- End .dropdown-cart-total -->
                                     </div><!-- End .dropdown-menu -->
@@ -275,13 +270,14 @@
         </div><!-- End .container-fluid -->
     </div><!-- End .header-middle -->
 
-    <div class="header-bottom sticky-header">
+    <div class="header-bottom sticky-header" style="color:{{env('primaryheader_color','#ffffff')}} !important;background:{{env('primaryheader_bg','#232642')}} !important">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-auto col-lg-3 col-xl-3 col-xxl-2 header-left">
                     <div class="dropdown category-dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" data-display="static" title="Browse Categories">
+                            aria-expanded="false" data-display="static" title="Browse Categories" 
+                            style="color:{{env('megamenu_color','#333')}} !important;background:{{env('megamenu_bg','#fcb941')}} !important">
                             {{ env('browse', 'Browse Categories') }}
                         </a>
 
@@ -321,10 +317,10 @@
                 <div class="col col-lg-6 col-xl-6 col-xxl-8 header-left">
                     <nav class="main-nav">
                         <ul class="menu sf-arrows">
-                            <li class="megamenu-container active">
+                            <li class="megamenu-container {{ (Route::is('public.home') ? ' active' : '')}}">
                                 <a href="{{ url('/') }}" class="sf-with">Home</a>
                             </li>
-                            <li>
+                            <li class="megamenu-container {{ (Route::is('shops') ? ' active' : '')}}">
                                 <a href="{{ route('shops') }}" class="sf-with">Shop</a>
                             </li>
                             <li>
@@ -347,7 +343,7 @@
                     </nav><!-- End .main-nav -->
                 </div><!-- End .col-xl-9 col-xxl-10 -->
                 <div class="col col-lg-3 col-xl-3 col-xxl-2 header-center">
-                    <a href="{{ url('vendor/login') }}">Become a Seller</a>
+                    <a href="{{ url('vendor/login') }}" class="side-link">Become a Seller</a>
                 </div>
 
             </div><!-- End .row -->

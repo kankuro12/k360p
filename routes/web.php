@@ -7,6 +7,7 @@ use App\model\ShippingDetail;
 use App\Notifications\User\OrderComfirmation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -22,10 +23,10 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('testo', function () {
 
-
-    foreach (Onsell::all() as $key => $value) {
-        $value->time();
-    }
+    Auth::logout();
+    // foreach (Onsell::all() as $key => $value) {
+    //     $value->time();
+    // }
 
     // DB::enableQueryLog();
 

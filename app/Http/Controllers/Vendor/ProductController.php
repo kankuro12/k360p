@@ -73,6 +73,7 @@ class ProductController extends Controller
             $product->isverified = 0;
             $product->vendor_id = Auth::user()->vendor->id;
             $product->category_id = $data['category_id'];
+            $product->costprice = $data['costprice'];
             $product->brand_id = $data['brand_id'];
             $product->stocktype = $data['stocktype'];
             $product->product_name = $data['product_name'];
@@ -273,6 +274,7 @@ class ProductController extends Controller
         $product->brand_id = $data['brand_id']??null;
         $product->stocktype = $data['stocktype'];
         $product->product_name = $data['product_name'];
+        $product->costprice = $data['costprice'];
         $product->product_description = $data['product_description']??'';
         $product->product_short_description = $data['product_short_description'];
         // $product->product_sku = $data['product_sku'];

@@ -68,24 +68,30 @@
               
                     <div class="col-md-6 pr-md-1">
                         <div class="form-group label-floating">
+                            <label ><strong>Product Quantity</strong> </label>
+                            <input required type="number" min="0" class="form-control" value="0" name="quantity" placeholder="Enter Quantity">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-md-1">
+                        <div class="form-group label-floating">
+                            <label ><strong>Product Cost Price</strong> </label>
+                            <input required type="number" min="0" class="form-control" value="" name="costprice" placeholder="Enter Product Cost Price">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-md-1">
+                        <div class="form-group label-floating">
                             <label ><strong>Product Mark Price</strong> </label>
-                            <input required type="number" step="0.01" class="form-control" value="" name="mark_price" placeholder="Enter Product Price">
+                            <input required type="number" min="0" class="form-control" value="" name="mark_price" placeholder="Enter Product Price">
                         </div>
                     </div>
                 
-                    <div class="col-md-6 pr-md-1">
+                    <div class="col-md-4 pr-md-1">
                         <div class="form-group label-floating">
                             <label ><strong>Product sale Price</strong> </label>
-                            <input required type="number" step="0.01" class="form-control" value="" name="sell_price" placeholder="Enter Product Promotional Price">
+                            <input required type="number" min="0" class="form-control" value="" name="sell_price" placeholder="Enter Product Promotional Price">
                         </div>
                     </div>
                 
-                    <div class="col-md-6 pr-md-1">
-                        <div class="form-group label-floating">
-                            <label ><strong>Product Quantity</strong> </label>
-                            <input required type="number" step="0.01" class="form-control" value="0" name="quantity" placeholder="Enter Quantity">
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">

@@ -11,7 +11,18 @@ $cat=$data->getElement();
 
     <div>
     @if ($cat->showtitle==1)
-        <h3><strong>{{$data->name}}</strong></h3>
+        <h3 class="mb-1 mt-1"><strong>{{$data->name}}</strong></h3>
+        <div class="row mb-1">
+            <div class="col-md-4 p-0" >
+                <div style="height:1px;background:red;"></div>
+            </div>
+            <div class="col-md-4 p-0" >
+                <div style="height: 1px;background:blue;"></div>
+            </div>
+            <div class="col-md-4 p-0" >
+                <div style="height: 1px;background:green;"></div>
+            </div>
+        </div>
     @endif
     </div>
     <div class="owl-carousel owl-full carousel-equal-height cat-owl" 
