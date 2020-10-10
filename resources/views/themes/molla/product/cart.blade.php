@@ -100,13 +100,7 @@
 											</td>
 											<td class="remove-col"><a href="{{ url('remove/cart/item/'.$item->id) }}" class="btn-remove" title="Remove"><i class="icon-close"></i></a></td>
 										</tr>
-										@php
-										    if($item->product->stocktype == 1){
-												$varianttotal = $varianttotal + $item->qty * $price->price;
-											}else{
-												$simpletotal = $simpletotal + $item->product->sell_price * $item->qty;
-											}
-                                        @endphp
+										
 										@endforeach
 									</tbody>
 								</table><!-- End .table table-wishlist -->

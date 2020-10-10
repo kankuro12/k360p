@@ -81,7 +81,7 @@
             <h3 style="border-bottom:1px #ffffff solid; padding:0.1rem 0rem;">
 
                 <strong>
-                    Order Comformation
+                    Order Confirmation
                 </strong>
             </h3>
             <div style="text-align: left">

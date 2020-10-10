@@ -46,7 +46,7 @@ class HomeController extends Controller
     }
 
     public function shops(){
-        $products=Product::paginate(12);
+        $products=Product::paginate(1);
         return view(HomePage::theme("product.shop"),compact("products"));
     }
 
