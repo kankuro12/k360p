@@ -16,7 +16,7 @@ class CreateMultipleTagDisplayItemsTable extends Migration
         Schema::create('multiple_tag_display_items', function (Blueprint $table) {
             $table->increments('id');
            
-            $table->text('orderby')->default('id');
+            $table->string('orderby')->default('id');
             $table->integer('order')->default(0);
             $table->integer('count')->default(8);
             $table->text('tag');

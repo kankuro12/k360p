@@ -20,14 +20,14 @@ class CreateVendorsTable extends Migration
             $table->string('slug')->unique();
             $table->string('phone_number');
             $table->string('secondary_phone_number')->nullable();
-            $table->text('address')->nullable();
+            $table->string('address')->nullable();
             $table->string('logo')->default('logo.png');
             $table->string('cover_img')->default('cover.png');
             $table->string('secondary_email')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('twitter_url')->nullable();
             $table->string('instagram_url')->nullable();
-            $table->text('description')->nullable();
+            $table->string('description')->nullable();
             $table->string('verified')->default(0);
             $table->boolean('featured')->default(0);
             $table->dateTime('verified_time')->nullable();

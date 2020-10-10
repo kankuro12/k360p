@@ -17,7 +17,7 @@ class CreateTagDisplaysTable extends Migration
             $table->increments('id');
             $table->text('tag');
             $table->text('title');
-            $table->text('orderby')->default('id');
+            $table->string('orderby')->default('id');
             $table->integer('order')->default(0);
             $table->integer('count')->default(8);
             $table->integer('home_page_section_id')->unsigned();

@@ -15,9 +15,9 @@ class CreateCategoryDisplaysTable extends Migration
     {
         Schema::create('category_displays', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('image')->default('');
-            $table->text('link')->default('');
-            $table->text('orderby')->default('id');
+            $table->string('image')->default('');
+            $table->string('link')->default('');
+            $table->string('orderby')->default('id');
             $table->integer('order')->default(0);
             $table->integer('count')->default(8);
             $table->integer('home_page_section_id')->unsigned();

@@ -16,8 +16,8 @@ class AddQueryToBoxedItemListDisplaysTable extends Migration
         Schema::table('boxed_item_list_displays', function (Blueprint $table) {
             $table->boolean('hasquery')->default(false);
             $table->boolean('hascategory')->default(false);
-            $table->text('query')->default("");
-            $table->text('title')->default("");
+            $table->string('query')->default("");
+            $table->string('title')->default("");
         });
     }
 

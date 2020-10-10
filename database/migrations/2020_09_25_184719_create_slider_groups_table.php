@@ -15,7 +15,7 @@ class CreateSliderGroupsTable extends Migration
     {
         Schema::create('slider_groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('name')->unique();
+            $table->string('name')->unique();
             $table->integer('home_page_section_id')->unsigned();
             $table->foreign('home_page_section_id')->references('id')->on('home_page_sections')->onDelete('cascade');
             $table->timestamps();

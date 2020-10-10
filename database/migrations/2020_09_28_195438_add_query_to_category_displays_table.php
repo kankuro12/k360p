@@ -15,7 +15,7 @@ class AddQueryToCategoryDisplaysTable extends Migration
     {
         Schema::table('category_displays', function (Blueprint $table) {
             $table->boolean('hasquery')->default(false);
-            $table->text('query')->default("");
+            $table->string('query')->default("");
         });
     }
 

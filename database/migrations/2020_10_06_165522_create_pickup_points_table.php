@@ -29,7 +29,7 @@ class CreatePickupPointsTable extends Migration
             $table->integer('shipping_area_id')->unsigned();
             $table->foreign('shipping_area_id')->references('id')->on('shipping_areas')->onDelete('cascade');
 
-            $table->text('street_address')->default('');
+            $table->string('street_address')->default('');
             $table->string('phone');
 
             $table->integer('user_id')->unsigned();

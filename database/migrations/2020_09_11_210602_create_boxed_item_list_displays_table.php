@@ -15,7 +15,7 @@ class CreateBoxedItemListDisplaysTable extends Migration
     {
         Schema::create('boxed_item_list_displays', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('orderby')->default('id');
+            $table->string('orderby')->default('id');
             $table->integer('order')->default(0);
             $table->integer('count')->default(8);
             $table->integer('boxed_item_display_id')->unsigned();

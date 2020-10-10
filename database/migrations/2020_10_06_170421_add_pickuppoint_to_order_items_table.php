@@ -14,7 +14,7 @@ class AddPickuppointToOrderItemsTable extends Migration
     public function up()
     {
         Schema::table('order_items', function (Blueprint $table) {
-            $table->integer('pickup_point_id')->unsigned()->nullable()->default(null);
+            $table->integer('pickup_point_id')->nullable()->unsigned();
             $table->foreign('pickup_point_id')->references('id')->on('pickup_points')->onDelete('cascade');
             $table->dateTime('pickup_point_time')->nullable();
         });

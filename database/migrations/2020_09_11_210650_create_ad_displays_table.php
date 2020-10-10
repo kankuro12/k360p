@@ -18,10 +18,10 @@ class CreateAdDisplaysTable extends Migration
             $table->integer('home_page_section_id')->unsigned();
             $table->foreign('home_page_section_id')->references('id')->on('home_page_sections')->onDelete('cascade');
             $table->boolean('issingle')->default(true);
-            $table->text('image1')->default("");
-            $table->text('image2')->default("");
-            $table->text('link1')->default("");
-            $table->text('link2')->default("");
+            $table->string('image1')->default("");
+            $table->string('image2')->default("");
+            $table->string('link1')->default("");
+            $table->string('link2')->default("");
             $table->timestamps();
         });
     }

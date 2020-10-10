@@ -14,7 +14,7 @@ class AlterStocksTable extends Migration
     public function up()
     {
         Schema::table('product_stocks', function (Blueprint $table) {
-            $table->text('code')->unique();
+            $table->string('code')->unique();
 
         });
     }
