@@ -4,7 +4,7 @@
 <ul class="menu-vertical sf-arrows">
     <li class="megamenu-container">
         @if (count($attr->subcat) > 0)
-            <a class="sf-with-ul" href="{{ url('shops-by-category/' . $attr->cat_id) }}"><i class="icon-blender"></i>
+            <a class="sf-with-ul" href="{{ url('shop-by-category/' . $attr->cat_id) }}"><i class="icon-blender"></i>
                 {{ $menu->menu_name }}</a>
             <div class="megamenu" style="min-height: 300px;">
                 <div class="row no-gutters">
@@ -15,13 +15,13 @@
                                     @foreach ($attr->subcat as $item)
                                         <div class="col-md-4">
                                             <div class="menu-title"><a
-                                                    href="{{ url('shops-by-category/' . $item->cat_id) }}">
+                                                    href="{{ url('shop-by-category/' . $item->cat_id) }}">
                                                     {{ $item->cat_name }} </a></div><!-- End .menu-title -->
                                             @if (count($item->subcat))
                                                 @foreach ($item->subcat as $item1)
                                                     <ul>
                                                         <li><a
-                                                                href="{{ url('shops-by-category/' . $item1->cat_id) }}">{{ $item1->cat_name }}</a>
+                                                                href="{{ url('shop-by-category/' . $item1->cat_id) }}">{{ $item1->cat_name }}</a>
                                                         </li>
                                                     </ul>
                                                 @endforeach

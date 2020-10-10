@@ -9,13 +9,13 @@
 @endsection
 @section('contant')
     <main class="main">
-        <div class="page-header text-center"
+        <div class="page-header text-center d-none d-md-block"
             style="background-image: url({{ asset('themes/molla/assets/images/page-header-bg.jpg') }})">
             <div class="container">
                 <h1 class="page-title">Single Product<span>Detail</span></h1>
             </div><!-- End .container -->
         </div><!-- End .page-header -->
-        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2 d-none d-md-block">
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>

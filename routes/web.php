@@ -177,6 +177,7 @@ Route::group(['prefix'=>'admin','middleware' => 'admin_auth'], function () {
         'as' => 'admin.add-category',
         'uses' => 'admin\CategoryController@addCategory'
     ]);
+    Route::get('del-category/{cat}', 'admin\CategoryController@delCategory')->name('admin.del-category');
     Route::match(['get', 'post'], 'manage-category', [
         'as' => 'admin.manage-category',
         'uses' => 'admin\CategoryController@manageCategory'

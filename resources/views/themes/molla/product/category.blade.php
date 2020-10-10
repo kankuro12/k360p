@@ -4,7 +4,9 @@
 @php
     $isgrid=1;
     
-    if(session('isgrid')){
+    
+    if(session()->has('isgrid')){
+        // dd(session('isgrid'));
         $isgrid=session('isgrid');
     }
 @endphp

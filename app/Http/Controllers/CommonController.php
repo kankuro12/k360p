@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\model\admin\Collection_product;
+use App\model\admin\Onsell;
 use App\model\admin\Sell_product;
 use App\Setting\HomePage;
 use Illuminate\Http\Request;
@@ -25,7 +26,8 @@ class CommonController extends Controller
     }
 
     public function saleProductDetail($id){
-        $onsale_group = Sell_product::where('sell_id',$id)->get();
-        return view(HomePage::theme("collection.sale_group"))->with(compact('onsale_group'));
+        $onsale_group = Sell_product::where('sell_id',$id)->paginate(12);
+        $sell=Onsell::find($id);
+        return view(HomePage::theme("collection.sale_group"))->with(compact('onsale_group','sell'));
     }
 }

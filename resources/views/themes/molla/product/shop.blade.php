@@ -2,9 +2,11 @@
 @section('title','Shops')
 @section('contant')
 @php
-    $isgrid=0;
+    $isgrid=1;
     
-    if(session('isgrid')){
+    
+    if(session()->has('isgrid')){
+        // dd(session('isgrid'));
         $isgrid=session('isgrid');
     }
 @endphp
@@ -73,7 +75,7 @@
 
                     <div class="products">
                         <div class="row">
-                            @foreach(\App\model\admin\Product::get() as $p)
+                            @foreach($products as $p)
                             @if ($isgrid==1)
 
                                 <div class="col-12 col-md-4 col-lg-3 col-xl-3">
@@ -92,10 +94,20 @@
 
                         </div><!-- End .row -->
 
-                        <div class="load-more-container text-center">
+                        {{-- <div class="load-more-container text-center">
                             <a href="#" class="btn btn-outline-darker btn-load-more">More Products <i class="icon-refresh"></i></a>
-                        </div><!-- End .load-more-container -->
+                        </div><!-- End .load-more-container --> --}}
                     </div><!-- End .products -->
+
+
+                    @if ($products->hasPages())
+                
+                    <div class="d-flex justify-content-center shadow pt-3" >
+                        {{-- {{ $onsale_group->links() }} --}}
+        
+                        {{ $products->links('pagination.default') }}
+                    </div>
+                    @endif
 
                     <div class="sidebar-filter-overlay"></div><!-- End .sidebar-filter-overlay -->
                     @include(\App\Setting\HomePage::theme('product.filter'))

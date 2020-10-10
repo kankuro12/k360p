@@ -47,7 +47,10 @@
                                             <a class="btn btn-secondary btn-just-icon btn-round btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" title="Shipping Methods" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="material-icons">local_shipping</i>
                                             </a>
-                                            
+                                            <a class="btn  btn-just-icon btn-round btn-danger"  href="{{route('admin.del-category',['cat'=>$category->cat_id])}}" role="button" id="dropdownMenuLink" title="Delete Category"  aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons">delete_forever
+                                                </i>
+                                            </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 @foreach (\App\ShippingClass::all() as $item)
                             

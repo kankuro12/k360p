@@ -677,6 +677,10 @@
     bottom: 0;
 }
 
+.product-label.label-sale{
+    background: #DC3545;
+}
+
 @media screen and (min-width: 481px) and (max-width: 767px) {
     .intro-title {
         font-size: 2.4rem;
@@ -864,7 +868,7 @@
     }
 
     .product-countdown{
-        left:0;right:0;
+        left:0;right:0;width: 100%;
     }
 
     html,body

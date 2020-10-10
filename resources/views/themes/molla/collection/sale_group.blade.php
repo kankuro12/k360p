@@ -21,6 +21,16 @@
     <div class="page-content">
         <div class="container">
 
+            <div class="d-block d-md-flex">
+
+                <div class="heading-left">
+                    <h2 class="title text-danger text-center" >{{ $sell->sell_name }} </h2><!-- End .title -->
+                </div><!-- End .heading-left -->
+                <div class="heading-right" style="width:320px;">
+                    <div class="product-countdown" data-until="{{$sell->end_at}}" data-relative="false" data-labels-short="true" style="position:relative;background-color:#dc3545;"></div>
+                </div><!-- End .heading-left -->
+            </div>
+            <hr class="mt-1 mb-2">
             <div class="products">
                 <div class="row">
                     @foreach($onsale_group as $p)
@@ -87,6 +97,14 @@
                 </div><!-- End .row -->
             </div><!-- End .products -->
 
+            @if ($onsale_group->hasPages())
+                
+            <div class="d-flex justify-content-center shadow pt-3" >
+                {{-- {{ $onsale_group->links() }} --}}
+
+                {{ $onsale_group->links('pagination.default') }}
+            </div>
+            @endif
         </div><!-- End .container -->
     </div><!-- End .page-content -->
 </main><!-- End .main -->
