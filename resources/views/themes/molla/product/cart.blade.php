@@ -86,6 +86,9 @@
 												</div>
 											</td>
 											
+											@php
+												$totalCharge=$item->rate * $item->qty ;
+											@endphp
 											   <td class="total-col">NPR. {{ $item->rate * $item->qty }} </td>
 											
 											<td class="extra-feature">
