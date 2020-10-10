@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
         $user->role_id = 2;
         $user->active = 1;
-        $user->activation_token = Str::random(8);
+        $user->activation_token = random_int(10000, 99999);
         $user->save();
 
         $vendor = Vendor::create([
