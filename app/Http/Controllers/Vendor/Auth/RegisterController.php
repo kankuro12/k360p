@@ -63,7 +63,7 @@ class RegisterController extends Controller
             return redirect('vendor/login')->withInfo('Your email has already been verified');
         }
         $user->active = 0;
-        $user->activation_token = Str::random(40);
+        $user->activation_token = random_int(10000, 99999);
         $user->save();
 
         $user->notify(new SignupActivate($user));
