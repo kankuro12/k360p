@@ -104,7 +104,7 @@ class HomeController extends Controller
     public function category($id){
         $cat=Category::find($id);
         $ids=$cat->childList();
-        $products=Product::whereIn('id',$ids)->get();
+        $products=Product::whereIn('category_id',$ids)->get();
         return view(HomePage::theme("product.category"),compact('cat','products'));
 
     }

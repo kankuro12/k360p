@@ -46,8 +46,8 @@
                 </nav><!-- End .mobile-nav -->
             </div><!-- .End .tab-pane -->
             <div class="tab-pane fade" id="mobile-cats-tab" role="tabpanel" aria-labelledby="mobile-cats-link">
-                <nav class="mobile-cats-nav">
-                    <ul class="mobile-cats-menu">
+                <nav class="mobile-nav">
+                    <ul class="mobile-menu">
                     @foreach ($cats as $item)
                         <li><a class="mobile-cats-lead" href="{{ url('shop-by-category/'.$item->cat_id)}}">{{ $item->cat_name }}</a>
                         @if (count($item->subcat))

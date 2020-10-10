@@ -672,6 +672,11 @@
     left: 1rem;
     right: 1rem;
 }
+
+.owl-full .owl-dots {
+    bottom: 0;
+}
+
 @media screen and (min-width: 481px) and (max-width: 767px) {
     .intro-title {
         font-size: 2.4rem;

@@ -9,6 +9,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\OneSignal\OneSignalChannel;
 use NotificationChannels\OneSignal\OneSignalMessage;
 
 class OrderComfirmation extends Notification
@@ -16,6 +17,7 @@ class OrderComfirmation extends Notification
     use Queueable;
 
     protected $ids;
+    
     /**
      * Create a new notification instance.
      *
@@ -36,7 +38,8 @@ class OrderComfirmation extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail',Aakash::class,OneSignalMessage::class];
+        //'mail',Aakash::class
+        return ['mail',Aakash::class,OneSignalChannel::class];
     }
 
     /**
@@ -66,10 +69,15 @@ class OrderComfirmation extends Notification
            $text.="\n".($i+1). ". #".$this->ids[$i];
         }
         $shipping=$notifiable;
-        return OneSignalMessage::create()
+        // dd($shipping);
+        $data= OneSignalMessage::create()
             ->setSubject("A New Order Added")
             ->setBody("Your Orders ".$text."\n Has Been Approved.\nCheck Your Account\n.")
             ->setUrl(route('user.order.item',['id'=>$shipping->id]));
+
+
+
+            return $data;
     }
 
     public function toAakash($notifiable){

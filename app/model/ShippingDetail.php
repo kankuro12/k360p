@@ -6,6 +6,7 @@ use App\District;
 use App\Municipality;
 use App\Province;
 use App\ShippingArea;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
@@ -31,5 +32,18 @@ class ShippingDetail extends Model
         return $this->belongsTo(ShippingArea::class,'shipping_area_id','id');
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function routeNotificationForOneSignal()
+    {
+
+        if($this->user_id==null){
+            return ['email'=>$this->email];
+        }else{
+
+            return ['email' => $this->user->email];
+        }
+    }
     
 }

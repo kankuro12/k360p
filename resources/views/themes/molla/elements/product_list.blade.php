@@ -100,7 +100,7 @@
                 <div class="product-cat">
                     <a href="#">Women</a>
                 </div><!-- End .product-cat -->
-                <h3 class="product-title"><a href="/product/{{ $product->id }}">{{ $product->product_name }}</a>
+                <h3 class="product-title"><a href="/product/{{ $product->product_id }}">{{ $product->product_name }}</a>
                 </h3>
                 <!-- End .product-title -->
 

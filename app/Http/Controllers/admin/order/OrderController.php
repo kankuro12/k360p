@@ -46,6 +46,7 @@ class OrderController extends Controller
 
             if($status==1){
                 ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
+                
             }
             if ($status == 5) {
                 ShippingDetail::find($request->sid)->notify(new RejectOrder($request->id));
