@@ -1,19 +1,24 @@
 <div class="product text-center">
     <figure class="product-media">
         @php
-            $onsale=$product->onSale();
+        $onsale=$product->onSale();
         @endphp
-        @if ($product->promo == 1  || $onsale )
+        @if ($product->promo == 1 || $onsale)
             @if ($onsale)
-            @php
-                $sell=$product->sale()->onsale;
-            @endphp
-                <span class="product-label label-sale"><a href="{{ route('public.sale.detail',$sell->sell_id) }}" style="color:white;font-weight: 400">{{$sell->sell_name}}</a></span>
+                @php
+                $sellproduct=$product->sale();
+                $sell=$sellproduct->onsale;
+                @endphp
+                <span class="product-label label-sale"><a href="{{ route('public.sale.detail', $sell->sell_id) }}"
+                        style="color:white;font-weight: 400">
+                        {{ $sell->sell_name }}
+                        <span class="ml-2">- {{ $sellproduct->sale_discount }}%</span>
+                    </a></span>
             @else
-                <span class="product-label label-sale">sale</span>
+                <span class="product-label label-sale">Promotion</span>
 
             @endif
-            
+
         @endif
         @if ($product->isnew())
             <span class="product-label label-new">New</span>
@@ -26,10 +31,10 @@
         </a>
 
         <div class="product-action-vertical">
-            <a href="{{ route('user.wishlist', $product->product_id)}}" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to
+            <a href="{{ route('user.wishlist', $product->product_id) }}" class="btn-product-icon btn-wishlist"
+                title="Add to wishlist"><span>add to
                     wishlist</span></a>
-            <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                title="Quick view"><span>Quick
+            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick
                     view</span></a>
             <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
         </div><!-- End .product-action-vertical -->
@@ -42,17 +47,24 @@
                     <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                     <input type="hidden" name="type" value="{{ $product->stocktype }}">
                     <input type="hidden" name="qty" value="1">
-                    @if ($product->promo == 0)
-                        <input type="hidden" name="rate" value="{{ $product->mark_price }}"> 
+                    @if ($product->promo == 0 && !$onsale)
+
+                        <input type="hidden" name="rate" value="{{ $product->mark_price }}">
+
                     @else
-                        <input type="hidden" name="rate" value="{{ $product->sell_price }}"> 
+                        @if ($onsale)
+                            <input type="hidden" name="rate" value="{{ $product->salePrice() }}">
+                        @else
+                            <input type="hidden" name="rate" value="{{ $product->$product->sell_price() }}">
+                        @endif
                     @endif
+
                     <button class="btn-product btn-cart w-100"><span>add to cart</span></button>
                     <!-- <span onclick="javascript:this.form.submit();" class="btn-product btn-cart"><span>add to cart</span></span> -->
                 </form>
             @else
-                <a href="{{ route('product.detail', $product->product_id) }}"
-                    class="btn-product btn-cart "><span>View Detail</span></a>
+                <a href="{{ route('product.detail', $product->product_id) }}" class="btn-product btn-cart "><span>View
+                        Detail</span></a>
             @endif
 
 
@@ -72,11 +84,16 @@
                 @if ($product->promo == 0 && !$onsale)
                     Rs. {{ $product->mark_price }}
                 @else
-                    <span class="new-price">Rs. {{ $product->sell_price }}</span>
-                    <span class="old-price">Was <span style="text-decoration: line-through;">Rs. {{ $product->mark_price }}</span></span>
+                    @if ($onsale)
+                        <span class="new-price">Rs. {{ $product->salePrice() }} </span>
+                    @else
+                        <span class="new-price">Rs. {{ $product->sell_price }} </span>
+                    @endif
+                    <span class="old-price">Was <span style="text-decoration: line-through;">Rs.
+                            {{ $product->mark_price }}</span></span>
                 @endif
             @else
-                
+
             @endif
 
         </div><!-- End .product-price -->

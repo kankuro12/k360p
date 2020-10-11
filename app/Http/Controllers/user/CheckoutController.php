@@ -49,7 +49,7 @@ class CheckoutController extends Controller
                 $orderItem->variant_code = $value->variant_code;
 
                 $vendor_id = $productDetail->vendor_id;
-                if ($vendor_id != null) {
+                if ($vendor_id != null || $vendor_id!=0) {
                     $orderItem->vendor_id = $vendor_id;
 
                     if (!in_array($vendor_id, $vids)) {

@@ -359,6 +359,14 @@ Route::group(['prefix'=>'admin','middleware' => 'admin_auth'], function () {
         'as' => 'admin.add-menu',
         'uses' => 'admin\MenuController@addMenu'
     ]);
+    Route::match(['get', 'post'], '/del-menu/{menu}', [
+        'as' => 'admin.del-menu',
+        'uses' => 'admin\MenuController@delMenu'
+    ]);
+    Route::match(['get', 'post'], '/update-menu/{menu}', [
+        'as' => 'admin.update-menu',
+        'uses' => 'admin\MenuController@updateMenu'
+    ]);
     Route::match(['get', 'post'], '/create-contactinfo', [
         'as' => 'admin.create-contactinfo',
         'uses' => 'admin\ContactinfoController@createContactinfo'

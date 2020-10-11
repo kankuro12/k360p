@@ -97,6 +97,17 @@ class Product extends Model
                       
     }
 
+    public function salePrice(){
+        $dt = Carbon::now();
+        $current =Onsell::where('started_at','<=',$dt)
+        ->where('end_at','>=',$dt)->select('sell_id')
+        ->get();
+        $sp=  Sell_product::where('product_id',$this->product_id)->whereIn('sell_id',$current)->first();
+    
+        return  round($this->mark_price - ($this->mark_price * $sp->sale_discount/100 ));
+                      
+    }
+
     public function isTop(){
         $count=env('top',100);
         return OrderItem::where('product_id',$this->product_id)->sum('qty')>$count;

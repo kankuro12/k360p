@@ -298,12 +298,11 @@
                                         @endif
                                     </h6>
                                 @endif
-                                @foreach (\App\model\admin\Menu::all() as $menu)
+                                @foreach (\App\model\admin\Menu::orderBy('order')->get() as $menu)
                                     @if ($menu->type == 1)
                                         @include('themes.molla.elements.menu.category',['menu'=>$menu])
                                     @elseif($menu->type==2)
                                         @include('themes.molla.elements.menu.collection',['menu'=>$menu])
-
                                     @endif
                                 @endforeach
                             </nav><!-- End .side-nav -->

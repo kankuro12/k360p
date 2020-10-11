@@ -112,8 +112,17 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                
                             </div>
                             <div class="row">
+                                <label>
+                                    Order
+                                </label>
+                                <input type="number" name="order" id="order" required class="form-control" value="0">
+                            </div>
+
+                            <div class="row">
+
                                 <div class="col-md-6">
                                     <input type="submit" value="Add Menu" class="btn btn-primary">
                                 </div>
@@ -132,13 +141,40 @@
                         <h4 class="card-title">Menu Lists</h4>
                         <div class="row">
                             <div class="col-md-12">
-                                <ul class="items-list">
+                                
                                     @foreach ($menus as $menu)
-                                        <li class="" style="border-bottom:#bbb 1px solid;padding:10px;">
-                                            {{ $menu->menu_name }}
-                                        </li>
+                                        <form action="{{route('admin.update-menu',['menu'=>$menu->id])}}" method="post">
+                                            <div class="row">
+                                                @csrf
+                                                <div class="col-md-3">
+                                                    <strong>Name: <input class="form-control" required type="text" name="menu_name" value="{{ $menu->menu_name }}"> </strong>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <strong>Order: <input class="form-control" type="number" name="order" required value="{{  $menu->order }}"> </strong>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <strong>
+                                                        <div>
+                                                            Type: {{$all[$menu->type]}}
+                                                        </div>
+                                                        <div>
+                                                            {{$menu->originalName()}}
+                                                        </div>
+    
+                                                    </strong>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button class="btn btn-primary">Update</button>
+    
+                                                    <a href="{{route('admin.del-menu',['menu'=>$menu->id])}}" class="btn btn-danger">Delete</a>
+    
+                                                </div>
+                                            </div>
+                                        </form>
+                                       
+                                       
                                     @endforeach
-                                </ul>
+                                
                             </div>
                         </div>
                     </div>

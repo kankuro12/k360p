@@ -9,7 +9,7 @@ class Collection extends Model
     //
     protected $primaryKey = 'collection_id';
 
-    public function items(){
-        return $this->hasMany(Collection_product::class,'collection_id','collection_id');
+    public function menuItems(){
+        return Collection_product::where('collection_id',$this->collection_id)->inRandomOrder()->limit(5)->get();
     }
 }

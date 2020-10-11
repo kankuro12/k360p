@@ -75,15 +75,16 @@
                                             <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews
                                                 )</a>
                                         </div><!-- End .rating-container -->
-                                        @php
-                                        $maxprice =
-                                        \App\model\ProductStock::where('product_id',$product->product_id)->max('price');
-                                        $minprice =
-                                        \App\model\ProductStock::where('product_id',$product->product_id)->min('price');
-                                        @endphp
 
                                         <div class="product-price" id="price">
                                             @if ($product->stocktype == 1)
+                                                @php
+                                                $maxprice =
+                                                \App\model\ProductStock::where('product_id',$product->product_id)->max('price');
+                                                $minprice =
+                                                \App\model\ProductStock::where('product_id',$product->product_id)->min('price');
+                                                
+                                                @endphp
                                                 @if ($maxprice == $minprice)
                                                     <span>NPR.{{ $maxprice }}</span>
                                                 @else
@@ -91,7 +92,24 @@
                                                         class="p-4 text-warning">To</span> <span>NPR.{{ $maxprice }}</span>
                                                 @endif
                                             @else
-                                                <span>NPR.{{ $product->mark_price }}</span>
+                                            @php
+                                                $onsale=$product->onSale();
+                                            @endphp
+                                            @php
+                                            $sellproduct=$product->sale();
+                                            $sell=$sellproduct->onsale;
+                                            @endphp
+                                            @if ($product->promo == 0 && !$onsale)
+                                                Rs. {{ $product->mark_price }}
+                                            @else
+                                                @if ($onsale)
+                                                    <span class="new-price">Rs. {{ $product->salePrice() }} </span>
+                                                @else
+                                                    <span class="new-price">Rs. {{ $product->sell_price }} </span>
+                                                @endif
+                                                <span class="old-price">Was <span style="text-decoration: line-through;">Rs.
+                                                        {{ $product->mark_price }}</span></span>
+                                            @endif
                                             @endif
 
                                         </div><!-- End .product-price -->
@@ -108,10 +126,18 @@
                                             <input type="hidden" name="type" value="{{ $product->stocktype }}">
                                             <input type="hidden" name="varient" id="product_varient">
                                             @if ($product->stocktype == 0)
-                                                <input type="hidden" name="rate" value="{{ $product->mark_price }}">
-                                            @else
-                                                <input type="hidden" name="rate" id="rateofvariant">
-                                            @endif
+                                                @if ($product->promo == 0 && !$onsale)
+                                                    <input type="hidden" name="rate" value="{{ $product->mark_price }}">
+                                                    @else
+                                                        @if ($onsale)
+                                                            <input type="hidden" name="rate" value="{{ $product->salePrice() }}">
+                                                        @else
+                                                            <input type="hidden" name="rate" value="{{ $product->$product->sell_price() }}">
+                                                        @endif
+                                                    @endif
+                                                @else
+                                                    <input type="hidden" name="rate" id="rateofvariant">
+                                                @endif
                                             @foreach ($product->variants() as $variant)
                                                 <div class="details-filter-row details-row-size">
                                                     <label for="size">{{ $variant->name }}</label>
@@ -137,7 +163,7 @@
                                                         <div class="product-details-quantity">
                                                             <input max="{{ $product->quantity }}" min="1" type="number"
                                                                 id="qty" name="qty" class="form-control" value="1" min="1"
-                                                                max="10" step="1" data-decimals="0" required>
+                                                              step="1" data-decimals="0" required>
                                                         </div><!-- End .product-details-quantity -->
 
                                                         <button class="btn-product btn-cart text-white" style="color: white">

@@ -11,7 +11,7 @@
                     <div class="col-md-8">
                         <div class="menu-col">
                             <div class="row">
-                                @foreach ($collection->items->take(4) as $item)
+                                @foreach ($collection->menuItems() as $item)
                                 @php
                                     $product=$item->product;
                                 @endphp

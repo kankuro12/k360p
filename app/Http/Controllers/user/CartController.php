@@ -38,8 +38,6 @@ class CartController extends Controller
                 if ($stockCheck->quantity >= $qty) {
                     $cartData->qty = $qty;
                     $cartData->save();
-
-
                     // extra feature update 
                     if ($request->has('extracharge')) {
                         foreach ($request->extracharge as $key => $value) {
