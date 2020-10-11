@@ -865,6 +865,8 @@ Route::group(['prefix'=>'admin/element','middleware' => 'admin_auth'], function 
     Route::get('/slider/add/{group}','Elements\SliderController@add')->name('elements.add-slider');
     Route::post('/slider/save/{group}','Elements\SliderController@save')->name('elements.save-slider');
     Route::post('/slider/del/{slider}','Elements\SliderController@del')->name('elements.del-slider');
+    Route::get('/slider/edit/{slider}','Elements\SliderController@edit')->name('elements.edit-slider');
+    Route::post('/slider/update/{slider}','Elements\SliderController@update')->name('elements.update-slider');
 
      //ad
  

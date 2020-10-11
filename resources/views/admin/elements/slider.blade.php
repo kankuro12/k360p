@@ -88,10 +88,11 @@
                                                     <td colspan="2">
                                                         <form
                                                             action="{{ route('elements.del-slider', ['slider' => $slider->id]) }}"
-                                                            method="post">
+                                                            method="post" style="display: inline;">
                                                             @csrf
                                                             <input type="submit" value="Delete" class="btn btn-danger">
                                                         </form>
+                                                        <a href="{{route('elements.edit-slider',['slider'=>$slider->id])}}" class="btn btn-primary">Edit</a>
                                                     </td>
                                                 </tr>
                                             </table>

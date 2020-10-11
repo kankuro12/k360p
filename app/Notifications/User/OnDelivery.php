@@ -2,9 +2,6 @@
 
 namespace App\Notifications\User;
 
-use App\Channels\Aakash;
-use App\model\OrderItem;
-use App\model\ShippingDetail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -12,12 +9,13 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\OneSignal\OneSignalChannel;
 use NotificationChannels\OneSignal\OneSignalMessage;
 
-class OrderComfirmation extends Notification
+class OnDelivery extends Notification
 {
     use Queueable;
 
+
     protected $ids;
-    
+
     /**
      * Create a new notification instance.
      *
@@ -26,8 +24,6 @@ class OrderComfirmation extends Notification
     public function __construct($_ids)
     {
         $this->ids=$_ids;
-
-        
     }
 
     /**
@@ -38,31 +34,7 @@ class OrderComfirmation extends Notification
      */
     public function via($notifiable)
     {
-        //'mail',Aakash::class
-        if(env('invoice',0)==1){
-
-            return ['mail',Aakash::class,OneSignalChannel::class];
-        }else{
-            return ['mail',OneSignalChannel::class];
-        }
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        
-        $shipping=$notifiable;
-        $orders=OrderItem::whereIn('id',$this->ids)->get();
-
-        return (new MailMessage)->subject('Order Comfirmed')->view(
-            'email.order.receipt',
-            ['shipping' => $shipping,'orders'=>$orders]
-        );
+        return [OneSignalChannel::class];
     }
 
     public function toOneSignal($notifiable)
@@ -75,20 +47,25 @@ class OrderComfirmation extends Notification
         // dd($shipping);
         $data= OneSignalMessage::create()
             ->setSubject("A New Order Added")
-            ->setBody("Your Orders ".$text."\n Has Been Approved.\nCheck Your Account\n.")
+            ->setBody("Your Orders ".$text."\n Are On Delivery.\nCheck Your Account\n.")
             ->setUrl(route('user.order.item',['id'=>$shipping->id]));
             return $data;
     }
 
-    public function toAakash($notifiable){
-        $text='';
-        for ($i=0; $i < count($this->ids); $i++) { 
-           $text.="\n".($i+1). ". #".$this->ids[$i];
-        }
-     
-
-        return ['to'=>$notifiable->phone,"text"=>"Your Orders ".$text."\n Has Been Approved.\nCheck Your Account\n-".env('APP_NAME','laravel')];
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
+
     /**
      * Get the array representation of the notification.
      *

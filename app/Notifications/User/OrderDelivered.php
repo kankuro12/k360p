@@ -2,10 +2,12 @@
 
 namespace App\Notifications\User;
 
+use App\Channels\Aakash;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\OneSignal\OneSignalChannel;
 
 class OrderDelivered extends Notification
 {
@@ -29,7 +31,11 @@ class OrderDelivered extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        if(env('orderdelivered',0)==1){
+            return ['mail',Aakash::class,OneSignalChannel::class];
+        }else{
+            return ['mail',OneSignalChannel::class];
+        } 
     }
 
     /**

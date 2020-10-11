@@ -30,7 +30,7 @@ $group=$data->getElement();
                         {!! $slider->secondary_text !!}
                     </div><!-- End .intro-text -->
 
-                <a href="{{ $slider->link_text }}" class="btn btn-primary" style="color:{{$slider->button_color}};background:{{$slider->background_bg}}">
+                <a href="{{ $slider->link_text }}" class="btn btn-primary" style="color:{{$slider->button_color}};background:{{$slider->button_bg}};border:none;">
                         <span>{!! $slider->button_text !!}</span>
                         <i class="icon-long-arrow-right"></i>
                     </a>

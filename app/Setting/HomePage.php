@@ -7,11 +7,11 @@ class HomePage
 
     const menutype = ['Brand', 'Category', 'Collection', 'Sale'];
     //
-    const collectionurl = "/collection/";
+    const collectionurl = "/collection-product//";
     const producturl = "/product/";
-    const saleurl = "/sale/";
-    const brandurl = "/brand/";
-    const categoryurl = "/category/";
+    const saleurl = "/sale-product/";
+    const brandurl = "/shop-by-brand/";
+    const categoryurl = "/shop-by-category/";
 
 
     const sectiontype = [

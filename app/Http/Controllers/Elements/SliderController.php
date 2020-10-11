@@ -70,4 +70,62 @@ class SliderController extends Controller
         $slider->delete();
         return redirect()->back();
     }
+
+    public function edit(Slider $slider){
+        $collections = Collection::all();
+        $onsells = Onsell::all();
+        $brands = Brand::all();
+        $categories = Category::all();
+        //dd($brands);
+        return view('admin.elements.editslider')->with(compact('collections', 'onsells', 'brands', 'categories', 'slider'));
+    }
+
+    public function update(Slider $slider,Request  $request){
+
+        $slider->primary_text = $request->primary_text;
+        $slider->secondary_text = $request->secondary_text;
+        $slider->button_text = $request->button_text;
+        $slider->button_bg = $request->button_bg;
+        $slider->button_color = $request->button_color;
+      
+        // dd($slider)
+        if($request->hasFile('image')){
+
+            $slider->slider_image = $request->file('image')->store('back/sliders');
+        }
+   
+        if($request->hasFile('mobile')){
+
+            $slider->mobile = $request->file('mobile')->store('back/sliders');
+        }
+        
+        if($request->has('linkradio')){
+
+            switch ($request->linkradio) {
+                case 1:
+                    $slider->link_text = $request->link;
+                    break;
+                case 2:
+                    $slider->link_text = HomePage::brandurl . $request->link;
+                    break;
+                case 3:
+                    $slider->link_text = HomePage::collectionurl . $request->link;
+                    break;
+                case 4:
+                    $slider->link_text = HomePage::saleurl . $request->link;
+                    break;
+                case 5:
+                    $slider->link_text = HomePage::categoryurl . $request->link;
+                    break;
+                default:
+                    $slider->link_text = "#";
+                    break;
+            }
+        }
+
+        $slider->save();
+
+
+        return redirect()->route('elements.manage',['section'=>$slider->group->home_page_section_id]);
+    }
 }

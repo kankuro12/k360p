@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\model\admin\Product;
 use App\model\OrderItem;
 use App\model\ShippingDetail;
+use App\Notifications\User\OnDelivery;
 use App\Notifications\User\OrderComfirmation;
 use App\Notifications\User\RejectOrder;
+use App\Notifications\Vendor\OrderPickedup;
 use App\Setting\OrderManager;
 use Illuminate\Http\Request;
 
@@ -46,6 +48,10 @@ class OrderController extends Controller
 
             if($status==1){
                 ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
+                
+            }
+            if($status==2){
+                ShippingDetail::find($request->sid)->notify(new OnDelivery($request->id));
                 
             }
             if ($status == 5) {
