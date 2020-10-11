@@ -68,11 +68,11 @@ class CheckoutController extends Controller
                 $orderItem->deliverytype = $request->delivery_type;
 
                 if($value->variant_code != null){
-                    $variantStock = ProductStock::where('product_id',$value->product_id)->where('code',$value->variant_code)->select('qty')->first();
+                    $variantStock = ProductStock::where('product_id',$value->product_id)->where('code',$value->variant_code)->first();
                     $variantStock->qty = $variantStock->qty - $value->qty;
                     $variantStock->save();
                 }else{
-                  $stockStatus = Product::where('product_id',$value->product_id)->select('quantity')->first();
+                  $stockStatus = Product::where('product_id',$value->product_id)->first();
                   $stockStatus->quantity = $stockStatus->quantity - $value->qty;
                   $stockStatus->save();
                 }

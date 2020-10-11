@@ -65,7 +65,7 @@ class ProductController extends Controller
                 $product->brand_name = "No Brand";
             }
 
-            if($product->vendor_id==null){
+            if($product->vendor_id==null || $product->vendor_id==0){
                 $product->vendor_name=env('APP_NAME','laravel')." Store" ;
             }else{
                 $product->vendor_name=Vendor::where('id',$product->vendor_id)->select('name')->first()->name ;
