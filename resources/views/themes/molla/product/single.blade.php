@@ -95,14 +95,15 @@
                                             @php
                                                 $onsale=$product->onSale();
                                             @endphp
-                                            @php
-                                            $sellproduct=$product->sale();
-                                            $sell=$sellproduct->onsale;
-                                            @endphp
+                                           
                                             @if ($product->promo == 0 && !$onsale)
                                                 Rs. {{ $product->mark_price }}
                                             @else
                                                 @if ($onsale)
+                                                    @php
+                                                    $sellproduct=$product->sale();
+                                                    $sell=$sellproduct->onsale;
+                                                    @endphp
                                                     <span class="new-price">Rs. {{ $product->salePrice() }} </span>
                                                 @else
                                                     <span class="new-price">Rs. {{ $product->sell_price }} </span>

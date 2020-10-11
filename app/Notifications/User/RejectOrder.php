@@ -7,6 +7,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\OneSignal\OneSignalChannel;
+use NotificationChannels\OneSignal\OneSignalMessage;
 
 class RejectOrder extends Notification
 {
@@ -33,7 +35,7 @@ class RejectOrder extends Notification
      */
     public function via($notifiable)
     {
-        return [Aakash::class];
+        return [Aakash::class,OneSignalChannel::class];
     }
 
     public function toAakash($notifiable){
@@ -46,6 +48,20 @@ class RejectOrder extends Notification
         return ['to'=>$notifiable->phone,"text"=>"Your Orders ".$text."\n Has Been Canceled.\nSorry For Your inconvenience\n-".env('APP_NAME','laravel')];
     }
 
+    public function toOneSignal($notifiable)
+    {
+        $text='';
+        for ($i=0; $i < count($this->ids); $i++) { 
+           $text.="\n".($i+1). ". #".$this->ids[$i];
+        }
+        $shipping=$notifiable;
+        // dd($shipping);
+        $data= OneSignalMessage::create()
+            ->setSubject("A New Order Added")
+            ->setBody("Your Orders ".$text."\n Has Been Rejected.\nCheck Your Account\n.")
+            ->setUrl(route('user.order.item',['id'=>$shipping->id]));
+            return $data;
+    }
     /**
      * Get the mail representation of the notification.
      *
