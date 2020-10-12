@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Delivery;
 
+use App\DeliveryImage;
 use App\Http\Controllers\Controller;
 use App\model\OrderItem;
 use App\model\ShippingDetail;
 use App\Notifications\User\OrderDelivered;
 use App\Notifications\User\OrderPickup;
 use App\Notifications\Vendor\OrderPickedup;
+use App\Setting\VendorAccount;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 
 class DashboardController extends Controller
 {
@@ -95,21 +98,34 @@ class DashboardController extends Controller
         ->update([
             'stage'=>4
         ]);
-
+        $sid=1;
         $all=[];
         $collection=OrderItem::whereIn('id',$request->id)->get()->groupBy('shipping_detail_id');
         foreach ($collection as $key => $value) {
             $data=[];
+            $sid=$key;
             $data['shipping']=ShippingDetail::find($key);
             $ids=[];
+           
             foreach ($value as $id) {
                 array_push($ids,$id->id);
+                if($id->vendor_id!=null && $id->vendor_id!=0){
+                    $account=new VendorAccount($id->vendor_id);
+                    $account->addOrder($id);
+                }
             }
             $data['items']=$ids;
             array_push($all,$data);
         }
         foreach ($all as $key => $value) {
             $value['shipping']->notify(new OrderDelivered($value['items'],Auth::user()->point->name));
+        }
+
+        foreach ($request->image as  $image) {
+            $i=new DeliveryImage();
+            $i->image=$image->store('image/delivery');
+            $i->shipping_detail_id=$sid;
+            $i->save();
         }
         return redirect()->back();
     }

@@ -103,6 +103,10 @@
     </div>
 </div>
 
+<div class="container-fluid">
+
+</div>
+
 <style>
     @media (min-width: 768px) {
         .row.equal {

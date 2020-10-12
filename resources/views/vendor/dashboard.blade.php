@@ -25,6 +25,7 @@
     @if ($data->verified == 0)
         @php
             $verification=\App\VendorVerification::where('vendor_id', $data->id)->first();
+            
         @endphp
         @if ($verification==null)
             <div class="row">
@@ -74,9 +75,49 @@
 
         </div>
     @else
+        @php
+            $account=new \App\Setting\VendorAccount($data->id);
+        @endphp
         <div class="container-fluid">
             <div class="row">    
                 
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header" data-background-color="pink">
+                            <i class="material-icons">attach_money</i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Total Earning</p>
+                            <h3 class="card-title">{{ $account->total() }}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <a href="{{route('vendor.manage-product')}}">
+                                    <i class="material-icons">local_offer</i> View Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header" data-background-color="purple">
+                            <i class="material-icons">attach_money</i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Witdrawable Earning</p>
+                            <h3 class="card-title">{{ $account->withdraw() }}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <a href="{{route('vendor.manage-product')}}">
+                                    <i class="material-icons">local_offer</i> View Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="card card-stats">
                         <div class="card-header" data-background-color="blue">

@@ -33,4 +33,9 @@ class OrderItem extends Model
     public function charges(){
         return $this->hasMany(OrderItemCharge::class);
     }
+
+    public function extraCharges(){
+
+        return OrderItemCharge::where('order_item_id',$this->id)->sum('amount');
+    }
 }
