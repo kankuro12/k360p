@@ -46,8 +46,8 @@ class OnDelivery extends Notification
         $shipping=$notifiable;
         // dd($shipping);
         $data= OneSignalMessage::create()
-            ->setSubject("A New Order Added")
-            ->setBody("Your Orders ".$text."\n Are On Delivery.\nCheck Your Account\n.")
+            ->setSubject("Order Status Changed")
+            ->setBody("Your Orders ".$text."\n Have Departed From ".env('APP_NAME','LARAVEL')." warehouse.\n Check Your Account\n.")
             ->setUrl(route('user.order.item',['id'=>$shipping->id]));
             return $data;
     }

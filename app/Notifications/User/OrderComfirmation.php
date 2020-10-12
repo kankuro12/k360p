@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\OneSignal\OneSignalChannel;
 use NotificationChannels\OneSignal\OneSignalMessage;
 
-class OrderComfirmation extends Notification
+class OrderComfirmation extends Notification implements ShouldQueue
 {
     use Queueable;
 

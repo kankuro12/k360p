@@ -8,6 +8,8 @@ use App\model\OrderItem;
 use App\model\ShippingDetail;
 use App\Notifications\User\OnDelivery;
 use App\Notifications\User\OrderComfirmation;
+use App\Notifications\User\OrderDelivered;
+use App\Notifications\User\OrderPickup;
 use App\Notifications\User\RejectOrder;
 use App\Notifications\Vendor\OrderPickedup;
 use App\Setting\OrderManager;
@@ -44,15 +46,28 @@ class OrderController extends Controller
                 'current'=>'required'
             ]);
             OrderItem::whereIn('id',$request->id)
-            ->update(['stage'=>$status]);
+            ->update(['stage'=>$status,'pickedup'=>1]);
 
             if($status==1){
                 ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
+                foreach (OrderItem::whereIn('id',$request->id)->get() as  $order) {
+                    $order->pickedup=1;
+                    $order->save();
+                }
                 
             }
             if($status==2){
                 ShippingDetail::find($request->sid)->notify(new OnDelivery($request->id));
-                
+            }
+
+
+            if($status==3){
+                ShippingDetail::find($request->sid)->notify(new OrderPickup($request->id,env('APP_NAME','larave;')." Store"));
+            }
+
+            if($status==4){
+                ShippingDetail::find($request->sid)->notify(new OrderDelivered($request->id,env('APP_NAME','larave;')." Store"));
+
             }
             if ($status == 5) {
                 ShippingDetail::find($request->sid)->notify(new RejectOrder($request->id));

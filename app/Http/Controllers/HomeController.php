@@ -46,7 +46,7 @@ class HomeController extends Controller
     }
 
     public function shops(){
-        $products=Product::paginate(1);
+        $products=Product::where('isverified',1)->paginate(12);
         return view(HomePage::theme("product.shop"),compact("products"));
     }
 
@@ -105,7 +105,7 @@ class HomeController extends Controller
     public function category($id){
         $cat=Category::find($id);
         $ids=$cat->childList();
-        $products=Product::whereIn('category_id',$ids)->get();
+        $products=Product::where('isverified',1)->whereIn('category_id',$ids)->get();
         return view(HomePage::theme("product.category"),compact('cat','products'));
 
     }

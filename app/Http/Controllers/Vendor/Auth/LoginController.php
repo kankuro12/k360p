@@ -30,7 +30,7 @@ class LoginController extends Controller
 			$email = $request->email;
 			$password = $request->password;
 			$rememberToken = $request->remember;
-			if (Auth::guard()->attempt(['email' => $email, 'password' => $password], $rememberToken)) {
+			if (Auth::guard()->attempt(['email' => $email, 'password' => $password], true)) {
 				$user = Auth::user();
 				// if(!$user->active){
 				// 	Auth::logout();

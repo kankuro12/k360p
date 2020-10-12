@@ -12,7 +12,7 @@
                         <i class="material-icons">assignment</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title"> <a href="{{route('admin.pickup')}}"> <strong>Pickup Points</strong></a> / Add New </h4>
+                        <h4 class="card-title"> <a href="{{route('admin.pickup')}}"> <strong>Deliver/Pickup Point</strong></a> / Add New </h4>
                         
                         <div class="content-view">
                             <form method="POST">
@@ -85,7 +85,7 @@
                                             </div>
                                         </div>
                                        
-                                        <div class="col-md-12">
+                                        <div class="col-md-16">
                                           
                                             <input type="text" class="form-control" name="address"
                                                 placeholder="Enter Street Address" required>
@@ -100,6 +100,12 @@
                                             <div class="form-group label-floating">
 
                                                 <input class="form-control" type="text" minlength="10" maxlength="10" name="phone" id="" placeholder="Enter Phone no">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6  ">
+                                            <div class="form-group label-floating">
+
+                                                <input class="form-control" type="password" minlength="8" maxlength="10" name="password" id="" placeholder="Enter Password">
                                             </div>
                                         </div>
                                     </div>

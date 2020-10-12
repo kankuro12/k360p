@@ -11,6 +11,8 @@ use App\model\ProductAttributeItem;
 use App\model\ProductStock;
 use App\Setting\VariantManager;
 use App\model\admin\Product;
+use App\model\Vendor\Vendor;
+use App\Notifications\Vendor\ProductAccepted;
 use App\ProductWeightClass;
 use App\ShippingClass;
 
@@ -319,6 +321,9 @@ class VariantController extends Controller
     public function product_verify(Product $product, $status)
     {
         $product->isverified = $status;
+        if($status==1){
+          Vendor::find($product->vendor_id)->notify(new ProductAccepted($product->product_id,$product->product_name));
+        }
         $product->save();
         return redirect()->back();
     }

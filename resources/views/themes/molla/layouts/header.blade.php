@@ -22,7 +22,7 @@
                             </li>
                             <li>
                                 <div class="header-dropdown">
-                                    <a href="#">Engligh</a>
+                                    <a href="#">English</a>
                                 </div><!-- End .header-dropdown -->
                             </li>
                             @if (empty(Auth::check()))

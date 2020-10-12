@@ -176,7 +176,7 @@ class ProductController extends Controller
 
     public function manageProduct()
     {
-        $id = Auth::user()->id;
+        $id = Auth::user()->vendor->id;
         $products = Product::where('vendor_id', $id)->get();
         foreach ($products as $product) {
             if ($product->brand_id != null) {

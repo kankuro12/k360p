@@ -62,6 +62,36 @@
                     <p> Dashboard </p>
                 </a>
             </li>
+            <li class="{{ (Route::is('admin.orders-pickup') ? ' active' : '') }}"  >
+                <a href="{{ route('admin.orders-pickup') }}">
+                    <i class="material-icons">directions_boat
+                    </i>
+                    <p> Pickup Dashboard </p>
+                </a>
+            </li>
+            <li class="{{ (Route::is('admin.pickup-pickup') ? ' active' : '') }}"  >
+                <a href="{{ route('admin.pickup-pickup') }}">
+                    <i class="material-icons">house
+                    </i>
+                    <p> Items in Warehouse </p>
+                </a>
+            </li>
+            <li class="{{ (Route::is('admin.orders-delivery') ? ' active' : '') }}"  >
+                <a href="{{ route('admin.orders-delivery') }}">
+                    <i class="material-icons">directions_bike
+
+                    </i>
+                    <p> Delivery Manager </p>
+                </a>
+            </li>
+            <li class="{{ (Route::is('admin.pickup') ? ' active' : '') }}"  >
+                <a href="{{ route('admin.pickup') }}">
+                    <i class="material-icons">directions_bike
+                    </i>
+                    <p> Delivery/Pickup Points </p>
+                </a>
+            </li>
+            
             <li >
                 <a data-toggle="collapse" href="#pagesExamples" >
                     <i class="material-icons">image</i>

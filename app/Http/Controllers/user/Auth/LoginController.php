@@ -25,7 +25,7 @@ class LoginController extends Controller
 	     	    	$password=$request->password;
 	     	    	$rememberToken=$request->remember;
 	     	    	
-	     			if (Auth::guard()->attempt(['email' => $email, 'password' => $password], $rememberToken)) {
+	     			if (Auth::guard()->attempt(['email' => $email, 'password' => $password], true)) {
 						return redirect('/viewcart');
 	     			}else{
 						return redirect('customer-signup')->with('warning','Invalid Username and Password');

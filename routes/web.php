@@ -899,7 +899,8 @@ Route::group(['prefix'=>'admin/orders','middleware' => 'admin_auth'], function (
 
     //sendtodelivery
     Route::get('/data/delivery','admin\order\WarehouseController@delivery')->name('admin.orders-delivery');
-    Route::get('/data/ondeliver','admin\order\WarehouseController@delivery')->name('admin.orders-delivery');
+    Route::post('/data/delivery/load','admin\order\WarehouseController@loadDelivery')->name('admin.orders-load-delivery');
+    Route::post('/data/ondeliver','admin\order\WarehouseController@ondelivery')->name('admin.orders-ondelivery');
 
     
     
@@ -916,9 +917,6 @@ Route::group(['prefix'=>'admin/pickuppoint','middleware' => 'admin_auth'], funct
     Route::post('/add', 'admin\order\PickupController@add')->name('admin.save-pickup');
     Route::get('/manage/{point}', 'admin\order\PickupController@manage')->name('admin.manage-pickup');
     Route::post('/update/{point}', 'admin\order\PickupController@edit')->name('admin.update-pickup');
-  
-
-
 
 });
 
@@ -931,6 +929,25 @@ Route::group(['prefix'=>'vendor/orders','middleware'=>['authen','type'],'type'=>
 
 });
 
+Route::group(['prefix'=>'delivery'], function () {
+    Route::get('login','Delivery\AuthController@login')->name('delivery.login');
+    Route::post('login','Delivery\AuthController@dologin')->name('delivery.do-login');
+    
+});
+Route::group(['prefix'=>'delivery','middleware'=>['authen','type'],'type'=>['delivery']], function () {
+    Route::get('dashboard','Delivery\DashboardController@index')->name('delivery.dashboard');
+    Route::get('pickup','Delivery\DashboardController@pickup')->name('delivery.pickup');
+    
+    Route::post('pickup/set','Delivery\DashboardController@setPickup')->name('delivery.set-pickup');
+
+    Route::post('order','Delivery\DashboardController@order')->name('delivery.order');
+
+    Route::get('warehouse','Delivery\DashboardController@pickup')->name('delivery.warehouse');
+    Route::get('delivered','Delivery\DashboardController@pickup')->name('delivery.delivered');
+
+});
+
+
 Route::get('hello', function () {
     // $sid=1;
     // $ids=[1,2];
@@ -938,5 +955,4 @@ Route::get('hello', function () {
     // $orders=OrderItem::whereIn('id',$ids)->get();
     // return view('email.order.receipt',compact('ids','sid','shipping','orders'));
     ShippingDetail::find(1)->notify(new OrderComfirmation([2]));
-
 });

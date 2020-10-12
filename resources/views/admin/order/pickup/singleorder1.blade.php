@@ -6,7 +6,6 @@ $product=$order->product;
     <div class="row" style="margin: 0;">
         <div class="col-md-2" style="border-right:#f1f1f1 solid 1px;">
             <div style="">
-
                 <img src="{{ asset($product->product_images) }}" />
             </div>
         </div>
@@ -53,7 +52,6 @@ $product=$order->product;
                         <div class="col-md-9"> {{\App\Setting\OrderManager::delivertype[ $order->deliverytype] }} Delivery</div>
                     </div>
                 </div>
-               
             </div>
         </div>
     </div>

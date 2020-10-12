@@ -26,7 +26,10 @@ class Authen
                         $redirectTo='user/login';
                     }elseif($type=='vendor'){
                         $redirectTo='vendor/login';
+                    } elseif($type=='delivery'){
+                        $redirectTo='delivery/login';
                     }
+
                 }
             }            
             return redirect($redirectTo);

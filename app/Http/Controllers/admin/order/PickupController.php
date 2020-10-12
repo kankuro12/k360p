@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\order;
 
 use App\Http\Controllers\Controller;
+use App\model\OrderItem;
 use App\PickupPoint;
 use App\User;
 use Illuminate\Http\Request;
@@ -21,18 +22,16 @@ class PickupController extends Controller
     public function add(Request $request)
     {
         if ($request->method() == 'POST') {
-
-
+            // dd($request->all());
             $user = new User([
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
-
-
             ]);
 
-            $user->role_id = 2;
+            $user->role_id = 3;
             $user->active = 1;
             $user->activation_token = Str::random(8);
+            // dd($user);
             $user->save();
 
             $point = new PickupPoint();
@@ -70,7 +69,7 @@ class PickupController extends Controller
     }
 
     public function manage(PickupPoint $point){
-        
+        $order=OrderItem::where('pickup_point_id',$point->id);
         return view('admin.pickup.manage',compact('point'));
     }
 }

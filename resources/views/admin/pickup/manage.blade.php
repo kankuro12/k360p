@@ -27,7 +27,7 @@
                     <div class="card-header">
                         <h4 class="card-title">
                             
-                            <a href="{{route('admin.pickup')}}"> <strong>Pickup Points</strong></a> /
+                            <a href="{{route('admin.pickup')}}"> <strong>Deliver/Pickup Point</strong></a> /
                             {{$point->name}}
                         </h4>
                     </div>

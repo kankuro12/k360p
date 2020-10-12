@@ -22,7 +22,7 @@
                                     <th>Name</th>
                                 
                                     <th>Brand</th>
-                                    <th>Stock Status</th>
+                                    <th>Status</th>
                                     <th>Quantity</th>
                                     <th class="disabled-sorting text-right">Actions</th>
                                 </tr>

@@ -154,6 +154,7 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '.navbar-toggle', function() {
+   
     $toggle = $(this);
 
     if (mobile_menu_visible == 1) {

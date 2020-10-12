@@ -52,17 +52,23 @@
 						<input class="input100" type="password" name="password" placeholder="Type your password">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
-					
-					<div class="text-right p-t-8 p-b-31">
-						<a href="#">
-							Forgot password?
-						</a>
+					<div class="row m-t-8">
+						<div class="col-md-6">
+								<input type="checkbox" name="remember" id="keeplogged">
+								<label for="keeplogged" class="color1">Keep me signed in</label><br>
+						</div>
+						<div class="col-md-6 text-right"> 
+							<a href="#">
+								Forgot password?
+							</a>
+						</div>
 					</div>
+					
 					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button type="submit" class="login100-form-btn" value="submit"> Submit </button>
+							<button type="submit" class="login100-form-btn" value="submit"> Sign In </button>
 						</div>
 					</div>
 				</form>

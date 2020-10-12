@@ -32,10 +32,12 @@ class CheckoutController extends Controller
             $shippingDetail->email = $request->email;
             $shippingDetail->order_message = $request->order_message;
             $shippingDetail->user_id = Auth::user()->id;
+
             $shippingDetail->province_id = $request->province_id;
             $shippingDetail->district_id = $request->district_id;
             $shippingDetail->municipality_id = $request->municipality_id;
             $shippingDetail->shipping_area_id = $request->shipping_area_id;
+            // dd($shippingDetail);
             $shippingDetail->save();
             $session_id = Session::get('session_id');
             $cart = Cart::where('session_id',$session_id)->get();

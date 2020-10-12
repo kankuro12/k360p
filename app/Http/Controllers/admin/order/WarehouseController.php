@@ -7,7 +7,12 @@ use App\model\admin\Product;
 use App\model\OrderItem;
 use App\model\ShippingDetail;
 use App\model\Vendor\Vendor;
+use App\Notifications\User\OnDelivery;
+use App\Notifications\User\OrderComfirmation;
 use App\Notifications\User\OrderPickup;
+use App\PickupPoint;
+use App\Trip;
+use App\TripItem;
 use Illuminate\Http\Request;
 
 class WarehouseController extends Controller
@@ -31,6 +36,19 @@ class WarehouseController extends Controller
            echo "<h3 ><strong > Order No #".$request->id." Cannot Be Picked </strong></h3>";
        }
     }
+
+    public function loadDelivery(Request $request){
+        $order=OrderItem::where('stage',1)->where('pickedup',1)->where('id',$request->id)->first();
+        
+        if($order!=null){
+            
+            $sid=$order->shoipping_detail_id;
+            return view('admin.order.pickup.singleorder2',compact('order','sid'));
+        }else{
+            return response( "<h3 ><strong > Order No #".$request->id." Cannot Be Add to delivery </strong></h3>",404);
+        }
+     }
+ 
 
     public function pickup(Request $request){
         $order=OrderItem::find($request->id);
@@ -70,5 +88,50 @@ class WarehouseController extends Controller
         $status=1;
 
         return view('admin.order.pickup.view',compact('orders','status'));
+    }
+
+    public function delivery(){
+        $points=PickupPoint::all();
+        return view('admin.order.delivery',compact('points'));
+    }
+
+    public function ondelivery(Request $request){
+       
+        $trip=new Trip();
+        $point=PickupPoint::find($request->pickup_point_id);
+        $trip->name=$point->name;
+        $trip->pickup_point_id=$request->pickup_point_id;
+        $trip->code=$request->code;
+        $trip->save();
+
+        foreach ($request->id as $id) {
+            $tripitem=new TripItem();
+            $tripitem->order_item_id=$id;
+            $tripitem->trip_id=$trip->id;
+            $tripitem->save();
+        }
+
+        OrderItem::whereIn('id',$request->id)
+        ->update(['stage'=>2]);
+
+        $all=[];
+        $collection=OrderItem::whereIn('id',$request->id)->get()->groupBy('shipping_detail_id');
+        foreach ($collection as $key => $value) {
+            $data=[];
+            $data['shipping']=ShippingDetail::find($key);
+            $ids=[];
+            foreach ($value as $id) {
+                array_push($ids,$id->id);
+            }
+            $data['items']=$ids;
+            array_push($all,$data);
+        }
+
+
+        foreach ($all as $key => $value) {
+            $value['shipping']->notify(new onDelivery ($value['items']));
+        }
+
+        return redirect()->back();
     }
 }

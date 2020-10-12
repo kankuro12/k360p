@@ -12,7 +12,7 @@
                         <i class="material-icons">assignment</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title">Pickup Point</h4>
+                        <h4 class="card-title">Deliver/Pickup Point</h4>
                         <div class="toolbar">
                             <a href="{{ route('admin.add-pickup')}}" class="create_modal btn btn-fill btn-primary">Add
                                 Pickup Points</a>

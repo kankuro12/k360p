@@ -35,10 +35,11 @@ class ShippingDetail extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
     public function routeNotificationForOneSignal()
     {
 
-        if($this->user_id==null){
+        if($this->user_id==null && $this->user_id==0){
             return ['email'=>$this->email];
         }else{
 

@@ -50,7 +50,7 @@ class CheckType
             return redirect()->route('vendor.dashboard');
         }
 
-        if (($user->role->name) == "Deliver") {
+        if (($user->role->name) == "deliver") {
 
             return redirect()->route('deliver.dashboard');
         }

@@ -71,6 +71,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Vendor::class, 'user_id');
     }
+    public function point()
+    {
+        return $this->hasOne(PickupPoint::class, 'user_id');
+    }
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomResetPasswordNotification($token));
