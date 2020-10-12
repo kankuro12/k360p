@@ -195,6 +195,7 @@ class CartController extends Controller
             $shippingDetail->district_id = $request->district_id;
             $shippingDetail->municipality_id = $request->municipality_id;
             $shippingDetail->shipping_area_id = $request->shipping_area_id;
+            $shippingDetail->otp = mt_rand(00000,99999);
             $shippingDetail->save();
             $session_id = Session::get('session_id');
             $cart = Cart::where('session_id', $session_id)->get();
@@ -225,11 +226,11 @@ class CartController extends Controller
                 $orderItem->deliverytype = $request->delivery_type;
 
                 if ($value->variant_code != null) {
-                    $variantStock = ProductStock::where('product_id', $value->product_id)->where('code', $value->variant_code)->select('qty')->first();
+                    $variantStock = ProductStock::where('product_id', $value->product_id)->where('code', $value->variant_code)->first();
                     $variantStock->qty = $variantStock->qty - $value->qty;
                     $variantStock->save();
                 } else {
-                    $stockStatus = Product::where('product_id', $value->product_id)->select('quantity')->first();
+                    $stockStatus = Product::where('product_id', $value->product_id)->first();
                     $stockStatus->quantity = $stockStatus->quantity - $value->qty;
                     $stockStatus->save();
                 }

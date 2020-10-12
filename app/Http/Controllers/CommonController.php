@@ -16,7 +16,7 @@ class CommonController extends Controller
     }
 
     public function collectionProductDetail($id){
-        $collection_group = Collection_product::where('collection_id',$id)->paginate(1);
+        $collection_group = Collection_product::where('collection_id',$id)->paginate(12);
         // dd($collection_group);
         return view(HomePage::theme("collection.collection_group"))->with(compact('collection_group'));
     }

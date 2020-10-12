@@ -70,7 +70,7 @@ class WarehouseController extends Controller
 
     public function picked(){
         $orders=[];
-        $collection=OrderItem::whereNotNull('vendor_id')->where('stage',1)->where('pickedup',1)->get()->groupBy('shipping_detail_id');
+        $collection=OrderItem::where('stage',1)->where('pickedup',1)->get()->groupBy('shipping_detail_id');
         foreach ($collection as $key => $value) {
             $data=[];
             $data['shipping']=ShippingDetail::find($key);
@@ -86,7 +86,8 @@ class WarehouseController extends Controller
             array_push($orders,$data);
         }
         $status=1;
-
+        // dd($orders);
+        
         return view('admin.order.pickup.view',compact('orders','status'));
     }
 

@@ -27,6 +27,16 @@
                     <p> Items in Warehouse </p>
                 </a>
             </li>
+
+            <li class="{{ (Route::is( 'delivery.delivered') ? ' active' : '') }}"  >
+                <a href="{{ route( 'delivery.delivered') }}">
+                    <i class="material-icons">house
+                    </i>
+                    <p> Make A Delivery </p>
+                </a>
+            </li>
+
+           
           
         </ul>
     </div>

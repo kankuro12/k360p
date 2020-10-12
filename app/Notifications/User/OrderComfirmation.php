@@ -72,10 +72,14 @@ class OrderComfirmation extends Notification implements ShouldQueue
            $text.="\n".($i+1). ". #".$this->ids[$i];
         }
         $shipping=$notifiable;
+        $tt='';
+        if($shipping->vendor_id==null|| $shipping->vendor_id==0){
+            $tt="Your Pickup OTP is ".$shipping->otp.".";
+        }
         // dd($shipping);
         $data= OneSignalMessage::create()
             ->setSubject("A New Order Added")
-            ->setBody("Your Orders ".$text."\n Has Been Approved.\nCheck Your Account\n.")
+            ->setBody("Your Orders ".$text."\n Has Been Approved".$tt."\nCheck Your Account\n.")
             ->setUrl(route('user.order.item',['id'=>$shipping->id]));
             return $data;
     }
@@ -85,9 +89,12 @@ class OrderComfirmation extends Notification implements ShouldQueue
         for ($i=0; $i < count($this->ids); $i++) { 
            $text.="\n".($i+1). ". #".$this->ids[$i];
         }
-     
-
-        return ['to'=>$notifiable->phone,"text"=>"Your Orders ".$text."\n Has Been Approved.\nCheck Your Account\n-".env('APP_NAME','laravel')];
+        $tt='';
+        $tt="Your Pickup OTP is ".$notifiable->otp.".";
+        if($notifiable->vendor_id!=null && $notifiable->vendor_id!=0){
+            $tt.="Check Your Account";
+        }
+        return ['to'=>$notifiable->phone,"text"=>"Your Orders ".$text."\n Has Been Approved.".$tt."\n-".env('APP_NAME','laravel')];
     }
     /**
      * Get the array representation of the notification.

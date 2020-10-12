@@ -150,6 +150,7 @@ class ProfileController extends Controller
                
                 if($verification==null){
                     $verification=new VendorVerification();
+                    $verification->vendor_id=$vendor->id;
                 }
                 $verification->bankaccount=$request->bankaccount;
                 $verification->bankname=$request->bankname;

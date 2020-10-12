@@ -842,8 +842,6 @@ Route::group(['prefix'=>'vendor','middleware'=>['authen','type'],'type'=>['vendo
         
        Route::post('/message/seen/{message}', 'Vendor\DashBoardController@message')->name('vendor.markread-message');
        Route::get('/messages', 'Vendor\DashBoardController@messages')->name('vendor.messages');
-   
-  
 });
 
 //Password reset routes
@@ -937,13 +935,18 @@ Route::group(['prefix'=>'delivery'], function () {
 Route::group(['prefix'=>'delivery','middleware'=>['authen','type'],'type'=>['delivery']], function () {
     Route::get('dashboard','Delivery\DashboardController@index')->name('delivery.dashboard');
     Route::get('pickup','Delivery\DashboardController@pickup')->name('delivery.pickup');
-    
+
     Route::post('pickup/set','Delivery\DashboardController@setPickup')->name('delivery.set-pickup');
 
     Route::post('order','Delivery\DashboardController@order')->name('delivery.order');
 
-    Route::get('warehouse','Delivery\DashboardController@pickup')->name('delivery.warehouse');
-    Route::get('delivered','Delivery\DashboardController@pickup')->name('delivery.delivered');
+    Route::get('warehouse','Delivery\DashboardController@warehouse')->name('delivery.warehouse');
+
+    Route::get('delivered','Delivery\DashboardController@delivered')->name('delivery.delivered');
+    Route::post('delivered/order','Delivery\DashboardController@deliveredOrder')->name('delivery.delivered-order');
+    Route::post('delivered/complete','Delivery\DashboardController@deliveredCompleted')->name('delivery.delivered-complete');
+
+    Route::post('check-otp','Delivery\DashboardController@otp')->name('delivery.check-otp');
 
 });
 

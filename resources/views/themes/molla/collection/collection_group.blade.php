@@ -87,7 +87,7 @@
             <div class="d-flex justify-content-center shadow pt-3" >
                 {{-- {{ $onsale_group->links() }} --}}
 
-                {{ $onsale_group->links('pagination.default') }}
+                {{ $collection_group->links('pagination.default') }}
             </div>
             @endif
         </div><!-- End .container -->

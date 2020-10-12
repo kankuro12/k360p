@@ -105,6 +105,9 @@
                 <p>
                     <strong>Phone: </strong>{{ $shipping->phone }}
                 </p>
+                <p>
+                    <strong>OTP: </strong>{{ $shipping->otp }}
+                </p>
 
             </div>
         </div>
@@ -153,12 +156,15 @@
                                 <hr>
 
                                 @php
-                                    $subtotal=$order->rate*$order->qty;
+                                    $subtotal=($order->rate*$order->qty)+$order->shippingcharge ;
                                 @endphp
 
                                 <h3>Extra Charges</h3>
                                 @foreach ($order->charges as $charge)
-                                       <strong> {{$charge->title}} </strong>- {{$charge->amount}}        
+                                       <strong> {{$charge->title}} </strong>- {{$charge->amount}}  
+                                       @php
+                                       $subtotal+=$charge->amount;
+                                   @endphp  
                                 @endforeach
                                 <hr>
                                 <h3>
@@ -171,8 +177,8 @@
             </table>
         </div>
 
-        <br>
-
+        
+<br>
         <div style="background-color:#F2DEDE;text-align:center;padding: 2rem 0.5rem;">
             <a style="border:none;background:#007ACC;color:white;padding:0.9rem 2rem;font-weight:800;text-decoration: none;" href="{{route('user.account')}}" target="_blank">
                 View You Account

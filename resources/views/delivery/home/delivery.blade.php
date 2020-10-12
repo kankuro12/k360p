@@ -33,15 +33,9 @@
                         Vendor Item Pickup
 
                     </h4>
-                    <div class="toolbar">
-                        <a href="{{ route('delivery.warehouse') }}" class="btn btn-primary">Item In WareHouse</a>
-                    </div>
                    
                     <br>
                     <div>
-                        <div>
-                            <input type="date" id="date" class="form-control">
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -65,13 +59,33 @@
                             </div> --}}
                         </div>
                     </div>
-                    <form action="{{route('delivery.set-pickup')}}" method="post" id="pickups">
+                    <form action="{{route('delivery.delivered-complete')}}" method="post" id="pickups" enctype="multipart/form-data">
                         @csrf
+                        <div>
+                            <span class="input-group-text">
+                                Enter #OTP for the order / OrderGroup
+                            </span>
+                            <input type="text" class="form-control" placeholder="#Order OTP" id="otp" name="otp">
+                            <span id="errmsg"></span>
+                        </div>
                         <div style="padding:1rem" id="data">
                         </div>
+
+                        
+                        <div id="imagesholder">
+                            <span onclick="imageholder()" class="btn btn-sm btn-primary">Add Another images</span>
+                            <input type="file" name="image[]" id="image" required="required" class="form-input" accept="image/*" placeholder="Add Verification Image" >
+                        </div>
+                        <div id="images">
+
+                        </div>
+                       
+                        <div id="mark1">
+
+                        </div>
                     </form>
-                    <div >
-                        <button class="btn btn-primary" onclick="received()">Mark Received</button>
+                    <div id="mark0">
+                        <button class="btn btn-primary" onclick="received()">Check Otp</button>
                     </div>
                 </div>
             </div>
@@ -83,8 +97,9 @@
 @endsection
 @section('scripts')
     <script>
-        document.getElementById('date').valueAsDate = new Date();
+    
 
+        $("#imagesholder").hide();
         function loadimage(id) {
             elements = document.querySelectorAll(".sid-" + id);
             elements.forEach((element) => {
@@ -133,14 +148,17 @@
         });
 
         function query(id) {
-            var statusurl = '{{route('delivery.order')}}';
+            var statusurl = '{{route('delivery.delivered-order')}}';
             // console.log(status, formid, statusurl);
           
             $.post(statusurl, {
                 'id': id
             }, function(data, stat, xhr) {
                 if (stat == "success") {
-                    $('#data').append(data);
+                    if($('#order-'+id).length==0){
+
+                        $('#data').append(data);
+                    }
                 } else {
                     alert('data');
                 }
@@ -148,37 +166,24 @@
                 console.log(data);
             });
         }
-
-        function pickup(id) {
-            var statusurl = '{{route('delivery.order')}}';
-
-            $.post(statusurl, {
-                'id': id
-            }, function(data, stat, xhr) {
-                console.log(data, stat);
-                if (stat == "success") {
-                   if(data.pickedup===1){
-                       $("#data").html('');
-                   }
-
-                } else {
-
-                }
-                console.log(data);
-            });
-        }
-
-        function loadorderdata(id) {
-            console.log('load order');
-        }
-
-        function loadordergroupdata(id) {
-            console.log('loadordergroup');
+        var taro=1;
+        function imageholder(){
+            taro+=1;
+            html= '<div class="row" id="i-'+taro+'"><div class="col-md-9"><input type="file" name="image[]" id="image" required="required" class="form-input" accept="image/*"  placeholder="Add Verification Image"></div><div class="col-md-3"><span class="btn btn-sm btn-danger " style="margin:3px;" onclick="$(\'#i-'+taro+'\').remove()">Delete</span></div></div>';
+            $('#images').append(html)
         }
 
         function received(){
-            if($('.ids').length>0){
-                $('#pickups').submit();
+            var otpurl='{{route('delivery.check-otp')}}';
+            if($('.ids').length>0 && $('#otp').val()!=''){
+                    $.post(otpurl, $("#pickups").serialize(), function(data, stat, xhr) {
+                        $('#mark0').remove();
+                        $('#mark1').html('<button class="btn btn-primary">Set Delivered</button>');
+                        $("#imagesholder").show();
+
+                    }).fail(function(jqXHR, textStatus, errorThrown){
+                       alert(jqXHR.responseText);
+                    });
             }else{
                 alert("Please Add At least one item tolist");
             }

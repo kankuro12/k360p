@@ -37,6 +37,7 @@ class CheckoutController extends Controller
             $shippingDetail->district_id = $request->district_id;
             $shippingDetail->municipality_id = $request->municipality_id;
             $shippingDetail->shipping_area_id = $request->shipping_area_id;
+            $shippingDetail->otp = mt_rand(00000,99999);
             // dd($shippingDetail);
             $shippingDetail->save();
             $session_id = Session::get('session_id');
