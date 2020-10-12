@@ -24,3 +24,6 @@
         </div>
     @endforeach
 @endsection
+@section('popup')
+    @include('themes.molla.layouts.popup')
+@endsection

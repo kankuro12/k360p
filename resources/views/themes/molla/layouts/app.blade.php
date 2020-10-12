@@ -53,6 +53,7 @@
     <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
     @include('themes.molla.layouts.mobilemenu')
     @include('themes.molla.layouts.footer')
+    @yield('popup')
 
     <!-- Sign in / Register Modal -->
     <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-hidden="true">

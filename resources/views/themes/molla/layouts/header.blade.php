@@ -303,6 +303,10 @@
                                         @include('themes.molla.elements.menu.category',['menu'=>$menu])
                                     @elseif($menu->type==2)
                                         @include('themes.molla.elements.menu.collection',['menu'=>$menu])
+                                    @elseif($menu->type==0)
+                                        @include('themes.molla.elements.menu.brand',['menu'=>$menu])
+                                    @elseif($menu->type==3)
+                                        @include('themes.molla.elements.menu.sales',['menu'=>$menu])
                                     @endif
                                 @endforeach
                             </nav><!-- End .side-nav -->

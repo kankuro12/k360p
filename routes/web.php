@@ -166,6 +166,10 @@ Route::group(['prefix'=>'admin', 'middleware'=> 'guest'],function(){
 });
 
 Route::group(['prefix'=>'admin','middleware' => 'admin_auth'], function () {
+
+
+    Route::match(['GET', 'POST'], 'popup-info', 'PopupController@popupBoxInfo')->name('popup.info');
+    
     Route::match(['get', 'post'], 'dashboard', [
         'as' => 'admin.dashboard',
         'uses' => 'admin\DashboardController@index'

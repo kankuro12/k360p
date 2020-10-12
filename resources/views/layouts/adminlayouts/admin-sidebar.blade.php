@@ -81,12 +81,12 @@
                     <i class="material-icons">directions_bike
 
                     </i>
-                    <p> Delivery Manager </p>
+                    <p>Send To Delivery</p>
                 </a>
             </li>
             <li class="{{ (Route::is('admin.pickup') ? ' active' : '') }}"  >
                 <a href="{{ route('admin.pickup') }}">
-                    <i class="material-icons">directions_bike
+                    <i class="material-icons">location_on
                     </i>
                     <p> Delivery/Pickup Points </p>
                 </a>
@@ -309,6 +309,12 @@
                             <a href="{{ route('admin.manage-menu') }}">
                                 <span class="sidebar-mini"> M </span>
                                 <span class="sidebar-normal"> Menus </span>
+                            </a>
+                        </li>
+                        <li class="{{ (Route::is('popup.info') ? ' active' : '') }}">
+                            <a href="{{ route('popup.info') }}">
+                                <span class="sidebar-mini"> P </span>
+                                <span class="sidebar-normal"> PopUp </span>
                             </a>
                         </li>
                         <li class="{{ (Request::is('admin/create-contactinfo') ? ' active' : '') }}">
