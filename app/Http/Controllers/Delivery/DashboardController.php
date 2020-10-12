@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Delivery;
 use App\Http\Controllers\Controller;
 use App\model\OrderItem;
 use App\model\ShippingDetail;
+use App\Notifications\User\OrderDelivered;
 use App\Notifications\User\OrderPickup;
 use App\Notifications\Vendor\OrderPickedup;
 use Illuminate\Http\Request;
@@ -90,7 +91,27 @@ class DashboardController extends Controller
     }
 
     public function deliveredCompleted(Request $request){
-        dd($request);
+        OrderItem::whereIn('id',$request->id)
+        ->update([
+            'stage'=>4
+        ]);
+
+        $all=[];
+        $collection=OrderItem::whereIn('id',$request->id)->get()->groupBy('shipping_detail_id');
+        foreach ($collection as $key => $value) {
+            $data=[];
+            $data['shipping']=ShippingDetail::find($key);
+            $ids=[];
+            foreach ($value as $id) {
+                array_push($ids,$id->id);
+            }
+            $data['items']=$ids;
+            array_push($all,$data);
+        }
+        foreach ($all as $key => $value) {
+            $value['shipping']->notify(new OrderDelivered($value['items'],Auth::user()->point->name));
+        }
+        return redirect()->back();
     }
 
     public function deliveredOrder(Request $request){

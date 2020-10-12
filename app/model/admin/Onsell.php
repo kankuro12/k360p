@@ -27,4 +27,8 @@ class Onsell extends Model
         $data1 = $data->format('+%Yy %Mm %Dd %Hh %Im %Ss');;
         return $data1;
     }
+
+    public function menuItems(){
+        return sell_product::where('sell_id',$this->sell_id)->inRandomOrder()->limit(6)->get();
+    }
 }
