@@ -38,12 +38,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
         <div class="clearfix"></div>
         <div class="collapse" id="collapseExample">
             <ul class="nav">
-                <li>
-                    <a href="#">
-                        <span class="sidebar-mini"> MP </span>
-                        <span class="sidebar-normal"> My Profile </span>
-                    </a>
-                </li>
+                
                 <li>
                     <a href="{{ url('vendor/edit-profile/'.Auth::user()->id) }}">
                         <span class="sidebar-mini"> EP </span>
@@ -66,6 +61,12 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                     <a href="{{ route('vendor.verification') }}">
                         <span class="sidebar-mini"> Ss </span>
                         <span class="sidebar-normal"> Update Verification Detail </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('vendor.verification') }}">
+                        <span class="sidebar-mini"> Ss </span>
+                        <span class="sidebar-normal"> Update Bank Detail </span>
                     </a>
                 </li>
                 <li >

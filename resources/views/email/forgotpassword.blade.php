@@ -203,7 +203,7 @@ ul li, ol li {
 
 			<!-- content -->
 			<div class="content">
-				<div style="text-align: center;margin-bottom:30px"><img src="asset('logo.png')" height="60px"></div>
+				<div style="text-align: center;margin-bottom:30px"><img src="{{asset('logo.png')}}" height="60px"></div>
 				<p>We have sent you this email in response to your request to reset your password on {{env('APP_NAME')}}.</p>
 				<p style="margin-top:15px;">To reset your password for  {{env('APP_NAME')}}  please follow the link below.</p>
 				<p style="margin:25px 0"><a href="{{route('password.reset',['token'=>$token])}}" class="btn-primary">Reset Password</a></p>
@@ -212,8 +212,9 @@ ul li, ol li {
 			</div>
 			<!-- /content -->
 			<div class="footer">
-				Copyright &copy; 2019 <a href="https://needtechnosoft.com.np">Need Technosoft.</a>
+				Copyright &copy; {{date("Y")}} <a href="{{route('public.home')}}">{{env('APP_NAME','laravel')}}</a>
 			</div>
+
 
 		</body>
 		</html>

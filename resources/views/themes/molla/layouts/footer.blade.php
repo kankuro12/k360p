@@ -85,6 +85,7 @@
                 <a href="{{env('insta','#')}}" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
                 <a href="{{env('youtube','#')}}" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
                 <a href="{{env('pinintrest','#')}}" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                <a href="{{env('linkedin','#')}}" class="social-icon social-linkedin" title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
             </div><!-- End .soial-icons -->
         </div><!-- End .container-fluid -->
     </div><!-- End .footer-bottom -->

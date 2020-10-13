@@ -101,6 +101,10 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <label >Street Address</label>
+                                            <input type="text" class="form-control" name="address" placeholder="Enter Street Address" value={{$option->address}} required>
+                                        </div>
                                         <div class="col-md-3  ">
                                             <div class="form-group label-floating">
 
@@ -122,7 +126,7 @@
                                     <div class="col-md-4  text-center">
                                         <div class="form-group ">
 
-                                            <input type="submit" class="btn btn-primary" value="Next">
+                                            <input type="submit" class="btn btn-primary" value="Update Shipping Details">
                                         </div>
                                     </div>
                                 </div>

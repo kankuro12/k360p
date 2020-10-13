@@ -124,7 +124,7 @@
     });
     $(document).ready(function() {
         $id = "{{ Auth::user()->id }}"
-        $url = "{{ asset('images/vendor_images/profile/') }}";
+        $url = "";
         //console.log($url);
         $.ajax({
             type: 'post',

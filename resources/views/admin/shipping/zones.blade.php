@@ -6,7 +6,13 @@
                 <i class="material-icons">map</i>
             </div>
             <div class="card-content">
-                <h3 class="card-title">Shipping Zones</h3>
+                <h3 class="card-title">
+                    <strong>
+                        <a href="{{ route('admin.shippings') }}">Shippings</a> 
+                    </strong>
+                    /
+                    Shipping Zones
+                </h3>
                 <div class="toolbar">
                     <!--        Here you can write extra buttons/actions for the toolbar              -->
                 </div>

@@ -59,8 +59,12 @@ Route::get('/', [
 
 Route::get('/home1', [
     'uses' => 'HomeController@home1',
-    'as' => 'public.home'
+    'as' => 'public.home1'
 ]);
+
+Route::get('/home', function(){
+    return redirect()->route('public.home');
+});
 
 Route::get('/about', [
     'uses' => 'HomeController@about',
@@ -910,7 +914,7 @@ Route::group(['prefix' => 'admin/orders', 'middleware' => 'admin_auth'], functio
 
     Route::post('/status/{status}', 'admin\order\OrderController@status')->name('admin.set-status');
 
-    //pickup
+    Route::get('/data/receipt','admin\order\OrderController@receipt')->name('admin.receit');
 
 
     Route::get('/data/pickup', 'admin\order\WarehouseController@index')->name('admin.orders-pickup');
@@ -946,6 +950,28 @@ Route::group(['prefix' => 'vendor/orders', 'middleware' => ['authen', 'type'], '
 });
 
 Route::group(['prefix' => 'delivery'], function () {
+    Route::get('login', 'Delivery\AuthController@login')->name('delivery.login');
+    Route::post('login', 'Delivery\AuthController@dologin')->name('delivery.do-login');
+});
+
+Route::group(['prefix' => 'delivery', 'middleware' => ['authen', 'type'], 'type' => ['delivery']], function () {
+    Route::get('dashboard', 'Delivery\DashboardController@index')->name('delivery.dashboard');
+    Route::get('pickup', 'Delivery\DashboardController@pickup')->name('delivery.pickup');
+
+    Route::post('pickup/set', 'Delivery\DashboardController@setPickup')->name('delivery.set-pickup');
+
+    Route::post('order', 'Delivery\DashboardController@order')->name('delivery.order');
+
+    Route::get('warehouse', 'Delivery\DashboardController@warehouse')->name('delivery.warehouse');
+
+    Route::get('delivered', 'Delivery\DashboardController@delivered')->name('delivery.delivered');
+    Route::post('delivered/order', 'Delivery\DashboardController@deliveredOrder')->name('delivery.delivered-order');
+    Route::post('delivered/complete', 'Delivery\DashboardController@deliveredCompleted')->name('delivery.delivered-complete');
+
+    Route::post('check-otp', 'Delivery\DashboardController@otp')->name('delivery.check-otp');
+});
+
+Route::group(['prefix' => 'account'], function () {
     Route::get('login', 'Delivery\AuthController@login')->name('delivery.login');
     Route::post('login', 'Delivery\AuthController@dologin')->name('delivery.do-login');
 });

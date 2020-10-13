@@ -53,7 +53,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                <button class="btn btn-primary btn-round" type="submit">Save</button>
+                                <button class="btn btn-primary btn-round" type="submit">Change Password</button>
                             </div>
                         </div>
                     </div>   
@@ -82,7 +82,7 @@
                             <h6 class="category">@ {{ $data->name }}</h6>
                             <div class="card-avatar">
                                 <a href="{{ url('vendor/edit-profile/'.Auth::user()->id) }}">
-                                    <img class="img" src="{{ asset('images/vendor_images/profile/'.$data->logo) }}" />
+                                    <img class="img" src="{{ asset($data->logo) }}" />
                                 </a>
                             </div>
                         </div>

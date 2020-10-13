@@ -156,7 +156,7 @@ class ProductController extends Controller
             $product->brand_id = $data['brand_id'];
             $product->stocktype = $data['stocktype'];
             $product->product_name = $data['product_name'];
-            $product->product_description = $data['product_description'];
+            $product->product_description = $data['product_description']??"";
             $product->product_short_description = $data['product_short_description'];
             $product->product_sku = $data['product_sku'];
             $product->mark_price = $data['mark_price'];

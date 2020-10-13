@@ -75,10 +75,12 @@
         </div><!-- End .tab-content -->
 
         <div class="social-icons">
-            <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
-            <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
-            <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
-            <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+            <a href="{{env('fb','#')}}" class="social-icon " title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                <a href="{{env('twitter','#')}}" class="social-icon " title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                <a href="{{env('insta','#')}}" class="social-icon " title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                <a href="{{env('youtube','#')}}" class="social-icon " title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                <a href="{{env('pinintrest','#')}}" class="social-icon " title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                <a href="{{env('linkedin','#')}}" class="social-icon " title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
         </div><!-- End .social-icons -->
     </div><!-- End .mobile-menu-wrapper -->
 </div><!-- End .mobile-menu-container -->

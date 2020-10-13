@@ -58,7 +58,7 @@
                             <form action="" method="post">
                                 @csrf
                             </form>
-                            <a href="#" onclick="logout()">Logout</a>
+                            <a href="{{route('vendor.getLogout')}}" >Logout</a>
                         </li>
                     </ul>
                 </li>

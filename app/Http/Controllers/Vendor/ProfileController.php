@@ -43,17 +43,18 @@ class ProfileController extends Controller
         $vendor->twitter_url = $data['twitter_link'];
         $vendor->instagram_url = $data['instagram_link'];
         $vendor->description = $data['description'];
+        $vendor->storename = $data['storename'];
         if ($request->hasFile('image')) {
-            $image_tmp = Input::file('image');
-            if ($image_tmp->isValid()) {
-                /*$originalimage = $request->file('image');
-                $thumbnailimage = Image::make($originalimage);*/
-                $extension = $image_tmp->getClientOriginalExtension();
-                $filename = rand(111, 99999) . '.' . $extension;
-                $image_path = 'images/vendor_images/profile/' . $filename;
-                $image_tmp->move(public_path('images/vendor_images/profile'), $filename);
-            }
-            $vendor->logo = $filename;
+            // $image_tmp = Input::file('image');
+            // if ($image_tmp->isValid()) {
+            //     /*$originalimage = $request->file('image');
+            //     $thumbnailimage = Image::make($originalimage);*/
+            //     $extension = $image_tmp->getClientOriginalExtension();
+            //     $filename = rand(111, 99999) . '.' . $extension;
+            //     $image_path = 'images/vendor_images/profile/' . $filename;
+            //     $image_tmp->move(public_path('images/vendor_images/profile'), $filename);
+            // }
+            $vendor->logo = $request->file('image')->store('images/vendor_images/profile');
         } else {
             $vendor->logo = $data['oldimg'];
         }
@@ -129,6 +130,9 @@ class ProfileController extends Controller
             $option->bulkbuy = $request->bulkbuy ?? false;
            
             $option->save();
+
+            $vendor->address=$request->address;
+            $vendor->save();
         }
 
         return view('vendor.auth.shipping', ['vendor' => $vendor, 'option' => $option]);

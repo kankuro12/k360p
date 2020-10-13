@@ -24,6 +24,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group label-floating">
+                                    <label class="control-label">Store name</label>
+                                    <input type="text" class="form-control" name="storename" value="{{ $data->storename }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group label-floating">
                                     <label class="control-label">Name</label>
                                     <input type="text" class="form-control" name="name" value="{{ $data->name }}">
                                 </div>
@@ -109,7 +117,7 @@
                         <input type="file" name="image" id="image-upload" />
                     </div>
                 <div class="card-content">
-                    <h6 class="category text-gray">CEO / Co-Founder</h6>
+                    <h6 class="category text-gray">Owner</h6>
                     <h4 class="card-title">{{ $data->name }}</h4>
                     <h4 class="card-title">@ {{ $data->primary_email }}</h4>
                     <div class="row">

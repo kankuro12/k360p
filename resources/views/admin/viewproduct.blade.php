@@ -240,7 +240,7 @@
                                                 <hr>
                                                 <div>
                                                     <textarea id="product-desc" class="cc"
-                                                        name="product_description" required>{!!  $productdetail->description !!}</textarea>
+                                                        name="product_description" required>{!!  $productdetail->product_description !!}</textarea>
                                                 </div>
                                             </div>
                                             </p>
@@ -310,7 +310,6 @@
                                         <hr>
 
                                         @include('admin.product.SimpleStock')
-
                                        @endif
                                     </div>
                                     <div class="tab-pane {{$sel==4?"active":""}}" id="productshipping" >

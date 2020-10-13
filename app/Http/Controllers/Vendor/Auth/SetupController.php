@@ -63,6 +63,7 @@ class SetupController extends Controller
 
             }
             $option->deliver_range=$request->deliver_range;
+            $option->storename=$request->storename;
             $option->landmark=$request->landmark;
             $option->province_id=$request->province_id;
             $option->district_id=$request->district_id;

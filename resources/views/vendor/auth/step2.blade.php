@@ -4,9 +4,13 @@
         @csrf
         <br>
         <div style="padding:25px;">
-
             <div class="row">
-
+                <div class="col-md-12  ">
+                    <div class="form-group label-floating">
+                        <input type="text" class="form-control" placeholder="Enter Store Name" name="storename"
+                            id="storename" required>
+                    </div>
+                </div>
                 <div class="col-md-12  ">
                     <div class="form-group label-floating">
 

@@ -83,4 +83,24 @@ class OrderController extends Controller
     public function flash($status,$id){
         return redirect()->route('admin.orders',['status'=>$status])->with('id',$id);
     }
+
+    public function receipt(Request $request){
+        $all=[];
+        $collection=OrderItem::all()->groupBy('shipping_detail_id');
+        foreach ($collection as $key => $value) {
+            $data=[];
+            $data['shipping']=ShippingDetail::find($key);
+            $data['items']=$value;
+            $ids=[];
+            foreach ($value as $id) {
+               array_push($ids,$id->product_id);
+            }
+            $para=Product::whereIn('product_id',$ids)->select('product_name')->get()->implode('product_name',',');
+            $data['search']=$para;
+            $data['count']=count($value);
+            array_push($all,$data);
+        }
+        
+        return view('admin.order.receipt',compact('all'));
+    }
 }

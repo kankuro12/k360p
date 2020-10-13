@@ -210,8 +210,9 @@ ul li, ol li {
 			</div>
 			<!-- /content -->
 			<div class="footer">
-				Copyright &copy; 2019 <a href="https://needtechnosoft.com.np">Need Technosoft.</a>
+				Copyright &copy; {{date("Y")}} <a href="{{route('public.home')}}">{{env('APP_NAME','laravel')}}</a>
 			</div>
+
 
 		</body>
 		</html>

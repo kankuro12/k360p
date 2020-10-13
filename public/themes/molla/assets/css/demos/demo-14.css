@@ -879,5 +879,9 @@
             padding: 0px;
             overflow-x: hidden; 
         }
+
+        .newsletter-popup-container .banner-title {
+            font-size:2.4rem;
+        }
 }
 /*# sourceMappingURL=demo-14.css.map */

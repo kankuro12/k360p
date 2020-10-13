@@ -113,9 +113,9 @@
                                 class="header-search header-search-extended header-search-visible header-search-no-radius">
                                 <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
                                 <form action="#" method="get">
-                                    <div class="header-search-wrapper search-wrapper-wide">
+                                    <div class="header-search-wrapper search-wrapper-wide" >
 
-                                        <div class="select-custom">
+                                        <div class="select-custom" >
                                             <select id="cat" name="cat">
                                                 <option value="">All Categories</option>
                                                 @foreach ($cats as $item)
@@ -134,6 +134,7 @@
                                                     @endif
                                                 @endforeach
                                             </select>
+                                            <p onclick="dropclick(this)"></p>
                                         </div><!-- End .select-custom -->
                                         <label for="q" class="sr-only">Search</label>
                                         <input type="search" class="form-control" name="q" id="q"

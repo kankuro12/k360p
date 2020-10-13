@@ -7,11 +7,11 @@
         @csrf
         <div class="">
             <div>
-                <h5><strong> AboutUs in brief</strong></h5>
+                <h5><strong> About Us in brief</strong></h5>
                 <textarea  name="mini" style="width: 100%;">{{$about!=null?$about->mini:""}}</textarea>
             </div>
             <div>
-                <h5><strong>Full AboutUs</strong></h5>
+                <h5><strong>Full About Us</strong></h5>
                 <textarea id="full" name="full" style="max-width: 800px;">{{$about!=null?$about->full:""}}</textarea>
             </div>
             <div style="padding-top:1rem;">

@@ -67,7 +67,7 @@
                                     </td>
                                     <td class="text-left">
                                         <a href="{{ url('/admin/view-product/'. $product->product_id) }}" data-toggle="tooltip" data-placement="top" title="View" class="btn  btn-just-icon btn-round btn-rose"><i class="material-icons">view_list</i></a>
-                                        <a href="{{ url('/admin/edit-product/'.$product->product_id) }}" data-toggle="tooltip" data-placement="left" title="Edit" class="btn btn-just-icon  btn-round btn-primary"><i class="material-icons">border_color</i></a>
+                                        {{-- <a href="{{ url('/admin/edit-product/'.$product->product_id) }}" data-toggle="tooltip" data-placement="left" title="Edit" class="btn btn-just-icon  btn-round btn-primary"><i class="material-icons">border_color</i></a> --}}
                                         <a href="#" data-toggle="tooltip" data-placement="left" title="Delete" class="btn btn-just-icon  btn-round btn-danger"><i class="material-icons">delete_forever</i></a>
                                     </td>
                                 </tr>

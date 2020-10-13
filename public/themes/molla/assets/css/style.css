@@ -8555,7 +8555,8 @@ small.form-text {
     -webkit-appearance: none;
     appearance: none;
 }
-.select-custom::after {
+
+/* #cat::after  {
     font-family: "molla";
     content: "\f110";
     position: absolute;
@@ -8565,7 +8566,19 @@ small.form-text {
     font-size: 1.5rem;
     transform: translateY(-51%);
     color: #333;
-}
+} */
+
+/* .select-custom ::after {
+    font-family: "molla";
+    content: "\f110";
+    position: absolute;
+    display: inline-block;
+    right: 1.9rem;
+    top: 50%;
+    font-size: 1.5rem;
+    transform: translateY(-51%);
+    color: #333;
+} */
 .select-custom .form-control,
 .select-custom .form-control-sm {
     padding-right: 4rem;

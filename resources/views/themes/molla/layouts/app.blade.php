@@ -135,6 +135,15 @@
     {!! \App\Setting\HomePage::renderJS()!!}
     
     @yield('js')
+    <script>
+        function dropclick(p){
+            console.log(p);
+            console.log($('#cat')[0])
+            $('#cat').trigger('mousedown')
+            $('#cat').focus();
+            $('#cat').click();
+        }
+    </script>
 
 </body>
 
