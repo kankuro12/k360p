@@ -47,7 +47,27 @@
                 @yield('contant')
        
     </div><!-- End .page-wrapper -->
-    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    <style>
+        #scroll-top{
+            width:40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #999;
+            color:#fff;
+            font-size: medium;
+            right: 10px;
+            bottom: 100px;
+        }
+        #scroll-top:hover{
+            background-color: #FF5C00;
+            color:#fff;
+
+        }
+    </style>
+    <button id="scroll-top" title="Back to Top">
+        <i class="icon-angle-up"></i>
+    </button>
 
       <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
