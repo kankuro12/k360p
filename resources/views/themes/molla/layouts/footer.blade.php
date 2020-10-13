@@ -39,14 +39,14 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-4">
                                     <span class="widget-about-title">Got Question? Call us 24/7</span>
-                                    <a href="tel:123456789">+0123 456 789</a>
+                                    <a href="tel:{{env('phone','')}}">+977 {{env('phone','')}}</a>
                                 </div><!-- End .col-sm-6 -->
-                                <div class="col-sm-6 col-md-8">
+                                {{-- <div class="col-sm-6 col-md-8">
                                     <span class="widget-about-title">Payment Method</span>
                                     <figure class="footer-payments">
                                        
                                     </figure><!-- End .footer-payments -->
-                                </div><!-- End .col-sm-6 -->
+                                </div><!-- End .col-sm-6 --> --}}
                             </div><!-- End .row -->
                         </div><!-- End .widget-about-info -->
                     </div><!-- End .widget about-widget -->
@@ -80,11 +80,11 @@
             <p class="footer-copyright">Copyright © 2020 {{env('APP_NAME',"your")}} All Rights Reserved.</p><!-- End .footer-copyright -->
             <div class="social-icons social-icons-color">
                 <span class="social-label">Social Media</span>
-                <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                <a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                <a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
-                <a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                <a href="{{env('fb','#')}}" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                <a href="{{env('twitter','#')}}" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                <a href="{{env('insta','#')}}" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                <a href="{{env('youtube','#')}}" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                <a href="{{env('pinintrest','#')}}" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
             </div><!-- End .soial-icons -->
         </div><!-- End .container-fluid -->
     </div><!-- End .footer-bottom -->
