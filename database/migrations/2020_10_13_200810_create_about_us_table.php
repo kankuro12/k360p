@@ -14,7 +14,9 @@ class CreateAboutUsTable extends Migration
     public function up()
     {
         Schema::create('about_us', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->text('mini')->nullable();
+            $table->text('full')->nullable();
             $table->timestamps();
         });
     }

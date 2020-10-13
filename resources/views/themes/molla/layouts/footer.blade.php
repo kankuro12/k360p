@@ -30,7 +30,10 @@
                 <div class="col-sm-12 col-lg-4">
                     <div class="widget widget-about">
                         <img src="{{asset('logo.png')}}" class="footer-logo" alt="Footer Logo" width="105" height="25">
-                        <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
+                        @php
+                            $about=\App\AboutUs::first();
+                        @endphp
+                        <p>{!! $about!=null?$about->mini:""!!}</p>
                         
                         <div class="widget-about-info">
                             <div class="row">

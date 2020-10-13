@@ -62,6 +62,15 @@ Route::get('/home1', [
     'as' => 'public.home'
 ]);
 
+Route::get('/about', [
+    'uses' => 'HomeController@about',
+    'as' => 'public.about'
+]);
+
+Route::get('/contact', [
+    'uses' => 'HomeController@contact',
+    'as' => 'public.contact'
+]);
 Route::get('/shops', [
     'uses' => 'HomeController@shops',
     'as' => 'shops'
@@ -440,6 +449,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
         'uses' => 'admin\TagController@updateTag'
     ]);
 
+    Route::match(['get', 'post'], '/about', [
+        'as' => 'admin.about',
+        'uses' => 'admin\DashboardController@about'
+    ]);
+
     //shipping settings
     Route::get('/shippings', 'admin\ShippingController@list')->name('admin.shippings');
     Route::get('/get-shipping/{id}', 'admin\ShippingController@get_shipping')->name('admin.get-shipping');
@@ -522,6 +536,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
     Route::post('footer-head/{id}', 'FooterheadController@update')->name('header.update');
     Route::post('footer-link', 'FooterheadController@footerLinkStore')->name('link.store');
     Route::get('footer-link-delete/{id}', 'FooterheadController@footerLinkDelete')->name('link.delete');
+
+
 });
 
 // Route::group(['prefix'=>'user','middleware'=>'guest'],function(){
@@ -950,8 +966,3 @@ Route::group(['prefix' => 'delivery', 'middleware' => ['authen', 'type'], 'type'
     Route::post('check-otp', 'Delivery\DashboardController@otp')->name('delivery.check-otp');
 });
 
-
-Route::get('about', function () {
-
-    return view('test');
-});

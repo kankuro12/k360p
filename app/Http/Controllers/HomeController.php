@@ -117,4 +117,12 @@ class HomeController extends Controller
         return view(HomePage::theme("product.shop"),compact('products'));
 
     }
+
+    public function about(){
+        return view(HomePage::theme("about"));
+    }
+
+    public function contact(){
+        return view(HomePage::theme("contact"));
+    }
 }

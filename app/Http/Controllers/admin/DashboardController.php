@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\AboutUs;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,5 +52,20 @@ class DashboardController extends Controller
             $option->save();
             return redirect()->back();
        }
+    }
+
+    public function about(Request $request){
+        $about=AboutUs::first();
+        if($request->method()=="POST"){
+            if($about==null){
+                $about=new AboutUs();
+            }
+            $about->mini=$request->mini;
+            $about->full=$request->full;
+            $about->save();
+            return redirect()->back();
+        }else{
+            return view('admin.elements.about');
+        }
     }
 }

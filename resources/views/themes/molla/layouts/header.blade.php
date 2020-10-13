@@ -343,12 +343,12 @@
                             </li>
 
                             <li>
-                                <a href="#" class="sf-with">About Us</a>
+                                <a href="{{route('public.about')}}" class="sf-with">About Us</a>
                             </li>
 
-                            <li>
-                                <a href="#" class="sf-with">Contact Us</a>
-                            </li>
+                            {{-- <li>
+                                <a href="{{route('public.contact')}}" class="sf-with">Contact Us</a>
+                            </li> --}}
 
                         </ul><!-- End .menu -->
                     </nav><!-- End .main-nav -->
