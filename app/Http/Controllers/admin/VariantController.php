@@ -311,7 +311,7 @@ class VariantController extends Controller
         $option->warrentytime = $request->warrentytime ?? "Month";
         $option->warrentyperiod = $request->warrentyperiod ?? 0;
         $option->isrefundable = $request->isrefundable ?? 0;
-        $option->refundablepolicy = $request->refundablepolicy;
+        $option->refundablepolicy = $request->refundablepolicy??"";
         $option->save();
         return redirect()
             ->back()

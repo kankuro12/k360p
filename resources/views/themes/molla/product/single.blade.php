@@ -266,13 +266,21 @@
                                 @else 
                                     Manufacturer Warrenty
                                 @endif <br>
-                                <strong>Warrenty Time period : </strong> {{ $productOption->warrentyperiod }}
-                                {{ $productOption->warrentytime }} <br>
+                                @if ($productOption->warrenty != 1)
+                                    
+                                    <strong>Warrenty Time period : </strong> {{ $productOption->warrentyperiod }}
+                                    {{ $productOption->warrentytime }} <br>
+                                @endif
                                 <strong>Refund Policy : </strong>
                                 @if ($productOption->isrefundable == 1) <span
                                     class="badge badge-primary">Yes</span> @else <span
                                         class="badge badge-danger">No</span> @endif
                             </div>
+                            @else
+                            <div class="mb-3">
+                                <strong>Product Warrenty : </strong> No Warrenty
+                                <br>
+                                <strong>Refund Policy : </strong><span class="badge badge-danger">No</span>
                             @endif
 
 
