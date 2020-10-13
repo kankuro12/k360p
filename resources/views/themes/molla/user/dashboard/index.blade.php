@@ -42,6 +42,7 @@
                                                     {{ $user->postalcode }} : Postalcode<br>
                                                     {{ $user->dob }}<br>
                                                     {{ $user->gender }}<br>
+                                                    <a href="{{ url('user/account-detail') }}">Update Detail</a>
                                                 </p>
                                             </div><!-- End .card-body -->
                                         </div><!-- End .card-dashboard -->

@@ -99,9 +99,9 @@
         </div><!-- End .product-price -->
         <div class="ratings-container">
             <div class="ratings">
-                <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
+            <div class="ratings-val" style="width: {{$product->avgRating()}}%;"></div><!-- End .ratings-val -->
             </div><!-- End .ratings -->
-            <span class="ratings-text">( 4 Reviews )</span>
+            <span class="ratings-text">( {{$product->reviewCount()}} Reviews )</span>
         </div><!-- End .rating-container -->
     </div><!-- End .product-body -->
 </div><!-- End .product -->

@@ -1,5 +1,10 @@
 @extends('themes.molla.layouts.app')
 @section('title', 'Product Detail')
+@section('css')
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('themes/molla/assets/css/simple-rating.css') }}">
+@endsection
 @section('meta')
     <meta property="og:url"           content="{{route('product.detail',['id'=>$product->product_id])}}" />
     <meta property="og:type"          content="article" />
@@ -68,13 +73,15 @@
                                         <h1 class="product-title">{{ $product->product_name }}</h1>
                                         <!-- End .product-title -->
 
-                                        <div class="ratings-container">
-                                            <div class="ratings">
-                                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                                            </div><!-- End .ratings -->
-                                            <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews
-                                                )</a>
-                                        </div><!-- End .rating-container -->
+                                        @php
+                                               $ratingCount = \App\Rating::where('product_id',$product->product_id)->count();
+                                            @endphp
+                                            <div class="ratings-container">
+                                                <div class="ratings">
+                                                    <div class="ratings-val" style="width: {{ $product->avgRating() }}%;"></div><!-- End .ratings-val -->
+                                                </div><!-- End .ratings -->
+                                                <a class="ratings-text" href="#product-review-link" id="review-link">( {{ $ratingCount }} Reviews )</a>
+                                            </div><!-- End .rating-container -->
 
                                         <div class="product-price" id="price">
                                             @if ($product->stocktype == 1)
@@ -301,11 +308,14 @@
                             <!-- <li class="nav-item">
                                         <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
                                     </li> -->
-                            <li class="nav-item">
-                                <a class="nav-link" id="product-review-link" data-toggle="tab"
-                                    href="#product-review-tab" role="tab" aria-controls="product-review-tab"
-                                    aria-selected="false">Reviews (2)</a>
-                            </li>
+                                   
+                                    @php
+                                        $ratingCount = \App\Rating::where('product_id',$product->product_id)->count();
+                                    @endphp
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews ({{ $ratingCount }})</a>
+                                    </li>
+                                   
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
@@ -343,69 +353,87 @@
                                         please view our <a href="#">Returns information</a></p>
                                 </div><!-- End .product-desc-content -->
                             </div><!-- .End .tab-pane -->
-                            <div class="tab-pane fade" id="product-review-tab" role="tabpanel"
-                                aria-labelledby="product-review-link">
+                            
+                            <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                                 <div class="reviews">
-                                    <h3>Reviews (2)</h3>
+                                    <h3>Reviews ({{ $ratingCount }})</h3>
+                                    @foreach(\App\Rating::latest()->where('product_id',$product->product_id)->get() as $rate)
+                                    @php 
+                                        $userName = \App\model\VendorUser\VendorUser::where('user_id',$rate->user_id)->select('fname','lname')->first();
+                                    @endphp
                                     <div class="review">
                                         <div class="row no-gutters">
                                             <div class="col-auto">
-                                                <h4><a href="#">Samanta J.</a></h4>
+                                                <h4><a href="#">{{ $userName->fname }} {{ substr($userName->lname,0,1) }}.</a></h4>
                                                 <div class="ratings-container">
                                                     <div class="ratings">
-                                                        <div class="ratings-val" style="width: 80%;"></div>
-                                                        <!-- End .ratings-val -->
+                                                        <div class="ratings-val" style="width: {{ $rate->rating * 20}}%;"></div><!-- End .ratings-val -->
                                                     </div><!-- End .ratings -->
                                                 </div><!-- End .rating-container -->
-                                                <span class="review-date">6 days ago</span>
+                                                <span class="review-date">{{ $rate->created_at->diffForHumans() }}</span>
                                             </div><!-- End .col -->
                                             <div class="col">
-                                                <h4>Good, perfect size</h4>
+                                                <h4>{{ $rate->title }}</h4>
 
                                                 <div class="review-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus
-                                                        cum dolores assumenda asperiores facilis porro reprehenderit
-                                                        animi culpa atque blanditiis commodi perspiciatis doloremque,
-                                                        possimus, explicabo, autem fugit beatae quae voluptas!</p>
+                                                    <p>{{ $rate->rating_desc }}</p>
                                                 </div><!-- End .review-content -->
 
                                                 <div class="review-action">
-                                                    <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
-                                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                                    <!-- <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
+                                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a> -->
                                                 </div><!-- End .review-action -->
                                             </div><!-- End .col-auto -->
                                         </div><!-- End .row -->
                                     </div><!-- End .review -->
-
-                                    <div class="review">
-                                        <div class="row no-gutters">
-                                            <div class="col-auto">
-                                                <h4><a href="#">John Doe</a></h4>
-                                                <div class="ratings-container">
-                                                    <div class="ratings">
-                                                        <div class="ratings-val" style="width: 100%;"></div>
-                                                        <!-- End .ratings-val -->
-                                                    </div><!-- End .ratings -->
-                                                </div><!-- End .rating-container -->
-                                                <span class="review-date">5 days ago</span>
-                                            </div><!-- End .col -->
-                                            <div class="col">
-                                                <h4>Very good</h4>
-
-                                                <div class="review-content">
-                                                    <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum
-                                                        blanditiis laudantium iste amet. Cum non voluptate eos enim, ab
-                                                        cumque nam, modi, quas iure illum repellendus, blanditiis
-                                                        perspiciatis beatae!</p>
-                                                </div><!-- End .review-content -->
-
-                                                <div class="review-action">
-                                                    <a href="#"><i class="icon-thumbs-up"></i>Helpful (0)</a>
-                                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                                </div><!-- End .review-action -->
-                                            </div><!-- End .col-auto -->
-                                        </div><!-- End .row -->
-                                    </div><!-- End .review -->
+                                    @endforeach
+                                    
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="reviews">
+                                                <h3>Your Ratings</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div style="margin:2rem 0;">
+                                                @include('themes.molla.layouts.message')
+                                            </div>
+                                            @if ($errors->any())
+                                              <div class="mb-3">
+                                                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                      <strong>Error has been occurred !</strong>
+                                                          <ul>
+                                                              @foreach ($errors->all() as $error)
+                                                                  <li>{{ $error }}</li>
+                                                              @endforeach
+                                                          </ul>
+                                                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                  </div>
+                                              </div>
+                                            @endif
+                                    @if(!empty(Auth::check()) && Auth::user()->role_id==1)
+                                        <form action="{{ route('user.ratings') }}" method="POST">
+                                            @csrf
+                                            <input class="rating" name="rating">
+                                            <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                                            <div class="form-group mt-1">
+                                                <input type="text" name="title" class="form-control" placeholder="Review Title" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea name="rating_desc" rows="5" class="form-control" placeholder="Review Description"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-outline-primary-2">
+                                                    <span>SAVE YOUR RATING</span>
+                                                    <i class="icon-long-arrow-right"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                        @endif
+                                        </div>
+                                    </div>
                                 </div><!-- End .reviews -->
                             </div><!-- .End .tab-pane -->
                         </div><!-- End .tab-content -->
@@ -584,4 +612,10 @@
 
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="vEByKOut"></script>
+<script src="{{ asset('themes/molla/assets/js/simple-rating.js') }}"></script>
+   <script type="text/javascript">
+      $(document).ready(function(){
+        $('.rating').rating();
+      });
+    </script>
 @endsection

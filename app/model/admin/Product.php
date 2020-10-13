@@ -4,6 +4,7 @@ namespace App\model\admin;
 
 use App\model\OrderItem;
 use App\model\ProductAttributeItem;
+use App\Rating;
 use App\Setting\VendorOption;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -115,5 +116,15 @@ class Product extends Model
 
     public function images(){
         return $this->hasMany(Product_image::class,'product_id','product_id');
+    }
+
+    public function avgRating(){
+        $avg=Rating::where('product_id',$this->product_id)->avg('rating');
+        return round(($avg/5)*100);
+    }
+
+    public function reviewCount(){
+        $avg=Rating::where('product_id',$this->product_id)->count();
+        return $avg;
     }
 }

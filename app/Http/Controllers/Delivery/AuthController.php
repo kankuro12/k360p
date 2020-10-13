@@ -15,25 +15,17 @@ class AuthController extends Controller
 
     public function login()
     {
-        $email="delivery@gmail.com";
-        // $password = $request->password;
-        $password = "admin@123";
-        // dd($email,$password);
-        if (Auth::attempt(['email' => $email, 'password' => $password], true)) {
-            return redirect()->route('delivery.dashboard');
-        }
-        // return view('delivery.auth.login');
+      
+        return view('delivery.auth.login');
     }
 
     public function dologin(Request $request)
     {
-        // dd($request->all());
 
-        // $email = $request->email;
-        $email="delivery@gmail.com";
-        // $password = $request->password;
-        $password = "admin@123";
-        // dd($email,$password);
+        $email = $request->email;
+        // $email="delivery@gmail.com";
+        $password = $request->password;
+       
         if (Auth::attempt(['email' => $email, 'password' => $password], true)) {
             return redirect()->route('delivery.dashboard');
         }

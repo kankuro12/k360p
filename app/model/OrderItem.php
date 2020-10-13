@@ -38,4 +38,8 @@ class OrderItem extends Model
 
         return OrderItemCharge::where('order_item_id',$this->id)->sum('amount');
     }
+
+    public function shipping(){
+        return $this->belongsTo(ShippingDetail::class,'shipping_detail_is','id');
+    }
 }

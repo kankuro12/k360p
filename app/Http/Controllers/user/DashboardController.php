@@ -8,6 +8,7 @@ use App\model\OrderItem;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\model\VendorUser\VendorUser;
+use App\Rating;
 use Session;
 use App\Setting\HomePage;
 use App\Wishlist;
@@ -20,12 +21,12 @@ class DashboardController extends Controller
 
 
     public function recentOrder(Request $request){
-        return view(HomePage::theme("user.dashboard.order"));
+        return view(HomePage::theme("user.dashboard.order_item"));
     }
 
     public function orderItem($id){
-        $orderItem = OrderItem::where('shipping_detail_id',$id)->get();
-        return view(HomePage::theme("user.dashboard.order_item"))->with(compact('orderItem'));
+        $orderItem = OrderItem::where('id',$id)->first();
+        return view(HomePage::theme("user.dashboard.order"))->with(compact('orderItem'));
     }
 
     public function cancelOrder(Request $request){
@@ -78,6 +79,35 @@ class DashboardController extends Controller
         $wishlist = Wishlist::where('id',$id)->first();
         $wishlist->delete();
         return redirect()->back()->with('success','Product has been removed successfully!');
+    }
+
+
+    public function userRatings(Request $r){
+        // dd($r->all());
+        $r->validate([
+            'rating' =>'required',
+        ]);
+
+        $countRate = Rating::where('user_id',Auth::user()->id)->where('product_id',$r->product_id)->count();
+        if($countRate>0){
+            $rating = Rating::where('user_id',Auth::user()->id)->where('product_id',$r->product_id)->first();
+            $rating->rating = $r->rating;  
+            $rating->title =  $r->title;
+            $rating->rating_desc = $r->rating_desc;
+            $rating->user_id = Auth::user()->id;
+            $rating->product_id = $r->product_id;
+            $rating->save();
+            return redirect()->back()->with('success','Your rating has been updated successfully!!');
+        }else{
+            $rating = new Rating();
+            $rating->rating = $r->rating;  
+            $rating->title =  $r->title;
+            $rating->rating_desc = $r->rating_desc;
+            $rating->user_id = Auth::user()->id;
+            $rating->product_id = $r->product_id;
+            $rating->save();
+            return redirect()->back()->with('success','Your rating has been added successfully!!'); 
+        }
     }
 
 }
