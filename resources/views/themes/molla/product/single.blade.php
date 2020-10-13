@@ -166,6 +166,8 @@
                                             @endforeach
                                             <div class="product-details-action" id="product-details-action">
                                                 @if ($product->stocktype == 0)
+                                                    @if ($product->quantity>0)
+                                                        
                                                     <div class="details-action-col">
                                                         <label for="qty">Qty:</label>
                                                         <div class="product-details-quantity">
@@ -181,6 +183,9 @@
                                                             </span>
                                                         </button>
                                                     </div><!-- End .details-action-col -->
+                                                    @else
+                                                        <span class="badge badge-danger">Out Of Stock</span>
+                                                    @endif
                                                 @else
                                                     <div id="product-variant-stock" class="mb-1">
 
@@ -434,7 +439,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-outline-primary-2">
-                                                    <span>SAVE YOUR RATING</span>
+                                                    <span>Add Review</span>
                                                     <i class="icon-long-arrow-right"></i>
                                                 </button>
                                             </div>
@@ -474,52 +479,9 @@
                                         }
                                     }
                                 }'>
-                        <div class="product product-7 text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-new">New</span>
-                                <a href="product.html">
-                                    <img src="{{ asset('themes/molla/assets/images/products/product-4.jpg') }}"
-                                        alt="Product image" class="product-image">
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
-                                            wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                        title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare"
-                                        title="Compare"><span>Compare</span></a>
-                                </div><!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                </div><!-- End .product-action -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Women</a>
-                                </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">Brown paperbag waist pencil skirt</a>
-                                </h3><!-- End .product-title -->
-                                <div class="product-price">
-                                    $60.00
-                                </div><!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
-                                    </div><!-- End .ratings -->
-                                    <span class="ratings-text">( 2 Reviews )</span>
-                                </div><!-- End .rating-container -->
-
-                                <div class="product-nav product-nav-dots">
-                                    <a href="#" class="active" style="background: #cc9966;"><span class="sr-only">Color
-                                            name</span></a>
-                                    <a href="#" style="background: #7fc5ed;"><span class="sr-only">Color name</span></a>
-                                    <a href="#" style="background: #e8c97a;"><span class="sr-only">Color name</span></a>
-                                </div><!-- End .product-nav -->
-                            </div><!-- End .product-body -->
-                        </div><!-- End .product -->
+                       @foreach (\App\model\admin\Product::where('category_id',$product->category_id)->inRandomOrder()->take(8)->get() as $item)
+                           @include('themes.molla.elements.product',['product'=>$item])
+                       @endforeach
 
 
                     </div><!-- End .owl-carousel -->

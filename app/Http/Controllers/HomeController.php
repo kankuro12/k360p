@@ -17,6 +17,7 @@ use App\model\admin\Category;
 use App\Setting\HomePage;
 use App\Setting\VariantManager;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -105,8 +106,15 @@ class HomeController extends Controller
     public function category($id){
         $cat=Category::find($id);
         $ids=$cat->childList();
-        $products=Product::where('isverified',1)->whereIn('category_id',$ids)->get();
+        $products=Product::where('isverified',1)->whereIn('category_id',$ids)->paginate(12);
         return view(HomePage::theme("product.category"),compact('cat','products'));
+
+    }
+
+    public function latest(){
+        $dayToCheck = Carbon::now()->subDays(env('newtag',7));
+        $products=Product::where('isverified',1)->where('created_at','>',$dayToCheck)->paginate(12);
+        return view(HomePage::theme("product.shop"),compact('products'));
 
     }
 }

@@ -72,6 +72,11 @@ Route::get('/shop-by-category/{id}', [
     'as' => 'shop-by-category'
 ]);
 
+Route::get('/latest/', [
+    'uses' => 'HomeController@latest',
+    'as' => 'latest'
+]);
+
 
 Route::get('/product/{id}', [
     'uses' => 'HomeController@productDetail',

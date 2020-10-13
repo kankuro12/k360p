@@ -24,7 +24,8 @@
 
                 @endif
                 @if ($product->isnew())
-                    <span class="product-label label-new">New</span>
+                    <span class="product-label label-new"><a href="{{route('latest')}}" style="color:white;"> New </a></span>
+
                 @endif
                 @if ($product->isTop())
                     <span class="product-label label-top">Top</span>
@@ -82,6 +83,7 @@
                 <div class="product-action text-center">
 
                     @if ($product->stocktype == 0)
+                        @if ($product->quantity>0)
                         <form action="{{ route('public.cart') }}" method="POST" class="w-100">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->product_id }}">
@@ -103,6 +105,10 @@
                                     cart</span></button>
                             <!-- <span onclick="javascript:this.form.submit();" class="btn-product btn-cart"><span>add to cart</span></span> -->
                         </form>
+                        @else
+                            <button class="btn-product btn-cart w-100"><span>Out Of Stock</span></button>
+
+                        @endif
                     @else
                         <a href="{{ route('product.detail', $product->product_id) }}" class="btn-product btn-cart "
                             style="color:white;"><span>View Detail</span></a>
@@ -118,7 +124,7 @@
             <div class="product-body product-action-inner">
 
                 <div class="product-cat">
-                    <a href="#">Women</a>
+                    <a href="{{route('shop-by-category',['id'=>$product->category->cat_id])}}">{{$product->category->cat_name}}</a>
                 </div><!-- End .product-cat -->
                 <h3 class="product-title"><a href="/product/{{ $product->product_id }}">{{ $product->product_name }}</a>
                 </h3>

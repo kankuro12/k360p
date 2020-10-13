@@ -53,6 +53,6 @@ class Category extends Model
     }
 
     public function subcat(){
-        return $this->hasMany(Category::class,'parent_id');
+        return $this->hasMany(Category::class,'parent_id','cat_id');
     }
 }

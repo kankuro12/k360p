@@ -74,10 +74,16 @@
                                 <a href="{{ route('user.account') }}"><i class="icon-user"></i>My Account</a>
                             </div><!-- End .header-dropdown -->
                         </div>
-                    @else
+                    @elseif(Auth::user()->role_id == 2)
                         <div>
                             <div>
                                 <a href="{{ route('vendor.dashboard') }}"><i class="icon-user"></i>My Account</a>
+                            </div><!-- End .header-dropdown -->
+                        </div>
+                    @elseif(Auth::user()->role_id == 3)
+                        <div>
+                            <div>
+                                <a href="{{ route('delivery.dashboard') }}"><i class="icon-user"></i>My Account</a>
                             </div><!-- End .header-dropdown -->
                         </div>
                     @endif
@@ -293,8 +299,10 @@
                                             \App\model\vendoruser\VendorUser::where('user_id',Auth::user()->id)->first();
                                             @endphp
                                             Hello ! {{ $user->fname }} {{ $user->lname }}
-                                        @else
+                                        @elseif(Auth::user()->role_id == 2)
                                             Hello ! {{ Auth::user()->vendor->name }}
+                                        @elseif(Auth::user()->role_id == 3)
+                                            Hello ! {{ Auth::user()->point->name }}
                                         @endif
                                     </h6>
                                 @endif

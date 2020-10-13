@@ -122,15 +122,17 @@ class CategoryController extends Controller
             $category->parent_id = $data['parent_id'];
         }
         if($request->hasFile('cat_image')){
-            $img_tmp = Input::file('cat_image');
-            if($img_tmp->isValid()){
-                $extension = $img_tmp->getClientOriginalExtension();
-                $filename = rand(111,99999).'.'.$extension;
-                $imagepath = 'images/backend_images/categories/'.$filename;
-                $img_tmp->move(public_path('images/backend_images/categories'),$filename);
-                $category->cat_image = $filename;
-                unlink('images/backend_images/categories/'.$data['catagory_image']);
-            }
+            $category->cat_image = $request->file('cat_image')->store('images/backend_images/categories/');
+            
+            
+            // $img_tmp = Input::file('cat_image');
+            // if($img_tmp->isValid()){
+            //     $extension = $img_tmp->getClientOriginalExtension();
+            //     $filename = rand(111,99999).'.'.$extension;
+            //     $imagepath = 'images/backend_images/categories/'.$filename;
+            //     $img_tmp->move(public_path('images/backend_images/categories'),$filename);
+            //     $category->cat_image = $filename;
+            // }
         }else{
             $category->cat_image = $data['catagory_image'];
         }
