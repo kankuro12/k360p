@@ -106,7 +106,7 @@
                     </a>
                 </div><!-- End .col-xl-3 col-xxl-2 -->
 
-                <div class="col col-lg-9 col-xl-9 col-xxl-10 header-middle-right">
+                <div class="col col-lg-9 col-xl-9 col-xxl-10 header-middle-right"   style="margin-top: auto;margin-bottom: auto;">
                     <div class="row">
                         <div class="col-lg-8 col-xxl-4-5col d-none d-lg-block">
                             <div
@@ -275,7 +275,7 @@
             </div><!-- End .row -->
         </div><!-- End .container-fluid -->
     </div><!-- End .header-middle -->
-
+  
     <div class="header-bottom sticky-header" style="color:{{env('primaryheader_color','#ffffff')}} !important;background:{{env('primaryheader_bg','#232642')}} !important">
         <div class="container-fluid">
             <div class="row">
