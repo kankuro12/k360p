@@ -4,10 +4,10 @@
     <table class="table">
         <tr>
             <td>
-                <strong>Referal Charge</strong>
+                <strong>Referal Charge (%)</strong>
             </td>
             <td>
-                <input type="number" name="rc" id="rc" class="form-control" min="0" value="{{$productdetail->referalcharge}}">
+                <input type="number" name="rc" id="rc" class="form-control" min="0"  max="100" value="{{$productdetail->referalcharge}}">
             </td>
         </tr>
         <tr>
