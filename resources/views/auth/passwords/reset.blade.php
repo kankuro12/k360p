@@ -1,12 +1,12 @@
-@extends('layouts.app')
+@extends('themes.molla.layouts.app')
 
-@section('content')
+@section('contant')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
+        <div class="col-md-8 pt-5">
+            <div class="card p-5 shadow" style="border:none;" >
+                <div class="card-header text-center "> <h4>Reset Password</h4> </div>
+                <hr class="mt-0">
                 <div class="card-body">
                     <form method="POST" action="{{ url('password/reset') }}">
                         @csrf

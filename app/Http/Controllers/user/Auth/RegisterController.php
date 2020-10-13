@@ -13,9 +13,14 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 class RegisterController extends Controller
 {
-    public function getRegister(){
-       
-    	return view(HomePage::theme("user.register"));
+    public function getRegister(Request $request){
+       if($request->path()=="user/login"){
+        return view(HomePage::theme("user.register"),['ss'=>0]);
+
+    }else{
+        return view(HomePage::theme("user.register"),['ss'=>1]);
+
+       }
     }
     public function postRegister(Request $request){
         // dd($request->all());

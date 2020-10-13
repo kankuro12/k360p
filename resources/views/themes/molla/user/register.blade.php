@@ -4,7 +4,7 @@
 <div class="main">
     <div class="page-header text-center" style="background-image: url({{ asset('themes/molla/assets/images/page-header-bg.jpg') }})">
         <div class="container">
-            <h1 class="page-title">User<span>Register</span></h1>
+            <h1 class="page-title">User<span>Register / Sign in</span></h1>
         </div><!-- End .container -->
     </div><!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav" style="margin-bottom: 0rem;">
@@ -40,18 +40,25 @@
                 </div>
                 <div class="col-md-3"></div>
             </div>
+            {{-- @php
+                $sel=0;
+                if(!empty($ss)){
+                    $sel=$ss;
+
+                }
+                @endphp --}}
                 <div class="form-box">
             			<div class="form-tab">
 	            			<ul class="nav nav-pills nav-fill" role="tablist">
 							    <li class="nav-item">
-							        <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="false">Sign In</a>
+                                <a class="nav-link {{$ss==0?"active":""}}" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="false">Sign In</a>
 							    </li>
 							    <li class="nav-item">
-							        <a class="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab" aria-controls="register-2" aria-selected="true">Register</a>
+							        <a class="nav-link {{$ss==1?"active":""}}" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab" aria-controls="register-2" aria-selected="true">Register</a>
 							    </li>
 							</ul>
 							<div class="tab-content">
-							    <div class="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+							    <div class="tab-pane {{$ss==0?"active show":""}} fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
                                 <form action="{{ route('user.postLogin') }}" method="POST">
                                     @csrf
                                      <div class="form-group">
@@ -75,12 +82,12 @@
                                              <label class="custom-control-label" for="signin-remember">Remember Me</label>
                                          </div><!-- End .custom-checkbox -->
 
-                                         <a href="{{ url('forget-password')}}" class="forgot-link">Forgot Your Password?</a>
+                                         <a href="{{ route('fpass')}}" class="forgot-link">Forgot Your Password?</a>
                                      </div><!-- End .form-footer -->
                                  </form>
 							    	
 							    </div><!-- .End .tab-pane -->
-							    <div class="tab-pane fade active show" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+							    <div class="tab-pane fade {{$ss==1?"active show":""}} " id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
                                     <form action="{{ route('user.postRegister') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
