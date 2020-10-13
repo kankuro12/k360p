@@ -335,6 +335,12 @@
                                 <span class="sidebar-normal"> Builder </span>
                             </a>
                         </li>
+                        <li class="{{ (Route::is('admin.about') ? ' active' : '') }}">
+                            <a href="{{ route('admin.about') }}">
+                                <span class="sidebar-mini"> AB </span>
+                                <span class="sidebar-normal"> About us </span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
