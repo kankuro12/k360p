@@ -951,20 +951,7 @@ Route::group(['prefix' => 'delivery', 'middleware' => ['authen', 'type'], 'type'
 });
 
 
-Route::get('hello', function () {
+Route::get('about', function () {
 
-    $date = DB::select("
-        select
-        DATE(`created_at`),
-        IFNULL( SUM( rate*qty ), 0 ) AS daily_sale
-        FROM order_items
-        WHERE stage=4 and created_at BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) and NOW()
-        group by DATE(`created_at`)");
-    dd($date);
-    // $sid=1;
-    // $ids=[1,2];
-    // $shipping=ShippingDetail::find($sid);
-    // $orders=OrderItem::whereIn('id',$ids)->get();
-    // return view('email.order.receipt',compact('ids','sid','shipping','orders'));
-    // ShippingDetail::find(1)->notify(new OrderComfirmation([2]));
+    return view('test');
 });
