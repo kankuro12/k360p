@@ -130,21 +130,21 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for=""> <strong> Length <span class="d_class"></span> </strong> </label>
-                                            <input required type="number" step="0.01" name="l" class="form-control"  placeholder="Enter Package Length" >
+                                            <input  type="number" step="0.01" name="l" class="form-control"  placeholder="Enter Package Length" >
                     
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for=""> <strong>Height <span class="d_class"></span></strong> </label>
-                                            <input required type="number" step="0.01" name="h" class="form-control" placeholder="Enter Package Height" >
+                                            <input  type="number" step="0.01" name="h" class="form-control" placeholder="Enter Package Height" >
                     
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for=""> <strong>width <span class="d_class"></span></strong> </label>
-                                            <input required type="number" step="0.01" name="w" class="form-control" placeholder="Enter Package Length">
+                                            <input  type="number" step="0.01" name="w" class="form-control" placeholder="Enter Package Length">
                     
                                         </div>
                                     </div>

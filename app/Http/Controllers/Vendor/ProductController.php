@@ -90,6 +90,11 @@ class ProductController extends Controller
             $cc = ChargesManager::getClosing($product->category_id, $product->mark_price);
             $product->closingcharge = $cc != null ? $cc->amount : 0;
             $product->referalcharge=$cat->referal_charge;
+
+            if($request->weight<env('maxbundableweight',6)){
+                $product->canbundle = 1;
+
+            }
             $product->save();
 
             if ($request->hasFile('product_images')) {
@@ -110,9 +115,9 @@ class ProductController extends Controller
             $shippingdetail->product_id = $product->product_id;
             $shippingdetail->shipping_class_id = $request->shipping_class_id;
             $shippingdetail->weight = $request->weight;
-            $shippingdetail->l = $request->l;
-            $shippingdetail->w = $request->w;
-            $shippingdetail->h = $request->h;
+            $shippingdetail->l = $request->l??0;
+            $shippingdetail->w = $request->w??0;
+            $shippingdetail->h = $request->h??0;
             $shippingdetail->save();
 
             //addshipping

@@ -24,13 +24,13 @@ use Illuminate\Support\Facades\DB;
 Route::get('testo', function () {
 
 
-    $shipping=ShippingDetail::find(51);
-    $orders=OrderItem::where('shipping_detail_id',$shipping->id)->get();
+    // $shipping=ShippingDetail::find(51);
+    // $orders=OrderItem::where('shipping_detail_id',$shipping->id)->get();
 
-    return view('email.order.receipt',compact('shipping','orders'));
-    dd($shipping,$orders);
+    // return view('email.order.receipt',compact('shipping','orders'));
+    // dd($shipping,$orders);
 
-    // Auth::logout();
+    Auth::logout();
 
     // foreach (Onsell::all() as $key => $value) {
     //     $value->time();
@@ -748,7 +748,7 @@ Route::group(['prefix' => 'vendor', 'middleware' => 'guest'], function () {
 
 
 Route::group(['prefix' => 'vendor', 'middleware' => ['authen', 'type'], 'type' => ['vendor']], function () {
-    Route::post('logout', [
+    Route::get('logout', [
         'uses' => 'Vendor\Auth\LoginController@getLogout',
         'as' => 'vendor.getLogout'
     ]);

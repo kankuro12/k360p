@@ -113,12 +113,12 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    @foreach ($attributes as $attr)
+                                                    @foreach ($withdrawl->paymentdetails as $key=> $attr)
                                                         <div>
                                                             <strong>
-                                                                {{$attr}}:
+                                                                {{$key}}:
                                                             </strong>
-                                                            {{$withdrawl->paymentdetails[$attr]}}
+                                                            {{$attr}}
                                                           
                                                         </div>
                                                     @endforeach

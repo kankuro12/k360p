@@ -60,12 +60,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <h2 style="text-transform: uppercase;"><strong>General Info</strong></h2>
-                                                <div>
-                                                    @if ($productdetails->vendor_id!=null)
-                                                        
-                                                    <span>Vendor Product</span><span></span>
-                                                    @endif
-                                                </div>
+                                            
                                             </div>
                                             <div class="col-md-6"><img class="img img-responsive img-round"
                                                     style="max-width: 120px;"

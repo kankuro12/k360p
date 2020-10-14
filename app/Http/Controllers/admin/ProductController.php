@@ -193,9 +193,9 @@ class ProductController extends Controller
             $shippingdetail->product_id = $product->product_id;
             $shippingdetail->shipping_class_id = $request->shipping_class_id;
             $shippingdetail->weight = $request->weight;
-            $shippingdetail->l = $request->l;
-            $shippingdetail->w = $request->w;
-            $shippingdetail->h = $request->h;
+            $shippingdetail->l = $request->l??0;
+            $shippingdetail->w = $request->w??0;
+            $shippingdetail->h = $request->h??0;
             $shippingdetail->save();
 
 
