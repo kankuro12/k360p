@@ -2,6 +2,7 @@
 
 namespace App\model\Vendor;
 
+use App\Setting\VendorAccount;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\User;
@@ -66,5 +67,9 @@ class Vendor extends Model
     public function routeNotificationForOneSignal()
     {
         return ['email' => $this->user->email];
+    }
+
+    public function account(){
+        return new VendorAccount($this->id);
     }
 }

@@ -13,6 +13,7 @@ use App\model\Coupon;
 use App\model\Coupon_setting;
 use App\Notifications\Vendor\SendMessage;
 use App\Notifications\Vendor\Verified;
+use App\Setting\VendorAccount;
 use App\User;
 use App\VendorMessage;
 
@@ -67,9 +68,11 @@ class VendorController extends Controller
             $coupon->maximum_discount_value = $coupondetails->maximum_discount_value;
             // dd($coupon);
         }
+
+        $account=new VendorAccount($vendordetails->id);
        
         //dd($coupons);
-        return view('admin.vendordetails')->with(compact('vendordetails','products','coupons'));
+        return view('admin.vendordetails')->with(compact('account','vendordetails','products','coupons'));
     }
 
     public function status($id,$status){

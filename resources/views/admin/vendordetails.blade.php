@@ -82,6 +82,13 @@
                                     <p>Email: {{ $vendordetails->primary_email }}, {{ $vendordetails->secondary_email }}</p>
                                     <p>Phone: +977-{{ $vendordetails->phone_number }}, +977-{{ $vendordetails->secondary_phone_number }}</p>
                                     <p>Description: {{ $vendordetails->description }}</p>
+
+                                    @if ($vendordetails->verified==1)
+                                    <hr>
+                                        <p>Total Transaction: {{$account->total()}}</p>
+                                        <p>Withdrawable Transaction: {{$account->withdraw()}}</p>
+                                        <p><a href="{{route('admin.detail',['id'=>$vendordetails->id])}}">Account Detail</a></p>
+                                    @endif
                                </div>
                                <div class="col-md-4">
                                     <div class="card card-profile">

@@ -57,14 +57,77 @@
             color:#fff;
             font-size: medium;
             right: 10px;
-            bottom: 100px;
+            bottom: 95px;
         }
+
+        #social-up-icon{
+            width:40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background-color: #999;
+            color:#fff;
+            font-size: medium;
+            right: 10px;
+            bottom: 140px;
+            position: fixed;
+            z-index: 999;
+        }
+        #social-up-icon:hover{
+          
+            background-color: #FF5C00;
+ 
+        }
+
         #scroll-top:hover{
             background-color: #FF5C00;
             color:#fff;
-
+            right: 10px;
+            bottom: 100px;
         }
+
+        .social-up{
+            right: 10px;
+            bottom: 180px;
+            position: fixed;
+            text-align: center;
+            right:0;
+            z-index: 999;
+        }
+
+        .social-up a{
+            display: block;
+            padding-top:0.5rem;
+            background-color: #999;
+            color:#fff;
+            border:none;
+            margin-bottom: 0.1rem;
+        }
+        
+        .social-up a:hover{
+            display: block;
+            padding-top:0.5rem;
+            background-color: #FF5C00;
+            transform: scale(1.1);
+        }
+        
+    
     </style>
+
+    <div class="social-up" id="social-up">
+
+                <a href="{{env('fb','#')}}" class="social-icon " title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                <a href="{{env('twitter','#')}}" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                <a href="{{env('insta','#')}}" class="social-icon " title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                <a href="{{env('youtube','#')}}" class="social-icon " title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                <a href="{{env('pinintrest','#')}}" class="social-icon " title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                <a href="{{env('linkedin','#')}}" class="social-icon " title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+    </div>
+
+    <button id="social-up-icon" title="Back to Top" onclick="social_toogle()">
+        <i class="icon-minus"></i>
+    </button>
+
     <button id="scroll-top" title="Back to Top">
         <i class="icon-angle-up"></i>
     </button>
@@ -142,6 +205,19 @@
             $('#cat').trigger('mousedown')
             $('#cat').focus();
             $('#cat').click();
+        }
+
+        var state=1;
+        function social_toogle(){
+            $('#social-up').toggle('slow');
+            if(state==1){
+                state=0;
+                $('#social-up-icon').html(' <i class="icon-plus"></i>')
+            }else{
+                state=1;
+                $('#social-up-icon').html(' <i class="icon-plus"></i>')
+
+            }
         }
     </script>
 

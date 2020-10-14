@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 class VendorAccount
 {
     
-    protected $vendor;
-    protected $vendorAccount;
+    public $vendor;
+    public $vendorAccount;
     public function __construct($vendor_id)
     {
         $this->vendor=Vendor::find($vendor_id);

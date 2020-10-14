@@ -287,6 +287,12 @@
                                 <span class="sidebar-normal"> Vendor List </span>
                             </a>
                         </li>
+                        <li class="{{ (Route::is('admin.account') ? ' active' : '') }}">
+                            <a href="{{ route('admin.account') }}">
+                                <span class="sidebar-mini"> VF </span>
+                                <span class="sidebar-normal"> Vendor Finance </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

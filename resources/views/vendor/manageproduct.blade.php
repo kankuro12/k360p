@@ -48,7 +48,7 @@
                                     <td>{{ $product->stock_status_name }}</td>
                                     <td>{{ $product->quantity }}</td>
                                     <td class="text-right">
-                                        <a href="#" class="btn  btn-simple btn-info btn-icon  like"><i class="material-icons">favorite</i></a>
+                                        {{-- <a href="#" class="btn  btn-simple btn-info btn-icon  like"><i class="material-icons">favorite</i></a> --}}
                                         <a href="{{route('vendor.view-product',['id'=>$product->product_id])}}" class="btn btn-simple  btn-warning btn-icon  edit"><i class="material-icons">dvr</i></a>
                                         <a href="#" class="btn btn-simple  btn-danger btn-icon  remove"><i class="material-icons">close</i></a>
                                     </td>

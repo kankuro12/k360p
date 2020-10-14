@@ -932,6 +932,13 @@ Route::group(['prefix' => 'admin/orders', 'middleware' => 'admin_auth'], functio
     Route::post('/data/ondeliver', 'admin\order\WarehouseController@ondelivery')->name('admin.orders-ondelivery');
 });
 
+Route::group(['prefix' => 'admin/account', 'middleware' => 'admin_auth'], function () {
+    Route::get('', 'admin\AccountController@index')->name('admin.account');
+    Route::get('/withdrawl/{id}', 'admin\AccountController@withdrawl')->name('admin.withdrawl');
+    Route::post('/save/withdrawl/{id}', 'admin\AccountController@saveWithdrawl')->name('admin.savewithdrawl');
+    Route::get('/detail/{id}', 'admin\AccountController@detail')->name('admin.detail');
+});
+
 
 
 Route::group(['prefix' => 'admin/pickuppoint', 'middleware' => 'admin_auth'], function () {
@@ -949,6 +956,10 @@ Route::group(['prefix' => 'vendor/orders', 'middleware' => ['authen', 'type'], '
     Route::get('/{status}', 'Vendor\order\OrderController@index')->name('vendor.orders');
     Route::get('/{status}/flash/{id}', 'Vendor\order\OrderController@flash')->name('vendor.orders-flash');
     Route::post('status/{status}', 'Vendor\order\OrderController@status')->name('vendor.set-status');
+});
+
+Route::group(['prefix' => 'vendor/accounts', 'middleware' => ['authen', 'type'], 'type' => ['vendor']], function () {
+    Route::get('/', 'Vendor\AccountController@index')->name('vendor.accounts');
 });
 
 Route::group(['prefix' => 'delivery'], function () {

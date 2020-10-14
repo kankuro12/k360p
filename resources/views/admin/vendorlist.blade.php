@@ -42,6 +42,7 @@
                                             <td class="text-center"><span class="label label-success">Active</span></td>
                                        @endif
                                        <td class="text-center"><a class="btn btn-primary" href="{{ url('admin/vendor-details/'. $vendor->id) }}">View</a></td>
+                                       <td class="text-center"><a class="btn btn-success" href="{{ route('admin.detail',['id'=> $vendor->vendor->id]) }}">Finance</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
