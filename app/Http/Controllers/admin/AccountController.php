@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\model\admin\VendorAccount as AdminVendorAccount;
 use App\model\admin\VendorWithdrawl;
 use App\model\Vendor\Vendor;
+use App\OrderPayment;
 use App\Setting\VendorAccount;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
@@ -28,10 +30,20 @@ class AccountController extends Controller
 
     }
     public function detail($id){
-        $withdrawls=VendorWithdrawl::where('vendor_id',$id)->get();
-        $attributes=explode(',',env('withdrawldetails',"bank,account"));
-        $account=new VendorAccount($id);
-        return view('admin.account.detail',compact('withdrawls','attributes','id','account'));
+        if(env('paymentstyle',0)==0){
+            
+            $withdrawls=VendorWithdrawl::where('vendor_id',$id)->get();
+            $attributes=explode(',',env('withdrawldetails',"bank,account"));
+            $account=new VendorAccount($id);
+            return view('admin.account.detail',compact('withdrawls','attributes','id','account'));
+        }else{
+            
+            $data=OrderPayment::where('paid',0)-> get()->groupBy(function($date) {
+                return \Carbon\Carbon::parse($date->created_at)->toDateString();
+            });
+           
+            return view('admin.account.detail1',compact('data','attributes','id','account'));
+        }
     }
 
     public function saveWithdrawl ($id,Request $request){

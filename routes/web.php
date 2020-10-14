@@ -944,6 +944,10 @@ Route::group(['prefix' => 'admin/account', 'middleware' => 'admin_auth'], functi
     Route::get('', 'admin\AccountController@index')->name('admin.account');
     Route::get('/withdrawl/{id}', 'admin\AccountController@withdrawl')->name('admin.withdrawl');
     Route::post('/save/withdrawl/{id}', 'admin\AccountController@saveWithdrawl')->name('admin.savewithdrawl');
+
+    Route::get('/withdrawl1/{id}', 'admin\AccountController@withdrawl1')->name('admin.withdrawl1');
+    Route::post('/save/withdrawl1/{id}', 'admin\AccountController@saveWithdrawl1')->name('admin.savewithdrawl1');
+
     Route::get('/detail/{id}', 'admin\AccountController@detail')->name('admin.detail');
 });
 

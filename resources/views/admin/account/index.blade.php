@@ -37,36 +37,43 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       @foreach ($vendors as $vendor)
-                                           @php
-                                               $account =$vendor->account();
-                                           @endphp
+                                        @foreach ($vendors as $vendor)
+                                            @php
+                                            $account =$vendor->account();
+                                            @endphp
                                             <tr>
                                                 <td>
-                                                    #{{$vendor->id}}
+                                                    #{{ $vendor->id }}
                                                 </td>
                                                 <td>
-                                                   <a href="{{route('admin.vendor-details',['id'=>$vendor->user->id])}}"> {{$vendor->name}} </a>
+                                                    <a
+                                                        href="{{ route('admin.vendor-details', ['id' => $vendor->user->id]) }}">
+                                                        {{ $vendor->name }} </a>
                                                 </td>
                                                 <td>
-                                                    {{$vendor->storename}}
+                                                    {{ $vendor->storename }}
                                                 </td>
                                                 <td>
-                                                    {{$account->total()}}
+                                                    {{ $account->total() }}
                                                 </td>
                                                 <td>
-                                                    {{$account->withdraw()}}
+                                                    {{ $account->withdraw() }}
                                                 </td>
                                                 <td>
-                                                    @if ($account->total()>=env('minwithdrawl',100))
-                                                        
-                                                        <a class="btn btn-primary" href="{{route('admin.withdrawl',['id'=>$vendor->id])}}">Withdrawl</a>
+                                                    @if ($account->total() >= env('minwithdrawl', 100))
+                                                        @if (env('paymentstyle', 0) == 0){
+                                                            <a class="btn btn-primary"
+                                                                href="{{ route('admin.withdrawl', ['id' => $vendor->id]) }}">Withdrawl</a>
+                                                        @endif
                                                     @endif
-                                                    <a class="btn btn-success" href="{{route('admin.detail',['id'=>$vendor->id])}}">Details</a>
-                                                    {{-- <a href="{{route('admin.withdrawl',['id'=>$vendor->id])}}">Withdrawl</a> --}}
+                                                    <a class="btn btn-success"
+                                                        href="{{ route('admin.detail', ['id' => $vendor->id]) }}">Details</a>
+                                                    {{-- <a
+                                                        href="{{ route('admin.withdrawl', ['id' => $vendor->id]) }}">Withdrawl</a>
+                                                    --}}
                                                 </td>
                                             </tr>
-                                       @endforeach
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
