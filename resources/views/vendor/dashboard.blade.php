@@ -92,7 +92,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                <a href="{{route('vendor.manage-product')}}">
+                                <a href="{{route('vendor.accounts')}}">
                                     <i class="material-icons">local_offer</i> View Account
                                 </a>
                             </div>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                <a href="{{route('vendor.manage-product')}}">
+                                <a href="{{route('vendor.accounts')}}">
                                     <i class="material-icons">local_offer</i> View Account
                                 </a>
                             </div>

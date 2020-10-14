@@ -942,7 +942,6 @@ Route::group(['prefix' => 'admin/account', 'middleware' => 'admin_auth'], functi
 });
 
 
-
 Route::group(['prefix' => 'admin/pickuppoint', 'middleware' => 'admin_auth'], function () {
 
     //pickupby admin

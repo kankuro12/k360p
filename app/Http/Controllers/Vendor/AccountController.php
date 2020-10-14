@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
-use App\model\admin\VendorAccount;
+use App\Setting\VendorAccount;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class AccountController extends Controller
 {
@@ -13,8 +13,13 @@ class AccountController extends Controller
 
     public function index(){
 
-        $vendor=Auth::user()->vendor->id;
-        $income=VendorAccount::where('vendor_id',$vendor->id)->get();
+        $vendor=Auth::user()->vendor;
+
+        $account=new VendorAccount($vendor->id);
+        $attributes=explode(',',env('withdrawldetails',"bank,account"));
+
+        return view('vendor.account.index',compact('account','attributes'));
+        // dd($account,$account->withdraw(),$account->total(),$account->withdrawls(),$account->payments());
         
     }
 }

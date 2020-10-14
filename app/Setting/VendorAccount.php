@@ -4,6 +4,7 @@ namespace App\Setting;
 
 use App\model\admin\Product;
 use App\model\admin\VendorAccount as AdminVendorAccount;
+use App\model\admin\VendorWithdrawl;
 use App\model\OrderItem;
 use App\model\Vendor\Vendor;
 use App\OrderPayment;
@@ -58,5 +59,14 @@ class VendorAccount
 
     public function withdraw(){
         return $this->vendorAccount->amount;
+    }
+
+    public function withdrawls(){
+        return VendorWithdrawl::where('vendor_id',$this->vendor->id)->get();
+
+    }
+
+    public function payments(){
+        return OrderPayment::where('vendor_id',$this->vendor->id)->get();
     }
 }
