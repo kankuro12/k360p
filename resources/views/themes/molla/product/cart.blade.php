@@ -40,6 +40,7 @@
 										$simpletotal = 0;
 										$varianttotal = 0;
 										$totalCharge = 0;
+										$extra = 0;
                                     @endphp
 									<tbody>
 										@foreach($cartItem as $item)
@@ -87,7 +88,7 @@
 											</td>
 											
 											@php
-												$totalCharge=$item->rate * $item->qty ;
+												$totalCharge+=$item->rate * $item->qty ;
 											@endphp
 											   <td class="total-col">NPR. {{ $item->rate * $item->qty }} </td>
 											
@@ -96,7 +97,7 @@
 													@foreach($extraFeature as $f)
 														<p>{{ $f->title }}  <span class="text-danger">(Rs.{{ $f->amount }})</span><a href="{{ url('remove/feature/item/'.$f->id) }}" class="btn-remove" title="Remove Feature"><i class="icon-close"></i></a> </p>
 														@php 
-														   $totalCharge = $totalCharge + $f->amount;
+														   $extra += $f->amount;
 														@endphp 
 													@endforeach
 												@endif
@@ -130,19 +131,19 @@
 	                					<tbody>
 	                						<tr class="summary-subtotal">
 	                							<td>Subtotal:</td>
-	                							<td>NPR.{{ $varianttotal + $simpletotal }}</td>
+	                							<td>NPR.{{ $totalCharge }}</td>
 											</tr><!-- End .summary-subtotal -->
 											
 											@if($totalCharge>0)
 											<tr class="summary-subtotal">
 	                							<td>Extra Feature Charge:</td>
-	                							<td>NPR.{{ $totalCharge }}</td>
+	                							<td>NPR.{{ $extra }}</td>
 											</tr><!-- End .summary-subtotal -->
 											@endif
 	                						
 	                						<tr class="summary-total">
 	                							<td>Total:</td>
-	                							<td>NPR.{{ $varianttotal + $simpletotal + $totalCharge }}</td>
+	                							<td>NPR.{{  $extra + $totalCharge }}</td>
 	                						</tr><!-- End .summary-total -->
 	                					</tbody>
 	                				</table><!-- End .table table-summary -->

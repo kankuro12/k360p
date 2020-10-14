@@ -66,6 +66,9 @@
 </head>
 
 <body>
+    @php
+        $total=0;
+    @endphp
     <div class="container">
         <h1 class="text-center" style="margin-bottom: 5px;">
             <img src="{{ asset('logo.png') }}" style="max-width:200px;">
@@ -122,10 +125,13 @@
                     $product=$order->product;
                     @endphp
                     <tr>
-                        <td class="td-1">
-                            <img src="{{ asset($product->product_images) }}" style="width:100%">
+                        <td class="td-1" width="200">
+                            <div style="max-width:200px">
+
+                                <img src="{{ asset($product->product_images) }}" style="width:200px;">
+                            </div>
                         </td>
-                        <td class="td-2">
+                        <td class="td-2" >
                             <div>
                                 <h3>Order Details</h3>
 
@@ -142,7 +148,7 @@
                                     <strong>Rate: </strong>{{ $order->rate }}
                                 </p>
                                 <p>
-                                    <strong>shipping Charge: </strong>{{ $order->shippingcharge }}
+                                   
                                 </p>
                                 <p>
                                     <strong>Delivery: </strong>{{\App\Setting\OrderManager::delivertype[ $order->deliverytype] }} Delivery
@@ -156,7 +162,7 @@
                                 <hr>
 
                                 @php
-                                    $subtotal=($order->rate*$order->qty)+$order->shippingcharge ;
+                                    $subtotal=($order->rate*$order->qty)
                                 @endphp
 
                                 <h3>Extra Charges</h3>
@@ -169,6 +175,9 @@
                                 <hr>
                                 <h3>
                                     <strong> Subtotal : </strong> {{$subtotal}}
+                                    @php
+                                        $total+=$subtotal;
+                                    @endphp
                                 </h3>
                             </div>
                         </td>
@@ -176,9 +185,12 @@
                 @endforeach
             </table>
         </div>
-
-        
 <br>
+<div style="text-align:right">
+    <strong>Total:</strong>{{$total}} <br>
+    <strong>shipping charge:</strong>{{$shipping->shipping_charge}} <br>
+    <strong>Grand Total:</strong>{{$total+$shipping->shipping_charge}} <br>
+</div>
         <div style="background-color:#F2DEDE;text-align:center;padding: 2rem 0.5rem;">
             <a style="border:none;background:#007ACC;color:white;padding:0.9rem 2rem;font-weight:800;text-decoration: none;" href="{{route('user.account')}}" target="_blank">
                 View You Account

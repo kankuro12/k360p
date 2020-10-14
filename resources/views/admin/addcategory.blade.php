@@ -52,6 +52,13 @@
                                                 <input type="text" class="form-control" value="" name="cat_name" required>
                                             </div>
                                         </div>
+
+                                        <div class=" pr-md-1">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Referal Charge</label>
+                                                <input type="number" min="0" class="form-control" value="" name="referal_charge" required>
+                                            </div>
+                                        </div>
                                    
         
                                   

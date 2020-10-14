@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\model\OrderItem;
+use App\model\ShippingDetail;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\model\VendorUser\VendorUser;
@@ -21,7 +22,14 @@ class DashboardController extends Controller
 
 
     public function recentOrder(Request $request){
-        return view(HomePage::theme("user.dashboard.order_item"));
+        $shipping = ShippingDetail::where('user_id',Auth::user()->id)->get();
+        $orderItems = [];
+        foreach ($shipping as $key => $value) {
+            $order = OrderItem::where('shipping_detail_id',$value->id)->get();
+            array_push($orderItems,$order);
+        }
+        // dd($orderItems);
+        return view(HomePage::theme("user.dashboard.order_item"))->with(compact('orderItems'));
     }
 
     public function orderItem($id){

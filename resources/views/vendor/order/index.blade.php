@@ -152,7 +152,7 @@
                             @include('vendor.order.singleorder',['order'=>$order,'sid'=>$shipping->id])
                             </div>
                     @endforeach
-
+                    @if(env('vendoraccept',0)==1)            
                     <div>
                         <form id="orders-form-{{$shipping->id}}" action="" style="display:inline;">
                             @csrf
@@ -170,6 +170,7 @@
                             <span class="btn btn-danger" onclick="rejectall({{$shipping->id}})">Reject All</span>
                         @endif
                     </div>
+                    @endif
               </div>
             </div>
         </div>

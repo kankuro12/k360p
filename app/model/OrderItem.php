@@ -40,6 +40,6 @@ class OrderItem extends Model
     }
 
     public function shipping(){
-        return $this->belongsTo(ShippingDetail::class,'shipping_detail_is','id');
+        return ShippingDetail::where('id',$this->shipping_detail_id)->first();
     }
 }

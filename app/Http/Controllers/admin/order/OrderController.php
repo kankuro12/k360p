@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\model\admin\Product;
 use App\model\OrderItem;
 use App\model\ShippingDetail;
+use App\model\Vendor\Vendor;
 use App\Notifications\User\OnDelivery;
 use App\Notifications\User\OrderComfirmation;
 use App\Notifications\User\OrderDelivered;
 use App\Notifications\User\OrderPickup;
 use App\Notifications\User\RejectOrder;
+use App\Notifications\Vendor\OrderAccepted;
 use App\Notifications\Vendor\OrderPickedup;
 use App\Setting\OrderManager;
 use Illuminate\Http\Request;
@@ -49,11 +51,24 @@ class OrderController extends Controller
             ->update(['stage'=>$status,'pickedup'=>1]);
 
             if($status==1){
+                $vids=[];
                 ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
                 foreach (OrderItem::whereIn('id',$request->id)->get() as  $order) {
                     $order->pickedup=1;
                     $order->save();
+                    if($order->vendor_id!=null && $order->vendor_id!=0){
+
+                        if(!in_array($order->vendor_id,$vids)){
+                            array_push($vids,$order->vendor_id);
+                        }
+                    }
                 }
+
+                foreach ($vids as $vid) {
+                   Vendor::find($vid)->notify(new OrderAccepted());
+                }
+
+
                 
             }
             if($status==2){

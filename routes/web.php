@@ -23,7 +23,15 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('testo', function () {
 
-    Auth::logout();
+
+    $shipping=ShippingDetail::find(51);
+    $orders=OrderItem::where('shipping_detail_id',$shipping->id)->get();
+
+    return view('email.order.receipt',compact('shipping','orders'));
+    dd($shipping,$orders);
+
+    // Auth::logout();
+
     // foreach (Onsell::all() as $key => $value) {
     //     $value->time();
     // }
@@ -527,8 +535,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
         'as' => 'admin.store-shipping',
         'uses' => 'admin\DashboardController@shipping'
     ]);
-
-
     // blog routes
     Route::get('blogs', 'BlogController@index');
     Route::post('blog/store', 'BlogController@store')->name('blog.store');

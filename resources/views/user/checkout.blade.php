@@ -97,7 +97,7 @@
                         <ul class="order-details-form mb-4">
                                 <li><span>Product</span> <span>qty</span><span>Price</span><span>Total</span></li>
                                 @foreach ($items as $item)
-                                <li><span>{{ $item->name }}</span> <span>{{ $item->quantity }}</span><span>Rs. {{ $item->price }}</span><span>Rs. {{ $item->itemtotalprice }}</span></li>
+                                <li><span>{{ $item->name }}</span> <span>{{ $item->quantity }}</span><span>Rs. {{ $item->rate }}</span><span>Rs. {{ $item->itemtotalprice }}</span></li>
                                 @endforeach
                                 <li><span>Subtotal</span> <span></span><span></span>Rs. {{ $subtotalprice }}</span></li>
                                 <li><span>Shipping</span> <span></span><span></span><span>Rs. {{ $shippingcost }}</span></li>

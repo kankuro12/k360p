@@ -130,20 +130,15 @@
 										@php
 										$price = \App\model\ProductStock::where('product_id',$item->product_id)->where('code',$item->variant_code)->select('price')->first();
 										if($item->product->stocktype == 1){
-										$varianttotal = $varianttotal + $item->qty * $price->price;
+										$varianttotal = $varianttotal + $item->qty * $item->rate;
 										}else{
-										$simpletotal = $simpletotal + $item->product->sell_price * $item->qty;
+										$simpletotal = $simpletotal + $item->rate* $item->qty;
 										}
 										@endphp
 										<tr>
 											<td>{{ $k+1}}. <a href="{{route('product.detail',$item->product_id)}}">{{ $item->product->product_name }}</a></td>
 											<td>
-												@if($item->product->stocktype == 0)
-												NPR.{{ $item->product->sell_price }}
-												@else
-												NPR.{{ $price->price }}
-												@endif
-												x {{ $item->qty }}
+												NPR.{{ $item->rate *$item->qty}}
 											</td>
 										</tr>
 										@php 

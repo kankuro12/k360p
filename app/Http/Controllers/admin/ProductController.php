@@ -150,6 +150,7 @@ class ProductController extends Controller
             //     }
             // }
             $product = new Product;
+            $cat=Category::find($data['category_id']);
             $product->isverified = 0;
             $product->category_id = $data['category_id'];
             $product->costprice = $data['costprice'];
@@ -165,9 +166,13 @@ class ProductController extends Controller
             $product->tags = $data['tags'];
             $product->status = "";
             $product->isverified = 1;
+            if($request->weight<env('maxbundableweight',6)){
+                $product->canbundle=true;
+            }
             $product->product_images = $request->file('product_main_images')->store('images/backend_images/products/main_image/');
             $cc = ChargesManager::getClosing($product->category_id, $product->mark_price);
             $product->closingcharge = $cc != null ? $cc->amount : 0;
+            $product->referalcharge=$cat->referal_charge;
             $product->save();
 
             if ($request->hasFile('product_images')) {
@@ -192,6 +197,8 @@ class ProductController extends Controller
             $shippingdetail->w = $request->w;
             $shippingdetail->h = $request->h;
             $shippingdetail->save();
+
+
 
             //addshipping
             $wc = new ProductWeightClass();
@@ -425,6 +432,7 @@ class ProductController extends Controller
         $product->sell_price = $data['sell_price'];
         $product->tags = $data['tags'];
         $product->featured = $data['featured']??0;
+        $product->canbundle = $data['canbundle']??0;
         if($data['quantity']!=null){
 
             $product->quantity = $data['quantity'];

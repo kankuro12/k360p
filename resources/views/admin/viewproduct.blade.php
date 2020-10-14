@@ -147,6 +147,8 @@
                                             action="{{ route('admin.update-product', ['product' => $productdetail->product_id]) }}"
                                             method="post">
                                             @csrf
+
+
                                             <p class="prod-desc"><strong>Name: </strong>
                                                 <input value="{{$productdetail->product_name}}" type="text" name="product_name" id="P_name" required class="cc">
 
@@ -223,6 +225,17 @@
                                                 </p>
                                             @endif
 
+                                            canbundle
+
+                                            <p class="prod-desc"><strong>Can Bundle: </strong>
+                                                <input type="checkbox" name="canbundle" id="canbundle" {{$productdetail->canbundle == 1?"checked":""}} value="1">
+                                                @if ($productdetail->canbundle == 1)
+                                                    <span id="featured_text" class="label label-primary">Can Bundle</span>
+
+                                                @else
+                                                    <span id="featured_text" class="label label-danger">Cannot Bundle</span>
+                                                @endif
+                                            </p>
                                             <p class="prod-desc"><strong>Featured: </strong>
                                                 <input type="checkbox" name="featured" id="featured" {{$productdetail->featured == 1?"checked":""}} value="1">
                                                 @if ($productdetail->featured == 1)

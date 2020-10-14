@@ -9,9 +9,29 @@ class ChargesManager
     public static function getShipping($cat_id,$weight,$range,$shipping_class_id){
         $semicat_id=$cat_id;
         $semicat=Category::find($cat_id);
+
+        $data=\App\WeightClass::where('category_id',$semicat_id)
+        ->where('min','<=',$weight)
+        ->where('max','>=',$weight)
+        ->where('deliver_range',$range)
+        ->where('shipping_class_id',$shipping_class_id)
+        ->first();
+        if($data!=null){
+            return $data;
+        }
+
         while ($semicat->parent_id!=null) {
             $semicat_id=$semicat->parent_id;
             $semicat=Category::find($semicat_id);
+            $data=\App\WeightClass::where('category_id',$semicat_id)
+            ->where('min','<=',$weight)
+            ->where('max','>=',$weight)
+            ->where('deliver_range',$range)
+            ->where('shipping_class_id',$shipping_class_id)
+            ->first();
+            if($data!=null){
+                return $data;
+            }
         }
         if($semicat_id==null){
             $semicat_id=$cat_id;
@@ -26,10 +46,26 @@ class ChargesManager
     }
     public static function getClosing($cat_id,$price){
         $semicat_id=$cat_id;
+
         $semicat=Category::find($cat_id);
+
+         $data= \App\ClosingCharge::where('category_id',$semicat_id)
+        ->where('min','<=',$price)
+        ->where('max','>=',$price)
+        ->first();
+        if($data!=null){
+            return $data;
+        }
         while ($semicat->parent_id!=null) {
             $semicat_id=$semicat->parent_id;
             $semicat=Category::find($semicat_id);
+            $data= \App\ClosingCharge::where('category_id',$semicat_id)
+            ->where('min','<=',$price)
+            ->where('max','>=',$price)
+            ->first();
+            if($data!=null){
+                return $data;
+            }
         }
         if($semicat_id==null){
             $semicat_id=$cat_id;

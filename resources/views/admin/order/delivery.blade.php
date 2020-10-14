@@ -152,7 +152,9 @@
                 } 
                 $("#order").val('');
                 // console.log(data);
-            });
+            }).fail(function(response) {
+                alert('Error: ' + response.responseText);
+            });;
         }
 
 

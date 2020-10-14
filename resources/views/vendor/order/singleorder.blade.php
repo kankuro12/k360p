@@ -55,6 +55,7 @@ $product=$order->product;
                 </div>
                
             </div>
+            @if(env('vendoraccept',0)==1)
             <div>
                     <form  method="post" id="order-form-{{$order->id}}">
                         @csrf
@@ -68,6 +69,7 @@ $product=$order->product;
                  
                     @endif
             </div>
+            @endif
         </div>
     </div>
 </div>

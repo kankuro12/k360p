@@ -20,6 +20,7 @@ class CategoryController extends Controller
             $category = new Category;
             $parent = Category::find($parentid);
             $category->cat_name = $data['cat_name'];
+            $category->referal_charge = $data['referal_charge']??0;
             $category->cat_description = $data['cat_description']??"";
             $category->cat_image = $request->file('cat_image')->store('images/backend_images/categories/');
             //dd($parent);
@@ -115,6 +116,7 @@ class CategoryController extends Controller
         $category = Category::find($data['cat_id']);
         //dd($category);
         $category->cat_name = $data['cat_name'];
+        $category->referal_charge = $data['referal_charge'];
         $category->cat_description = $data['cat_description'];
         if($data['parent_id'] == Null){
             $category->parent_id = $data['p_id'];

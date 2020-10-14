@@ -43,7 +43,7 @@
                             <input type="date" id="date" class="form-control">
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
 
                                     <span class="input-group-text">
@@ -54,7 +54,7 @@
                                     <span id="errmsg"></span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <span class="input-group-text">
                                         Enter #Order Group/Shipping Track ID (Press Enter To Search Item)
@@ -62,7 +62,7 @@
                                     <input type="text" class="form-control" placeholder="#Order Group/Shipping Track ID"
                                         id="ordergroup">
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div style="padding:1rem" id="data">

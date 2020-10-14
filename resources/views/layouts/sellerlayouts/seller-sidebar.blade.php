@@ -69,6 +69,14 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                         <span class="sidebar-normal"> Update Bank Detail </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('vendor.accounts') }}">
+                        <span class="sidebar-mini"> AC </span>
+                        <span class="sidebar-normal"> My Finance </span>
+                    </a>
+                </li>
+                
+
                 <li >
                     <a href="/vendor/messages">
                         <span class="sidebar-mini"> Ms </span>

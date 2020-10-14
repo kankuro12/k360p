@@ -41,28 +41,37 @@
                                                 <table class="table table-cart table-mobile">
                                                     <thead>
                                                         <tr>
-                                                            <th>SID</th>
-                                                            <th>Name</th>
-                                                            <th>Address</th>
-                                                            <th>Phone</th>
+                                                            <th>Traking Id</th>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Rate</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @foreach(\App\model\OrderItem::where('stage',0)->get() as $order)
+                                                        @foreach($orderItems as $items)
+                                                        @foreach($items as $order)
+                                                        @if($order->stage == 0)
                                                         <tr>
                                                             <td>#{{ $order->id }}</td>
-                                                            <td>{{ $order->shipping->name }}
-                                                                <br>
-                                                                <strong style="color:#0acf21;">
-                                                                    {{$order->created_at->diffForHumans()}}
-                                                                </strong>
+                                                            <td class="product-col">
+                                                                <div class="product" style="background: none;">
+                                                                    <figure class="product-media">
+                                                                        <a href="#">
+                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
+                                                                        </a>
+                                                                    </figure>
+                                                                </div><!-- End .product -->
                                                             </td>
-                                                            <td>{{ $order->shipping->area->name }}, <br> {{ $order->shipping->municipality->name }}, <br> {{ $order->shipping->district->name }}, {{ $order->shipping->province->name }} </td>
-                                                            <td>{{ $order->shipping->phone }}</td>
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Items</a></td>
+
+                                                            <td>{{$order->qty}}</td>
+                                                            <td>{{$order->rate}}</td>
+
+                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
                                                         </tr>
+                                                        @endif
+                                                        @endforeach
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -83,28 +92,37 @@
                                                 <table class="table table-cart table-mobile">
                                                     <thead>
                                                         <tr>
-                                                            <th>SID</th>
-                                                            <th>Name</th>
-                                                            <th>Address</th>
-                                                            <th>Phone</th>
+                                                            <th>Traking Id</th>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Rate</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @foreach(\App\model\OrderItem::where('stage',1)->get() as $order)
+                                                        @foreach($orderItems as $items)
+                                                        @foreach($items as $order)
+                                                        @if($order->stage == 1)
                                                         <tr>
                                                             <td>#{{ $order->id }}</td>
-                                                            <td>{{ $order->shipping->name }}
-                                                            <br>
-                                                                <strong style="color:#0acf21;">
-                                                                    {{$order->created_at->diffForHumans()}}
-                                                                </strong>
+                                                            <td class="product-col">
+                                                                <div class="product" style="background: none;">
+                                                                    <figure class="product-media">
+                                                                        <a href="#">
+                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
+                                                                        </a>
+                                                                    </figure>
+                                                                </div><!-- End .product -->
                                                             </td>
-                                                            <td>{{ $order->shipping->area->name }}, <br> {{ $order->shipping->municipality->name }}, <br> {{ $order->shipping->district->name }}, {{ $order->shipping->province->name }} </td>
-                                                            <td>{{ $order->shipping->phone }}</td>
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Items</a></td>
+
+                                                            <td>{{$order->qty}}</td>
+                                                            <td>{{$order->rate}}</td>
+
+                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
                                                         </tr>
+                                                        @endif
+                                                        @endforeach
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -125,28 +143,37 @@
                                                 <table class="table table-cart table-mobile">
                                                     <thead>
                                                         <tr>
-                                                            <th>SID</th>
-                                                            <th>Name</th>
-                                                            <th>Address</th>
-                                                            <th>Phone</th>
+                                                            <th>Traking Id</th>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Rate</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @foreach(\App\model\OrderItem::where('stage',2)->get() as $order)
+                                                        @foreach($orderItems as $items)
+                                                        @foreach($items as $order)
+                                                        @if($order->stage == 2)
                                                         <tr>
                                                             <td>#{{ $order->id }}</td>
-                                                            <td>{{ $order->shipping->name }}
-                                                            <br>
-                                                                <strong style="color:#0acf21;">
-                                                                    {{$order->created_at->diffForHumans()}}
-                                                                </strong>
+                                                            <td class="product-col">
+                                                                <div class="product" style="background: none;">
+                                                                    <figure class="product-media">
+                                                                        <a href="#">
+                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
+                                                                        </a>
+                                                                    </figure>
+                                                                </div><!-- End .product -->
                                                             </td>
-                                                            <td>{{ $order->shipping->area->name }}, <br> {{ $order->shipping->municipality->name }}, <br> {{ $order->shipping->district->name }}, {{ $order->shipping->province->name }} </td>
-                                                            <td>{{ $order->shipping->phone }}</td>
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Items</a></td>
+
+                                                            <td>{{$order->qty}}</td>
+                                                            <td>{{$order->rate}}</td>
+
+                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
                                                         </tr>
+                                                        @endif
+                                                        @endforeach
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -167,28 +194,37 @@
                                                 <table class="table table-cart table-mobile">
                                                     <thead>
                                                         <tr>
-                                                            <th>SID</th>
-                                                            <th>Name</th>
-                                                            <th>Address</th>
-                                                            <th>Phone</th>
+                                                            <th>Traking Id</th>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Rate</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @foreach(\App\model\OrderItem::where('stage',3)->get() as $order)
+                                                        @foreach($orderItems as $items)
+                                                        @foreach($items as $order)
+                                                        @if($order->stage == 3)
                                                         <tr>
                                                             <td>#{{ $order->id }}</td>
-                                                            <td>{{ $order->shipping->name }}
-                                                            <br>
-                                                                <strong style="color:#0acf21;">
-                                                                    {{$order->created_at->diffForHumans()}}
-                                                                </strong>
+                                                            <td class="product-col">
+                                                                <div class="product" style="background: none;">
+                                                                    <figure class="product-media">
+                                                                        <a href="#">
+                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
+                                                                        </a>
+                                                                    </figure>
+                                                                </div><!-- End .product -->
                                                             </td>
-                                                            <td>{{ $order->shipping->area->name }}, <br> {{ $order->shipping->municipality->name }}, <br> {{ $order->shipping->district->name }}, {{ $order->shipping->province->name }} </td>
-                                                            <td>{{ $order->shipping->phone }}</td>
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Items</a></td>
+
+                                                            <td>{{$order->qty}}</td>
+                                                            <td>{{$order->rate}}</td>
+
+                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
                                                         </tr>
+                                                        @endif
+                                                        @endforeach
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -209,28 +245,37 @@
                                                 <table class="table table-cart table-mobile">
                                                     <thead>
                                                         <tr>
-                                                            <th>SID</th>
-                                                            <th>Name</th>
-                                                            <th>Address</th>
-                                                            <th>Phone</th>
+                                                            <th>Traking Id</th>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Rate</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @foreach(\App\model\OrderItem::where('stage',4)->get() as $order)
+                                                        @foreach($orderItems as $items)
+                                                        @foreach($items as $order)
+                                                        @if($order->stage == 4)
                                                         <tr>
                                                             <td>#{{ $order->id }}</td>
-                                                            <td>{{ $order->shipping->name }}
-                                                            <br>
-                                                                <strong style="color:#0acf21;">
-                                                                    {{$order->created_at->diffForHumans()}}
-                                                                </strong>
+                                                            <td class="product-col">
+                                                                <div class="product" style="background: none;">
+                                                                    <figure class="product-media">
+                                                                        <a href="#">
+                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
+                                                                        </a>
+                                                                    </figure>
+                                                                </div><!-- End .product -->
                                                             </td>
-                                                            <td>{{ $order->shipping->area->name }}, <br> {{ $order->shipping->municipality->name }}, <br> {{ $order->shipping->district->name }}, {{ $order->shipping->province->name }} </td>
-                                                            <td>{{ $order->shipping->phone }}</td>
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Items</a></td>
+
+                                                            <td>{{$order->qty}}</td>
+                                                            <td>{{$order->rate}}</td>
+
+                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
                                                         </tr>
+                                                        @endif
+                                                        @endforeach
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -251,28 +296,37 @@
                                                 <table class="table table-cart table-mobile">
                                                     <thead>
                                                         <tr>
-                                                            <th>SID</th>
-                                                            <th>Name</th>
-                                                            <th>Address</th>
-                                                            <th>Phone</th>
+                                                            <th>Traking Id</th>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Rate</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @foreach(\App\model\OrderItem::where('stage',5)->get() as $order)
+                                                        @foreach($orderItems as $items)
+                                                        @foreach($items as $order)
+                                                        @if($order->stage == 5)
                                                         <tr>
                                                             <td>#{{ $order->id }}</td>
-                                                            <td>{{ $order->shipping->name }}
-                                                            <br>
-                                                                <strong style="color:#0acf21;">
-                                                                    {{$order->created_at->diffForHumans()}}
-                                                                </strong>
+                                                            <td class="product-col">
+                                                                <div class="product" style="background: none;">
+                                                                    <figure class="product-media">
+                                                                        <a href="#">
+                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
+                                                                        </a>
+                                                                    </figure>
+                                                                </div><!-- End .product -->
                                                             </td>
-                                                            <td>{{ $order->shipping->area->name }}, <br> {{ $order->shipping->municipality->name }}, <br> {{ $order->shipping->district->name }}, {{ $order->shipping->province->name }} </td>
-                                                            <td>{{ $order->shipping->phone }}</td>
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Items</a></td>
+
+                                                            <td>{{$order->qty}}</td>
+                                                            <td>{{$order->rate}}</td>
+
+                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
                                                         </tr>
+                                                        @endif
+                                                        @endforeach
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -293,32 +347,37 @@
                                                 <table class="table table-cart table-mobile">
                                                     <thead>
                                                         <tr>
-                                                            <th>SID</th>
-                                                            <th>Name</th>
-                                                            <th>Address</th>
-                                                            <th>Phone</th>
+                                                            <th>Traking Id</th>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Rate</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @foreach(\App\model\OrderItem::where('stage',6)->get() as $order)
+                                                        @foreach($orderItems as $items)
+                                                        @foreach($items as $order)
+                                                        @if($order->stage == 6)
                                                         <tr>
                                                             <td>#{{ $order->id }}</td>
-                                                            @if ($order->shipping==null)
-                                                                {{dd($order)}}
-                                                            @else
-                                                                <td>{{ $order->shipping->name }}
-                                                                <br>
-                                                                    <strong style="color:#0acf21;">
-                                                                        {{$order->created_at->diffForHumans()}}
-                                                                    </strong>
-                                                                </td>
-                                                            @endif
-                                                            <td>{{ $order->shipping->area->name }}, <br> {{ $order->shipping->municipality->name }}, <br> {{ $order->shipping->district->name }}, {{ $order->shipping->province->name }} </td>
-                                                            <td>{{ $order->shipping->phone }}</td>
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Items</a></td>
+                                                            <td class="product-col">
+                                                                <div class="product" style="background: none;">
+                                                                    <figure class="product-media">
+                                                                        <a href="#">
+                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
+                                                                        </a>
+                                                                    </figure>
+                                                                </div><!-- End .product -->
+                                                            </td>
+
+                                                            <td>{{$order->qty}}</td>
+                                                            <td>{{$order->rate}}</td>
+
+                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
                                                         </tr>
+                                                        @endif
+                                                        @endforeach
                                                         @endforeach
                                                     </tbody>
                                                 </table>

@@ -34,14 +34,15 @@
                                                     <tbody>
                                                         <h5>Shipping Group - #{{ $orderItem->id }}</h5>
                                                         <tr>
-                                                            <td>{{ $orderItem->shipping->name }}
+                                                            <td>{{ $orderItem->shipping()->name }}
                                                                 <br>
                                                                 <strong style="color:#0acf21;">
                                                                     {{$orderItem->created_at->diffForHumans()}}
                                                                 </strong>
                                                             </td>
-                                                            <td>{{ $orderItem->shipping->area->name }}, <br> {{ $orderItem->shipping->municipality->name }}, <br> {{ $orderItem->shipping->district->name }}, {{ $orderItem->shipping->province->name }} </td>
-                                                            <td>{{ $orderItem->shipping->email }},<br>{{ $orderItem->shipping->phone }}</td>
+                                                            <td>{{ $orderItem->shipping()->area->name }}, <br> {{ $orderItem->shipping()->municipality->name }}, <br> {{ $orderItem->shipping()->district->name }}, {{ $orderItem->shipping()->province->name }} </td>
+                                                            <td>{{ $orderItem->shipping()->email }},<br>{{ $orderItem->shipping()->phone }}</td>
+                                                        
                                                         </tr>
                                                     </tbody>
                                                 </table>

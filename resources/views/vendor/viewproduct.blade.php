@@ -60,6 +60,12 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <h2 style="text-transform: uppercase;"><strong>General Info</strong></h2>
+                                                <div>
+                                                    @if ($productdetails->vendor_id!=null)
+                                                        
+                                                    <span>Vendor Product</span><span></span>
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="col-md-6"><img class="img img-responsive img-round"
                                                     style="max-width: 120px;"
@@ -175,6 +181,15 @@
                                                 </p>
                                             @endif
 
+                                            <p class="prod-desc"><strong>Can Bundle: </strong>
+                                                
+                                                @if ($productdetail->canbundle == 1)
+                                                    <span id="featured_text" class="label label-primary">Can Bundle</span>
+                                                @else
+                                                    <span id="featured_text" class="label label-danger">Cannot Bundle</span>
+                                                @endif
+                                                <span>( Request Admin To Change Bundle Info )</span>
+                                            </p>
                                             <p class="prod-desc"><strong>Featured: </strong>
                                                 <input type="checkbox" name="featured" id="featured" {{$productdetail->featured == 1?"checked":""}} value="1">
                                                 @if ($productdetail->featured == 1)

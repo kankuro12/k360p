@@ -31,6 +31,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-8 pr-md-1">
+                        <div class="form-group label-floating">
+                        <label class="control-label">Referal Charge</label>
+                        <input type="text" class="form-control"  value="{{ $data->referal_charge }}" name="referal_charge">
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-8">
@@ -46,7 +54,7 @@
                         <label for="">Image</label>
                         <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                             <div class="fileinput-new thumbnail">
-                                <img src="{{ asset('images/backend_images/categories/'.$data->cat_image) }}" alt="...">
+                                <img src="{{ asset($data->cat_image) }}" alt="...">
                             </div>
                             <div class="fileinput-preview fileinput-exists thumbnail"></div>
                             <div>

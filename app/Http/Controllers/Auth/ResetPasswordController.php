@@ -50,7 +50,7 @@ class ResetPasswordController extends Controller
         $user->save();
         if($user->role_id==1){
 
-            $this->redirectTo="/admin/login";
+            $this->redirectTo="/user/login";
         }elseif($user->role_id==2){
             $this->redirectTo="/vendor/login";
             
@@ -64,6 +64,6 @@ class ResetPasswordController extends Controller
     }
 
     public function success(Request $request){
-        dd($request);
+       return redirect('/');
     }
 }

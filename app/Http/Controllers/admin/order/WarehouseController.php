@@ -41,11 +41,18 @@ class WarehouseController extends Controller
         $order=OrderItem::where('stage',1)->where('pickedup',1)->where('id',$request->id)->first();
         
         if($order!=null){
-            
-            $sid=$order->shoipping_detail_id;
+            $sid=$order->shipping_detail_id;
+            $shipping=ShippingDetail::find($sid);
+            $other=OrderItem::where('shipping_detail_id',$sid)->get();
+           
+            foreach ($other as $key => $value) {
+                if($value->pickedup==0){
+                    return response( " Order No #".$request->id." Cannot Be Add to delivery Other items in shippinggroup is not Picked",404);
+                }
+            }
             return view('admin.order.pickup.singleorder2',compact('order','sid'));
         }else{
-            return response( "<h3 ><strong > Order No #".$request->id." Cannot Be Add to delivery </strong></h3>",404);
+            return response( " Order No #".$request->id." Cannot Be Add to delivery ",404);
         }
      }
  

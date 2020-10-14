@@ -28,6 +28,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-left" >Name</th>
+                                    <th class="text-left">Referal Charge</th>
                                     <th class="text-left">image</th>
                                     <th class="text-left">Parent Category</th>
                                     <th class="disabled-sorting text-left">Actions</th>
@@ -37,6 +38,7 @@
                             @foreach($categories as $category)
                                 <tr>
                                     <td class="text-left">{{ $category->cat_name }}</td>
+                                    <td class="text-left">{{ $category->referal_charge }}</td>
                                     <td class="text-left"><img style="max-width: 120px;" src="{{ asset( $category->cat_image) }}" alt=""></td>
                                     <td class="text-left"><span class="label label-primary">{{ $category->parentlists }}</span></td>
                                     <td class="text-left">

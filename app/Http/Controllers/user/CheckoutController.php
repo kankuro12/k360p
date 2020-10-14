@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Session;
 class CheckoutController extends Controller
 {
     public function index(Request $request){
+        // dd($request);
         if($request->isMethod('post')){
             // dd($request->shipping_charge);
             $name = $request->fname.' '.$request->lname;
@@ -37,15 +38,22 @@ class CheckoutController extends Controller
             $shippingDetail->district_id = $request->district_id;
             $shippingDetail->municipality_id = $request->municipality_id;
             $shippingDetail->shipping_area_id = $request->shipping_area_id;
+            $shippingDetail->shipping_charge = $request->shipping_charge;
             $shippingDetail->otp = mt_rand(00000,99999);
             // dd($shippingDetail);
             $shippingDetail->save();
             $session_id = Session::get('session_id');
             $cart = Cart::where('session_id',$session_id)->get();
             $vids = [];
+            $all=$request->all();
             foreach ($cart as $key => $value) {
                 $productDetail = Product::where('product_id',$value->product_id)->where('isverified',1)->first();
                 $orderItem = new OrderItem();
+                $orderItem->shipping_detail_id = $shippingDetail->id;
+
+                $orderItem->bundleid =$all['bundle_'.$value->product_id];
+                $orderItem->shippingcharge = $all['shipping_'.$value->product_id];
+
                 $orderItem->shipping_detail_id = $shippingDetail->id;
                 $orderItem->product_id = $value->product_id;
                 $orderItem->qty = $value->qty;
@@ -62,7 +70,6 @@ class CheckoutController extends Controller
                     $orderItem->ismainstore=1;
                 }
 
-                $orderItem->shippingcharge = $request->shipping_charge;
                 $orderItem->stage = 0;
                 $orderItem->issimple = $productDetail->stocktype;
                 $orderItem->rate = $value->rate;
@@ -119,11 +126,19 @@ class CheckoutController extends Controller
         $session_id = Session::get('session_id');
         $cartItem = Cart::where('session_id',$session_id)->get();
         $charge = [];
+        $charge_1 = [];
+        $charge_2 = [];
+        $bundle=[];
+        $bundle_1=[];
+        $i=0;
 
         foreach ($cartItem as $value) {
             $shippingCharge = OrderManager::getShipping($value->product_id,$p_id,$d_id,$m_id,$shipping_area_id);
             $c=[];
-            $c['product']=Product::where('product_id',$value->product_id)->select('product_name','product_id')->first()->toArray();
+            $c['product']=Product::where('product_id',$value->product_id)->select('product_name','product_id','canbundle','vendor_id')->first()->toArray();
+            if($c['product']['vendor_id']==null){
+                $c['product']['vendor_id']=0; 
+            }
             if($shippingCharge['type']=='s101'){
                 $c['type']="Free Shipping";
                 $c['price']=0;
@@ -149,12 +164,50 @@ class CheckoutController extends Controller
                 $c['price'] = $value->qty * $shippingCharge['Price'];
                 $c['show']=$shippingCharge['Price']." X ".$value->qty;
             }
-          
+            if($c['product']['canbundle']==1){
+                array_push($charge_1,$c);
+                
+            }else{
+                $c['bundleid']=$i;
+                array_push($charge_2,$c);
+                $bundle['bundle'.$i]=[];
+                $bundle['bundle'.$i]['shipping']=$c['price'];
+                $bundle['bundle'.$i]['product']=[];
+                array_push($bundle['bundle'.$i]['product'],$c);
+                $i+=1;
+            }
             array_push($charge,$c);
         }
 
-        // dd($charge);
-        return view('themes.molla.user.dashboard.shipping',['charges'=>$charge]);
+       
+        if(count($charge_1)>0){
+
+            $max=0;
+            foreach ($charge_1 as $cc) {
+                if($cc['price']>$max){
+                    $max=$cc['price'];
+                }
+            }
+    
+            if(count($bundle)>0){
+                $max=$max/2;
+            }
+    
+            $bundle['bundle'.$i]=[];
+            $bundle['bundle'.$i]['shipping']=$max;
+            $bundle['bundle'.$i]['product']=[];
+            foreach ($charge_1 as $cc) {
+                $cc['bundleid']=$i;
+                array_push( $bundle['bundle'.$i]['product'],$cc);
+            }
+        }
+
+
+
+
+        // dd($bundle);
+        // return view('themes.molla.user.dashboard.shipping',['charges'=>$charge]);
+        return view('themes.molla.user.dashboard.newshipping',['bundles'=>$bundle]);
     }
 
     

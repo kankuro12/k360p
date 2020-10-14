@@ -69,6 +69,7 @@ class ProductController extends Controller
         //dd($request->all());
         if ($request->isMethod('post')) {
             $data = $request->all();
+            $cat=Category::find($data['category_id']);
             $product = new Product;
             $product->isverified = 0;
             $product->vendor_id = Auth::user()->vendor->id;
@@ -88,6 +89,7 @@ class ProductController extends Controller
             $product->product_images = $request->file('product_main_images')->store('images/backend_images/products/main_image/');
             $cc = ChargesManager::getClosing($product->category_id, $product->mark_price);
             $product->closingcharge = $cc != null ? $cc->amount : 0;
+            $product->referalcharge=$cat->referal_charge;
             $product->save();
 
             if ($request->hasFile('product_images')) {
