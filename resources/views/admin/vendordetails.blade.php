@@ -94,7 +94,7 @@
                                     <div class="card card-profile">
                                         <div class="card-avatar">
                                             <a>
-                                                <img class="img" src="{{ asset('images/vendor_images/profile/'. $vendordetails->logo) }}" />
+                                                <img class="img" src="{{ asset($vendordetails->logo) }}" />
                                             </a>
                                         </div>
                                         <div class="card-content">
