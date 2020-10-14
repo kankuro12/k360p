@@ -859,6 +859,8 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['authen', 'type'], 'type' =
     Route::get('product-attribute-item/del/{aiid}', 'vendor\VariantController@del_item');
     Route::post('product-stock/add/{pid}', 'vendor\VariantController@add_Stock');
     Route::post('product-stock/update/{stock}', 'vendor\VariantController@update_Stock');
+    Route::post('simple-stock/{product}', 'Vendor\VariantController@simple_Stock')->name('vendor.simple-stock');
+
     Route::post('product-shipping/{product}', 'Vendor\VariantController@product_shipping');
     Route::post('product-option/{product}', 'Vendor\VariantController@product_option');
 

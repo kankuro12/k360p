@@ -262,7 +262,8 @@
                                         @if ($productdetail->stocktype == 1)
                                             @include('vendor.product.VariantStock')
                                         @else
-                                            <h4>Variant Not Found</h4>
+                                        @include('vendor.product.SimpleStock')
+
                                         @endif
                                     </div>
                                     <div class="tab-pane {{ $sel == 4 ? 'active' : '' }}" id="productshipping">

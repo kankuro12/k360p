@@ -282,4 +282,28 @@ class VariantController extends Controller
                 ->back()
                 ->with('sel', 6);
         }
+
+        public function simple_Stock(Product $product, Request $request)
+        {
+            $validator1 = Validator::make($request->all(), [
+    
+                
+                'qty' => 'required',
+              
+            ]);
+            
+            if ($validator1->fails()) {
+                // dd($validator1->errors());
+                return redirect()
+                    ->back()
+                    ->withErrors($validator1)
+                    ->with('sel', 3);
+            }
+            $input = $request->all();
+            $product->quantity = $input['qty'];
+            $product->save();
+            return redirect()
+                ->back()
+                ->with('sel', 3);
+        }
 }
