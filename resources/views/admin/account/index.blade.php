@@ -58,7 +58,10 @@
                                                     {{$account->withdraw()}}
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-primary" href="{{route('admin.withdrawl',['id'=>$vendor->id])}}">Withdrawl</a>
+                                                    @if ($account->total()>=env('minwithdrawl',100))
+                                                        
+                                                        <a class="btn btn-primary" href="{{route('admin.withdrawl',['id'=>$vendor->id])}}">Withdrawl</a>
+                                                    @endif
                                                     <a class="btn btn-success" href="{{route('admin.detail',['id'=>$vendor->id])}}">Details</a>
                                                     {{-- <a href="{{route('admin.withdrawl',['id'=>$vendor->id])}}">Withdrawl</a> --}}
                                                 </td>
