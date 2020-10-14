@@ -63,7 +63,6 @@ class SetupController extends Controller
 
             }
             $option->deliver_range=$request->deliver_range;
-            $option->storename=$request->storename;
             $option->landmark=$request->landmark;
             $option->province_id=$request->province_id;
             $option->district_id=$request->district_id;
@@ -74,6 +73,7 @@ class SetupController extends Controller
             $option->bulkbuy=$request->bulkbuy??false;
             $option->vendor_id=$vendor->id;
             $option->save();
+            $vendor->storename=$request->storename;
             $vendor->address=$request->address;
             $vendor->stage=2;
             $vendor->save();

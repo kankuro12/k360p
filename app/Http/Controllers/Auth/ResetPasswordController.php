@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 class ResetPasswordController extends Controller
@@ -60,5 +61,9 @@ class ResetPasswordController extends Controller
         // event(new PasswordReset($user));
 
         return redirect('/user/login');
+    }
+
+    public function success(Request $request){
+        dd($request);
     }
 }
