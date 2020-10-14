@@ -65,6 +65,11 @@ Route::get('/', [
     'as' => 'public.home'
 ]);
 
+Route::get('/search', [
+    'uses' => 'HomeController@search',
+    'as' => 'public.search'
+]);
+
 Route::get('/home1', [
     'uses' => 'HomeController@home1',
     'as' => 'public.home1'

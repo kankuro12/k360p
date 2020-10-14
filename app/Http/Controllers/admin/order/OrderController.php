@@ -54,8 +54,8 @@ class OrderController extends Controller
                 $vids=[];
                 ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
                 foreach (OrderItem::whereIn('id',$request->id)->get() as  $order) {
-                    $order->pickedup=1;
-                    $order->save();
+                    // $order->pickedup=1;
+                    // $order->save();
                     if($order->vendor_id!=null && $order->vendor_id!=0){
 
                         if(!in_array($order->vendor_id,$vids)){

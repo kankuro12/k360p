@@ -52,7 +52,7 @@ class AccountController extends Controller
             if(!in_array("Order_Date",$attributes)){
                 array_push($attributes,"Order_Date");
             }
-            $data=OrderPayment::where('paid',0)-> get()->groupBy(function($date) {
+            $data=OrderPayment::where('vendor_id',$id)->where('paid',0)-> get()->groupBy(function($date) {
                 return \Carbon\Carbon::parse($date->created_at)->toDateString();
             });
            

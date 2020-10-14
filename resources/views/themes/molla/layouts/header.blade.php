@@ -112,21 +112,21 @@
                             <div
                                 class="header-search header-search-extended header-search-visible header-search-no-radius">
                                 <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                                <form action="#" method="get">
+                                <form action="/search" method="get">
                                     <div class="header-search-wrapper search-wrapper-wide" >
 
                                         <div class="select-custom" >
                                             <select id="cat" name="cat">
                                                 <option value="">All Categories</option>
                                                 @foreach ($cats as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->cat_name }}</option>
+                                                    <option value="{{ $item->cat_id }}">{{ $item->cat_name }}</option>
                                                     @if (count($item->subcat))
                                                         @foreach ($item->subcat as $item1)
-                                                            <option value="{{ $item1->id }}">- {{ $item1->cat_name }}
+                                                            <option value="{{ $item1->cat_id }}">- {{ $item1->cat_name }}
                                                             </option>
                                                             @if (count($item1->subcat))
                                                                 @foreach ($item1->subcat as $i)
-                                                                    <option value="{{ $i->id }}">-- {{ $i->cat_name }}
+                                                                    <option value="{{ $i->cat_id }}">-- {{ $i->cat_name }}
                                                                     </option>
                                                                 @endforeach
                                                             @endif

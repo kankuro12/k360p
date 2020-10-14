@@ -25,6 +25,23 @@ class HomeController extends Controller
 
     
 
+    public function search(Request $request){
+        // dd($request);
+        $products=Product::where('isverified',1);
+        if($request->cat!=null){
+            $cat=Category::find($request->cat);
+            $ids=$cat->childList();
+            $products=$products->whereIn('category_id',$ids);
+        }
+        
+        $all=$request->all();
+        
+        $products=$products->where('product_name', 'LIKE', '%' . $request->q . '%')->orWhereRaw(" lower(`tags`) LIKE '%". strtolower ($request->q ). "%'");
+        $products=$products->orWhereIn('category_id',Category::where('cat_name', 'LIKE', '%' . $request->q . '%')->pluck('cat_id')->toArray())->paginate(12);
+
+        return view(HomePage::theme("product.search"),compact("products",'all'));
+        
+    }
 
     public function home1(){
         //dd(Auth::user()->id);
