@@ -165,23 +165,41 @@
                                             <div class="product-countdown" data-until="{{$sell->end_at}}" data-relative="false" data-labels-short="true" style="position:relative;background-color:#dc3545;"></div>
                                         </div><!-- End .heading-left -->
                                     </div>
-
+                                    @php
+                                    $sell_product =
+                                    \App\model\admin\Sell_product::where('sell_id',$sell->sell_id)->take(4)->get();
+                                    $sell_productCount =
+                                    \App\model\admin\Sell_product::where('sell_id',$sell->sell_id)->count();
+                                    @endphp
                                     <hr class="mt-1 mb-2">
                                    
                                     <div class="products mb-3">
-                                        <div class="row ">
-                                            @php
-                                            $sell_product =
-                                            \App\model\admin\Sell_product::where('sell_id',$sell->sell_id)->take(4)->get();
-                                            $sell_productCount =
-                                            \App\model\admin\Sell_product::where('sell_id',$sell->sell_id)->count();
-                                            @endphp
-                                            @foreach ($sell_product as $p)
-                                                <div class="col-12 col-md-4 col-lg-4 col-xl-3">
-                                                    @include(\App\Setting\HomePage::theme('elements.product'),['product'=>$p->product])
-                                                </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
-                                            @endforeach
-                                        </div><!-- End .row -->
+                                        <div class="d-md-none d-block">
+                                            <div class="owl-carousel owl-full carousel-equal-height cat-owl" 
+                                            data-owl='{
+                                                "responsive":{
+                                                    "0": {
+                                                        "items":1               
+                                                    }
+                        
+                                                }}'>
+                                                @foreach ($sell_product as $p)
+                                                    @include('themes.molla.elements.product',['product'=>$p->product])
+                                                @endforeach
+                                        
+                                            </div><!-- End .owl-carousel -->
+                                        </div>
+                                        <div class="d-md-block d-none">
+
+                                            <div class="row ">
+                                               
+                                                @foreach ($sell_product as $p)
+                                                    <div class="col-12 col-md-4 col-lg-4 col-xl-3">
+                                                        @include(\App\Setting\HomePage::theme('elements.product'),['product'=>$p->product])
+                                                    </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+                                                @endforeach
+                                            </div><!-- End .row -->
+                                        </div>
                                         @if ($sell_productCount >= 4)
                                             <div class="load-more-container text-center">
                                                 <a href="{{ route('public.sale.detail', $sell->sell_id) }}"
