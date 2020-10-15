@@ -123,6 +123,6 @@
    }
 
    .owl-full .owl-nav [class*="owl-"]:hover, .owl-full .owl-nav [class*="owl-"]:focus{
-       background:rgba(rgb(0, 0, 0, 0.3);
+       background:rgba(0, 0, 0, 0.3);
    }
 </style>
