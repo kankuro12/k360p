@@ -14,7 +14,7 @@
                             @csrf
 
                             <div id="accordion" role="tablist">
-                                <div class="card card-collapse">
+                                <div class="card card-collapse" style="margin:5px 0px;">
                                   <div class="card-header" role="tab" id="headingOne">
                                     <h5 class="mb-0">
                                       <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -24,7 +24,7 @@
                                     </h5>
                                   </div>
                               
-                                  <div id="collapseOne" class="collapse " role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                  <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body" style="padding: 1rem;">
                                         <div class="row">
                                             <div class="col-md-6 ">
@@ -117,7 +117,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="card card-collapse">
+                                <div class="card card-collapse" style="margin:5px 0px;">
                                   <div class="card-header" role="tab" id="headingTwo">
                                     <h5 class="mb-0">
                                       <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -179,11 +179,11 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="card card-collapse">
+                                <div class="card card-collapse" style="margin:5px 0px;">
                                   <div class="card-header" role="tab" id="headingThree">
                                     <h5 class="mb-0">
                                       <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Details And Final Step
+                                        Descriptions
                                         <i class="material-icons">keyboard_arrow_down</i>
                                       </a>
                                     </h5>
@@ -208,65 +208,81 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12">
-                                                <label for=""> <strong>Primary Image (800 x 600)</strong> </label>
-                                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                                    <div class="fileinput-new thumbnail">
-                                                        <img src="{{ asset('images/backend_images/image_placeholder.jpg') }}" alt="...">
-                                                    </div>
-                                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                                    <div>
-                                                        <span class="btn btn-rose btn-round btn-file">
-                                                            <span class="fileinput-new">Select image</span>
-                                                            <span class="fileinput-exists">Change</span>
-                                                            <input required type="file" name="product_main_images"  accept="image/*"/>
-                                                        </span>
-                                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
-                                                            data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div>
-                                                    <label for="images"> <strong>Gallery Images (800 x 600)</strong> </label>
-                                                    <div class="row" id="images">
-                                                        @for ($i = 0; $i < env('productimage_count'); $i++)
-                                                            <div class="col-md-6 h-100" style="margin-bottom: 5px;min-height:180px;">
-                                                                <div style="position: relative">
-                                                                    <div >
-                                                                        <input onchange="loadImage(this,{{$i}})" v="{{$i}}" style="display:none;" name="product_images[]" type="file" id="gal_{{$i}}" accept="image/*"/>
-                                                                        <img src="{{ asset('images/backend_images/add_image.png') }}" alt="..." id="gal_img_{{$i}}" 
-                                                                        onclick="document.getElementById('gal_{{$i}}').click();">
-                                                                    </div>
-                                                                    <div style="position: absolute;top:0px;right:0px;">
-                                                                        <span class="btn btn-danger"
-                                                                        onclick="
-                                                                        document.getElementById('gal_{{$i}}').value = null;
-                                                                        document.getElementById('gal_img_{{$i}}').src='{{ asset('images/backend_images/add_image.png') }}';
-                                                                        "
-                                                                        >Clear</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endfor
-                                                    </div>
-                                                </div>
-            
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <button class="btn btn-primary">Add Product</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                                <div class="card card-collapse" style="margin:5px 0px;"> 
+                                    <div class="card-header" role="tab" id="headerfour">
+                                      <h5 class="mb-0">
+                                        <a class="collapsed" data-toggle="collapse" href="#collapsefour" aria-expanded="false" aria-controls="collapseThree">
+                                          Images And Final Step
+                                          <i class="material-icons">keyboard_arrow_down</i>
+                                        </a>
+                                      </h5>
+                                    </div>
+                                    <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                      <div class="card-body"  style="padding: 1rem;">
+                                        
+                                          <div class="row">
+                                              <div class="col-md-4 col-sm-12">
+                                                  <label for=""> <strong>Primary Image (800 x 600)</strong> </label>
+                                                  <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                      <div class="fileinput-new thumbnail">
+                                                          <img src="{{ asset('images/backend_images/image_placeholder.jpg') }}" alt="...">
+                                                      </div>
+                                                      <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                      <div>
+                                                          <span class="btn btn-rose btn-round btn-file">
+                                                              <span class="fileinput-new">Select image</span>
+                                                              <span class="fileinput-exists">Change</span>
+                                                              <input required type="file" name="product_main_images"  accept="image/*"/>
+                                                          </span>
+                                                          <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
+                                                              data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-8">
+                                                  <div>
+                                                      <label for="images"> <strong>Gallery Images (800 x 600)</strong> </label>
+                                                      <div class="row" id="images">
+                                                          @for ($i = 0; $i < env('productimage_count'); $i++)
+                                                              <div class="col-md-6 h-100" style="margin-bottom: 5px;min-height:180px;">
+                                                                  <div style="position: relative">
+                                                                      <div >
+                                                                          <input onchange="loadImage(this,{{$i}})" v="{{$i}}" style="display:none;" name="product_images[]" type="file" id="gal_{{$i}}" accept="image/*"/>
+                                                                          <img src="{{ asset('images/backend_images/add_image.png') }}" alt="..." id="gal_img_{{$i}}" 
+                                                                          onclick="document.getElementById('gal_{{$i}}').click();">
+                                                                      </div>
+                                                                      <div style="position: absolute;top:0px;right:0px;">
+                                                                          <span class="btn btn-danger"
+                                                                          onclick="
+                                                                          document.getElementById('gal_{{$i}}').value = null;
+                                                                          document.getElementById('gal_img_{{$i}}').src='{{ asset('images/backend_images/add_image.png') }}';
+                                                                          "
+                                                                          >Clear</span>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          @endfor
+                                                      </div>
+                                                  </div>
+              
+                                                  
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-md-12">
+                                                  <div class="form-group">
+                                                      <button class="btn btn-primary">Add Product</button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
                               
                               
                             

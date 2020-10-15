@@ -14,214 +14,275 @@
                 <form action="{{ route('vendor.create-product') }}" method="post" enctype="multipart/form-data">
                    
                    @csrf
-                   <div class="row">
-                    <div class="col-md-6 ">
-                        <div class="form-group">
-                            
-                            <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
-                                name="stocktype" data-style="btn btn-primary " title="Select Stock Type"
-                                data-size="3" required>
-                                <option value="0">Simple</option>
-                                <option value="1">Variant</option>
-                            </select>
-                        </div>
-                    </div>
-               
-                    <div class="col-md-6 pr-md-1">
-                        <div class="form-group label-floating">
-                            <label > <strong>Product Name</strong> </label>
-                            <input type="text" class="form-control" value="" name="product_name" required placeholder="Enter Product Name">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 ">
-                        <div class="form-group">
-                          
-                            <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
-                                name="brand_id" data-style="btn btn-primary " title="Select Product Brand"
-                                data-size="3">
-                                <?php echo $branddropdown; ?>
-                            </select>
-                        </div>
-                    </div>
-               
-                    <div class="col-md-6 pr-md-1">
-                        <div class="form-group">
+                   <div id="accordion" role="tablist">
+                    <div class="card card-collapse" style="margin:5px 0px;">
+                      <div class="card-header" role="tab" id="headingOne">
+                        <h5 class="mb-0">
+                          <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            General Info
+                            <i class="material-icons">keyboard_arrow_down</i>
+                          </a>
+                        </h5>
+                      </div>
+                  
+                      <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body" style="padding: 1rem;">
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        
+                                        <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
+                                            name="stocktype" data-style="btn btn-primary " title="Select Stock Type"
+                                            data-size="3" required>
+                                            <option value="0">Simple</option>
+                                            <option value="1">Variant</option>
+                                        </select>
+                                    </div>
+                                </div>
                            
-                            <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
-                                name="category_id" data-style="btn btn-primary " title="Select Product Category"
-                                data-size="3" required>
-                                <?php echo $categorydropdown; ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="row">
-                    <div class="col-md-6 pr-md-1">
-                        <div class="form-group label-floating">
-                            <label ><strong>Product SKU</strong> </label>
-                            <input type="text" class="form-control" value="" name="product_sku" placeholder="Enter Product SKU">
-                        </div>
-                    </div>
-              
-                    <div class="col-md-6 pr-md-1">
-                        <div class="form-group label-floating">
-                            <label ><strong>Product Quantity</strong> </label>
-                            <input required type="number" min="0" class="form-control" value="0" name="quantity" placeholder="Enter Quantity">
-                        </div>
-                    </div>
-                    <div class="col-md-4 pr-md-1">
-                        <div class="form-group label-floating">
-                            <label ><strong>Product Cost Price</strong> </label>
-                            <input  type="number" min="0" class="form-control" value="" name="costprice" placeholder="Enter Product Cost Price">
-                        </div>
-                    </div>
-                    <div class="col-md-4 pr-md-1">
-                        <div class="form-group label-floating">
-                            <label ><strong>Product Mark Price</strong> </label>
-                            <input required type="number" min="0" class="form-control" value="" name="mark_price" placeholder="Enter Product Price">
-                        </div>
-                    </div>
-                
-                    <div class="col-md-4 pr-md-1">
-                        <div class="form-group label-floating">
-                            <label ><strong>Product sale Price</strong> </label>
-                            <input required type="number" min="0" class="form-control" value="" name="sell_price" placeholder="Enter Product Promotional Price">
-                        </div>
-                    </div>
-                
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="attributeitem"> <strong>Tags (Separate With Comma)</strong> </label>
-                        <div class="form-control">
-                            <input name="tags" class="form-control" required data-role="tagsinput" name="attributeitem" id="attributeitem" required />
-                        </div>
-        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for=""> <strong>Shipping Method</strong> </label>
-                        <select class="selectpicker" data-live-search="true" id="shipping_class_id" name="shipping_class_id"
-                            data-style="btn btn-primary " title="Select A shipping Method" data-size="3" required onchange="
-                            $('#w_class').text($(this).find(':selected').attr('data-wclass'));
-                            $('.d_class').text($(this).find(':selected').attr('data-dclass'));
-                            ">
-                            @foreach (App\ShippingClass::all() as $item)
-                                <option  data-wclass="{{ $item->weightclass }}" data-dclass="{{$item->dimensionclass}}" value="{{ $item->id }}" >
-                                    {{ $item->name}}</option>
-                            @endforeach
-                        </select>
-        
-                    </div>
-        
-                </div>
-                <div >
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for=""> <strong>Weight <span id="w_class"></span></strong>  </label>
-                                <input  type="number" step="0.01" name="weight" class="form-control" placeholder="Enter Product Weight">
+                                <div class="col-md-6 pr-md-1">
+                                    <div class="form-group label-floating">
+                                        <label > <strong>Product Name</strong> </label>
+                                        <input type="text" class="form-control" value="" name="product_name" required placeholder="Enter Product Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                      
+                                        <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
+                                            name="brand_id" data-style="btn btn-primary " title="Select Product Brand"
+                                            data-size="3">
+                                            <?php echo $branddropdown; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                           
+                                <div class="col-md-6 pr-md-1">
+                                    <div class="form-group">
+                                       
+                                        <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
+                                            name="category_id" data-style="btn btn-primary " title="Select Product Category"
+                                            data-size="3" required>
+                                            <?php echo $categorydropdown; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-md-6 pr-md-1">
+                                    <div class="form-group label-floating">
+                                        <label ><strong>Product SKU</strong> </label>
+                                        <input type="text" class="form-control" value="" name="product_sku" placeholder="Enter Product SKU">
+                                    </div>
+                                </div>
+                          
+                                <div class="col-md-6 pr-md-1">
+                                    <div class="form-group label-floating">
+                                        <label ><strong>Product Quantity</strong> </label>
+                                        <input required type="number" min="0" class="form-control" value="0" name="quantity" placeholder="Enter Quantity">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-md-1">
+                                    <div class="form-group label-floating">
+                                        <label ><strong>Product Cost Price</strong> </label>
+                                        <input  type="number" min="0" class="form-control" value="" name="costprice" placeholder="Enter Product Cost Price">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-md-1">
+                                    <div class="form-group label-floating">
+                                        <label ><strong>Product Mark Price</strong> </label>
+                                        <input required type="number" min="0" class="form-control" value="" name="mark_price" placeholder="Enter Product Price">
+                                    </div>
+                                </div>
+                            
+                                <div class="col-md-4 pr-md-1">
+                                    <div class="form-group label-floating">
+                                        <label ><strong>Product sale Price</strong> </label>
+                                        <input required type="number" min="0" class="form-control" value="" name="sell_price" placeholder="Enter Product Promotional Price">
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="attributeitem"> <strong>Tags (Separate With Comma)</strong> </label>
+                                    <div class="form-control">
+                                        <input name="tags" class="form-control" required data-role="tagsinput" name="attributeitem" id="attributeitem" required />
+                                    </div>
+                    
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for=""> <strong> Length <span class="d_class"></span> </strong> </label>
-                                <input  type="number" step="0.01" name="l" class="form-control"  placeholder="Enter Package Length" >
-        
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for=""> <strong>Height <span class="d_class"></span></strong> </label>
-                                <input  type="number" step="0.01" name="h" class="form-control" placeholder="Enter Package Height" >
-        
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for=""> <strong>width <span class="d_class"></span></strong> </label>
-                                <input  type="number" step="0.01" name="w" class="form-control" placeholder="Enter Package Length">
-        
-                            </div>
-                        </div>
+                      </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label > <strong>Short Description</strong> </label>
-                            <textarea id="product-short-desc" class="form-control"
-                                name="product_short_description" required placeholder="Enter Short Description"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label > <strong>Description</strong> </label>
-                            <textarea id="product-desc" class="form-control"
-                                name="product_description" placeholder="Enter Full Description"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-12">
-                        <label for=""> <strong>Primary Image (800 x 600)</strong> </label>
-                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                            <div class="fileinput-new thumbnail">
-                                <img src="{{ asset('images/backend_images/image_placeholder.jpg') }}" alt="...">
+                    <div class="card card-collapse" style="margin:5px 0px;">
+                      <div class="card-header" role="tab" id="headingTwo">
+                        <h5 class="mb-0">
+                          <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Shipping Details
+                            <i class="material-icons">keyboard_arrow_down</i>
+                          </a>
+                        </h5>
+                      </div>
+                      <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body"  style="padding: 1rem;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for=""> <strong>Shipping Method</strong> </label>
+                                    <select class="selectpicker" data-live-search="true" id="shipping_class_id" name="shipping_class_id"
+                                        data-style="btn btn-primary " title="Select A shipping Method" data-size="3" required onchange="
+                                        $('#w_class').text($(this).find(':selected').attr('data-wclass'));
+                                        $('.d_class').text($(this).find(':selected').attr('data-dclass'));
+                                        ">
+                                        @foreach (App\ShippingClass::all() as $item)
+                                            <option  data-wclass="{{ $item->weightclass }}" data-dclass="{{$item->dimensionclass}}" value="{{ $item->id }}" >
+                                                {{ $item->name}}</option>
+                                        @endforeach
+                                    </select>
+                    
+                                </div>
+                    
                             </div>
-                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                            <div>
-                                <span class="btn btn-rose btn-round btn-file">
-                                    <span class="fileinput-new">Select image</span>
-                                    <span class="fileinput-exists">Change</span>
-                                    <input required type="file" name="product_main_images"  accept="image/*"/>
-                                </span>
-                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
-                                    data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div>
-                            <label for="images"> <strong>Gallery Images (800 x 600)</strong> </label>
-                            <div class="row" id="images">
-                                @for ($i = 0; $i < env('productimage_count'); $i++)
-                                    <div class="col-md-6 h-100" style="margin-bottom: 5px;min-height:180px;">
-                                        <div style="position: relative">
-                                            <div >
-                                                <input onchange="loadImage(this,{{$i}})" v="{{$i}}" style="display:none;" name="product_images[]" type="file" id="gal_{{$i}}" accept="image/*"/>
-                                                <img src="{{ asset('images/backend_images/add_image.png') }}" alt="..." id="gal_img_{{$i}}" 
-                                                onclick="document.getElementById('gal_{{$i}}').click();">
-                                            </div>
-                                            <div style="position: absolute;top:0px;right:0px;">
-                                                <span class="btn btn-danger"
-                                                onclick="
-                                                document.getElementById('gal_{{$i}}').value = null;
-                                                document.getElementById('gal_img_{{$i}}').src='{{ asset('images/backend_images/add_image.png') }}';
-                                                "
-                                                >Clear</span>
-                                            </div>
+                            <div >
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for=""> <strong>Weight <span id="w_class"></span></strong>  </label>
+                                            <input  type="number" step="0.01" name="weight" class="form-control" placeholder="Enter Product Weight">
                                         </div>
                                     </div>
-                                @endfor
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for=""> <strong> Length <span class="d_class"></span> </strong> </label>
+                                            <input  type="number" step="0.01" name="l" class="form-control"  placeholder="Enter Package Length" >
+                    
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for=""> <strong>Height <span class="d_class"></span></strong> </label>
+                                            <input  type="number" step="0.01" name="h" class="form-control" placeholder="Enter Package Height" >
+                    
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for=""> <strong>width <span class="d_class"></span></strong> </label>
+                                            <input  type="number" step="0.01" name="w" class="form-control" placeholder="Enter Package Length">
+                    
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                      </div>
+                    </div>
+                    <div class="card card-collapse" style="margin:5px 0px;">
+                      <div class="card-header" role="tab" id="headingThree">
+                        <h5 class="mb-0">
+                          <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Descriptions
+                            <i class="material-icons">keyboard_arrow_down</i>
+                          </a>
+                        </h5>
+                      </div>
+                      <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body"  style="padding: 1rem;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label > <strong>Short Description</strong> </label>
+                                        <textarea id="product-short-desc" class="form-control"
+                                            name="product_short_description" required placeholder="Enter Short Description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label > <strong>Description</strong> </label>
+                                        <textarea id="product-desc" class="form-control"
+                                            name="product_description" placeholder="Enter Full Description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                         
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <button class="btn btn-primary">Add Product</button>
                         </div>
+                      </div>
                     </div>
+                    <div class="card card-collapse" style="margin:5px 0px;"> 
+                        <div class="card-header" role="tab" id="headerfour">
+                          <h5 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapsefour" aria-expanded="false" aria-controls="collapseThree">
+                              Images And Final Step
+                              <i class="material-icons">keyboard_arrow_down</i>
+                            </a>
+                          </h5>
+                        </div>
+                        <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                          <div class="card-body"  style="padding: 1rem;">
+                            
+                              <div class="row">
+                                  <div class="col-md-4 col-sm-12">
+                                      <label for=""> <strong>Primary Image (800 x 600)</strong> </label>
+                                      <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                          <div class="fileinput-new thumbnail">
+                                              <img src="{{ asset('images/backend_images/image_placeholder.jpg') }}" alt="...">
+                                          </div>
+                                          <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                          <div>
+                                              <span class="btn btn-rose btn-round btn-file">
+                                                  <span class="fileinput-new">Select image</span>
+                                                  <span class="fileinput-exists">Change</span>
+                                                  <input required type="file" name="product_main_images"  accept="image/*"/>
+                                              </span>
+                                              <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
+                                                  data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-8">
+                                      <div>
+                                          <label for="images"> <strong>Gallery Images (800 x 600)</strong> </label>
+                                          <div class="row" id="images">
+                                              @for ($i = 0; $i < env('productimage_count'); $i++)
+                                                  <div class="col-md-6 h-100" style="margin-bottom: 5px;min-height:180px;">
+                                                      <div style="position: relative">
+                                                          <div >
+                                                              <input onchange="loadImage(this,{{$i}})" v="{{$i}}" style="display:none;" name="product_images[]" type="file" id="gal_{{$i}}" accept="image/*"/>
+                                                              <img src="{{ asset('images/backend_images/add_image.png') }}" alt="..." id="gal_img_{{$i}}" 
+                                                              onclick="document.getElementById('gal_{{$i}}').click();">
+                                                          </div>
+                                                          <div style="position: absolute;top:0px;right:0px;">
+                                                              <span class="btn btn-danger"
+                                                              onclick="
+                                                              document.getElementById('gal_{{$i}}').value = null;
+                                                              document.getElementById('gal_img_{{$i}}').src='{{ asset('images/backend_images/add_image.png') }}';
+                                                              "
+                                                              >Clear</span>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              @endfor
+                                          </div>
+                                      </div>
+  
+                                      
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="form-group">
+                                          <button class="btn btn-primary">Add Product</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
                 </div>
                 </form>
             </div>
