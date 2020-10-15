@@ -114,4 +114,11 @@
         color:{{env('footertelcolor','#ffffff')}} !important;
 
    }
+   .owl-next span{
+       font-size:40px;
+   }
+
+   .owl-prev span{
+       font-size:40px;
+   }
 </style>
