@@ -883,5 +883,10 @@
         .newsletter-popup-container .banner-title {
             font-size:2.4rem;
         }
+
+        .product-media1
+        {
+            height:auto !important;overflow-y: visible;background-color: white;
+        }
 }
 /*# sourceMappingURL=demo-14.css.map */

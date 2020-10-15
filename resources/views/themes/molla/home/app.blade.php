@@ -1,5 +1,7 @@
 @extends('themes.molla.layouts.app')
 @section('contant')
+<div style="height:1px;"></div>
+
     @foreach (App\model\admin\HomePageSection::where('parent_id', 0)
             ->orderBy('order', 'asc')
             ->get()

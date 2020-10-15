@@ -1,5 +1,5 @@
 <div class="product text-center">
-    <figure class="product-media">
+    <figure class="product-media" >
         @php
         $onsale=$product->onSale();
         @endphp

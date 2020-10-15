@@ -10423,6 +10423,13 @@ button:focus {
 #filter-price-range {
     color: #c96;
 }
+
+.product-media1
+{
+    height:220px;overflow-y: hidden;background-color: white;
+}
+
+
 @media screen and (min-width: 576px) {
     .toolbox-right {
         flex-direction: row;
@@ -10432,6 +10439,8 @@ button:focus {
         margin-right: -0.5rem;
         margin-left: 1rem;
     }
+
+   
 }
 @media screen and (min-width: 768px) {
     .toolbox {

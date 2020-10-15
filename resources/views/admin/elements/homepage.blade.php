@@ -29,7 +29,7 @@
                                             ({{\App\Setting\HomePage::sectiontype[$item->type]}})
                                         </div>
                                         <div class="col-md-2">
-                                            <strong >Rows : </strong>
+                                            <strong >Columns : </strong>
                                             <span id="sec_{{$item->id}}_row">
                                                 {{$item->row}}
                                             </span>
@@ -92,7 +92,7 @@
                 ({w})
             </div>
             <div class="col-md-2">
-                <strong>Rows : </strong>
+                <strong>Columns : </strong>
                 <span id="sec_{id}_row">
                     {row}
                 </span>
@@ -124,7 +124,7 @@
                 ({w})
             </div>
             <div class="col-md-2">
-                <strong>Rows : </strong>
+                <strong>Columns : </strong>
                 <span id="sec_{id}_row">
                     {row}
                 </span>
