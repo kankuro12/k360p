@@ -17,6 +17,7 @@ use App\ExtraCharge;
 use App\model\Admin;
 use App\model\OrderItemCharge;
 use App\model\Vendor\Vendor;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
@@ -282,8 +283,13 @@ class CartController extends Controller
             return redirect()->back()->with('warning', 'This coupon code does not exist!');
         } else {
             $couponStatus = Coupon::where('coupon_code', $request->coupon_code)->first();
-            $start_date = date('yy-m-d', strtotime($couponStatus->start_time));
-            dd($start_date);
+            $start_date = $couponStatus->start_time;
+            $end_date = $couponStatus->end_time;
+            if(Auth::check()){
+                
+            }
+            $session_id = Session::get('session_id');
+            $cart = Cart::where('session_id', $session_id)->get();
         }
     }
 }

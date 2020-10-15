@@ -8,14 +8,14 @@
         @php
         $c="";
         if($item->boxed==1){
-        $c="container";
+        $c="style='margin-left:2rem;margin-right:2rem'";
         }elseif($item->boxed==2){
-        $c="container-fluid";
+        $c="style='margin-left:1rem;margin-right:1rem'";
         }else{
         $c="";
         }
         @endphp
-        <div class="{{ $c }}">
+        <div  $c >
             <div class="row">
                 <div class="col-md-{{ $item->row }} " id="section_{{ $item->id }}">
                     @include($item->render() ,['data'=>$item])

@@ -28,7 +28,13 @@
                             <tbody>
                                 @foreach ($coupons as $coupon)
                                     <tr>
-                                        <td>{{ $coupon->coupon_code }}</td>
+                                        <td>
+                                            {{ $coupon->coupon_code }}
+                                            @if ($coupon->vendorid==0 ||$coupon->vendorid==null)
+                                            <br>
+                                                <span class="badge badge-primary"> Vendor Coupon</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $coupon->coupon_name }}</td>
                                         <td>{{ $coupon->start_time }}</td>
                                         <td>{{ $coupon->end_time }}</td>
