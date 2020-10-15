@@ -193,7 +193,7 @@ class CategoryController extends Controller
         // dd($parentlists);
         $category->parentlists = $parentlists;
 
-        return view('admin.category.subcategory', compact('categories', 'category'));
+        return view('admin.category.subcategory', compact('categories', 'category','id'));
     }
 
     public function addCategory1(Request $request)

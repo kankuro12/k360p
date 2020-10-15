@@ -144,9 +144,7 @@
                                         name="cat_description"></textarea>
                                 </div>
                             </div>
-                       
-                            <input type="hidden" name="parent_id" value="{{$category->cat_id}}">
-                            
+                            <input type="hidden" name="parent_id" value="{{$id}}">
                         </div>
                     </div>
                 </div>
