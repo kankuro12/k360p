@@ -121,4 +121,8 @@
    .owl-prev span{
        font-size:40px;
    }
+
+   .owl-full .owl-nav [class*="owl-"]:hover, .owl-full .owl-nav [class*="owl-"]:focus{
+       background:rgba(rgb(0, 0, 0, 0.3);
+   }
 </style>
