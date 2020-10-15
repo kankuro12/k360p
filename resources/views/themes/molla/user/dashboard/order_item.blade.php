@@ -32,7 +32,7 @@
                                         <div class="card-header" id="heading4-1">
                                             <h2 class="card-title">
                                                 <a role="button" data-toggle="collapse" href="#collapse4-1" aria-expanded="true" aria-controls="collapse4-1">
-                                                    <i class="icon-star-o"></i>Pending
+                                                   Pending
                                                 </a>
                                             </h2>
                                         </div><!-- End .card-header -->
@@ -68,7 +68,10 @@
                                                             <td>{{$order->qty}}</td>
                                                             <td>{{$order->rate}}</td>
 
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
+                                                            <td>
+                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a> <br>
+                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                            </td>
                                                         </tr>
                                                         @endif
                                                         @endforeach
@@ -83,7 +86,7 @@
                                         <div class="card-header" id="heading4-2">
                                             <h2 class="card-title">
                                                 <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-2" aria-expanded="false" aria-controls="collapse4-2">
-                                                    <i class="icon-star-o"></i>Accepted
+                                                    Accepted
                                                 </a>
                                             </h2>
                                         </div><!-- End .card-header -->
@@ -119,7 +122,10 @@
                                                             <td>{{$order->qty}}</td>
                                                             <td>{{$order->rate}}</td>
 
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
+                                                            <td>
+                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
+                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                            </td>
                                                         </tr>
                                                         @endif
                                                         @endforeach
@@ -134,7 +140,7 @@
                                         <div class="card-header" id="heading4-3">
                                             <h2 class="card-title">
                                                 <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-3" aria-expanded="false" aria-controls="collapse4-3">
-                                                    <i class="icon-star-o"></i>On Delivery
+                                                    On Delivery
                                                 </a>
                                             </h2>
                                         </div><!-- End .card-header -->
@@ -170,7 +176,10 @@
                                                             <td>{{$order->qty}}</td>
                                                             <td>{{$order->rate}}</td>
 
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
+                                                            <td>
+                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
+                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                            </td>
                                                         </tr>
                                                         @endif
                                                         @endforeach
@@ -185,7 +194,7 @@
                                         <div class="card-header" id="heading4-4">
                                             <h2 class="card-title">
                                                 <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-4" aria-expanded="false" aria-controls="collapse4-4">
-                                                    <i class="icon-star-o"></i>Pickup
+                                                     Pickup
                                                 </a>
                                             </h2>
                                         </div><!-- End .card-header -->
@@ -221,7 +230,10 @@
                                                             <td>{{$order->qty}}</td>
                                                             <td>{{$order->rate}}</td>
 
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
+                                                            <td>
+                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
+                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                            </td>
                                                         </tr>
                                                         @endif
                                                         @endforeach
@@ -236,7 +248,7 @@
                                         <div class="card-header" id="heading4-5">
                                             <h2 class="card-title">
                                                 <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-5" aria-expanded="false" aria-controls="collapse4-5">
-                                                    <i class="icon-star-o"></i>Delivered
+                                                    Delivered
                                                 </a>
                                             </h2>
                                         </div><!-- End .card-header -->
@@ -272,7 +284,10 @@
                                                             <td>{{$order->qty}}</td>
                                                             <td>{{$order->rate}}</td>
 
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
+                                                            <td>
+                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
+                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                            </td>
                                                         </tr>
                                                         @endif
                                                         @endforeach
@@ -287,7 +302,7 @@
                                         <div class="card-header" id="heading4-6">
                                             <h2 class="card-title">
                                                 <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-6" aria-expanded="false" aria-controls="collapse4-6">
-                                                    <i class="icon-star-o"></i>Rejected
+                                                    Rejected
                                                 </a>
                                             </h2>
                                         </div><!-- End .card-header -->
@@ -323,7 +338,10 @@
                                                             <td>{{$order->qty}}</td>
                                                             <td>{{$order->rate}}</td>
 
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
+                                                            <td>
+                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
+                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                            </td>
                                                         </tr>
                                                         @endif
                                                         @endforeach
@@ -338,7 +356,7 @@
                                         <div class="card-header" id="heading4-7">
                                             <h2 class="card-title">
                                                 <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-7" aria-expanded="false" aria-controls="collapse4-7">
-                                                    <i class="icon-star-o"></i>Returned
+                                                  Returned
                                                 </a>
                                             </h2>
                                         </div><!-- End .card-header -->
@@ -374,7 +392,10 @@
                                                             <td>{{$order->qty}}</td>
                                                             <td>{{$order->rate}}</td>
 
-                                                            <td><a href="{{route('user.order.item',$order->id)}}">View Details</a></td>
+                                                            <td>
+                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
+                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                            </td>
                                                         </tr>
                                                         @endif
                                                         @endforeach
@@ -384,7 +405,6 @@
                                             </div><!-- End .card-body -->
                                         </div><!-- End .collapse -->
                                     </div><!-- End .card -->
-
 
                                 </div><!-- End .accordion -->
                             </div><!-- End .col-md-6 -->

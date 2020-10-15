@@ -221,6 +221,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
         'as' => 'admin.edit-category',
         'uses' => 'admin\CategoryController@editCategory'
     ]);
+
+    Route::match(['get', 'post'], '/edit-category1/{id}', [
+        'as' => 'admin.edit-category1',
+        'uses' => 'admin\CategoryController@editCategory1'
+    ]);
+
+    Route::get('manage-category1','admin\CategoryController@manageCategory1' )->name('admin.manage-category1');
+    Route::get('manage-subcategory/{id}','admin\CategoryController@subcategory' )->name('admin.manage-subcategory');
+    Route::post('add-category1','admin\CategoryController@addcategory1' )->name('admin.add-category1');
+
     Route::match(['get', 'post'], '/update-category', [
         'as' => 'admin.update-category',
         'uses' => 'admin\CategoryController@updateCategory'
@@ -471,6 +481,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
         'uses' => 'admin\DashboardController@about'
     ]);
 
+    
+
     //shipping settings
     Route::get('/shippings', 'admin\ShippingController@list')->name('admin.shippings');
     Route::get('/get-shipping/{id}', 'admin\ShippingController@get_shipping')->name('admin.get-shipping');
@@ -677,6 +689,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['authen', 'type'], 'type' => 
     Route::match(['get', 'post'], 'order/item/{id}', [
         'uses' => 'user\DashboardController@orderItem',
         'as' => 'user.order.item'
+    ]);
+
+    Route::match(['get', 'post'], 'full/order/{shipping_detail_id}', [
+        'uses' => 'user\DashboardController@fullOrderDetail',
+        'as' => 'user.full.order'
     ]);
 
 

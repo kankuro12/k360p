@@ -37,6 +37,11 @@ class DashboardController extends Controller
         return view(HomePage::theme("user.dashboard.order"))->with(compact('orderItem'));
     }
 
+    public function fullOrderDetail($shipping_detail_id){
+        $orderItem = OrderItem::where('shipping_detail_id',$shipping_detail_id)->get();
+        return view(HomePage::theme("user.dashboard.full_order"))->with(compact('orderItem'));
+    }
+
     public function cancelOrder(Request $request){
         return view('user.profile.cancellation');
     }

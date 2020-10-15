@@ -2,6 +2,8 @@
 
 namespace App\model\admin;
 
+use App\model\Coupon;
+use App\model\Coupon_setting;
 use App\model\OrderItem;
 use App\model\ProductAttributeItem;
 use App\Rating;
@@ -79,6 +81,28 @@ class Product extends Model
             ];
         }else{
             return null;
+        }
+    }
+
+    public function cuponprice($coupon,$currentrate,$total){
+        if($this->onsale()){
+            return $currentrate;
+        }else{
+            $now=Carbon::now();
+            $couponCount = Coupon::where('coupon_code', $coupon)->where($now,['start_time','end_time'])->count();
+            if($couponCount==0){
+                return $currentrate;
+
+            }else{
+                $c = Coupon::where('coupon_code', $coupon)->where($now,['start_time','end_time'])->first();
+                $csetting=Coupon_setting::where('coupon_id',$c->id)->first();
+                if($total<$csetting->minimum_order_value || $csetting->minimum_order_valueissued_number_coupon){
+                    return $currentrate;
+                }
+
+                
+
+            }
         }
     }
 

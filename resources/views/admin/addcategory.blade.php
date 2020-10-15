@@ -23,7 +23,7 @@
                              <strong>
                                  <a href="{{route('admin.manage-category')}}">Categories</a>
                             </strong> / Add Category</h4>
-                        <form action="{{ route('admin.add-category') }}" enctype="multipart/form-data" method="post">
+                        <form action="{{ route('admin.add-category1') }}" enctype="multipart/form-data" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-4 col-sm-12">
@@ -70,16 +70,7 @@
                                             </div>
                                         </div>
                                    
-                                        <div class=" pr-md-1">
-                                            <div class="form-group">
-                                                <label for="exampleFormControlSelect1">Select Parent Category</label>
-                                                <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
-                                                    name="parent_id" data-style="btn btn-primary" title="Select Parent Category"
-                                                    data-size="3">
-                                                    <?php echo $categorydropdown; ?>
-                                                </select>
-                                            </div>
-                                        </div>
+                                      
                                     </div>
                                 </div>
                             </div>
