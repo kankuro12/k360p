@@ -26,8 +26,8 @@
         @if ($product->isTop())
             <span class="product-label label-top">Top</span>
         @endif
-        <a href="/product/{{ $product->product_id }}">
-            <img src="{{ asset($product->product_images) }}" alt="Product image" class="product-image">
+        <a href="/product/{{ $product->product_id }}" style="margin: auto 0;display:flex;height:100%;">
+            <img src="{{ asset($product->product_images) }}" alt="Product image" class="product-image" style="margin:auto;">
         </a>
 
         <div class="product-action-vertical">
@@ -101,7 +101,9 @@
                             {{ $product->mark_price }}</span></span>
                 @endif
             @else
-
+            <span class="new-price">
+                <br>
+            </span>
             @endif
 
         </div><!-- End .product-price -->
