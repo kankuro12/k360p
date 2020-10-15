@@ -12,7 +12,7 @@
             ({{ \App\Setting\HomePage::sectiontype[$data->type] }})
         </div>
         <div class="col-md-2">
-            <strong>Rows : </strong> 
+            <strong>Columns : </strong> 
             <span id="sec_{{$data->id}}_row">
                 {{$data->row}}
             </span>
