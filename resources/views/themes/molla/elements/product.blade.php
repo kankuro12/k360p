@@ -36,7 +36,7 @@
                     wishlist</span></a>
             <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick
                     view</span></a>
-            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+            {{-- <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a> --}}
         </div><!-- End .product-action-vertical -->
 
         <div class="product-action text-center">
@@ -49,16 +49,18 @@
                     <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                     <input type="hidden" name="type" value="{{ $product->stocktype }}">
                     <input type="hidden" name="qty" value="1">
+                  
                     @if ($product->promo == 0 && !$onsale)
 
                         <input type="hidden" name="rate" value="{{ $product->mark_price }}">
-
+                     
                     @else
                         @if ($onsale)
                             <input type="hidden" name="rate" value="{{ $product->salePrice() }}">
                         @else
                             <input type="hidden" name="rate" value="{{ $product->$product->sell_price() }}">
                         @endif
+                      
                     @endif
 
                     <button class="btn-product btn-cart w-100"><span>add to cart</span></button>
@@ -82,7 +84,7 @@
         <div class="product-cat">
             <a href="{{route('shop-by-category',['id'=>$product->category->cat_id])}}">{{ $product->category->cat_name }}</a>
         </div><!-- End .product-cat -->
-        <h3 class="product-title"><a href="/product/{{ $product->product_id }}">{{ $product->product_name }}</a>
+        <h3 class="product-title"><a href="{{ route('product.detail', ['id'=>$product->product_id]) }}">{{ $product->product_name }}</a>
         </h3>
         <!-- End .product-title -->
         <div class="product-price">

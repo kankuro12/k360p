@@ -196,10 +196,12 @@ class CartController extends Controller
             $shippingDetail->municipality_id = $request->municipality_id;
             $shippingDetail->shipping_area_id = $request->shipping_area_id;
             $shippingDetail->otp = mt_rand(00000,99999);
+            $shippingDetail->shipping_charge = $request->shipping_charge;
             $shippingDetail->save();
             $session_id = Session::get('session_id');
             $cart = Cart::where('session_id', $session_id)->get();
             $vids = [];
+            $all=$request->all();
             foreach ($cart as $key => $value) {
                 $productDetail = Product::where('product_id', $value->product_id)->first();
                 $orderItem = new OrderItem();
@@ -217,7 +219,9 @@ class CartController extends Controller
                 }else{
                     $orderItem->ismainstore=1;
                 }
-                $orderItem->shippingcharge = $request->shipping_charge;
+                // $orderItem->shippingcharge = $request->shipping_charge;
+                $orderItem->bundleid =$all['bundle_'.$value->product_id];
+                $orderItem->shippingcharge = $all['shipping_'.$value->product_id];
                 $orderItem->stage = 0;
                 $orderItem->issimple = $productDetail->stocktype==0?1:0;
                 $orderItem->rate = $value->rate;
@@ -257,6 +261,7 @@ class CartController extends Controller
                 // dd($vendor->user);	                        
                 $vendor->notify(new \App\Notifications\Vendor\OrderNotification($shippingDetail));
             }
+            Cart::where('session_id', $session_id)->delete();
             return redirect('/viewcart')->with('success', 'Your order placed successfully!');
         } else {
             $session_id = Session::get('session_id');

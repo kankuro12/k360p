@@ -242,9 +242,6 @@ class ProductController extends Controller
             }
             $wc->save();
             // dd($wc);
-
-
-
             return redirect("/admin/view-product/" . $product->product_id);
         }
     }

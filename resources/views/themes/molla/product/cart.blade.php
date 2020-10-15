@@ -148,8 +148,9 @@
 	                					</tbody>
 	                				</table><!-- End .table table-summary -->
 									<a href="{{ route('user.checkout') }}" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
+									@if(!Auth::check())
 	                				<a href="{{ route('guest.checkout') }}" class="btn btn-outline-primary-2 btn-order btn-block">CHECKOUT AS GUEST</a>
-									
+									@endif
 	                			</div><!-- End .summary -->
 
 		            			<a href="{{ url('shops') }}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>

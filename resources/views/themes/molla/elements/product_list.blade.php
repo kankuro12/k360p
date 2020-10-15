@@ -67,8 +67,8 @@
                     <a href="#" class="btn-product btn-quickview" style="border: none;
                     background: transparent;" title="Quick view"><span>quick
                             view</span></a>
-                    <a href="#" class="btn-product btn-compare" style="border: none;
-                    background: transparent;" title="Compare"><span>compare</span></a>
+                    {{-- <a href="#" class="btn-product btn-compare" style="border: none;
+                    background: transparent;" title="Compare"><span>compare</span></a> --}}
 
                 </div><!-- End .product-action -->
                 <div class="product-action">

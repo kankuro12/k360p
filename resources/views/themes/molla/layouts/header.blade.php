@@ -149,7 +149,7 @@
 
                         <div class="col-lg-4 col-xxl-5col d-flex justify-content-end align-items-center">
                             <div class="header-dropdown-link">
-                                <div class="dropdown compare-dropdown">
+                                {{-- <div class="dropdown compare-dropdown">
                                     <a href="#" class="dropdown-toggle " role="button" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false" data-display="static"
                                         title="Compare Products" aria-label="Compare Products">
@@ -179,7 +179,7 @@
                                                     class="icon-long-arrow-right"></i></a>
                                         </div>
                                     </div><!-- End .dropdown-menu -->
-                                </div><!-- End .compare-dropdown -->
+                                </div><!-- End .compare-dropdown --> --}}
                                 @php
                                 if(!empty(Auth::check())){
                                 $wishlistCount = \App\Wishlist::where('user_id',Auth::user()->id)->count();
