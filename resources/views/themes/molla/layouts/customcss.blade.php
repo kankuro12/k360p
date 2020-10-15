@@ -90,4 +90,28 @@
         color: {{env('side_color_hover',"#ffffff")}}
     }
    
+   .fsem{
+       background:{{env('footerbg','#333')}};
+       color:{{env('footercolor','#ffffff')}};
+   }
+
+   .widget-about-title{
+        color:{{env('footercolor','#ffffff')}};
+
+   }
+
+   .min-about{
+    color:{{env('footercolor','#ffffff')}};
+
+   }
+
+   .widget-title{
+    color:{{env('footercolor','#ffffff')}} !important;
+
+   }
+
+   .footer-tel{
+        color:{{env('footertelcolor','#ffffff')}} !important;
+
+   }
 </style>

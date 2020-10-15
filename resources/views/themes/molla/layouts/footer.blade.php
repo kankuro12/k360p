@@ -24,7 +24,7 @@
             </div><!-- End .row -->
         </div><!-- End .container-fluid -->
     </div><!-- End .cta -->
-    <div class="footer-middle border-0">
+    <div class="footer-middle border-0 fsem">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 col-lg-4">
@@ -33,13 +33,13 @@
                         @php
                             $about=\App\AboutUs::first();
                         @endphp
-                        <p>{!! $about!=null?$about->mini:""!!}</p>
+                        <p class="min-about">{!! $about!=null?$about->mini:""!!}</p>
                         
                         <div class="widget-about-info">
                             <div class="row">
-                                <div class="col-sm-6 col-md-4">
+                                <div class="col-sm-12 col-md-12">
                                     <span class="widget-about-title">Got Question? Call us 24/7</span>
-                                    <a href="tel:{{env('phone','')}}">+977 {{env('phone','')}}</a>
+                                    <a href="tel:{{env('phone','')}}" class="footer-tel">{{env('phone','')}}</a>
                                 </div><!-- End .col-sm-6 -->
                                 {{-- <div class="col-sm-6 col-md-8">
                                     <span class="widget-about-title">Payment Method</span>
