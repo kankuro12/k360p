@@ -64,6 +64,7 @@ class ResetPasswordController extends Controller
     }
 
     public function success(Request $request){
-       return redirect('/');
+        // dd($request);
+       return redirect()->route('reset.success');
     }
 }

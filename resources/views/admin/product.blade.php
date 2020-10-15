@@ -75,7 +75,7 @@
                                 <div class="col-md-4 pr-md-1">
                                     <div class="form-group label-floating">
                                         <label ><strong>Product Cost Price</strong> </label>
-                                        <input required type="number" min="0" class="form-control" value="" name="costprice" placeholder="Enter Product Cost Price">
+                                        <input  type="number" min="0" class="form-control" value="" name="costprice" placeholder="Enter Product Cost Price">
                                     </div>
                                 </div>
                                 <div class="col-md-4 pr-md-1">
@@ -124,7 +124,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for=""> <strong>Weight <span id="w_class"></span></strong>  </label>
-                                            <input required type="number" step="0.01" name="weight" class="form-control" placeholder="Enter Product Weight">
+                                            <input  type="number" step="0.01" name="weight" class="form-control" placeholder="Enter Product Weight">
                                         </div>
                                     </div>
                                     <div class="col-md-4">

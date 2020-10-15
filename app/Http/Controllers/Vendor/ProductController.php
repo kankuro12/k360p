@@ -74,7 +74,7 @@ class ProductController extends Controller
             $product->isverified = 0;
             $product->vendor_id = Auth::user()->vendor->id;
             $product->category_id = $data['category_id'];
-            $product->costprice = $data['costprice'];
+            $product->costprice = $data['costprice']??0;
             $product->brand_id = $data['brand_id'];
             $product->stocktype = $data['stocktype'];
             $product->product_name = $data['product_name'];
@@ -114,7 +114,7 @@ class ProductController extends Controller
             $shippingdetail = new \App\ProductShippingDetail();
             $shippingdetail->product_id = $product->product_id;
             $shippingdetail->shipping_class_id = $request->shipping_class_id;
-            $shippingdetail->weight = $request->weight;
+            $shippingdetail->weight = $request->weight??0;
             $shippingdetail->l = $request->l??0;
             $shippingdetail->w = $request->w??0;
             $shippingdetail->h = $request->h??0;
@@ -125,37 +125,37 @@ class ProductController extends Controller
             $wc->product_id = $product->product_id;
             $wc->shipping_class_id = $request->shipping_class_id;
             $category = $product->category;
-            $amount_0 = ChargesManager::getShipping($product->category_id, $request->weight, 0, $request->shipping_class_id);
+            $amount_0 = ChargesManager::getShipping($product->category_id, $shippingdetail->weight , 0, $request->shipping_class_id);
             if ($amount_0 != null) {
                 $wc->amount_0 = $amount_0->amount;
                 $wc->type_0 = $amount_0->type;
             }
 
-            $amount_1 = ChargesManager::getShipping($product->category_id, $request->weight, 1, $request->shipping_class_id);
+            $amount_1 = ChargesManager::getShipping($product->category_id, $shippingdetail->weight , 1, $request->shipping_class_id);
             if ($amount_1 != null) {
                 $wc->amount_1 = $amount_1->amount;
                 $wc->type_1 = $amount_1->type;
             }
 
-            $amount_2 = ChargesManager::getShipping($product->category_id, $request->weight, 2, $request->shipping_class_id);
+            $amount_2 = ChargesManager::getShipping($product->category_id, $shippingdetail->weight , 2, $request->shipping_class_id);
             if ($amount_2 != null) {
                 $wc->amount_2 = $amount_2->amount;
                 $wc->type_2 = $amount_2->type;
             }
 
-            // $amount_2 = $category->getShippingPrice($request->weight, 2, $request->shipping_class_id);
+            // $amount_2 = $category->getShippingPrice($shippingdetail->weight , 2, $request->shipping_class_id);
             // if ($amount_2 != null) {
             //     $wc->amount_2 = $amount_2->amount;
             //     $wc->type_2 = $amount_2->type;
             // }
 
-            $amount_3 = ChargesManager::getShipping($product->category_id, $request->weight, 3, $request->shipping_class_id);
+            $amount_3 = ChargesManager::getShipping($product->category_id, $shippingdetail->weight , 3, $request->shipping_class_id);
             if ($amount_3 != null) {
                 $wc->amount_3 = $amount_3->amount;
                 $wc->type_3 = $amount_3->type;
             }
 
-            $amount_4 = ChargesManager::getShipping($product->category_id, $request->weight, 4, $request->shipping_class_id);;
+            $amount_4 = ChargesManager::getShipping($product->category_id, $shippingdetail->weight , 4, $request->shipping_class_id);;
             if ($amount_4 != null) {
                 $wc->amount_4 = $amount_4->amount;
                 $wc->type_4 = $amount_4->type;

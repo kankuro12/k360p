@@ -23,7 +23,9 @@ use Illuminate\Support\Facades\Validator;
 class HomeController extends Controller
 {
 
-    
+    public function success(){
+        return view(HomePage::theme("sucess"));
+    }
 
     public function search(Request $request){
         // dd($request);

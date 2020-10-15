@@ -893,6 +893,8 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('password/success', 'Auth\ResetPasswordController@success')->name('reset.send');
+Route::get('password/success/message', 'HomeController@success')->name('reset.success');
+
 
 
 
