@@ -92,7 +92,14 @@
                 </a>
             </li>
             
-            <li >
+            <li class="{{ (Route::is('admin.manage-category1') ? ' active' : '') }}">
+                <a href="{{ route('admin.manage-category1') }}">
+                    <i class="material-icons">assignment
+                    </i>
+                    <p> Manage Categories </p>
+                </a>
+            </li>
+            {{-- <li >
                 <a data-toggle="collapse" href="#pagesExamples" >
                     <i class="material-icons">image</i>
                     <p> Category
@@ -115,7 +122,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
             <li>
                 <a data-toggle="collapse" href="#componentsExamples">
                     <i class="material-icons">business_center</i>
