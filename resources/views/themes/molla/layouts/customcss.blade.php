@@ -90,7 +90,7 @@
         color: {{env('side_color_hover',"#ffffff")}}
     }
    
-   .fsem{
+   .fsem, .footer-bottom{
        background:{{env('footerbg','#333')}};
        color:{{env('footercolor','#ffffff')}};
    }

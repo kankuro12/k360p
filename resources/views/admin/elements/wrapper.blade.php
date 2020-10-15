@@ -7,7 +7,7 @@
         ({{w}})
     </div>
     <div class="col-md-2">
-        <strong>Rows : </strong>{{row}}
+        <strong>Columns : </strong>{{row}}
         
     </div>
     <div class="col-md-2">
