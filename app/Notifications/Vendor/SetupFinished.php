@@ -42,8 +42,8 @@ class SetupFinished extends Notification
 
         return (new SlackMessage)
                     ->success()
-                    ->from('Laravel')
-                    ->content('A New Vendor Has Submitted Document for Verification')
+                    ->from(env('APP_NAME'))
+                    ->content($vendor->name.' Has Submitted Document for Verification')
                     ->attachment(function ($attachment) use ($vendor,$notifiable) {
                         $attachment->title('View Detail', $vendor->url)
                                    ->fields([

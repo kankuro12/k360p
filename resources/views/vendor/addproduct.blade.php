@@ -15,13 +15,14 @@
                    
                    @csrf
                    <div id="accordion" role="tablist">
-                    <div class="card card-collapse" style="margin:5px 0px;">
-                      <div class="card-header" role="tab" id="headingOne">
-                        <h5 class="mb-0">
-                          <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <div class="card card-collapse" style="margin:5px 0px;" >
+                      <div class="card-header" role="tab" id="headingOne" style="color:white;background:#9C27B0;padding-bottom:0.5rem;border-radius:7px;">
+                        <h5 class="mb-0" >
+                          <a style="color:white;" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             General Info
-                            <i class="material-icons">keyboard_arrow_down</i>
+                            <i class="material-icons " style="float:right;">keyboard_arrow_down</i>
                           </a>
+                          
                         </h5>
                       </div>
                   
@@ -119,11 +120,11 @@
                       </div>
                     </div>
                     <div class="card card-collapse" style="margin:5px 0px;">
-                      <div class="card-header" role="tab" id="headingTwo">
+                      <div class="card-header" style="color:white;background:#9C27B0;padding-bottom:0.5rem;border-radius:7px;" role="tab" id="headingTwo">
                         <h5 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          <a class="collapsed" style="color:white;" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             Shipping Details
-                            <i class="material-icons">keyboard_arrow_down</i>
+                            <i class="material-icons" style="float:right;">keyboard_arrow_down</i>
                           </a>
                         </h5>
                       </div>
@@ -181,11 +182,11 @@
                       </div>
                     </div>
                     <div class="card card-collapse" style="margin:5px 0px;">
-                      <div class="card-header" role="tab" id="headingThree">
+                      <div class="card-header" style="color:white;background:#9C27B0;padding-bottom:0.5rem;border-radius:7px;" role="tab" id="headingThree">
                         <h5 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          <a class="collapsed" style="color:white;" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             Descriptions
-                            <i class="material-icons">keyboard_arrow_down</i>
+                            <i class="material-icons" style="float: right;">keyboard_arrow_down</i>
                           </a>
                         </h5>
                       </div>
@@ -214,11 +215,11 @@
                       </div>
                     </div>
                     <div class="card card-collapse" style="margin:5px 0px;"> 
-                        <div class="card-header" role="tab" id="headerfour">
+                        <div class="card-header" style="color:white;background:#9C27B0;padding-bottom:0.5rem;border-radius:7px;" role="tab" id="headerfour">
                           <h5 class="mb-0">
-                            <a class="collapsed" data-toggle="collapse" href="#collapsefour" aria-expanded="false" aria-controls="collapseThree">
+                            <a class="collapsed" style="color:white;" data-toggle="collapse" href="#collapsefour" aria-expanded="false" aria-controls="collapseThree">
                               Images And Final Step
-                              <i class="material-icons">keyboard_arrow_down</i>
+                              <i class="material-icons" style="float:right;">keyboard_arrow_down</i>
                             </a>
                           </h5>
                         </div>

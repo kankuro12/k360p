@@ -57,11 +57,11 @@ class SignupActivate extends Notification
     {
        
         $vendor=$notifiable->vendor;
-        $vendor->url = 'http://192.168.100.101:8000/admin/vendor-details/'.$notifiable->id;
+        $vendor->url = route('admin.vendor-details',['id'=>$notifiable->id]);
 
         return (new SlackMessage)
                     ->success()
-                    ->from('Laravel')
+                    ->from(env('APP_NAME'))
                     ->content('A New Vendor Has Been Registered')
                     ->attachment(function ($attachment) use ($vendor,$notifiable) {
                         $attachment->title('View Detail', $vendor->url)

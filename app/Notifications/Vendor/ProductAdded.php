@@ -42,7 +42,7 @@ class ProductAdded extends Notification
 
         return (new SlackMessage)
                     ->success()
-                    ->from('Laravel')
+                    ->from(env('APP_NAME'))
                     ->content('Vendor '.$vendor->name.' Has added a new Product')
                     ->attachment(function ($attachment) use ($vendor,$notifiable) {
                         $attachment->title('View Product', $vendor->url)
