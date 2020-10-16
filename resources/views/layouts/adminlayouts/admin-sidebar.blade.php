@@ -362,6 +362,12 @@
                                 <span class="sidebar-normal"> About us </span>
                             </a>
                         </li>
+                        <li class="{{ (Route::is('admin.tnc') ? ' active' : '') }}">
+                            <a href="{{ route('admin.tnc') }}">
+                                <span class="sidebar-mini"> TC </span>
+                                <span class="sidebar-normal"> Terms and conditions</span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
