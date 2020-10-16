@@ -129,7 +129,7 @@
 
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
-                                                <label class="custom-control-label" for="register-policy-2">I agree to the <a href="{{ url('terms-and-condition') }}">Terms & Condition</a> *</label>
+                                                <label class="custom-control-label" for="register-policy-2">I agree to the <a href="{{ url('ctnc') }}">Terms & Condition</a> *</label>
                                             </div><!-- End .custom-checkbox -->
                                         </div><!-- End .form-footer -->
                                     </form>

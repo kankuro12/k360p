@@ -84,6 +84,21 @@ Route::get('/about', [
     'as' => 'public.about'
 ]);
 
+Route::get('/ctnc', [
+    'uses' => 'HomeController@ctnc',
+    'as' => 'public.ctnc'
+]);
+
+Route::get('/vtnc', [
+    'uses' => 'HomeController@ctnc',
+    'as' => 'public.ctnc'
+]);
+
+Route::get('/pp', [
+    'uses' => 'HomeController@pp',
+    'as' => 'public.pp'
+]);
+
 Route::get('/contact', [
     'uses' => 'HomeController@contact',
     'as' => 'public.contact'
@@ -479,6 +494,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
     Route::match(['get', 'post'], '/about', [
         'as' => 'admin.about',
         'uses' => 'admin\DashboardController@about'
+    ]);
+    Route::match(['get', 'post'], '/tnc', [
+        'as' => 'admin.tnc',
+        'uses' => 'admin\DashboardController@tnc'
     ]);
 
     

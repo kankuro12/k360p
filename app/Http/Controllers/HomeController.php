@@ -144,4 +144,18 @@ class HomeController extends Controller
     public function contact(){
         return view(HomePage::theme("contact"));
     }
+
+    public function ctnc(){
+        return view(HomePage::theme("ctnc"));
+
+    }
+
+    public function vtnc(){
+        return view(HomePage::theme("vtnc"));
+
+    }
+    public function pp(){
+        return view(HomePage::theme("pp"));
+
+    }
 }

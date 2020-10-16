@@ -14,6 +14,7 @@ use App\model\admin\Collection;
 use App\model\admin\DefaultShipping;
 use App\model\OrderItem;
 use App\model\vendor\Vendor;
+use App\Term;
 
 class DashboardController extends Controller
 {
@@ -66,6 +67,22 @@ class DashboardController extends Controller
             return redirect()->back();
         }else{
             return view('admin.elements.about');
+        }
+    }
+
+    public function tnc(Request $request){
+        $tnc=Term::first();
+        if($request->method()=="POST"){
+            if($tnc==null){
+                $tnc=new Term();
+            }
+            $tnc->ctnc=$request->ctnc;
+            $tnc->vtnc=$request->vtnc;
+            $tnc->pp=$request->pp;
+            $tnc->save();
+            return redirect()->back();
+        }else{
+            return view('admin.elements.tnc');
         }
     }
 }

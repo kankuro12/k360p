@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-wrapper">
                         <input type="checkbox" name="agreetc" id="agreetc" value="1">
-                        <label for="agreetc" class="color-secondary">I agree to the <a href="/terms-and-conditions" class="color-primary">Terms and conditions</a></label>
+                        <label for="agreetc" class="color-secondary">I agree to the <a href="/vtnc" class="color-primary">Terms and conditions</a></label>
                     </div>
 					<button id="load">Register
 						<i class="zmdi zmdi-arrow-right"></i>
