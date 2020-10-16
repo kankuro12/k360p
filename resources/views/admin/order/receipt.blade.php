@@ -175,10 +175,18 @@
             </tr>
             <tr>
                 <th class="t_r" colspan="5">
+                    Cupon Discount:
+                </th>
+                <td class="t_l">
+                    {{$shipping->discount}}
+                </td>
+            </tr>
+            <tr>
+                <th class="t_r" colspan="5">
                     Grand Total:
                 </th>
                 <td class="t_l">
-                    {{$shipping->shipping_charge+$total}}
+                    {{$shipping->shipping_charge+$total - $shipping->discount}}
                 </td>
             </tr>
         </table>

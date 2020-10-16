@@ -1,6 +1,6 @@
 
 <header class="header header-14">
-    <div class="header-top d-none d-md-flex" style="background-color: {{ env('secondaryheader_bg', '#3d4273') }};color: {{ env('secondaryheader_color', '#ffffff') }};">
+    <div class="header-top d-none d-lg-flex" style="background-color: {{ env('secondaryheader_bg', '#3d4273') }};color: {{ env('secondaryheader_color', '#ffffff') }};">
         <div class="container-fluid pt-1 pt-md-0 pb-1 pb-md-0">
             <div class="header-left">
                 <span>
@@ -53,7 +53,7 @@
         </div><!-- End .container -->
     </div><!-- End .header-top -->
 
-    <div class="header-top d-md-none d-block "
+    <div class="header-top d-lg-none d-block "
         style="font-weight:500;background-color: {{ env('secondaryheader_bg', '3d4273') }};color: {{ env('secondaryheader_color', 'ffffff') }};">
         <div class="container d-flex justify-content-between" style="padding:1rem 2rem;">
 
