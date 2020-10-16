@@ -140,10 +140,20 @@
 	                							<td>NPR.{{ $extra }}</td>
 											</tr><!-- End .summary-subtotal -->
 											@endif
+											@php
+												$discount=Session::get('couponAmount', 0);
+											@endphp
+											@if($discount>0)
+											<tr class="summary-subtotal">
+	                							<td>coupon Discount:</td>
+	                							<td>NPR.{{ $discount }}</td>
+											</tr><!-- End .summary-subtotal -->
+											@endif
+											
 	                						
 	                						<tr class="summary-total">
 	                							<td>Total:</td>
-	                							<td>NPR.{{  $extra + $totalCharge }}</td>
+	                							<td>NPR.{{  $extra + $totalCharge - $discount}}</td>
 	                						</tr><!-- End .summary-total -->
 	                					</tbody>
 	                				</table><!-- End .table table-summary -->

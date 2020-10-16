@@ -108,9 +108,9 @@
                                                         <strong>Total :</strong> {{ $total }} <br>
                                                         <strong>Extra Charge :</strong> {{ $totalCharge }} <br>
                                                         <strong>Shipping Charge :</strong> {{ $shippingCharge }} <br>
-                                                        <strong>Discount :</strong> ({{ $discount }})
+                                                        <strong>Discount :</strong> ({{ $orderItem[0]->shipping()->discount }})
                                                         <hr>
-                                                        <strong>Grand Total : </strong> <strong>NPR. {{ $total + $totalCharge + $shippingCharge - $discount }}</strong>
+                                                        <strong>Grand Total : </strong> <strong>NPR. {{ $total + $totalCharge + $shippingCharge - $orderItem[0]->shipping()->discount }}</strong>
                                                     </div>
                                             </div><!-- End .card-body -->
                                         </div><!-- End .card-dashboard -->

@@ -15,9 +15,12 @@ use App\model\ShippingDetail;
 use App\ExatraChargeCart;
 use App\ExtraCharge;
 use App\model\Admin;
+use App\model\Coupon_setting;
 use App\model\OrderItemCharge;
 use App\model\Vendor\Vendor;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -191,6 +194,7 @@ class CartController extends Controller
             $shippingDetail->name = $name;
             $shippingDetail->phone = $request->phone;
             $shippingDetail->email = $request->email;
+            $shippingDetail->discount = Session::get('couponAmount', 0);
             $shippingDetail->order_message = $request->order_message;
             $shippingDetail->province_id = $request->province_id;
             $shippingDetail->district_id = $request->district_id;
@@ -199,6 +203,7 @@ class CartController extends Controller
             $shippingDetail->otp = mt_rand(00000,99999);
             $shippingDetail->shipping_charge = $request->shipping_charge;
             $shippingDetail->save();
+            $request->session()->forget('couponAmount');
             $session_id = Session::get('session_id');
             $cart = Cart::where('session_id', $session_id)->get();
             $vids = [];
@@ -276,20 +281,47 @@ class CartController extends Controller
     }
 
 
-    public function applyCoupon(Request $request)
-    {
-        $couponCount = Coupon::where('coupon_code', $request->coupon_code)->count();
-        if ($couponCount == 0) {
-            return redirect()->back()->with('warning', 'This coupon code does not exist!');
-        } else {
-            $couponStatus = Coupon::where('coupon_code', $request->coupon_code)->first();
-            $start_date = $couponStatus->start_time;
-            $end_date = $couponStatus->end_time;
-            if(Auth::check()){
-                
+    public function applyCoupon(Request $request){
+        $couponCount = Coupon::where('coupon_code',$request->coupon_code)->count();
+        if($couponCount == 0){
+            return redirect()->back()->with('warning','This coupon code does not exist!');
+        }else{
+            $couponExpire = Coupon::join('coupon_settings','coupons.id','=','coupon_settings.coupon_id')->
+            where('coupons.coupon_code',$request->coupon_code)->first();
+            
+            if(!Carbon::now()->between($couponExpire->start_time,$couponExpire->end_time)){
+                return redirect()->back()->with('warning','This coupon code is expired!');
+            }else{
+                $session_id = Session::get('session_id');
+                $userCart = Cart::where('session_id',$session_id)->get();
+                $total=Cart::where('session_id',$session_id)->sum(DB::raw('rate * qty'));
+                if($total<$couponExpire->minimum_order_value || $couponExpire->minimum_order_valueissued_number_coupon){
+                    return redirect()->back()->with('warning','Your total amount is not applicable! The mininum required amount is Rs.'.$couponExpire->minimum_order_value);
+                }else{
+
+                    $issuedTimes = Coupon_setting::where('coupon_id',$couponExpire->id)->first();
+                    // dd($issuedTimes);
+                    if($issuedTimes->issued_number_coupon>0){
+                        if ($couponExpire->discount_type == 1) {
+                            $discountAmount = $couponExpire->discount_value;
+
+                            $issuedTimes->issued_number_coupon =  $issuedTimes->issued_number_coupon - 1;
+                            $issuedTimes->save();
+                        } else {
+                            $discountAmount = ($total * $couponExpire->discount_percent) / 100;
+                            
+                            $issuedTimes->issued_number_coupon =  $issuedTimes->issued_number_coupon - 1;
+                            $issuedTimes->save();
+                        }
+                    }else{
+                       return redirect()->back()->with('success','This coupon already used!');
+                    }
+                    Session::put('couponAmount',$discountAmount);
+                    return redirect()->back()->with('success','Coupon code applied successfully!');
+                }
             }
-            $session_id = Session::get('session_id');
-            $cart = Cart::where('session_id', $session_id)->get();
+           
         }
+
     }
 }

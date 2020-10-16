@@ -162,6 +162,15 @@
 											<td>NPR.{{ $extraCharge }}</td>
 										</tr><!-- End .summary-subtotal -->
 										@endif
+										    @php
+												$discount=Session::get('couponAmount', 0);
+											@endphp
+											@if($discount>0)
+											<tr class="summary-subtotal">
+	                							<td>coupon Discount:</td>
+	                							<td>NPR.{{ $discount }}</td>
+											</tr><!-- End .summary-subtotal -->
+											@endif
 										<tr>
 											<td colspan="2">
 												<div id="shipping-charge" class="text-left">
@@ -171,9 +180,9 @@
 										</tr>
 										<tr class="summary-total">
 											<td>Grand Total:</td>
-											<td id="showTotal">NPR.{{ $varianttotal + $simpletotal + $extraCharge }}</td>
+											<td id="showTotal">NPR.{{ $varianttotal + $simpletotal + $extraCharge - $discount }}</td>
 										</tr><!-- End .summary-total -->
-										<input type="hidden" id="gtotal" value="{{ $varianttotal + $simpletotal + $extraCharge }}">
+										<input type="hidden" id="gtotal" value="{{ $varianttotal + $simpletotal + $extraCharge-$discount }}">
 
 										<tr>
 											<td>Delivery Method</td>

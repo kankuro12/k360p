@@ -33,6 +33,7 @@ class CheckoutController extends Controller
             $shippingDetail->email = $request->email;
             $shippingDetail->order_message = $request->order_message;
             $shippingDetail->user_id = Auth::user()->id;
+            $shippingDetail->discount = Session::get('couponAmount', 0);
 
             $shippingDetail->province_id = $request->province_id;
             $shippingDetail->district_id = $request->district_id;
@@ -40,7 +41,9 @@ class CheckoutController extends Controller
             $shippingDetail->shipping_area_id = $request->shipping_area_id;
             $shippingDetail->shipping_charge = $request->shipping_charge;
             $shippingDetail->otp = mt_rand(00000,99999);
+
             // dd($shippingDetail);
+            $request->session()->forget('couponAmount');
             $shippingDetail->save();
             $session_id = Session::get('session_id');
             $cart = Cart::where('session_id',$session_id)->get();
