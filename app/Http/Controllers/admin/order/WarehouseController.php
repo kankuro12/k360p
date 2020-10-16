@@ -127,6 +127,7 @@ class WarehouseController extends Controller
         foreach ($collection as $key => $value) {
             $data=[];
             $data['shipping']=ShippingDetail::find($key);
+            $data['orders']=$value;
             $ids=[];
             foreach ($value as $id) {
                 array_push($ids,$id->id);
@@ -140,6 +141,82 @@ class WarehouseController extends Controller
             $value['shipping']->notify(new onDelivery ($value['items']));
         }
 
-        return redirect()->back();
+        return redirect()->route('admin.orders-trip',['id'=>$trip->id]);
+        // return redirect()->back();
+    }
+
+    public function trips(){
+        $all=Trip::orderBy('created_at')->get();
+        return view('admin.order.trips',compact('all'));
+    }
+
+    public function trip($id){
+        $trip=Trip::find($id);
+        // dd($all->items);
+        $all=[];
+        $data=TripItem::join('order_items','trip_items.order_item_id','=','order_items.id')
+        ->join('products','order_items.product_id','=','products.product_id')
+        ->join('shipping_details','order_items.shipping_detail_id','=','shipping_details.id')
+        ->where('trip_items.trip_id',$id)
+        ->select('trip_items.id','products.product_name','order_items.id as order_id','order_items.shipping_detail_id','order_items.qty')
+        ->get()->groupBy('shipping_detail_id');
+       
+        foreach ($data as $key=> $value) {
+            $d=[];
+            $d['shipping']=ShippingDetail::find($key);
+            $d['orders']=[];
+            foreach ($value as $order) {
+               array_push( $d['orders'],("#".$order->order_id ." ".$order->product_name ." X ".$order->qty));
+            }
+            
+            array_push($all,$d);
+        }
+       
+        return view('admin.order.trip',compact('all','trip'));
+    }
+
+    public function singlePrint(ShippingDetail $shipping){
+        $all=[];$data=[];
+        // dd($shipping);
+        $data['shipping']=$shipping;
+        $data['orders']=OrderItem::where('shipping_detail_id',$shipping->id)->get();
+        array_push($all,$data);
+        return view('admin.order.receipt',compact('all'));
+    }
+
+    public function multiplePrint(Request $request){
+        // dd($request);
+        $all=[];
+        foreach ($request->ids as $id) {
+           
+            $data=[];
+            // dd($shipping);
+            $data['shipping']=ShippingDetail::find($id);
+            $data['orders']=OrderItem::where('shipping_detail_id',$id)->get();
+            array_push($all,$data);
+        }
+        return view('admin.order.receipt',compact('all'));
+    }
+
+    public function tripPrint($id){
+        $all=[];
+        $trip=Trip::find($id);
+        // dd($all->items);
+        $all=[];
+        $ids=TripItem::where('trip_items.trip_id',$id)->pluck('order_item_id')->toArray();
+        // dd($data);
+        $collection=OrderItem::whereIn('id',$ids)->get()->groupBy('shipping_detail_id');
+        foreach ($collection as $key => $value) {
+            $data=[];
+            $data['shipping']=ShippingDetail::find($key);
+            $data['orders']=$value;
+            $ids=[];
+            foreach ($value as $id) {
+                array_push($ids,$id->id);
+            }
+            $data['items']=$ids;
+            array_push($all,$data);
+        }
+        return view('admin.order.receipt',compact('all','trip'));
     }
 }

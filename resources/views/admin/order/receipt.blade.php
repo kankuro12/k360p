@@ -122,12 +122,12 @@
                 <th>Product NAme</th>
                 <th>Rate(RS)</th>
                 <th>Qty</th>
-                <th>Shipping(RS)</th>
+                {{-- <th>Shipping(RS)</th> --}}
                 <th>Extra(RS)</th>
                 <th>Sub Total(RS)</th>
             </tr>
 
-            @foreach ($item['items'] as $order) 
+            @foreach ($item['orders'] as $order) 
         
                 <tr>
                     <td>
@@ -142,15 +142,15 @@
                     <td>
                         {{$order->qty}}
                     </td>
-                    <td>
+                    {{-- <td>
                         {{$order->shippingcharge}}
-                    </td>
+                    </td> --}}
                     <td>
                         {{$order->extraCharges()}}
                     </td>
                     <td class="t_l">
                         @php
-                            $subtotal=($order->rate*$order->qty)+$order->shipping_charge+$order->extraCharges();
+                            $subtotal=($order->rate*$order->qty)+$order->extraCharges();
                             $total+=$subtotal;
                        @endphp
                         {{$subtotal}}
@@ -158,11 +158,27 @@
                 </tr>
             @endforeach
             <tr>
-                <th class="t_r" colspan="6">
+                <th class="t_r" colspan="5">
                     Total:
                 </th>
                 <td class="t_l">
                     {{$total}}
+                </td>
+            </tr>
+            <tr>
+                <th class="t_r" colspan="5">
+                    Shipping Charge:
+                </th>
+                <td class="t_l">
+                    {{$shipping->shipping_charge}}
+                </td>
+            </tr>
+            <tr>
+                <th class="t_r" colspan="5">
+                    Grand Total:
+                </th>
+                <td class="t_l">
+                    {{$shipping->shipping_charge+$total}}
                 </td>
             </tr>
         </table>

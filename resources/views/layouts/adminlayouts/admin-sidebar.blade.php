@@ -84,6 +84,14 @@
                     <p>Send To Delivery</p>
                 </a>
             </li>
+            <li class="{{ (Route::is('admin.orders-trips') ? ' active' : '') }}"  >
+                <a href="{{ route('admin.orders-trips') }}">
+                    <i class="material-icons">directions_bike
+
+                    </i>
+                    <p>Trips</p>
+                </a>
+            </li>
             <li class="{{ (Route::is('admin.pickup') ? ' active' : '') }}"  >
                 <a href="{{ route('admin.pickup') }}">
                     <i class="material-icons">location_on

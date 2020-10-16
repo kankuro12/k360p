@@ -962,6 +962,15 @@ Route::group(['prefix' => 'admin/orders', 'middleware' => 'admin_auth'], functio
     Route::get('/data/delivery', 'admin\order\WarehouseController@delivery')->name('admin.orders-delivery');
     Route::post('/data/delivery/load', 'admin\order\WarehouseController@loadDelivery')->name('admin.orders-load-delivery');
     Route::post('/data/ondeliver', 'admin\order\WarehouseController@ondelivery')->name('admin.orders-ondelivery');
+    
+    Route::get('/data/trips', 'admin\order\WarehouseController@trips')->name('admin.orders-trips');
+    Route::get('/data/trip/{id}', 'admin\order\WarehouseController@trip')->name('admin.orders-trip');
+    Route::get('/data/print/single/{shipping}', 'admin\order\WarehouseController@singlePrint')->name('admin.orders-singlePrint');
+    Route::get('/data/print/trip/{id}', 'admin\order\WarehouseController@tripPrint')->name('admin.orders-tripPrint');
+    Route::post('/data/print/multiple', 'admin\order\WarehouseController@multiplePrint')->name('admin.orders-multiplePrint');
+    
+
+    
 });
 
 Route::group(['prefix' => 'admin/account', 'middleware' => 'admin_auth'], function () {
@@ -985,6 +994,8 @@ Route::group(['prefix' => 'admin/pickuppoint', 'middleware' => 'admin_auth'], fu
     Route::post('/add', 'admin\order\PickupController@add')->name('admin.save-pickup');
     Route::get('/manage/{point}', 'admin\order\PickupController@manage')->name('admin.manage-pickup');
     Route::post('/update/{point}', 'admin\order\PickupController@edit')->name('admin.update-pickup');
+
+    
 });
 
 Route::group(['prefix' => 'vendor/orders', 'middleware' => ['authen', 'type'], 'type' => ['vendor']], function () {

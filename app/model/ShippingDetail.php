@@ -46,5 +46,9 @@ class ShippingDetail extends Model
             return ['email' => $this->user->email];
         }
     }
+
+    public function orders(){
+        $this->hasMany(OrderItem::class,'shipping_detail_id','id');
+    }
     
 }
