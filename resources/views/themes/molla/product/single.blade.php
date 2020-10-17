@@ -96,9 +96,9 @@
                                                     ----
                                                 @else
                                                     @if ($maxprice == $minprice)
-                                                    <span>NPR.{{ $maxprice }}</span>
+                                                    <span>NPR.{{ floatval($maxprice) }}</span>
                                                     @else
-                                                    <span>NPR.{{ $minprice}}</span> <span
+                                                    <span>NPR.{{floatval( $minprice)}}</span> <span
                                                         class="p-4 text-warning">To</span> <span>NPR.{{ $maxprice }}</span>
                                                      @endif
                                                 @endif
@@ -109,19 +109,19 @@
                                             @endphp
                                            
                                             @if ($product->promo == 0 && !$onsale)
-                                                Rs. {{ $product->mark_price }}
+                                                Rs. {{ floatval($product->mark_price) }}
                                             @else
                                                 @if ($onsale)
                                                     @php
                                                     $sellproduct=$product->sale();
                                                     $sell=$sellproduct->onsale;
                                                     @endphp
-                                                    <span class="new-price">Rs. {{ $product->salePrice() }} </span>
+                                                    <span class="new-price">Rs. {{floatval( $product->salePrice()) }} </span>
                                                 @else
-                                                    <span class="new-price">Rs. {{ $product->sell_price }} </span>
+                                                    <span class="new-price">Rs. {{ floatval($product->sell_price) }} </span>
                                                 @endif
                                                 <span class="old-price">Was <span style="text-decoration: line-through;">Rs.
-                                                        {{ $product->mark_price }}</span></span>
+                                                        {{floatval( $product->mark_price) }}</span></span>
                                             @endif
                                             @endif
 
@@ -534,7 +534,7 @@
                                                 <span
                                                     class="p-4 text-warning">To
                                                 </span> 
-                                                <span>NPR.{{ $maxprice+0 }}</span>
+                                                <span>NPR.{{floatval ($maxprice)}}</span>
                                             @endif
                                         @else
                                         @php
