@@ -200,8 +200,8 @@
                                                     <a href="{{ route('user.wishlist', $product->product_id) }}"
                                                         class="btn-product btn-wishlist p-1 pr-3 pl-3" title="Wishlist"><span>Add to
                                                             Wishlist</span></a>
-                                                    <a href="#" class="btn-product btn-compare p-1 pr-3 pl-3" title="Compare"><span>Add to
-                                                            Compare</span></a>
+                                                    {{-- <a href="#" class="btn-product btn-compare p-1 pr-3 pl-3" title="Compare"><span>Add to
+                                                            Compare</span></a> --}}
                                                 </div><!-- End .details-action-wrapper -->
                                             </div><!-- End .product-details-action -->
 
@@ -616,7 +616,7 @@
                         $('#product-variant-stock').text("Stock Not Avialable");
 
                     }else{
-                        $('#product-variant-stock').text(innerdata.data);
+                        $('#product-variant-stock').text("Variant Not avialable Currently.");
                         $('#price').text("Stock Not Avialable");
 
                     }
