@@ -107,9 +107,24 @@ class HomeController extends Controller
         $code=VariantManager::MakeCode($input,$input['product_id']);
         if(VariantManager::hasStock($code)){
             $stock=VariantManager::stock($code);
+            $p=$stock->product;
             if($stock->qty>0){
+                $onsale=$p->onSale();
+                if ($p->promo == 0 && !$onsale){
 
-                return response()->json(['sucess'=>true,'data'=>$stock,'type'=>'1']);
+                    return response()->json(['sucess'=>true,'data'=>$stock,'type'=>'1']);
+                }else{
+                    if($onsale){
+                        $sellproduct=$p->sale();
+                        $stock->price=round($stock->price - ($stock->price * $onsale->sale_discount/100 ));
+                        return response()->json(['sucess'=>true,'data'=>$stock,'type'=>'1']);
+
+                    }else{
+                        $stock->price=$stock->sale;
+                        return response()->json(['sucess'=>true,'data'=>$stock,'type'=>'1']);
+                    }
+                }
+               
             }else{
                 return response()->json(['sucess'=>false,'data'=>"Stock Not Available",'type'=>'1']);
 

@@ -599,7 +599,7 @@
                     html =
                         ' <div class="details-action-col"><label for="qty">Qty:</label><div class="product-details-quantity"><input max="' +
                         innerdata.data.qty +
-                        '" min="1" type="number" id="qty" name="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required></div><button class="btn-product btn-cart"><span>add to cart</span></button></div>';
+                        '" min="1" type="number" id="qty" name="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required></div><button class="btn-product btn-cart text-white"><span class="text-white">add to cart</span></button></div>';
                     $('#product-variant-stock').html(html);
 
                     $('#price').text("NPR." + innerdata.data.price);
