@@ -613,6 +613,8 @@
                 } else {
                     if (innerdata.type == 1) {
                         $('#product-variant-stock').text(innerdata.data);
+                    }else{
+                        $('#price').text("NPR." + innerdata.data.price);
                     }
                 }
             })

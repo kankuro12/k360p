@@ -126,12 +126,12 @@ class HomeController extends Controller
                 }
                
             }else{
-                return response()->json(['sucess'=>false,'data'=>"Stock Not Available",'type'=>'1']);
+                return response()->json(['sucess'=>false,'data'=>$stock,'type'=>'1']);
 
             }
 
         }else{
-            return response()->json(['sucess'=>false,'data'=>"Stock Not Available",'type'=>'1']);
+            return response()->json(['sucess'=>false,'data'=>"Stock Not Available",'type'=>'2']);
 
         }
 
