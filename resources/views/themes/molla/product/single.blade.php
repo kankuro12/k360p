@@ -512,7 +512,7 @@
                                     <h5 class="product-title"><a
                                             href="{{ route('product.detail', $p->product_id) }}">{{ $p->product_name }}</a>
                                     </h5><!-- End .product-title -->
-                                    <div class="product-price" style="color:red;font-size:1rem;">
+                                    <div class="product-price" style="color:red;font-size:2rem;">
                                         @if ($p->stocktype == 1)
                                             @php
                                             $maxprice =
@@ -522,10 +522,14 @@
                                             
                                             @endphp
                                             @if ($maxprice == $minprice)
-                                                <span>NPR.{{ $maxprice+0 }}</span>
+                                                <span>NPR.{{floatval(  $maxprice) }}</span>
                                             @else
-                                                <span>NPR.{{ $minprice }}</span> <span
-                                                    class="p-4 text-warning">To</span> <span>NPR.{{ $maxprice+0 }}</span>
+                                                <span>NPR.{{floatval(  $minprice) }}</span>
+                                                <br>
+                                                <span
+                                                    class="p-4 text-warning">To
+                                                </span> 
+                                                <span>NPR.{{ $maxprice+0 }}</span>
                                             @endif
                                         @else
                                         @php
@@ -533,19 +537,19 @@
                                         @endphp
                                        
                                         @if ($p->promo == 0 && !$onsale)
-                                            Rs. {{ $p->mark_price+0 }}
+                                            Rs. {{floatval( $p->mark_price) }}
                                         @else
                                             @if ($onsale)
                                                 @php
                                                 $sellproduct=$p->sale();
                                                 $sell=$sellproduct->onsale;
                                                 @endphp
-                                                <span class="new-price">Rs. {{ $p->salePrice()+0 }} </span>
+                                                <span class="new-price">Rs. {{ floatval( $p->salePrice()) }} </span>
                                             @else
-                                                <span class="new-price">Rs. {{ $p->sell_price+0 }} </span>
+                                                <span class="new-price">Rs. {{ floatval( $p->sell_price+0) }} </span>
                                             @endif
                                             <span class="old-price">Was <span style="text-decoration: line-through;">Rs.
-                                                    {{ $p->mark_price+0 }}</span></span>
+                                                    {{floatval(  $p->mark_price+0) }}</span></span>
                                         @endif
                                         @endif
 
