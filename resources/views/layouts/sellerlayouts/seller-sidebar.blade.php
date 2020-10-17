@@ -85,7 +85,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 </li>
                 <li >
                     <a href="{{route('vendor.getLogout')}}">
-                        <span class="sidebar-mini"> Ms </span>
+                        <span class="sidebar-mini"> Ms </span>  
                         <span class="sidebar-normal"> Messages </span>
                     </a>
                 </li>
