@@ -512,9 +512,45 @@
                                     <h5 class="product-title"><a
                                             href="{{ route('product.detail', $p->product_id) }}">{{ $p->product_name }}</a>
                                     </h5><!-- End .product-title -->
-                                    <div class="product-price">
-                                        <span class="new-price">NPR.{{ $p->mark_price }}</span>
+                                    <<div class="product-price" id="price">
+                                        @if ($product->stocktype == 1)
+                                            @php
+                                            $maxprice =
+                                            \App\model\ProductStock::where('product_id',$p->product->product_id)->max('price');
+                                            $minprice =
+                                            \App\model\ProductStock::where('product_id',$p->product->product_id)->min('price');
+                                            
+                                            @endphp
+                                            @if ($maxprice == $minprice)
+                                                <span>NPR.{{ $maxprice+0 }}</span>
+                                            @else
+                                                <span>NPR.{{ $minprice }}</span> <span
+                                                    class="p-4 text-warning">To</span> <span>NPR.{{ $maxprice+0 }}</span>
+                                            @endif
+                                        @else
+                                        @php
+                                            $onsale=$p->product->onSale();
+                                        @endphp
+                                       
+                                        @if ($p->product->promo == 0 && !$onsale)
+                                            Rs. {{ $p->product->mark_price+0 }}
+                                        @else
+                                            @if ($onsale)
+                                                @php
+                                                $sellproduct=$p->product->sale();
+                                                $sell=$sellproduct->onsale;
+                                                @endphp
+                                                <span class="new-price">Rs. {{ $p->product->salePrice()+0 }} </span>
+                                            @else
+                                                <span class="new-price">Rs. {{ $p->product->sell_price+0 }} </span>
+                                            @endif
+                                            <span class="old-price">Was <span style="text-decoration: line-through;">Rs.
+                                                    {{ $p->product->mark_price+0 }}</span></span>
+                                        @endif
+                                        @endif
+
                                     </div><!-- End .product-price -->
+
                                 </div><!-- End .product-body -->
                             </div><!-- End .product product-sm -->
                         @endforeach
