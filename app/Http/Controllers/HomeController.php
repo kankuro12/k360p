@@ -107,7 +107,7 @@ class HomeController extends Controller
         $code=VariantManager::MakeCode($input,$input['product_id']);
         if(VariantManager::hasStock($code)){
             $stock=VariantManager::stock($code);
-            $p=$stock->product;
+            $p=Product::find($stock->product_id);
             if($stock->qty>0){
                 $onsale=$p->onSale();
                 if ($p->promo == 0 && !$onsale){
