@@ -99,7 +99,7 @@
                                                     <span>NPR.{{ floatval($maxprice) }}</span>
                                                     @else
                                                     <span>NPR.{{floatval( $minprice)}}</span> <span
-                                                        class="p-4 text-warning">To</span> <span>NPR.{{ $maxprice }}</span>
+                                                        class="p-4 text-warning">To</span> <span>NPR.{{ floatval($maxprice) }}</span>
                                                      @endif
                                                 @endif
                                                 
