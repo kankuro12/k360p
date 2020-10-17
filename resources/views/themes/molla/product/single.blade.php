@@ -93,9 +93,9 @@
                                                 
                                                 @endphp
                                                 @if ($maxprice == $minprice)
-                                                    <span>NPR.{{ $maxprice }}</span>
+                                                    <span>NPR.{{ $maxprice??"--" }}</span>
                                                 @else
-                                                    <span>NPR.{{ $minprice }}</span> <span
+                                                    <span>NPR.{{ $minprice>>"--" }}</span> <span
                                                         class="p-4 text-warning">To</span> <span>NPR.{{ $maxprice }}</span>
                                                 @endif
                                             @else
