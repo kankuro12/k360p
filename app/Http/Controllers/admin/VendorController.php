@@ -20,14 +20,19 @@ use App\VendorMessage;
 class VendorController extends Controller
 {
     public function getVendor(){
-        $vendors = User::where('role_id', 2)->get();
-        foreach($vendors as $vendor){
+        $vs = User::where('role_id', 2)->get();
+        $vendors=[];
+        foreach($vs as $vendor){
             $vendordetail = Vendor::where('user_id',$vendor->id)->first();
+            if($vendordetail!=null){
+
+                $vendor->name = $vendordetail->name;
+                $vendor->phone = $vendordetail->phone_number;
+                $vendor->verified = $vendordetail->verified;
+                array_push($vendors,$vendor);
+            }
             //dd($vendordetail->name);
             // $vendor->
-            $vendor->name = $vendordetail->name;
-            $vendor->phone = $vendordetail->phone_number;
-            $vendor->verified = $vendordetail->verified;
         }
         //dd($vendors);
         return view('admin.vendorlist')->with(compact('vendors'));
