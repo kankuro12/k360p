@@ -512,7 +512,7 @@
                                     <h5 class="product-title"><a
                                             href="{{ route('product.detail', $p->product_id) }}">{{ $p->product_name }}</a>
                                     </h5><!-- End .product-title -->
-                                    <<div class="product-price" id="price">
+                                    <div class="product-price" style="color:red;font-size:1rem;">
                                         @if ($p->stocktype == 1)
                                             @php
                                             $maxprice =
