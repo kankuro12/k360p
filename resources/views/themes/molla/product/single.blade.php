@@ -501,7 +501,7 @@
         ->get()
     as $p)
                             <div class="product product-sm">
-                                <figure class="product-media">
+                                <figure class="product-media" style="height: auto;">
                                     <a href="{{ route('product.detail', $p->product_id) }}">
                                         <img src="{{ asset($p->product_images) }}" alt="Product image"
                                             class="product-image">
@@ -512,7 +512,7 @@
                                     <h5 class="product-title"><a
                                             href="{{ route('product.detail', $p->product_id) }}">{{ $p->product_name }}</a>
                                     </h5><!-- End .product-title -->
-                                    <div class="product-price" style="color:red;font-size:2rem;">
+                                    <div class="product-price" style="color:red;font-size:1.5rem;">
                                         @if ($p->stocktype == 1)
                                             @php
                                             $maxprice =
@@ -525,7 +525,7 @@
                                                 <span>NPR.{{floatval(  $maxprice) }}</span>
                                             @else
                                                 <span>NPR.{{floatval(  $minprice) }}</span>
-                                                <br>
+                                                
                                                 <span
                                                     class="p-4 text-warning">To
                                                 </span> 
