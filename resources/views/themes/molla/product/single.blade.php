@@ -93,7 +93,7 @@
                                                 
                                                 @endphp
                                                 @if ($maxprice == $minprice)
-                                                    <span>NPR.{{ $maxprice??"--" }}</span>
+                                                    <span>NPR.{{ $maxprice??"----" }}</span>
                                                 @else
                                                     <span>NPR.{{ $minprice>>"--" }}</span> <span
                                                         class="p-4 text-warning">To</span> <span>NPR.{{ $maxprice }}</span>
@@ -522,7 +522,7 @@
                                             
                                             @endphp
                                             @if ($maxprice == $minprice)
-                                                <span>NPR.{{floatval(  $maxprice) }}</span>
+                                                <span>NPR.{{floatval(  $maxprice)==0?"----":floatval(  $maxprice) }}</span>
                                             @else
                                                 <span>NPR.{{floatval(  $minprice) }}</span>
                                                 
