@@ -612,9 +612,13 @@
                     $('#rateofvariant').val(innerdata.data.price);
                 } else {
                     if (innerdata.type == 1) {
-                        $('#product-variant-stock').text(innerdata.data);
-                    }else{
                         $('#price').text("NPR." + innerdata.data.price);
+                        $('#product-variant-stock').text("Stock Not Avialable");
+
+                    }else{
+                        $('#product-variant-stock').text(innerdata.data);
+                        $('#price').text("Stock Not Avialable");
+
                     }
                 }
             })
