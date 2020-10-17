@@ -92,12 +92,17 @@
                                                 \App\model\ProductStock::where('product_id',$product->product_id)->min('price');
                                                 
                                                 @endphp
-                                                @if ($maxprice == $minprice)
-                                                    <span>NPR.{{ $maxprice??"----" }}</span>
+                                                @if ($maxprice==null)
+                                                    ----
                                                 @else
-                                                    <span>NPR.{{ $minprice>>"--" }}</span> <span
+                                                    @if ($maxprice == $minprice)
+                                                    <span>NPR.{{ $maxprice }}</span>
+                                                    @else
+                                                    <span>NPR.{{ $minprice}}</span> <span
                                                         class="p-4 text-warning">To</span> <span>NPR.{{ $maxprice }}</span>
+                                                     @endif
                                                 @endif
+                                                
                                             @else
                                             @php
                                                 $onsale=$product->onSale();
