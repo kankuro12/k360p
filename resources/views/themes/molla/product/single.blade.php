@@ -513,7 +513,7 @@
                                             href="{{ route('product.detail', $p->product_id) }}">{{ $p->product_name }}</a>
                                     </h5><!-- End .product-title -->
                                     <<div class="product-price" id="price">
-                                        @if ($product->stocktype == 1)
+                                        @if ($p->product->stocktype == 1)
                                             @php
                                             $maxprice =
                                             \App\model\ProductStock::where('product_id',$p->product->product_id)->max('price');
