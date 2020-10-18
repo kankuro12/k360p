@@ -9,7 +9,7 @@ class BoxedItemListDisplay extends Model
     //
 
     public function products(){
-        $data=Product::where('product_id','>',0);
+        $data=Product::where('isverified',1);
         $category=\App\model\admin\Category::find($this->category_id);
         $categories=$category->childList();
         if($this->hascategory==1){
