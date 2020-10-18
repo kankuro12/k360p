@@ -27,6 +27,7 @@ $cat=$data->getElement();
     </div>
     <div class="owl-carousel owl-full carousel-equal-height cat-owl" 
     data-owl='{
+        "loop":false,
         "responsive":{
             "0": {
                 "items":1               
