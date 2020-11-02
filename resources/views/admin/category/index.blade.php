@@ -101,7 +101,7 @@
                                 <span class="btn btn-rose btn-round btn-file">
                                     <span class="fileinput-new">Select image</span>
                                     <span class="fileinput-exists">Change</span>
-                                    <input required type="file" name="cat_image" />
+                                    <input type="file" name="cat_image" />
                                 </span>
                                 <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
                                     data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
@@ -124,7 +124,6 @@
                                 </div>
                             </div>
                        
-
                       
                             <div class="">
                                 <div class="form-group label-floating">
