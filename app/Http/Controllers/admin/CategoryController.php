@@ -23,7 +23,11 @@ class CategoryController extends Controller
             $category->cat_name = $data['cat_name'];
             $category->referal_charge = $data['referal_charge'] ?? 0;
             $category->cat_description = $data['cat_description'] ?? "";
-            $category->cat_image = $request->file('cat_image')->store('images/backend_images/categories/');
+            if($request->hasFile('cat_image')){
+                $category->cat_image = $request->file('cat_image')->store('images/backend_images/categories/');
+            }else{
+                $category->cat_image = 'No Image available';
+            }
             //dd($parent);
             $category->parent_id = $parentid;
             $category->save();
@@ -199,7 +203,6 @@ class CategoryController extends Controller
     public function addCategory1(Request $request)
     {
 
-
         $data = $request->all();
         $parentid = null;
         $referal = 0;
@@ -209,11 +212,16 @@ class CategoryController extends Controller
             $parent = Category::find($parentid);
             $referal = $parent->referal_charge;
         }
+        
         $category = new Category;
         $category->cat_name = $data['cat_name'];
         $category->referal_charge = $data['referal_charge'] ?? $referal;
         $category->cat_description = $data['cat_description'] ?? "";
-        $category->cat_image = $request->file('cat_image')->store('images/backend_images/categories/');
+        if($request->hasFile('cat_image')){
+            $category->cat_image = $request->file('cat_image')->store('images/backend_images/categories/');
+        }else{
+            $category->cat_image = 'No image available';
+        }
         //dd($parent);
         $category->parent_id = $parentid;
         $category->save();
@@ -254,7 +262,7 @@ class CategoryController extends Controller
             $category = Category::find($id);
             $category->cat_name = $data['cat_name'];
             $category->referal_charge = $data['referal_charge'];
-            $category->cat_description = $data['cat_description'];
+            $category->cat_description = $data['cat_description'] ?? "";
             $parentid = $category->parent_id;
             if ($request->hasFile('cat_image')) {
                 $category->cat_image = $request->file('cat_image')->store('images/backend_images/categories/');
