@@ -44,7 +44,7 @@
                                 <div class="col-md-8 pr-md-1">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Referal Charge</label>
-                                        <input type="text" class="form-control" value="{{ $data->referal_charge }}"
+                                        <input type="text" class="form-control" step="0.01" value="{{ $data->referal_charge }}"
                                             name="referal_charge">
                                     </div>
                                 </div>

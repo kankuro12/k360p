@@ -120,7 +120,7 @@
                             <div class=" pr-md-1">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Referal Charge</label>
-                                    <input type="number" min="0" class="form-control" value="" name="referal_charge" required>
+                                    <input type="number" min="0" class="form-control" value="" step="0.01" name="referal_charge" required>
                                 </div>
                             </div>
                        
