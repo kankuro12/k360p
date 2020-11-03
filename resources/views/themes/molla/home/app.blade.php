@@ -25,6 +25,9 @@
             </div>
         </div>
     @endforeach
+    @if(Session::get('brand-section'))
+       @include('themes.molla.home.brand')
+    @endif
 @endsection
 @section('popup')
     @include('themes.molla.layouts.popup')

@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +112,11 @@ Route::get('/shops', [
 Route::get('/shop-by-category/{id}', [
     'uses' => 'HomeController@category',
     'as' => 'shop-by-category'
+]);
+
+Route::get('/shop-by-brand/{id}', [
+    'uses' => 'HomeController@brand',
+    'as' => 'shop-by-brand'
 ]);
 
 Route::get('/latest/', [
@@ -582,6 +588,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
     Route::post('footer-head/{id}', 'FooterheadController@update')->name('header.update');
     Route::post('footer-link', 'FooterheadController@footerLinkStore')->name('link.store');
     Route::get('footer-link-delete/{id}', 'FooterheadController@footerLinkDelete')->name('link.delete');
+
+    // brand section route 
+    Route::get('brand-section/{id}', function ($id) {
+        if($id == 1){
+            Session::put('brand-section',1);
+            return redirect()->back();
+        }else{
+            Session::forget('brand-section');
+            return redirect()->back();
+        }
+    })->name('brand-section');
 
 
 });

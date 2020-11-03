@@ -145,6 +145,13 @@ class HomeController extends Controller
 
     }
 
+
+    public function brand($id){
+        $brand = Brand::find($id);
+        $products = Product::where('isverified',1)->where('brand_id',$id)->paginate(12);
+        return view(HomePage::theme("product.brand"),compact('brand','products'));
+    }
+
     public function latest(){
         $dayToCheck = Carbon::now()->subDays(env('newtag',7));
         $products=Product::where('isverified',1)->where('created_at','>',$dayToCheck)->paginate(12);
