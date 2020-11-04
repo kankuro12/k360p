@@ -4,15 +4,7 @@
 <div class="container-fluid">
 <div class="row">
         <div class="col-md-12">
-            @if(Session::has('flash_message'))
-            <div class="alert alert-success">
-                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-                </button>
-                <span>
-                <b> Success - </b>{!! session('flash_message') !!}</span>
-            </div>
-            @endif
+            
             <div class="card">
                 <div class="card-header card-header-icon" data-background-color="purple">
                     <i class="material-icons">assignment</i>

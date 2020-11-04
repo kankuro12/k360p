@@ -19,7 +19,8 @@ class HomePage
         'Slider',
         'Advertisment',
         'Category',
-        'MultiCategory'
+        'MultiCategory',
+        'Brand'
     ];
     const themes = "molla";
     // const CSS=[

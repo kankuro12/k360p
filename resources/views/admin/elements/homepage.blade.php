@@ -12,11 +12,6 @@
                         <h4 class="card-title">Homepage Section</h4>
                         <div>
                             <button class="btn btn-primary" onclick="showModal(0)">Add Root Section</button>
-                            @if(Session::get('brand-section') == 1)
-                               <a href="{{ route('brand-section',0) }}" class="btn btn-primary">Hide Brand Section</a>
-                            @else
-                               <a href="{{ route('brand-section',1) }}" class="btn btn-primary">Show Brand Section</a>
-                            @endif
                         </div>
                         <div class="content-view">
                             <div id="root">
