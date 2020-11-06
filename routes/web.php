@@ -708,6 +708,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['authen', 'type'], 'type' => 
         'as' => 'user.profile'
     ]);
 
+    Route::get('account', [
+        'uses' => 'user\DashboardController@iframProfile',
+        'as' => 'user.account.profile'
+    ]);
+
     Route::match(['get', 'post'], 'order', [
         'uses' => 'user\DashboardController@recentOrder',
         'as' => 'user.order'

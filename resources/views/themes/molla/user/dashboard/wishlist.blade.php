@@ -9,7 +9,7 @@
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>Wishlist</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('user.account') }}"><i class="zmdi zmdi-home"></i> User Dashboard </a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('user.account.profile') }}"><i class="zmdi zmdi-home"></i> User Dashboard </a></li>
                         <li class="breadcrumb-item">Pages</li>
                         <li class="breadcrumb-item active">Wishlist</li>
                     </ul>
