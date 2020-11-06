@@ -80,6 +80,11 @@ class ElementController extends Controller
                 //dd($brands);
                 return view('admin.elements.boxeddisplay')->with(compact('categories', 'section', 'columns'));
                 break;
+            case 5:
+                $brands = Brand::all();
+                return view('admin.elements.brand')->with(compact('brands','section'));
+                break;
+                
             default:
                 # code...
                 break;

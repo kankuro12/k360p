@@ -5,6 +5,7 @@ namespace App\model\admin;
 use App\Setting\HomePage;
 use App\SliderGroup;
 use Illuminate\Database\Eloquent\Model;
+use App\BrandDisplay;
 
 class HomePageSection extends Model
 {
@@ -80,6 +81,10 @@ class HomePageSection extends Model
                     $display = BoxedItemDisplay::where('home_page_section_id', $this->id)->first();
                     return $display;
                     break;
+                case 5:
+                    $display = BrandDisplay::where('home_page_section_id', $this->id)->get();
+                    return $display;
+                    break;
                 default:
                     return null;
                     break;
@@ -108,6 +113,9 @@ class HomePageSection extends Model
                 break;
             case 4:
                 return HomePage::theme('elements.boxed');
+                break;
+            case 5:
+                return HomePage::theme('elements.brand');
                 break;
             default:
                 return '';

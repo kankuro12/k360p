@@ -9,7 +9,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -589,16 +588,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
     Route::post('footer-link', 'FooterheadController@footerLinkStore')->name('link.store');
     Route::get('footer-link-delete/{id}', 'FooterheadController@footerLinkDelete')->name('link.delete');
 
-    // brand section route 
-    Route::get('brand-section/{id}', function ($id) {
-        if($id == 1){
-            Session::put('brand-section',1);
-            return redirect()->back();
-        }else{
-            Session::forget('brand-section');
-            return redirect()->back();
-        }
-    })->name('brand-section');
+    
 
 
 });
@@ -975,6 +965,12 @@ Route::group(['prefix' => 'admin/element', 'middleware' => 'admin_auth'], functi
     Route::post('/boxed/add/{section}', 'Elements\AdController@saveBoxed')->name('elements.save-boxed');
     Route::post('/boxed/update/{item}', 'Elements\AdController@updateBoxed')->name('elements.update-boxed');
     Route::get('/boxed/del/{item}', 'Elements\AdController@delBoxed')->name('elements.del-boxed');
+
+    // brand items 
+    Route::post('/brand/save/{section}', 'Elements\BrandController@save')->name('elements.brand-save');
+    Route::get('/brand/delete/{id}', 'Elements\BrandController@delete')->name('delete.brand');
+
+
 });
 
 //admin ordermanagement

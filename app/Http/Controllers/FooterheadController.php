@@ -29,7 +29,7 @@ class FooterheadController extends Controller
         }
 
         if($r->linkradio == 2){
-            $link->link = 'shops-by-brand/'.$r->brands;
+            $link->link = 'shop-by-brand/'.$r->brands;
         }
 
         if($r->linkradio == 3){
@@ -41,7 +41,7 @@ class FooterheadController extends Controller
         }
 
         if($r->linkradio == 5){
-            $link->link = 'shops-by-category/'.$r->categories;
+            $link->link = 'shop-by-category/'.$r->categories;
         }
 
         $link->save();
