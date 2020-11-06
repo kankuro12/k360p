@@ -44,16 +44,16 @@
     <aside id="leftsidebar" class="sidebar">
         <div class="navbar-brand">
             <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-            <a href="{{url('/')}}"><span class="m-l-10">HOME</span></a>
+            <a href="#"><span class="m-l-10">User Account</span></a>
         </div>
         <div class="menu">
             <ul class="list">
                 <li>
                     <div class="user-info">
                         @if($user->profile_img != 'profile.png')
-                        <a class="image" href="{{ route('user.account') }}"><img src="{{ asset($user->profile_img) }}" alt="User"></a>
+                        <a class="image" href="{{ route('user.account.profile') }}"><img src="{{ asset($user->profile_img) }}" alt="User"></a>
                         @else
-                        <a class="image" href="{{ route('user.account') }}"><img src="{{ asset('images/user/user.png') }}" alt="User"></a>
+                        <a class="image" href="{{ route('user.account.profile') }}"><img src="{{ asset('images/user/user.png') }}" alt="User"></a>
                         @endif
                         <div class="detail">
                             <h4>{{ $user->fname}} {{ $user->lname}}</h4>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="active open"><a href="{{ route('user.account') }}"><i class="zmdi zmdi-home"></i><span>User Dashboard</span></a></li>
+                <li class="active open"><a href="{{ route('user.account.profile') }}"><i class="zmdi zmdi-home"></i><span>User Dashboard</span></a></li>
                 <li><a href="{{ route('user.order') }}" class="waves-effect waves-block"><i class="zmdi zmdi-shopping-cart"></i><span>Orders</span></a></li>
                 <li><a href="{{ route('account.detail') }}" class="waves-effect waves-block"><i class="zmdi zmdi-lock"></i><span>Account Details</span></a></li>
                 <li><a href="{{ route('user.wishlist.page') }}" class="waves-effect waves-block"><i class="zmdi zmdi-assignment"></i><span>Wishlist Items</span></a></li>

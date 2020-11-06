@@ -20,6 +20,9 @@ class DashboardController extends Controller
         return view(HomePage::theme("user.dashboard.header"));
     }
 
+    public function iframProfile(){
+        return view(HomePage::theme("user.dashboard.index"));
+    }
 
     public function recentOrder(Request $request){
         $shipping = ShippingDetail::where('user_id',Auth::user()->id)->get();
