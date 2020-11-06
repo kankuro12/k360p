@@ -17,7 +17,7 @@ use App\Wishlist;
 class DashboardController extends Controller
 {
     public function dashboard(){
-        return view(HomePage::theme("user.dashboard.index"));
+        return view(HomePage::theme("user.dashboard.header"));
     }
 
 

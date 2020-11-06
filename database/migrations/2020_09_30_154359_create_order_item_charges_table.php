@@ -16,7 +16,7 @@ class CreateOrderItemChargesTable extends Migration
         Schema::create('order_item_charges', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('amount',8,2)->default(0);
-            $table->decimal('title',8,2)->default(0);
+            $table->text('title');
             $table->integer('extra_charge_id')->unsigned();
             $table->foreign('extra_charge_id')->references('id')->on('extra_charges')->onDelete('cascade');
             $table->timestamps();

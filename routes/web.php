@@ -54,6 +54,7 @@ Route::get('testo', function () {
     // dd($orders,$date);
 });
 
+
 Route::get('grid/{id}', function ($id) {
     session(['isgrid' => $id]);
     // dd(session('isgrid'));

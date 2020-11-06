@@ -1,83 +1,65 @@
-@extends('themes.molla.layouts.app')
+@extends('themes.molla.user.dashboard.app')
 @section('title','User Wishlist')
-@section('contant')
-<main class="main">
-    <div class="page-header text-center" style="background-image: url('themes/molla/assets/images/page-header-bg.jpg')">
-        <div class="container">
-            <h1 class="page-title">My Wishlist<span>Shop</span></h1>
-        </div><!-- End .container -->
-    </div><!-- End .page-header -->
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+@section('content')
 
-            </ol>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Wishlist</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('user.account') }}"><i class="zmdi zmdi-home"></i> User Dashboard </a></li>
+                        <li class="breadcrumb-item">Pages</li>
+                        <li class="breadcrumb-item active">Wishlist</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div style="margin:2rem 0;">
+                        @include('themes.molla.layouts.message')
+                    </div>
+                    <div class="card project_list">
+                        <div class="table-responsive">
+                            <table class="table table-hover c_table theme-color">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <td>Name</td>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($wishlist as $list)
+                                    <tr>
+                                        <td>
+                                            <img class="rounded avatar" src="{{ asset($list->product->product_images) }}" alt="Product Image">
+                                        </td>
+                                        <td>
+                                            <a class="single-user-name" href="{{ route('product.detail',$list->product_id)}}">{{ $list->product->product_name }}</a><br>
+                                        </td>
+                                        <td>Rs.{{ $list->product->mark_price }}</td>
+                                        <td><a href="{{ route('user.wishlist.remove',$list->id)}}" class="badge badge-danger">Remove</a></td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
 
-    <div class="page-content">
-        <div class="dashboard">
-            <div class="container">
-                <div class="row">
-                    @include('themes.molla.user.dashboard.header')
-
-                    <div class="col-md-8 col-lg-9">
-                        <div style="margin:2rem 0;">
-                            @include('themes.molla.layouts.message')
-                        </div>
-                        <div class="tab-content">
-
-                            <div class="tab-pane fade show active" id="tab-order" role="tabpanel" aria-labelledby="tab-order-link">
-                               @php 
-                                    $wishlistCount = \App\Wishlist::where('user_id',Auth::user()->id)->count();
-                               @endphp
-                               @if($wishlistCount>0)
-                                <table class="table table-wishlist table-mobile">
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Price</th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        @foreach($wishlist as $list)
-                                        <tr>
-                                            <td class="product-col">
-                                                <div class="product">
-                                                    <figure class="product-media">
-                                                        <a href="{{ route('product.detail',$list->product_id)}}">
-                                                            <img src="{{ asset($list->product->product_images) }}" alt="Product image">
-                                                        </a>
-                                                    </figure>
-
-                                                    <h3 class="product-title">
-                                                        <a href="{{ route('product.detail',$list->product_id)}}">{{ $list->product->product_name }}</a>
-                                                    </h3><!-- End .product-title -->
-                                                </div><!-- End .product -->
-                                            </td>
-                                            <td class="price-col">NPR.{{ $list->product->mark_price }}</td>
-
-                                            <td class="remove-col"><a href="{{ route('user.wishlist.remove',$list->id)}}" class="btn-remove" title="Remove"><i class="icon-close"></i></a></td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                               @else
-                                <p>Products are not added yet!!!!</p>
-                               @endif
-                            </div><!-- .End .tab-pane -->
+                            </table>
 
                         </div>
-                    </div><!-- End .col-lg-9 -->
-                </div><!-- End .row -->
-            </div><!-- End .container -->
-        </div><!-- End .dashboard -->
-    </div><!-- End .page-content -->
-</main>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 @endsection
