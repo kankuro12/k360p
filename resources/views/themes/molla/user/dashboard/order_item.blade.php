@@ -1,418 +1,384 @@
-@extends('themes.molla.layouts.app')
+@extends('themes.molla.user.dashboard.app')
 @section('title','User Orders')
-@section('contant')
-<main class="main">
-    <div class="page-header text-center" style="background-image: url('themes/molla/assets/images/page-header-bg.jpg')">
-        <div class="container">
-            <h1 class="page-title">My Orders<span>Shop</span></h1>
-        </div><!-- End .container -->
-    </div><!-- End .page-header -->
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                <li class="breadcrumb-item "><a href="{{ url('/user/dashboard') }}"> My Account </a></li>
-                <li class="breadcrumb-item active" aria-current="page">My Orders</li>
+@section('content')
 
-            </ol>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Orders</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('user.account') }}"><i class="zmdi zmdi-home"></i> User Dashboard </a></li>
+                        <li class="breadcrumb-item">Pages</li>
+                        <li class="breadcrumb-item active">Orders</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card mt-2">
+                        <div class="body">
+                            <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingOne_1">
+                                        <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1" class="collapsed"><i class="zmdi zmdi-hc-fw"></i> Pending </a> </h4>
+                                    </div>
+                                    <div id="collapseOne_1" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_1" style="">
+                                        <div class="panel-body p-0">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+                                                <div class="card project_list">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover c_table theme-color pt-2">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 50px;">Traking Id</th>
+                                                                    <th>Image</th>
+                                                                    <th>Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Rate</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($orderItems as $items)
+                                                                @foreach($items as $order)
+                                                                @if($order->stage == 0)
+                                                                <tr>
+                                                                    <td>#{{ $order->id }}</td>
+                                                                    <td>
+                                                                        <img class="rounded avatar" src="{{asset($order->product->product_images) }}" alt="Product Image">
+                                                                    </td>
+                                                                    <td>{{ $order->product->product_name }}</td>
+                                                                    <td>{{$order->qty}}</td>
+                                                                    <td>{{$order->rate}}</td>
+                                                                    <td>
+                                                                        <a href="{{route('user.order.item',$order->id)}}">View Details</a> <br>
+                                                                        <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endif
+                                                                @endforeach
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-    <div class="page-content">
-        <div class="dashboard">
-            <div class="container">
-                <div class="row">
-                    @include('themes.molla.user.dashboard.header')
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingThree_1">
+                                        <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_1" aria-expanded="false" aria-controls="collapseThree_1"><i class="zmdi zmdi-hc-fw"></i> Accepted </a> </h4>
+                                    </div>
+                                    <div id="collapseThree_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_1" style="">
+                                    <div class="panel-body p-0">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+                                                <div class="card project_list">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover c_table theme-color pt-2">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 50px;">Traking Id</th>
+                                                                    <th>Image</th>
+                                                                    <th>Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Rate</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($orderItems as $items)
+                                                                @foreach($items as $order)
+                                                                @if($order->stage == 1)
+                                                                <tr>
+                                                                    <td>#{{ $order->id }}</td>
+                                                                    <td>
+                                                                        <img class="rounded avatar" src="{{asset($order->product->product_images) }}" alt="Product Image">
+                                                                    </td>
+                                                                    <td>{{ $order->product->product_name }}</td>
+                                                                    <td>{{$order->qty}}</td>
+                                                                    <td>{{$order->rate}}</td>
+                                                                    <td>
+                                                                        <a href="{{route('user.order.item',$order->id)}}">View Details</a> <br>
+                                                                        <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endif
+                                                                @endforeach
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="col-md-8 col-lg-9">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="accordion accordion-icon" id="accordion-4">
-                                    <div class="card card-box bg-light">
-                                        <div class="card-header" id="heading4-1">
-                                            <h2 class="card-title">
-                                                <a role="button" data-toggle="collapse" href="#collapse4-1" aria-expanded="true" aria-controls="collapse4-1">
-                                                   Pending
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse4-1" class="collapse show" aria-labelledby="heading4-1" data-parent="#accordion-4">
-                                            <div class="card-body">
-                                                <table class="table table-cart table-mobile">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Traking Id</th>
-                                                            <th>Product</th>
-                                                            <th>Quantity</th>
-                                                            <th>Rate</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
 
-                                                    <tbody>
-                                                        @foreach($orderItems as $items)
-                                                        @foreach($items as $order)
-                                                        @if($order->stage == 0)
-                                                        <tr>
-                                                            <td>#{{ $order->id }}</td>
-                                                            <td class="product-col">
-                                                                <div class="product" style="background: none;">
-                                                                    <figure class="product-media">
-                                                                        <a href="#">
-                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
-                                                                        </a>
-                                                                    </figure>
-                                                                </div><!-- End .product -->
-                                                            </td>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingFour_1">
+                                        <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseFour_1" aria-expanded="false" aria-controls="collapseFour_1"><i class="zmdi zmdi-hc-fw"></i> On Delivery </a> </h4>
+                                    </div>
+                                    <div id="collapseFour_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour_1" style="">
+                                    <div class="panel-body p-0">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+                                                <div class="card project_list">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover c_table theme-color pt-2">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 50px;">Traking Id</th>
+                                                                    <th>Image</th>
+                                                                    <th>Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Rate</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($orderItems as $items)
+                                                                @foreach($items as $order)
+                                                                @if($order->stage == 2)
+                                                                <tr>
+                                                                    <td>#{{ $order->id }}</td>
+                                                                    <td>
+                                                                        <img class="rounded avatar" src="{{asset($order->product->product_images) }}" alt="Product Image">
+                                                                    </td>
+                                                                    <td>{{ $order->product->product_name }}</td>
+                                                                    <td>{{$order->qty}}</td>
+                                                                    <td>{{$order->rate}}</td>
+                                                                    <td>
+                                                                        <a href="{{route('user.order.item',$order->id)}}">View Details</a> <br>
+                                                                        <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endif
+                                                                @endforeach
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                            <td>{{$order->qty}}</td>
-                                                            <td>{{$order->rate}}</td>
 
-                                                            <td>
-                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a> <br>
-                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
-                                                            </td>
-                                                        </tr>
-                                                        @endif
-                                                        @endforeach
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingFive_1">
+                                        <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseFive_1" aria-expanded="false" aria-controls="collapseFive_1"><i class="zmdi zmdi-hc-fw"></i> Pickup </a> </h4>
+                                    </div>
+                                    <div id="collapseFive_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive_1" style="">
+                                    <div class="panel-body p-0">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+                                                <div class="card project_list">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover c_table theme-color pt-2">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 50px;">Traking Id</th>
+                                                                    <th>Image</th>
+                                                                    <th>Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Rate</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($orderItems as $items)
+                                                                @foreach($items as $order)
+                                                                @if($order->stage == 3)
+                                                                <tr>
+                                                                    <td>#{{ $order->id }}</td>
+                                                                    <td>
+                                                                        <img class="rounded avatar" src="{{asset($order->product->product_images) }}" alt="Product Image">
+                                                                    </td>
+                                                                    <td>{{ $order->product->product_name }}</td>
+                                                                    <td>{{$order->qty}}</td>
+                                                                    <td>{{$order->rate}}</td>
+                                                                    <td>
+                                                                        <a href="{{route('user.order.item',$order->id)}}">View Details</a> <br>
+                                                                        <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endif
+                                                                @endforeach
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                    <div class="card card-box bg-light">
-                                        <div class="card-header" id="heading4-2">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-2" aria-expanded="false" aria-controls="collapse4-2">
-                                                    Accepted
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse4-2" class="collapse" aria-labelledby="heading4-2" data-parent="#accordion-4">
-                                            <div class="card-body">
-                                                <table class="table table-cart table-mobile">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Traking Id</th>
-                                                            <th>Product</th>
-                                                            <th>Quantity</th>
-                                                            <th>Rate</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
 
-                                                    <tbody>
-                                                        @foreach($orderItems as $items)
-                                                        @foreach($items as $order)
-                                                        @if($order->stage == 1)
-                                                        <tr>
-                                                            <td>#{{ $order->id }}</td>
-                                                            <td class="product-col">
-                                                                <div class="product" style="background: none;">
-                                                                    <figure class="product-media">
-                                                                        <a href="#">
-                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
-                                                                        </a>
-                                                                    </figure>
-                                                                </div><!-- End .product -->
-                                                            </td>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingSix_1">
+                                        <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseSix_1" aria-expanded="false" aria-controls="collapseSix_1"><i class="zmdi zmdi-hc-fw"></i> Delivered </a> </h4>
+                                    </div>
+                                    <div id="collapseSix_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix_1" style="">
+                                    <div class="panel-body p-0">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+                                                <div class="card project_list">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover c_table theme-color pt-2">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 50px;">Traking Id</th>
+                                                                    <th>Image</th>
+                                                                    <th>Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Rate</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($orderItems as $items)
+                                                                @foreach($items as $order)
+                                                                @if($order->stage == 4)
+                                                                <tr>
+                                                                    <td>#{{ $order->id }}</td>
+                                                                    <td>
+                                                                        <img class="rounded avatar" src="{{asset($order->product->product_images) }}" alt="Product Image">
+                                                                    </td>
+                                                                    <td>{{ $order->product->product_name }}</td>
+                                                                    <td>{{$order->qty}}</td>
+                                                                    <td>{{$order->rate}}</td>
+                                                                    <td>
+                                                                        <a href="{{route('user.order.item',$order->id)}}">View Details</a> <br>
+                                                                        <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endif
+                                                                @endforeach
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                            <td>{{$order->qty}}</td>
-                                                            <td>{{$order->rate}}</td>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingSev_1">
+                                        <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseSev_1" aria-expanded="false" aria-controls="collapseSev_1"><i class="zmdi zmdi-hc-fw"></i> Rejected </a> </h4>
+                                    </div>
+                                    <div id="collapseSev_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSev_1" style="">
+                                    <div class="panel-body p-0">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+                                                <div class="card project_list">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover c_table theme-color pt-2">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 50px;">Traking Id</th>
+                                                                    <th>Image</th>
+                                                                    <th>Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Rate</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($orderItems as $items)
+                                                                @foreach($items as $order)
+                                                                @if($order->stage == 5)
+                                                                <tr>
+                                                                    <td>#{{ $order->id }}</td>
+                                                                    <td>
+                                                                        <img class="rounded avatar" src="{{asset($order->product->product_images) }}" alt="Product Image">
+                                                                    </td>
+                                                                    <td>{{ $order->product->product_name }}</td>
+                                                                    <td>{{$order->qty}}</td>
+                                                                    <td>{{$order->rate}}</td>
+                                                                    <td>
+                                                                        <a href="{{route('user.order.item',$order->id)}}">View Details</a> <br>
+                                                                        <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endif
+                                                                @endforeach
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                            <td>
-                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
-                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
-                                                            </td>
-                                                        </tr>
-                                                        @endif
-                                                        @endforeach
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
 
-                                    <div class="card card-box bg-light">
-                                        <div class="card-header" id="heading4-3">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-3" aria-expanded="false" aria-controls="collapse4-3">
-                                                    On Delivery
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse4-3" class="collapse" aria-labelledby="heading4-3" data-parent="#accordion-4">
-                                            <div class="card-body">
-                                                <table class="table table-cart table-mobile">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Traking Id</th>
-                                                            <th>Product</th>
-                                                            <th>Quantity</th>
-                                                            <th>Rate</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingTwo_1">
+                                        <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseTwo_1" aria-expanded="false" aria-controls="collapseTwo_1"><i class="zmdi zmdi-hc-fw"></i> Returned </a> </h4>
+                                    </div>
+                                    <div id="collapseTwo_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_1" style="">
+                                    <div class="panel-body p-0">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+                                                <div class="card project_list">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover c_table theme-color pt-2">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 50px;">Traking Id</th>
+                                                                    <th>Image</th>
+                                                                    <th>Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Rate</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($orderItems as $items)
+                                                                @foreach($items as $order)
+                                                                @if($order->stage == 6)
+                                                                <tr>
+                                                                    <td>#{{ $order->id }}</td>
+                                                                    <td>
+                                                                        <img class="rounded avatar" src="{{asset($order->product->product_images) }}" alt="Product Image">
+                                                                    </td>
+                                                                    <td>{{ $order->product->product_name }}</td>
+                                                                    <td>{{$order->qty}}</td>
+                                                                    <td>{{$order->rate}}</td>
+                                                                    <td>
+                                                                        <a href="{{route('user.order.item',$order->id)}}">View Details</a> <br>
+                                                                        <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endif
+                                                                @endforeach
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                    <tbody>
-                                                        @foreach($orderItems as $items)
-                                                        @foreach($items as $order)
-                                                        @if($order->stage == 2)
-                                                        <tr>
-                                                            <td>#{{ $order->id }}</td>
-                                                            <td class="product-col">
-                                                                <div class="product" style="background: none;">
-                                                                    <figure class="product-media">
-                                                                        <a href="#">
-                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
-                                                                        </a>
-                                                                    </figure>
-                                                                </div><!-- End .product -->
-                                                            </td>
-
-                                                            <td>{{$order->qty}}</td>
-                                                            <td>{{$order->rate}}</td>
-
-                                                            <td>
-                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
-                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
-                                                            </td>
-                                                        </tr>
-                                                        @endif
-                                                        @endforeach
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-                                    <div class="card card-box bg-light">
-                                        <div class="card-header" id="heading4-4">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-4" aria-expanded="false" aria-controls="collapse4-4">
-                                                     Pickup
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse4-4" class="collapse" aria-labelledby="heading4-4" data-parent="#accordion-4">
-                                            <div class="card-body">
-                                                <table class="table table-cart table-mobile">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Traking Id</th>
-                                                            <th>Product</th>
-                                                            <th>Quantity</th>
-                                                            <th>Rate</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                        @foreach($orderItems as $items)
-                                                        @foreach($items as $order)
-                                                        @if($order->stage == 3)
-                                                        <tr>
-                                                            <td>#{{ $order->id }}</td>
-                                                            <td class="product-col">
-                                                                <div class="product" style="background: none;">
-                                                                    <figure class="product-media">
-                                                                        <a href="#">
-                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
-                                                                        </a>
-                                                                    </figure>
-                                                                </div><!-- End .product -->
-                                                            </td>
-
-                                                            <td>{{$order->qty}}</td>
-                                                            <td>{{$order->rate}}</td>
-
-                                                            <td>
-                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
-                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
-                                                            </td>
-                                                        </tr>
-                                                        @endif
-                                                        @endforeach
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-                                    <div class="card card-box bg-light">
-                                        <div class="card-header" id="heading4-5">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-5" aria-expanded="false" aria-controls="collapse4-5">
-                                                    Delivered
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse4-5" class="collapse" aria-labelledby="heading4-5" data-parent="#accordion-4">
-                                            <div class="card-body">
-                                                <table class="table table-cart table-mobile">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Traking Id</th>
-                                                            <th>Product</th>
-                                                            <th>Quantity</th>
-                                                            <th>Rate</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                        @foreach($orderItems as $items)
-                                                        @foreach($items as $order)
-                                                        @if($order->stage == 4)
-                                                        <tr>
-                                                            <td>#{{ $order->id }}</td>
-                                                            <td class="product-col">
-                                                                <div class="product" style="background: none;">
-                                                                    <figure class="product-media">
-                                                                        <a href="#">
-                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
-                                                                        </a>
-                                                                    </figure>
-                                                                </div><!-- End .product -->
-                                                            </td>
-
-                                                            <td>{{$order->qty}}</td>
-                                                            <td>{{$order->rate}}</td>
-
-                                                            <td>
-                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
-                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
-                                                            </td>
-                                                        </tr>
-                                                        @endif
-                                                        @endforeach
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-                                    <div class="card card-box bg-light">
-                                        <div class="card-header" id="heading4-6">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-6" aria-expanded="false" aria-controls="collapse4-6">
-                                                    Rejected
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse4-6" class="collapse" aria-labelledby="heading4-6" data-parent="#accordion-4">
-                                            <div class="card-body">
-                                                <table class="table table-cart table-mobile">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Traking Id</th>
-                                                            <th>Product</th>
-                                                            <th>Quantity</th>
-                                                            <th>Rate</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                        @foreach($orderItems as $items)
-                                                        @foreach($items as $order)
-                                                        @if($order->stage == 5)
-                                                        <tr>
-                                                            <td>#{{ $order->id }}</td>
-                                                            <td class="product-col">
-                                                                <div class="product" style="background: none;">
-                                                                    <figure class="product-media">
-                                                                        <a href="#">
-                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
-                                                                        </a>
-                                                                    </figure>
-                                                                </div><!-- End .product -->
-                                                            </td>
-
-                                                            <td>{{$order->qty}}</td>
-                                                            <td>{{$order->rate}}</td>
-
-                                                            <td>
-                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
-                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
-                                                            </td>
-                                                        </tr>
-                                                        @endif
-                                                        @endforeach
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-                                    <div class="card card-box bg-light">
-                                        <div class="card-header" id="heading4-7">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse4-7" aria-expanded="false" aria-controls="collapse4-7">
-                                                  Returned
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse4-7" class="collapse" aria-labelledby="heading4-7" data-parent="#accordion-4">
-                                            <div class="card-body">
-                                                <table class="table table-cart table-mobile">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Traking Id</th>
-                                                            <th>Product</th>
-                                                            <th>Quantity</th>
-                                                            <th>Rate</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                        @foreach($orderItems as $items)
-                                                        @foreach($items as $order)
-                                                        @if($order->stage == 6)
-                                                        <tr>
-                                                            <td>#{{ $order->id }}</td>
-                                                            <td class="product-col">
-                                                                <div class="product" style="background: none;">
-                                                                    <figure class="product-media">
-                                                                        <a href="#">
-                                                                            <img src="{{asset($order->product->product_images) }}" alt="Product image">
-                                                                        </a>
-                                                                    </figure>
-                                                                </div><!-- End .product -->
-                                                            </td>
-
-                                                            <td>{{$order->qty}}</td>
-                                                            <td>{{$order->rate}}</td>
-
-                                                            <td>
-                                                                <a href="{{route('user.order.item',$order->id)}}">View Details</a><br>
-                                                                <a href="{{route('user.full.order',$order->shipping_detail_id)}}">View Full Order</a>
-                                                            </td>
-                                                        </tr>
-                                                        @endif
-                                                        @endforeach
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-                                </div><!-- End .accordion -->
-                            </div><!-- End .col-md-6 -->
-                        </div><!-- End .row -->
-                    </div><!-- End .col-lg-9 -->
-                </div><!-- End .row -->
-            </div><!-- End .container -->
-        </div><!-- End .dashboard -->
-    </div><!-- End .page-content -->
-</main>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
