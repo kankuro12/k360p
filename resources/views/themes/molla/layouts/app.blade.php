@@ -206,13 +206,14 @@
             $('#cat').focus();
             $('#cat').click();
         }
-
+        $('#social-up').hide();
+        $('#social-up-icon').html(' <i class="icon-plus"></i>')
         var state=1;
         function social_toogle(){
             $('#social-up').toggle('slow');
             if(state==1){
                 state=0;
-                $('#social-up-icon').html(' <i class="icon-plus"></i>')
+                $('#social-up-icon').html(' <i class="icon-minus"></i>')
             }else{
                 state=1;
                 $('#social-up-icon').html(' <i class="icon-plus"></i>')

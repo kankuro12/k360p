@@ -9,11 +9,11 @@ $user = \App\model\VendorUser\VendorUser::where('user_id',Auth::user()->id)->fir
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>Profile</h2>
+                    <h2>User Dashboard</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ url('/')}}"><i class="zmdi zmdi-home"></i> Home </a></li>
                         <li class="breadcrumb-item">Pages</li>
-                        <li class="breadcrumb-item active">Profile</li>
+                        <li class="breadcrumb-item active">User Dashboard</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -25,32 +25,64 @@ $user = \App\model\VendorUser\VendorUser::where('user_id',Auth::user()->id)->fir
         </div>
         <div class="container-fluid">
             <div class="row clearfix">
-               
-                <div class="col-lg-4 col-md-12">
-                    <div class="card mcard_2">
-                        <div class="img">
-                            <img src="{{asset('themes/userdashboard/images/image-gallery/3.jpg') }}" class="img-fluid" alt="">
-                        </div>
-                        <div class="body">
-                            <div class="user">
-                                @if($user->profile_img != 'profile.png')
-                                   <a class="image" href="#"><img src="{{ asset($user->profile_img) }}" class="rounded-circle img-raised" alt="profile-image"></a>
-                                @else
-                                   <a class="image" href="#"><img src="{{ asset('images/user/user.png') }}" class="rounded-circle img-raised" alt="profile-image"></a>
-                                @endif
-                                <div class="details">
-                                    <h6 class="mb-0">{{ $user->fname}} {{ $user->lname}}</h6>
-                                    <small>Consumer</small>
+
+                <div class="col-lg-5 col-md-12">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="card w_data_1">
+                                <div class="body">
+                                    <div class="w_icon indigo"><i class="zmdi zmdi-hc-fw"></i></div>
+                                    <h4 class="mt-3">{{ $pendingCount }}</h4>
+                                    <span class="text-muted">Pending Order(s)</span>
                                 </div>
                             </div>
-                            <span class="text-muted">Quality is more improtant than quantity. One home run is much better than doubles.</span>
-                            <h6 class="mt-2"><a href="javascript:void(0);" title="">Thank You</a></h6>
-                            
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="card w_data_1">
+                                <div class="body">
+                                    <div class="w_icon indigo"><i class="zmdi zmdi-hc-fw"></i></div>
+                                    <h4 class="mt-3">{{ $acceptCount }}</h4>
+                                    <span class="text-muted">Accepted Order(s)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="card w_data_1">
+                                <div class="body">
+                                    <div class="w_icon indigo"><i class="zmdi zmdi-hc-fw"></i></div>
+                                    <h4 class="mt-3">{{ $receivCount }}</h4>
+                                    <span class="text-muted">Received Order(s)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="card w_data_1">
+                                <div class="body">
+                                    <div class="w_icon indigo"><i class="zmdi zmdi-hc-fw"></i></div>
+                                    <h4 class="mt-3">{{ $rejectCount }}</h4>
+                                    <span class="text-muted">Rejected Order(s)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="card w_data_1">
+                                <div class="body">
+                                    <div class="w_icon indigo"><i class="zmdi zmdi-hc-fw"></i></div>
+                                    <h4 class="mt-3">{{ $returnCount }}</h4>
+                                    <span class="text-muted">Returned Order(s)</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-8 col-md-12">
+                <div class="col-lg-7 col-md-12">
                     <div class="card">
                         <div class="body">
                             <h4 class="text-center">User Information</h4>

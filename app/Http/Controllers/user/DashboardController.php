@@ -21,7 +21,17 @@ class DashboardController extends Controller
     }
 
     public function iframProfile(){
-        return view(HomePage::theme("user.dashboard.index"));
+        
+        $pendingCount = ShippingDetail::join('order_items','shipping_details.id','=','order_items.shipping_detail_id')->where('shipping_details.user_id',Auth::user()->id)->where('order_items.stage',0)->count();
+
+        $acceptCount = ShippingDetail::join('order_items','shipping_details.id','=','order_items.shipping_detail_id')->where('shipping_details.user_id',Auth::user()->id)->where('order_items.stage',1)->count();
+
+        $receivCount = ShippingDetail::join('order_items','shipping_details.id','=','order_items.shipping_detail_id')->where('shipping_details.user_id',Auth::user()->id)->where('order_items.stage',4)->count();
+
+        $rejectCount = ShippingDetail::join('order_items','shipping_details.id','=','order_items.shipping_detail_id')->where('shipping_details.user_id',Auth::user()->id)->where('order_items.stage',5)->count();
+
+        $returnCount = ShippingDetail::join('order_items','shipping_details.id','=','order_items.shipping_detail_id')->where('shipping_details.user_id',Auth::user()->id)->where('order_items.stage',6)->count();
+        return view(HomePage::theme("user.dashboard.index"))->with(compact('pendingCount','acceptCount','receivCount','rejectCount','returnCount'));
     }
 
     public function recentOrder(Request $request){
