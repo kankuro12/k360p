@@ -350,6 +350,12 @@
                                 <span class="sidebar-normal"> Footer Link </span>
                             </a>
                         </li>
+                        <li class="{{ (Request::is('admin/clearfix') ? ' active' : '') }}">
+                            <a href="{{ url('admin/clearfix') }}">
+                                <span class="sidebar-mini"> CI </span>
+                                <span class="sidebar-normal"> Clearfix Info </span>
+                            </a>
+                        </li>
                         <li class="{{ (Request::is('admin/footer-head') ? ' active' : '') }}">
                             <a href="{{ route('elements') }}">
                                 <span class="sidebar-mini"> EL </span>

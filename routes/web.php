@@ -589,6 +589,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
     Route::post('footer-link', 'FooterheadController@footerLinkStore')->name('link.store');
     Route::get('footer-link-delete/{id}', 'FooterheadController@footerLinkDelete')->name('link.delete');
 
+    // clearfix
+    Route::match(['GET', 'POST'], 'clearfix', 'FooterheadController@showItems')->name('clearfix');
+    Route::match(['GET', 'POST'], 'clearfix/{id}', 'FooterheadController@showItemsUpdate')->name('clearfix.update');
+
     
 
 
