@@ -82,5 +82,6 @@
                 <a href="{{env('pinintrest','#')}}" class="social-icon " title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
                 <a href="{{env('linkedin','#')}}" class="social-icon " title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
         </div><!-- End .social-icons -->
+        
     </div><!-- End .mobile-menu-wrapper -->
 </div><!-- End .mobile-menu-container -->
