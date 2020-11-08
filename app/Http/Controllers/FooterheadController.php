@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Clearfix;
 use App\Footerhead;
 use App\Footerlink;
 use Illuminate\Http\Request;
@@ -53,5 +54,21 @@ class FooterheadController extends Controller
         $link = Footerlink::where('id',$id)->first();
         $link->delete();
         return redirect()->back()->with('flash_message','Link has been deleted successfully !!!');
+    }
+
+
+    // clear fix
+
+    public function showItems(){
+        return view('admin.footer.clearfix');
+    }
+
+    public function showItemsUpdate(Request $r, $id){
+        $clear = Clearfix::find($id);
+        $clear->title = $r->title;
+        $clear->link_title = $r->link_title;
+        $clear->link = $r->link;
+        $clear->save();
+        return redirect()->back()->with('flash_message','Updated successfully !!!');
     }
 }

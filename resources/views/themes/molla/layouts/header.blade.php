@@ -2,10 +2,13 @@
 <header class="header header-14">
     <div class="header-top d-none d-lg-flex" style="background-color: {{ env('secondaryheader_bg', '#3d4273') }};color: {{ env('secondaryheader_color', '#ffffff') }};">
         <div class="container-fluid pt-1 pt-md-0 pb-1 pb-md-0">
+            @php 
+                $clearinfo = \App\Clearfix::first();
+            @endphp
             <div class="header-left">
                 <span>
-                    Some special product are onsale for certain time... <a href="{{ url('sale-product') }}"
-                        class="text-warning ml-2"> Shop Now </a>
+                    {{$clearinfo->title}} <a href="{{ url($clearinfo->link) }}"
+                        class="text-warning ml-2"> {{ $clearinfo->link_title}} </a>
                 </span>
             </div><!-- End .header-left -->
 
