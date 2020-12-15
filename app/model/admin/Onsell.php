@@ -29,6 +29,6 @@ class Onsell extends Model
     }
 
     public function menuItems(){
-        return sell_product::where('sell_id',$this->sell_id)->inRandomOrder()->limit(6)->get();
+        return Sell_product::where('sell_id',$this->sell_id)->inRandomOrder()->limit(6)->get();
     }
 }
