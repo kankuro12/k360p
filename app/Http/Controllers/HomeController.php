@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\model\admin\Brand;
@@ -164,5 +165,14 @@ class HomeController extends Controller
     public function pp(){
         return view(HomePage::theme("pp"));
 
+    }
+
+    public function blogList(){
+        return view(HomePage::theme("blog.list"));
+    }
+
+    public function blogDetail($id){
+        $blog = Blog::find($id);
+        return view(HomePage::theme("blog.single"))->with(compact('blog'));
     }
 }

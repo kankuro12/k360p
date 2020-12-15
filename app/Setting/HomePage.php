@@ -20,7 +20,8 @@ class HomePage
         'Advertisment',
         'Category',
         'MultiCategory',
-        'Brand'
+        'Brand',
+        'Blog'
     ];
     const themes = "molla";
     // const CSS=[
