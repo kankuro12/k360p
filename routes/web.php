@@ -135,6 +135,16 @@ Route::post('product/stock/get/', [
     'as' => 'product.stock'
 ]);
 
+Route::get('blogs', [
+    'uses' => 'HomeController@blogList',
+    'as' => 'public.blog'
+]);
+
+Route::get('blog/{id}', [
+    'uses' => 'HomeController@blogDetail',
+    'as' => 'public.blog.detail'
+]);
+
 Route::match(['get', 'post'], '/cart', [
     'as' => 'public.cart',
     'uses' => 'user\CartController@addProduct'
@@ -980,6 +990,9 @@ Route::group(['prefix' => 'admin/element', 'middleware' => 'admin_auth'], functi
     Route::post('/brand/save/{section}', 'Elements\BrandController@save')->name('elements.brand-save');
     Route::get('/brand/delete/{id}', 'Elements\BrandController@delete')->name('delete.brand');
 
+    // blog items
+    Route::post('/blog/save/{section}', 'Elements\BrandController@blogSave')->name('elements.blog-save');
+    Route::get('/blog/delete/{id}', 'Elements\BrandController@blogDelete')->name('delete.blog');
 
 });
 

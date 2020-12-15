@@ -2,6 +2,7 @@
 
 namespace App\model\admin;
 
+use App\BlogDisplay;
 use App\Setting\HomePage;
 use App\SliderGroup;
 use Illuminate\Database\Eloquent\Model;
@@ -85,6 +86,10 @@ class HomePageSection extends Model
                     $display = BrandDisplay::where('home_page_section_id', $this->id)->get();
                     return $display;
                     break;
+                case 6:
+                    $display = BlogDisplay::where('home_page_section_id', $this->id)->get();
+                    return $display;
+                    break;
                 default:
                     return null;
                     break;
@@ -116,6 +121,9 @@ class HomePageSection extends Model
                 break;
             case 5:
                 return HomePage::theme('elements.brand');
+                break;
+            case 6: 
+                return HomePage::theme('elements.blog');
                 break;
             default:
                 return '';

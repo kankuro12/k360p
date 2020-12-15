@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Elements;
 
+use App\Blog;
 use App\Http\Controllers\Controller;
 use App\model\admin\Brand;
 use App\model\admin\Category;
@@ -83,6 +84,11 @@ class ElementController extends Controller
             case 5:
                 $brands = Brand::all();
                 return view('admin.elements.brand')->with(compact('brands','section'));
+                break;
+
+            case 6: 
+                $blog = Blog::all();
+                return view('admin.elements.blog')->with(compact('blog','section'));
                 break;
                 
             default:
