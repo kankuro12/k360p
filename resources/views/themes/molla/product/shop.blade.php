@@ -1,5 +1,8 @@
 @extends('themes.molla.layouts.app')
 @section('title','Shops')
+@section('css')
+<link rel="stylesheet" href="{{ asset('themes\molla\assets\css\plugins\nouislider\nouislider.css') }}">
+@endsection
 @section('contant')
 @php
     $isgrid=1;
@@ -115,5 +118,35 @@
             </div><!-- End .page-content -->
 </main><!-- End .main -->
 
+@endsection
+@section('js')
+
+<script src="{{ asset("themes/molla/assets/js/nouislider.min.js") }}"></script>
+<script>
+    var slider = document.getElementById('need-price-slider');
+    noUiSlider.create(slider, {
+            start: [{{$_min}}, {{$_max}}],
+            connect: true,
+            step: 50,
+            margin: 200,
+            range: {
+                min: {{$min}},
+                max: {{$max}},
+            },
+            tooltips: true,
+            format: wNumb({
+                decimals: 0,
+
+            }),
+        });
+
+        // Update Price Range
+        slider.noUiSlider.on("update", function (values, handle) {
+            console.log(values);
+            $("#filter-price-range").text(values.join(" - "));
+            $("#max").val(values[1]);
+            $("#min").val(values[0]);
+        });
+</script>
 @endsection
 

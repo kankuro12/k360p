@@ -20,6 +20,7 @@ use App\Setting\VariantManager;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class HomeController extends Controller
 {
@@ -66,9 +67,35 @@ class HomeController extends Controller
         }
     }
 
-    public function shops(){
-        $products=Product::where('isverified',1)->paginate(12);
-        return view(HomePage::theme("product.shop"),compact("products"));
+    public function shops(Request $request){
+        $max=Product::max('mark_price');
+        $min=Product::min('mark_price');
+        $p=Product::where('isverified',1);
+
+        $categories=[];
+        $_min=$min;
+        $_max=$max;
+        if($request->filled("categories")){
+            $categories=$request->categories;
+            $p=$p->whereIn('category_id',$request->categories);
+        }
+        if($request->filled("min")){
+            $_min=$request->min;
+            $p=$p->where('mark_price','>=',$request->min);
+        }
+
+        if($request->filled("max")){
+            $_max=$request->max;
+
+
+            $p=$p->where('mark_price','<=',$request->max);
+        }
+
+
+
+        $products=$p->paginate(12)->appends($request->all());
+        // dd($products->links());
+        return view(HomePage::theme("product.shop"),compact("products","max","min",'_min','_max','categories'));
     }
 
     public function productDetail($id){
