@@ -36,23 +36,23 @@ class HomeController extends Controller
             $ids=$cat->childList();
             $products=$products->whereIn('category_id',$ids);
         }
-        
+
         $all=$request->all();
-        
+
         $products=$products->where('product_name', 'LIKE', '%' . $request->q . '%')->orWhereRaw(" lower(`tags`) LIKE '%". strtolower ($request->q ). "%'");
         $products=$products->orWhereIn('category_id',Category::where('cat_name', 'LIKE', '%' . $request->q . '%')->pluck('cat_id')->toArray())->paginate(12);
 
         return view(HomePage::theme("product.search"),compact("products",'all'));
-        
+
     }
 
     public function home1(){
         //dd(Auth::user()->id);
        $products = Product::where('featured',1)->get();
-     
-    
+
+
            return view(HomePage::theme("home.app"));
-       
+
     }
 
     public function home(){
@@ -62,7 +62,7 @@ class HomeController extends Controller
             return view(HomePage::theme("home.app"));
          }else{
              return view(HomePage::theme("home.index"));
- 
+
         }
     }
 
@@ -97,7 +97,7 @@ class HomeController extends Controller
         foreach ($input['attributes'] as $attribute) {
             $rules['attribute_' . $attribute] = 'integer|required';
         }
-    
+
         $validator1 = Validator::make($request->all(), $rules);
 
         if ($validator1->fails()) {
@@ -128,7 +128,6 @@ class HomeController extends Controller
         $ids=$cat->childList();
         $products=Product::where('isverified',1)->whereIn('category_id',$ids)->paginate(12);
         return view(HomePage::theme("product.category"),compact('cat','products'));
-
     }
 
 
@@ -176,3 +175,7 @@ class HomeController extends Controller
         return view(HomePage::theme("blog.single"))->with(compact('blog'));
     }
 }
+
+
+// gjhgjhgjhghjhj
+

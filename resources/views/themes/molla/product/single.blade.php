@@ -90,7 +90,7 @@
                                                 \App\model\ProductStock::where('product_id',$product->product_id)->max('price');
                                                 $minprice =
                                                 \App\model\ProductStock::where('product_id',$product->product_id)->min('price');
-                                                
+
                                                 @endphp
                                                 @if ($maxprice == $minprice)
                                                     <span>NPR.{{ $maxprice }}</span>
@@ -102,7 +102,7 @@
                                             @php
                                                 $onsale=$product->onSale();
                                             @endphp
-                                           
+
                                             @if ($product->promo == 0 && !$onsale)
                                                 Rs. {{ $product->mark_price }}
                                             @else
@@ -167,7 +167,7 @@
                                             <div class="product-details-action" id="product-details-action">
                                                 @if ($product->stocktype == 0)
                                                     @if ($product->quantity>0)
-                                                        
+
                                                     <div class="details-action-col">
                                                         <label for="qty">Qty:</label>
                                                         <div class="product-details-quantity">
@@ -225,7 +225,7 @@
                             </div><!-- End .row -->
                         </div><!-- End .product-details-top -->
 
-                        
+
                     </div><!-- End .col-lg-9 -->
 
                     <aside class="col-lg-3">
@@ -259,20 +259,20 @@
                                 $productOption = \App\ProductOption::where('product_id',$product->product_id)->first();
                                 @endphp
                                 @if ($productOption!=null)
-                                    
-                                
+
+
                                 <h4 class="widget-title">Product Options</h4><!-- End .widget-title -->
                                 <div class="mb-3">
                                     <strong>Product Warrenty : </strong>
-                                @if ($productOption->warrenty == 1) 
+                                @if ($productOption->warrenty == 1)
                                     No Warrenty
-                                @elseif($productOption->warrenty == 2) 
-                                    Local Warrenty 
-                                @else 
+                                @elseif($productOption->warrenty == 2)
+                                    Local Warrenty
+                                @else
                                     Manufacturer Warrenty
                                 @endif <br>
                                 @if ($productOption->warrenty != 1)
-                                    
+
                                     <strong>Warrenty Time period : </strong> {{ $productOption->warrentyperiod }}
                                     {{ $productOption->warrentytime }} <br>
                                 @endif
@@ -321,14 +321,14 @@
                             <!-- <li class="nav-item">
                                         <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
                                     </li> -->
-                                   
+
                                     @php
                                         $ratingCount = \App\Rating::where('product_id',$product->product_id)->count();
                                     @endphp
                                     <li class="nav-item">
                                         <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews ({{ $ratingCount }})</a>
                                     </li>
-                                   
+
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
@@ -366,12 +366,12 @@
                                         please view our <a href="#">Returns information</a></p>
                                 </div><!-- End .product-desc-content -->
                             </div><!-- .End .tab-pane -->
-                            
+
                             <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                                 <div class="reviews">
                                     <h3>Reviews ({{ $ratingCount }})</h3>
                                     @foreach(\App\Rating::latest()->where('product_id',$product->product_id)->get() as $rate)
-                                    @php 
+                                    @php
                                         $userName = \App\model\VendorUser\VendorUser::where('user_id',$rate->user_id)->select('fname','lname')->first();
                                     @endphp
                                     <div class="review">
@@ -400,7 +400,7 @@
                                         </div><!-- End .row -->
                                     </div><!-- End .review -->
                                     @endforeach
-                                    
+
                                     <div class="row">
                                         <div class="col-md-2">
                                             <div class="reviews">
@@ -455,13 +455,14 @@
                     <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
                     <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
                         data-owl-options='{
-                                    "nav": false, 
+                                    "nav": false,
                                     "dots": true,
                                     "margin": 20,
                                     "loop": false,
                                     "responsive": {
                                         "0": {
-                                            "items":1
+                                            "items":2
+
                                         },
                                         "480": {
                                             "items":2
@@ -501,18 +502,18 @@
         ->get()
     as $p)
                             <div class="product product-sm">
-                                <figure class="product-media">
+                                <figure class="product-media media-single">
                                     <a href="{{ route('product.detail', $p->product_id) }}">
                                         <img src="{{ asset($p->product_images) }}" alt="Product image"
                                             class="product-image">
                                     </a>
                                 </figure>
 
-                                <div class="product-body">
+                                <div class="product-body product-body-single">
                                     <h5 class="product-title"><a
                                             href="{{ route('product.detail', $p->product_id) }}">{{ $p->product_name }}</a>
                                     </h5><!-- End .product-title -->
-                                    <div class="product-price">
+                                    <div class="product-price product-price-single">
                                         <span class="new-price">NPR.{{ $p->mark_price }}</span>
                                     </div><!-- End .product-price -->
                                 </div><!-- End .product-body -->

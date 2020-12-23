@@ -2,7 +2,7 @@
 <header class="header header-14">
     <div class="header-top d-none d-lg-flex" style="background-color: {{ env('secondaryheader_bg', '#3d4273') }};color: {{ env('secondaryheader_color', '#ffffff') }};">
         <div class="container-fluid pt-1 pt-md-0 pb-1 pb-md-0">
-            @php 
+            @php
                 $clearinfo = \App\Clearfix::first();
             @endphp
             <div class="header-left">
@@ -104,8 +104,8 @@
                         <i class="icon-bars"></i>
                     </button>
                     <a href="/" class="logo">
-                        <img src="{{ asset('logo.png') }}" alt="{{ env('APP_NAME', 'your') }} Logo" width="105"
-                            height="25">
+                        <img src="{{ asset('images/mart1.png') }}" alt="{{ env('APP_NAME', 'your') }} Logo" width="250"
+                        >
                     </a>
                 </div><!-- End .col-xl-3 col-xxl-2 -->
 
@@ -279,14 +279,14 @@
             </div><!-- End .row -->
         </div><!-- End .container-fluid -->
     </div><!-- End .header-middle -->
-  
+
     <div class="header-bottom sticky-header" style="color:{{env('primaryheader_color','#ffffff')}} !important;background:{{env('primaryheader_bg','#232642')}} !important">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-auto col-lg-3 col-xl-3 col-xxl-2 header-left">
                     <div class="dropdown category-dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" data-display="static" title="Browse Categories" 
+                            aria-expanded="false" data-display="static" title="Browse Categories"
                             style="color:{{env('megamenu_color','#333')}} !important;background:{{env('megamenu_bg','#fcb941')}} !important">
                             {{ env('browse', 'Browse Categories') }}
                         </a>

@@ -30,8 +30,8 @@
     @yield('css')
 
     <style>
-        
-        
+
+
     </style>
 </head>
 @php
@@ -43,9 +43,9 @@
         @include('themes.molla.layouts.customcss')
 
         @include('themes.molla.layouts.header')
-               
+
                 @yield('contant')
-       
+
     </div><!-- End .page-wrapper -->
 
     <style>
@@ -74,9 +74,9 @@
             z-index: 999;
         }
         #social-up-icon:hover{
-          
+
             background-color: #FF5C00;
- 
+
         }
 
         #scroll-top:hover{
@@ -103,15 +103,15 @@
             border:none;
             margin-bottom: 0.1rem;
         }
-        
+
         .social-up a:hover{
             display: block;
             padding-top:0.5rem;
             background-color: #FF5C00;
             transform: scale(1.1);
         }
-        
-    
+
+
     </style>
 
     <div class="social-up" id="social-up">
@@ -184,7 +184,7 @@
                                     </form>
                                     <div class="form-choice">
                                         <p class="text-center"><a href="{{ route('user.getRegister') }}" >Click Here For Signup</a></p>
-                                        
+
                                     </div><!-- End .form-choice -->
                                 </div><!-- .End .tab-pane -->
                             </div><!-- End .tab-content -->
@@ -193,10 +193,10 @@
                 </div><!-- End .modal-body -->
             </div><!-- End .modal-content -->
         </div><!-- End .modal-dialog -->
-    </div><!-- End .modal --> 
+    </div><!-- End .modal -->
 
     {!! \App\Setting\HomePage::renderJS()!!}
-    
+
     @yield('js')
     <script>
         function dropclick(p){

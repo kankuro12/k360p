@@ -2,14 +2,15 @@
 $group=$data->getElement();
 @endphp
 {{-- <style>
-    .owl-item {height: 0;}    
+    .owl-item {height: 0;}
 .owl-item.active {height: auto;}
 </style> --}}
 <div class="intro-slider-container slider-container-ratio mb-2 ">
     <div class="intro-slider owl-carousel owl-simple owl-nav-inside" data-toggle="owl" data-owl-options='{
-            "nav": true, 
+            "nav": true,
             "dots": true,
-            "autoHeight":true
+            "autoHeight":true,
+            "autoplay":true
         }'>
         @foreach ($group->sliders as $slider)
             <div class="intro-slide">

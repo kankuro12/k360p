@@ -89,6 +89,7 @@ class ShippingController extends Controller
 
     public function weight(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'type' => 'required',
             'deliver_range' => 'required',

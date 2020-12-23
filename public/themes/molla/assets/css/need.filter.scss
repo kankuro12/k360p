@@ -1,0 +1,42 @@
+.filter{
+    padding:0px 15px;
+    border-right:1px #d2d2d2 solid;
+    .filter-title{
+        font-size: 2rem;
+        font-weight:700;
+
+    }
+    .filter-clear{
+        font-weight:600;
+        line-height: 2px;
+        display:block;
+        color:#DD253E;
+        padding-top:1.8rem;
+        cursor:pointer;
+        :hover{
+            color:rgb(184, 28, 48);
+            text-shadow: 1px 1px rgba(0,0,0,0.5);
+        }
+    }
+
+    .divider{
+        padding-top:1px;
+        background:#dddddd;
+        box-shadow: 0px 0px 3px 0px rgba(31, 31, 31, 0.24);
+    }
+    .services{
+        .service-item{
+            display:block;
+            input{
+                height:1.2rem;
+                width:1.2rem;
+
+            }
+            .service-name{
+                line-height:1.2rem;
+                font-size:1.2rem;
+                font-weight:600;
+            }
+        }
+    }
+}

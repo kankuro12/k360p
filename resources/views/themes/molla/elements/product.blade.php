@@ -9,9 +9,11 @@
                 $sellproduct=$product->sale();
                 $sell=$sellproduct->onsale;
                 @endphp
-                <span class="product-label label-sale"><a href="{{ route('public.sale.detail', $sell->sell_id) }}"
+                <span class="product-label label-sale "><a href="{{ route('public.sale.detail', $sell->sell_id) }}"
                         style="color:white;font-weight: 400">
-                        {{ $sell->sell_name }}
+                        <span class="d-none d-md-inline">
+                            {{ $sell->sell_name }}
+                        </span>
                         <span class="ml-2">- {{ $sellproduct->sale_discount }}%</span>
                     </a></span>
             @else
@@ -39,28 +41,28 @@
             {{-- <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a> --}}
         </div><!-- End .product-action-vertical -->
 
-        <div class="product-action text-center">
+        <div class="product-action text-center d-none d-md-block">
 
             @if ($product->stocktype == 0)
                 @if ($product->quantity>0)
-                    
+
                 <form action="{{ route('public.cart') }}" method="POST" class="w-100">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                     <input type="hidden" name="type" value="{{ $product->stocktype }}">
                     <input type="hidden" name="qty" value="1">
-                  
+
                     @if ($product->promo == 0 && !$onsale)
 
                         <input type="hidden" name="rate" value="{{ $product->mark_price }}">
-                     
+
                     @else
                         @if ($onsale)
                             <input type="hidden" name="rate" value="{{ $product->salePrice() }}">
                         @else
                             <input type="hidden" name="rate" value="{{ $product->$product->sell_price() }}">
                         @endif
-                      
+
                     @endif
 
                     <button class="btn-product btn-cart w-100"><span>add to cart</span></button>
@@ -101,16 +103,17 @@
                             {{ $product->mark_price }}</span></span>
                 @endif
             @else
-            <span class="new-price">
-                <br>
-            </span>
+
             @endif
 
         </div><!-- End .product-price -->
-        <div class="ratings-container">
-            <div class="ratings">
+        <div class="ratings-container ">
+            <div class="ratings d-none d-md-inline">
             <div class="ratings-val" style="width: {{$product->avgRating()}}%;"></div><!-- End .ratings-val -->
             </div><!-- End .ratings -->
+            <span class="d-inline-block d-md-none">
+                <i class="la la-star"></i> {{$product->avgRating()/20}} .
+            </span>
             <span class="ratings-text">( {{$product->reviewCount()}} Reviews )</span>
         </div><!-- End .rating-container -->
     </div><!-- End .product-body -->
