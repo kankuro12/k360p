@@ -76,8 +76,15 @@ class HomeController extends Controller
         $_min=$min;
         $_max=$max;
         if($request->filled("categories")){
+            $cats=[];
             $categories=$request->categories;
-            $p=$p->whereIn('category_id',$request->categories);
+            foreach($categories as $cat){
+
+                $_cat=Category::find($cat);
+                $ids=$_cat->childList();
+                array_push($cats,$ids);
+            }
+            $p=$p->whereIn('category_id',$cats);
         }
         if($request->filled("min")){
             $_min=$request->min;
