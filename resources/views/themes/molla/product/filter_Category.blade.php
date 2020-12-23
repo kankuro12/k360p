@@ -4,7 +4,7 @@
         <label class="custom-control-label" for="cat-{{$category->cat_id}}">{{$category->cat_name}}</label>
         @if($category->count() >0)
             <a style="color:black;float:right;" data-toggle="collapse" href="#cat-container-{{$category->cat_id}}" role="button" aria-expanded="true" aria-controls="cat-container-{{$category->cat_id}}">
-                c
+                +
             </a>
         @endif
     </div><!-- End .custom-checkbox -->
