@@ -82,7 +82,10 @@ class HomeController extends Controller
 
                 $_cat=Category::find($cat);
                 $ids=$_cat->childList();
-                array_push($cats,$ids);
+                foreach($ids as $id){
+
+                    array_push($cats,$id);
+                }
             }
             $p=$p->whereIn('category_id',$cats);
         }
