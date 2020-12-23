@@ -39,7 +39,7 @@
                 <div class="collapse show" id="widget-1">
                     <div class="widget-body">
                         <div class="filter-items filter-items-count">
-                            @foreach (\App\Model\admin\Category::whereNull('parent_id')->get() as $category)
+                            @foreach (\App\model\admin\Category::whereNull('parent_id')->get() as $category)
                                 @include(\App\setting\HomePage::theme('product.filter_Category'),['category'=>$category])
                             @endforeach
 
