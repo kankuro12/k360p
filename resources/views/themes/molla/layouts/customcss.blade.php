@@ -126,6 +126,10 @@
        background:rgba(0, 0, 0, 0.3);
    }
 
+   .product{
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+   }
+
 
    @media (max-width:576px){
        div.product-body{
