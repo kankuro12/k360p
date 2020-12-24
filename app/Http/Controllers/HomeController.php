@@ -172,8 +172,9 @@ class HomeController extends Controller
         $categories=[];
         $_min=$min;
         $_max=$max;
-        $categories=$request->categories;
-        // if($request->filled("categories")){
+        if($request->filled("categories")){
+            $categories=$request->categories;
+        }
         //     $cats=[];
         //     foreach($categories as $cat){
 
