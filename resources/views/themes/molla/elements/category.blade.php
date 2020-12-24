@@ -25,11 +25,11 @@ $cat=$data->getElement();
         </div>
     @endif
     </div>
-    <div class="owl-carousel owl-full carousel-equal-height cat-owl" 
+    <div class="owl-carousel owl-full carousel-equal-height cat-owl"
     data-owl='{
         "responsive":{
             "0": {
-                "items":1               
+                "items":{{$cat->mobile}}
             },
             "480": {
                 "items":{{$cat->mobile}}

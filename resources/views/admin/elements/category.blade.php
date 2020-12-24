@@ -35,7 +35,7 @@
                         <h4 class="card-title"> <a href="{{ route('elements') }}"><strong>Homepage Section</strong></a>/
                             Category Display / <strong>{{ $section->name }}</strong></h4>
                         <div>
-                            
+
                         </div>
                         <div class="content-view">
                             <div id="root">
@@ -83,17 +83,17 @@
                                             <div class="col-md-3">
 
                                                 <label >mobile</label>
-                                                <input type="number" name="mobile" value="{{$mobile}}"  min="1" required class="form-control">
+                                                <input type="number" name="mobile" value="{{$mobile}}"  min="1" step="0.001" required class="form-control">
                                             </div>
                                             <div class="col-md-3">
 
                                                 <label >tab</label>
-                                                <input type="number" name="tab" min="1" value="{{$tab}}" required class="form-control">
+                                                <input type="number" name="tab" min="1" value="{{$tab}}" step="0.001" required class="form-control">
                                             </div>
                                             <div class="col-md-3">
 
                                                 <label >laptop</label>
-                                                <input type="number" name="laptop" min="1" value="{{$laptop}}"  required class="form-control">
+                                                <input type="number" name="laptop" min="1" value="{{$laptop}}" step="0.001"  required class="form-control">
                                             </div>
                                             <div class="col-md-3">
                                                 <label >tv</label>
@@ -126,6 +126,6 @@
 
 @section('scripts')
 <script>
-   
+
 </script>
 @endsection

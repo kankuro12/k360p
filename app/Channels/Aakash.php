@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class Aakash
 {
     const url="https://aakashsms.com/admin/public/sms/v3/send";
-    const token="e3d8dccc23900f6d19cd76bcd4f7b5157de6e7312335d2da81c258037bbef9b4";
+    const token="0a8ae61597039acd1adf28e77173614e4ed88e9458a8a48151af51711af176af3";
     /**
      * Send the given notification.
      *

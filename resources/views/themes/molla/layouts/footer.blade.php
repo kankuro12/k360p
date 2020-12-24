@@ -8,7 +8,7 @@
                             <h3 class="cta-title text-primary">Join Our Newsletter</h3><!-- End .cta-title -->
                             <p class="cta-desc text-light">Subcribe to get information about products and coupons</p><!-- End .cta-desc -->
                         </div><!-- End .col-lg-5 -->
-                        
+
                         <div class="col-lg-7">
                             <form action="#">
                                 <div class="input-group">
@@ -29,12 +29,12 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-4">
                     <div class="widget widget-about">
-                        <img src="{{asset('logo.png')}}" class="footer-logo" alt="Footer Logo" width="105" height="25">
+                        <img src="{{asset('images/mart1.png')}}" class="footer-logo" alt="Footer Logo" width="105" height="25">
                         @php
                             $about=\App\AboutUs::first();
                         @endphp
                         <p class="min-about">{!! $about!=null?$about->mini:""!!}</p>
-                        
+
                         <div class="widget-about-info">
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
@@ -44,7 +44,7 @@
                                 {{-- <div class="col-sm-6 col-md-8">
                                     <span class="widget-about-title">Payment Method</span>
                                     <figure class="footer-payments">
-                                       
+
                                     </figure><!-- End .footer-payments -->
                                 </div><!-- End .col-sm-6 --> --}}
                             </div><!-- End .row -->
@@ -66,11 +66,11 @@
                 </div><!-- End .col-sm-4 col-lg-2 -->
                 @endforeach
 
-                
 
-               
 
-                
+
+
+
             </div><!-- End .row -->
         </div><!-- End .container-fluid -->
     </div><!-- End .footer-middle -->
