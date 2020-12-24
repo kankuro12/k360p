@@ -17,7 +17,7 @@
             <div class="card-header card-header-icon" data-background-color="rose">
                <i class="material-icons">view_carousel</i>
             </div>
-    
+
             <div class="card-content">
                 <h4 class="card-title">Update Slider</h4>
                 <form action="{{ route('elements.update-slider',['slider'=>$slider->id]) }}" enctype="multipart/form-data" method="post">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group label-floating">
                             <label >Button Text</label>
                             <input required type="text" class="form-control"   name="button_text" value="{{$slider->button_text}}">
@@ -95,6 +95,12 @@
                             <div class="form-group label-floating">
                             <label >Button text Color</label>
                             <input required type="color" class="form-control"  value="{{$slider->button_color}}" name="button_color">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 ">
+                            <div class="form-group label-floating">
+                            <label >Button Status</label> <br>
+                            <input type="checkbox" name="button_status" id="" {{ $slider->button_status == 1?'checked':''}} value="1"> Show button
                             </div>
                         </div>
                     </div>
@@ -120,10 +126,10 @@
                                     </label>
                                 </div>
                                 <div class="col-md-8">
-                                   
-                                    
+
+
                                     <input type="text" placeholder="Enter Custom Link" class="form-control" id="customlink" value="" name="link" disabled>
-                                   
+
                                 </div>
                             </div>
                             <div class="row">
@@ -195,9 +201,9 @@
                     </div>
                 </form>
             </div>
-            
+
         </div>
-    </div>  
+    </div>
 </div>
 @endsection
 @section('scripts')

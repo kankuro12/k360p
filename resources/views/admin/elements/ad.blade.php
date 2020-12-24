@@ -15,17 +15,26 @@
                         $image1="";
                         $text="";
                         $link="";
+                        $bg_color="";
+                        $text_color="";
+                        $status = "";
                         if($data!=null){
                             $image=$data->image1;
                             $text=$data->link2;
                             $link=$data->link1;
                             $image1=$data->image2;
+                            $bg_color=$data->button_bg_color;
+                            $text_color=$data->button_text_color;
+                            $status = $data->button_status;
+                        }else {
+                            $bg_color='#d99b00';
+                            $text_color='#ffffff';
                         }
                         @endphp
                         <h4 class="card-title"> <a href="{{ route('elements') }}"><strong>Homepage Section</strong></a>/
                             Advertisment / <strong>{{ $section->name }}</strong></h4>
                         <div>
-                            
+
                         </div>
                         <div class="content-view">
                             <div id="root">
@@ -72,13 +81,35 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 pr-md-1">
+
+                                        <div class="col-md-3 pr-md-1">
                                             <div class="form-group label-floating">
                                                 <label>Button Text</label>
                                                 <input required type="text" class="form-control"
                                                     name="link2" value="{{$text}}">
                                             </div>
                                         </div>
+
+                                        <div class="col-md-3 col-4">
+                                            <div class="form-group label-floating">
+                                            <label >Button Background</label>
+                                            <input required type="color" class="form-control"  value="{{$bg_color}}" name="button_bg">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-4 ">
+                                            <div class="form-group label-floating">
+                                            <label >Button text Color</label>
+                                            <input required type="color" class="form-control"  value="{{$text_color}}" name="button_color">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3" style="margin-top: 1rem;">
+                                            <div>
+                                                <label >Button Status</label> <br>
+                                                <input type="checkbox" name="button_status" id="" value="1" {{ $status == 1?'checked':''}}>  : Show Button
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 pr-md-1">
@@ -88,8 +119,8 @@
                                             <div>
                                                 <h4>
                                                    <strong>
-                                                       link : 
-                                                    </strong> 
+                                                       link :
+                                                    </strong>
                                                     {{url($link)}}
                                                 </h4>
                                                 <hr>
@@ -102,10 +133,10 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                   
+
                                                         <input type="text" class="form-control" id="customlink" value=""
                                                             name="link" disabled>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="row">

@@ -25,8 +25,8 @@
                                         <div class="col-md-9">
                                             <img src="{{ asset($slider->slider_image) }}" alt="" srcset=""
                                                 style="width: 100%;">
-                                            
-                                            
+
+
                                         </div>
                                         <div class="col-md-3">
                                             <img src="{{ asset($slider->mobile) }}" alt="" srcset=""
@@ -76,6 +76,14 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
+                                                        <strong>Button Status</strong>
+                                                    </td>
+                                                    <td>
+                                                        {{ $slider->button_status == 1?'Displayed':'Not Displayed'}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
                                                         <strong>link Text</strong>
                                                     </td>
                                                     <td>
@@ -83,7 +91,7 @@
                                                             href="{{ $slider->link_text }}">{{ $slider->link_text }}</a>
                                                     </td>
                                                 </tr>
-                                               
+
                                                 <tr>
                                                     <td colspan="2">
                                                         <form

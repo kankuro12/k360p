@@ -12,8 +12,9 @@ $ad=$data->getElement();
         </a>
 
         <div class="banner-content">
-            
-            <a href="{{$ad->link1}}" class="banner-link" style="margin-top:60%;">{{$ad->link2}} <i class="icon-long-arrow-right"></i></a>
+            @if($ad->button_status == 1)
+             <a href="{{$ad->link1}}" class="banner-link" style="margin-top:60%; background:{{$ad->button_bg_color}}; color: {{ $ad->button_text_color}};">{{$ad->link2}} <i class="icon-long-arrow-right"></i></a>
+            @endif
         </div><!-- End .banner-content -->
     </div><!-- End .banner -->
 @endif

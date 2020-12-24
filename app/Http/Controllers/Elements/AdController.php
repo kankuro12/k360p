@@ -23,6 +23,10 @@ class AdController extends Controller
             $ad->home_page_section_id=$section->id;
         }
         $ad->link2=$request->link2;
+        $ad->button_text_color = $request->button_color;
+        $ad->button_bg_color = $request->button_bg;
+        $ad->button_status = $request->button_status??0;
+
         if($request->has('linkradio')){
 
             switch ($request->linkradio) {
@@ -83,7 +87,7 @@ class AdController extends Controller
     }
 
     public function saveBoxed(BoxedItemDisplay $section,Request $request){
-  
+
         // dd($request);
         $data=new BoxedItemListDisplay();
         $data->boxed_item_display_id=$section->id;
@@ -96,7 +100,7 @@ class AdController extends Controller
         $data->orderby=$request->orderby;
         $data->order=$request->order;
         $data->count=$request->count;
-        
+
 
         $data->mobile=$request->mobile;
         $data->tab=$request->tab;
@@ -110,7 +114,7 @@ class AdController extends Controller
     }
 
     public function updateBoxed(BoxedItemListDisplay $item,Request $request){
-        
+
     //    dd($request);
         $item->query=$request->mquery??'';
         $item->hasquery=$request->hasquery??0;
@@ -135,13 +139,13 @@ class AdController extends Controller
     }
 
     public function delBoxed(BoxedItemListDisplay $item,Request $request){
-        
+
         //    dd($request);
-           
-    
+
+
             $item->delete();
-    
+
             return redirect()->back();
-    
+
         }
 }

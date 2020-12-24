@@ -37,10 +37,11 @@ class SliderController extends Controller
         $slider->button_bg = $request->button_bg;
         $slider->button_color = $request->button_color;
         $slider->slider_group_id=$group->id;
-   
+        $slider->button_status = $request->button_status??0;
+
         $slider->slider_image = $request->file('image')->store('back/sliders');
         $slider->mobile = $request->file('mobile')->store('back/sliders');
-        
+
         switch ($request->linkradio) {
             case 1:
                 $slider->link_text = $request->link;
@@ -87,18 +88,19 @@ class SliderController extends Controller
         $slider->button_text = $request->button_text;
         $slider->button_bg = $request->button_bg;
         $slider->button_color = $request->button_color;
-      
+        $slider->button_status = $request->button_status??0;
+
         // dd($slider)
         if($request->hasFile('image')){
 
             $slider->slider_image = $request->file('image')->store('back/sliders');
         }
-   
+
         if($request->hasFile('mobile')){
 
             $slider->mobile = $request->file('mobile')->store('back/sliders');
         }
-        
+
         if($request->has('linkradio')){
 
             switch ($request->linkradio) {

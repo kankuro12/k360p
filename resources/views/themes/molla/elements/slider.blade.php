@@ -30,11 +30,12 @@ $group=$data->getElement();
                     <div class="intro-text text-white">
                         {!! $slider->secondary_text !!}
                     </div><!-- End .intro-text -->
-
-                <a href="{{ $slider->link_text }}" class="btn btn-primary" style="color:{{$slider->button_color}};background:{{$slider->button_bg}};border:none;">
+                    @if($slider->button_status == 1)
+                     <a href="{{ $slider->link_text }}" class="btn btn-primary" style="color:{{$slider->button_color}};background:{{$slider->button_bg}};border:none;">
                         <span>{!! $slider->button_text !!}</span>
                         <i class="icon-long-arrow-right"></i>
                     </a>
+                    @endif
                 </div><!-- End .intro-content -->
             </div><!-- End .intro-slide -->
         @endforeach

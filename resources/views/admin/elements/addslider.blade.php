@@ -17,7 +17,7 @@
             <div class="card-header card-header-icon" data-background-color="rose">
                <i class="material-icons">view_carousel</i>
             </div>
-    
+
             <div class="card-content">
                 <h4 class="card-title">Add Slider</h4>
                 <form action="{{ route('elements.save-slider',['group'=>$group->id]) }}" enctype="multipart/form-data" method="post">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group label-floating">
                             <label >Button Text</label>
                             <input required type="text" class="form-control"  value="" name="button_text">
@@ -97,6 +97,12 @@
                             <input required type="color" class="form-control"  value="#333333" name="button_color">
                             </div>
                         </div>
+                        <div class="col-md-3 col-6 ">
+                            <div class="form-group label-floating">
+                            <label >Button Status</label> <br>
+                            <input type="checkbox" name="button_status" id="" value="1" >  Show Button
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 pr-md-1">
@@ -110,10 +116,10 @@
                                     </label>
                                 </div>
                                 <div class="col-md-8">
-                                   
-                                    
+
+
                                     <input type="text" placeholder="Enter Custom Link" class="form-control" id="customlink" value="" name="link" disabled>
-                                   
+
                                 </div>
                             </div>
                             <div class="row">
@@ -185,9 +191,9 @@
                     </div>
                 </form>
             </div>
-            
+
         </div>
-    </div>  
+    </div>
 </div>
 @endsection
 @section('scripts')
