@@ -3,8 +3,8 @@
 @section('contant')
 @php
     $isgrid=1;
-    
-    
+
+
     if(session()->has('isgrid')){
         // dd(session('isgrid'));
         $isgrid=session('isgrid');
@@ -51,7 +51,7 @@
 								</div>
                             </div><!-- End .toolbox-sort --> --}}
                             <div class="toolbox-layout">
-                             
+
                 						<a href="{{route('grid',['id'=>0])}}" class="btn-layout {{$isgrid==1?"":"active"}}">
                 							<svg width="16" height="10">
                 								<rect x="0" y="0" width="4" height="4"></rect>
@@ -80,26 +80,26 @@
 
                                 <div class="col-12 col-md-4 col-lg-3 col-xl-3">
                                     @include(\App\Setting\HomePage::theme('elements.product'),['product'=>$p])
-                                
+
                                 </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
                             @else
-                                <div class="col-12 col-md-4 col-lg-9 col-xl-9">                                 
+                                <div class="col-12 col-md-4 col-lg-9 col-xl-9">
                                     @include(\App\Setting\HomePage::theme('elements.product_list'),['product'=>$p])
                                 </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
                             @endif
                             @endforeach
-                            
 
-                           
+
+
 
                         </div><!-- End .row -->
 
                         <div class="load-more-container text-center">
                             @if ($products->hasPages())
-                
+
                             <div class="d-flex justify-content-center shadow pt-3" >
                                 {{-- {{ $onsale_group->links() }} --}}
-                
+
                                 {{ $products->links('pagination.default') }}
                             </div>
                             @endif

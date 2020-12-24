@@ -160,11 +160,52 @@ class HomeController extends Controller
 
     }
 
-    public function category($id){
+    public function category(Request $request, $id){
         $cat=Category::find($id);
         $ids=$cat->childList();
-        $products=Product::where('isverified',1)->whereIn('category_id',$ids)->paginate(12);
-        return view(HomePage::theme("product.category"),compact('cat','products'));
+
+
+        $max=Product::max('mark_price');
+        $min=Product::min('mark_price');
+        $p=Product::where('isverified',1);
+
+        $categories=[];
+        $_min=$min;
+        $_max=$max;
+        $categories=$request->categories;
+        // if($request->filled("categories")){
+        //     $cats=[];
+        //     foreach($categories as $cat){
+
+        //         $_cat=Category::find($cat);
+        //         $ids=$_cat->childList();
+        //         foreach($ids as $id){
+
+        //             array_push($cats,$id);
+        //         }
+        //     }
+        //     $p=$p->whereIn('category_id',$cats);
+        // }
+        if($request->filled("min")){
+            $_min=$request->min;
+            $p=$p->where('mark_price','>=',$request->min);
+        }
+
+        if($request->filled("max")){
+            $_max=$request->max;
+
+
+            $p=$p->where('mark_price','<=',$request->max);
+        }
+
+
+
+        $products=$p->paginate(12)->appends($request->all());
+
+
+
+        // $products=Product::where('isverified',1)->whereIn('category_id',$ids)->paginate(12);
+        return view(HomePage::theme("product.category"),compact("cat","products","max","min",'_min','_max','categories'));
     }
 
 
