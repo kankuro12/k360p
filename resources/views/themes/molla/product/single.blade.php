@@ -265,11 +265,11 @@
                                 <div class="mb-3">
                                     <strong>Product Warrenty : </strong>
                                 @if ($productOption->warrenty == 1)
-                                    No Warrenty
+                                    No Warranty
                                 @elseif($productOption->warrenty == 2)
-                                    Local Warrenty
+                                    Local Warranty
                                 @else
-                                    Manufacturer Warrenty
+                                    Manufacturer Warranty
                                 @endif <br>
                                 @if ($productOption->warrenty != 1)
 
@@ -283,7 +283,7 @@
                             </div>
                             @else
                             <div class="mb-3">
-                                <strong>Product Warrenty : </strong> No Warrenty
+                                <strong>Product Warranty : </strong> No Warranty
                                 <br>
                                 <strong>Refund Policy : </strong><span class="badge badge-danger">No</span>
                             @endif
