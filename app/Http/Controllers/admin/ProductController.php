@@ -69,7 +69,7 @@ class ProductController extends Controller
                 $product->vendor_name=env('APP_NAME','laravel')." Store" ;
             }else{
                 $product->vendor_name=Vendor::where('id',$product->vendor_id)->select('name')->first()->name ;
-                
+
             }
         }
         //dd($products);
@@ -433,6 +433,11 @@ class ProductController extends Controller
         if($data['quantity']!=null){
 
             $product->quantity = $data['quantity'];
+        }
+
+        if($request->has('product_images')){
+            // dd($request->product_images);
+            $product->product_images = $request->file('product_images')->store('images/backend_images/products/main_image/');
         }
         $product->save();
 

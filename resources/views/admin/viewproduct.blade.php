@@ -23,11 +23,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">
-                            
+
                             <strong><a  href="{{url('admin/manage-product')}}">Products</a> / {{ $productdetail->product_name }}</strong>
                         </h4>
                         @if ($productdetail->vendor_id!=0)
-                            
+
                         <p>
                             @if ($productdetail->isverified==1 )
                             <span class="label label-success">
@@ -49,7 +49,7 @@
                             {{-- <span  style="padding:10px;background:#F44336;border-radius:10px;color:white;font-weight: 600;">
                                 Not Verified
                                 <span class="badge badge-danger" style="background:#F44336">
-                                    
+
                                     <span class="material-icons">
                                         cancel
                                     </span>
@@ -113,7 +113,8 @@
                                     <div class="tab-pane {{$sel==1?"active":""}}" id="general-info">
                                         <div class="row">
                                         <div class="col-md-6"><h2 style="text-transform: uppercase;"><strong>General Info</strong></h2></div>
-                                        <div class="col-md-6"><img class="img img-responsive img-round" style="max-width: 120px;" src="{{ asset($productdetail->product_images) }}" alt=""></div>
+                                        <div class="col-md-6"><img class="img img-responsive img-round" style="max-width: 120px;" src="{{ asset($productdetail->product_images) }}" alt="">
+                                        </div>
                                         </div>
                                         <hr>
                                         <form onsubmit="return false;" class="form-horizontal">
@@ -145,9 +146,13 @@
 
                                         <form
                                             action="{{ route('admin.update-product', ['product' => $productdetail->product_id]) }}"
-                                            method="post">
+                                            method="post" enctype="multipart/form-data">
                                             @csrf
 
+                                            <p class="prod-desc"><strong>Feature Image: </strong>
+                                                <img class="img img-responsive img-round" style="max-width: 120px;" src="{{ asset($productdetail->product_images) }}" alt="">
+                                                <input type="file" name="product_images" value="change image" class="btn btn-success btn-sm" style="width: 200px;">
+                                            </p>
 
                                             <p class="prod-desc"><strong>Name: </strong>
                                                 <input value="{{$productdetail->product_name}}" type="text" name="product_name" id="P_name" required class="cc">
@@ -164,6 +169,8 @@
                                                 </select>
 
                                             </p>
+
+
                                             <p class="prod-desc"><strong>Description: </strong>
                                                 <textarea name="product_short_description" id="product_short_description"
                                                     class="cc">{{ $productdetail->product_short_description }}</textarea>
@@ -261,7 +268,7 @@
                                                 <input type="submit" value="Update Product" class="btn btn-primary">
                                             </p>
                                         </form>
-                                        
+
                                     </div>
                                     <div class="tab-pane {{$sel==2?"active":""}}" id="productimages">
                                         <h3>PRODUCT IMAGES</h3>
@@ -278,12 +285,12 @@
                                                         <a href="{{url('admin/product-image/del/'.$productimage->product_image_id)}}" class="btn btn-danger" >Delete</a>
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>
                                             @endforeach
                                         </div>
                                         <div>
                                         <form action="{{url('admin/product-image/add/'.$productdetail->product_id)}}" enctype="multipart/form-data" method="POST">
-                                        @csrf    
+                                        @csrf
                                             <label for="images">Add Gallery Images (800 x 600)</label>
                                             <div class="row" id="images">
                                                 @for ($i = 0; $i <  env('productimage_count')-count($productimages); $i++)
@@ -291,7 +298,7 @@
                                                         <div style="position: relative">
                                                             <div >
                                                                 <input onchange="loadImage(this,{{$i}})" v="{{$i}}" style="display:none;" name="product_images[]" type="file" id="gal_{{$i}}" accept="image/*"/>
-                                                                <img src="{{ asset('images/backend_images/add_image.png') }}" alt="..." id="gal_img_{{$i}}" 
+                                                                <img src="{{ asset('images/backend_images/add_image.png') }}" alt="..." id="gal_img_{{$i}}"
                                                                 onclick="document.getElementById('gal_{{$i}}').click();">
                                                             </div>
                                                             <div style="position: absolute;top:0px;right:0px;">
@@ -311,7 +318,7 @@
                                             </div>
                                         </form>
                                         </div>
-    
+
                                     </div>
                                     <div class="tab-pane {{$sel==3?"active":""}}" id="productattribute">
                                         @if ($productdetail->stocktype==1)
@@ -330,15 +337,15 @@
                                     </div>
                                     <div class="tab-pane {{$sel==5?"active":""}}" id="extra" >
                                         @include('admin.product.detail')
-                                        
+
                                     </div>
                                     <div class="tab-pane {{$sel==6?"active":""}}" id="extracharge" >
                                         @include('admin.product.extracharge')
-                                        
+
                                     </div>
                                     <div class="tab-pane {{$sel==7?"active":""}}" id="admincharge" >
                                         @include('admin.product.admincharges')
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -348,13 +355,13 @@
             </div>
         </div>
     </div>
-@endsection 
+@endsection
 @section('scripts')
     <script src="{{ asset('js/backend-js/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace('product-desc');
          CKEDITOR.replace('refundablepolicy');
-        
+
         function selectLink(){
             var copylink = document.getElementById("prodlink");
             copylink.select();
@@ -385,11 +392,11 @@
             console.log(input,i);
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-                
+
                 reader.onload = function(e) {
                 $('#gal_img_'+i).attr('src', e.target.result);
                 }
-                var FileSize = input.files[0].size  / 1024; 
+                var FileSize = input.files[0].size  / 1024;
                 if(FileSize>{{env('productimage_size')}}){
                     alert('Image Size Cannot Be Greater than 600kb');
                     document.getElementById('gal_img_'+i).src='{{ asset('images/backend_images/add_image.png') }}';
