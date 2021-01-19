@@ -1,0 +1,47 @@
+.mobile-header{
+    position: fixed;
+    position:fixed;
+    top:0px;
+    left:0px;
+    right:0px;
+    padding:10px;
+    display:flex;
+    z-index:9999;
+    line-height: 1;
+    input{
+        padding:5px 10px;
+        outline: none;
+        border:1px solid #d4d4d4;
+    }
+}
+
+.hasbackground{
+    input{
+        border:none;
+    }
+}
+
+.mobile-footer{
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    padding:10px;
+    display:flex;
+    z-index:9999;
+    line-height: 1;
+    .footer-item{
+        flex:1;
+        color:white;
+        text-align:center;
+        .icon{
+            color: white;
+            font-size: 2.5rem;
+        }
+        .text{
+            font-weight:400;
+            color: white;
+        }
+
+    }
+}

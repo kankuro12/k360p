@@ -12,6 +12,7 @@
                         Price
                     </a>
                 </h3><!-- End .widget-title -->
+                @if (isset($_max) && isset($_min))
 
                 <div class="collapse show" id="widget-5">
                     <div class="widget-body">
@@ -27,6 +28,7 @@
                         </div><!-- End .filter-price -->
                     </div><!-- End .widget-body -->
                 </div><!-- End .collapse -->
+                @endif
             </div><!-- End .widget -->
 
             <div class="widget widget-collapsible">

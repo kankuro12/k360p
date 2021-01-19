@@ -1,0 +1,46 @@
+.filter {
+  padding: 0px 15px;
+  border-right: 1px #d2d2d2 solid;
+}
+
+.filter .filter-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.filter .filter-clear {
+  font-weight: 600;
+  line-height: 2px;
+  display: block;
+  color: #DD253E;
+  padding-top: 1.8rem;
+  cursor: pointer;
+}
+
+.filter .filter-clear :hover {
+  color: #b81c30;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.filter .divider {
+  padding-top: 1px;
+  background: #dddddd;
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(31, 31, 31, 0.24);
+          box-shadow: 0px 0px 3px 0px rgba(31, 31, 31, 0.24);
+}
+
+.filter .services .service-item {
+  display: block;
+}
+
+.filter .services .service-item input {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.filter .services .service-item .service-name {
+  line-height: 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+/*# sourceMappingURL=need.filter.css.map */

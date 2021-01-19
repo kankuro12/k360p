@@ -48,7 +48,7 @@ class HomePage
 
 
     const CSS = [
-        "assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css", "assets/css/bootstrap.min.css", "assets/css/plugins/owl-carousel/owl.carousel.css", "assets/css/plugins/magnific-popup/magnific-popup.css", "assets/css/plugins/jquery.countdown.css", "assets/css/style.css", "assets/css/skins/skin-demo-14.css", "assets/css/demos/demo-14.css"
+        "assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css", "assets/css/bootstrap.min.css", "assets/css/plugins/owl-carousel/owl.carousel.css", "assets/css/plugins/magnific-popup/magnific-popup.css", "assets/css/plugins/jquery.countdown.css", "assets/css/style.css", "assets/css/skins/skin-demo-14.css", "assets/css/demos/demo-14.css","assets/css/mobile.css"
 
     ];
     const JS = [

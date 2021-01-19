@@ -219,7 +219,7 @@ $(document).ready(function () {
     // Product countdown
     if ($.fn.countdown) {
         $(".product-countdown").each(function () {
-            
+
             var $this = $(this),
                 untilDate = $this.data("until"),
                 compact = $this.data("compact"),
@@ -677,15 +677,58 @@ $(document).ready(function () {
 
     // Scroll Top Button - Show
     var $scrollTop = $("#scroll-top");
+    var $mobheader=$('.mobile-header');
+    $(window).on("load", function () {
 
-    $(window).on("load scroll", function () {
         if ($(window).scrollTop() >= 400) {
             $scrollTop.addClass("show");
+
         } else {
             $scrollTop.removeClass("show");
+
+
+        }
+
+        if ($('body')[0].scrollTop >= headercolortop) {
+
+            $mobheader.css('background',headercolor);
+            $mobheader.addClass('hasbackground');
+        } else {
+
+            $mobheader.css('background',"transparent");
+            $mobheader.removeClass('hasbackground');
+
+
         }
     });
 
+
+    $('body').scroll(function (e) {
+
+        console.log('scrolling',$('body')[0].scrollTop);
+        if ($('body')[0].scrollTop >= 400) {
+            $scrollTop.addClass("show");
+
+        } else {
+            $scrollTop.removeClass("show");
+
+
+        }
+
+        if ($('body')[0].scrollTop >= headercolortop) {
+
+            $mobheader.css('background',headercolor);
+            $mobheader.addClass('hasbackground');
+        } else {
+
+            $mobheader.css('background',"transparent");
+            $mobheader.removeClass('hasbackground');
+
+
+        }
+
+
+    });
     // On click animate to top
     $scrollTop.on("click", function (e) {
         $("html, body").animate(

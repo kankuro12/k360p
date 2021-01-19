@@ -56,6 +56,8 @@
         </div><!-- End .container -->
     </div><!-- End .header-top -->
 
+@if(env('enable_mobile_header',1)!=1)
+
     <div class="header-top d-lg-none d-block "
         style="font-weight:500;background-color: {{ env('secondaryheader_bg', '3d4273') }};color: {{ env('secondaryheader_color', 'ffffff') }};">
         <div class="container d-flex justify-content-between" style="padding:1rem 2rem;">
@@ -95,7 +97,8 @@
             </span>
         </div>
     </div>
-    <div class="header-middle">
+@endif
+    <div class="header-middle {{env('enable_mobile_header',1)==1?"d-none d-md-block":""}}">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-auto col-lg-3 col-xl-3 col-xxl-2">
@@ -365,3 +368,54 @@
         </div><!-- End .container-fluid -->
     </div><!-- End .header-bottom -->
 </header><!-- End .header -->
+@if(env('enable_mobile_header',1)==1)
+<div class="mobile-header" >
+    <form action="/search" class="w-100">
+        <input type="search" placeholder="Search Product" class="w-100" name="q" value="{{isset($_GET['q'])?$_GET['q']:''}}">
+    </form>
+</div>
+@endif
+<script>
+    var headercolor="{{env('mobile_footer_color','#343A40')}}";
+    var headercolortop={{Route::is('public.home1')?240:0}}
+</script>
+
+<div class="mobile-footer d-flex d-md-none" style="background:{{env('mobile_footer_color','#343A40')}} !important;">
+    <div class="footer-item">
+        <a href="{{ url('/home1') }}" >
+            <div class="icon">
+                <i class="icon-shopping-cart"></i>
+            </div>
+            <div class="text">
+                Home
+            </div>
+        </a>
+    </div>
+
+    <div class="footer-item">
+        <a href="{{ url('') }}" >
+            <div class="icon">
+                <i class="icon-shopping-cart"></i>
+            </div>
+            <div class="text">
+                Category
+            </div>
+        </a>
+    </div>
+    <div class="footer-item">
+        <div class="icon">
+            <i class="icon-shopping-cart"></i>
+        </div>
+        <div class="text">
+            Cart
+        </div>
+    </div>
+    <div class="footer-item">
+        <div class="icon">
+            <i class="icon-user"></i>
+        </div>
+        <div class="text">
+            Account
+        </div>
+    </div>
+</div>

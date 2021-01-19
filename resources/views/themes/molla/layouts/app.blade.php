@@ -22,7 +22,7 @@
     <meta name="application-name" content="{{env('APP_NAME')}}">
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="{{env('mobile_footer_color','#343A40')}}">
 
     @yield('meta')
 
@@ -39,6 +39,7 @@
 @endphp
 
 <body>
+    <div id="tracker"></div>
     <div class="page-wrapper">
         @include('themes.molla.layouts.customcss')
 

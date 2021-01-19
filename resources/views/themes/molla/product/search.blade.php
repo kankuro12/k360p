@@ -3,43 +3,40 @@
 @section('contant')
 @php
     $isgrid=1;
-    
-    
+
+
     if(session()->has('isgrid')){
         // dd(session('isgrid'));
         $isgrid=session('isgrid');
     }
 @endphp
 <main class="main">
-        	<div class="page-header text-center" style="background-image: url('themes/molla/assets/images/page-header-bg.jpg')">
-        		<div class="container">
-        			<h1 class="page-title">Product<span>Search</span></h1>
-        		</div><!-- End .container -->
-        	</div><!-- End .page-header -->
-            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
-                <div class="container">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Product</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Search</li>
-                    </ol>
-                </div><!-- End .container -->
-            </nav><!-- End .breadcrumb-nav -->
+    <div class="{{env('enable_mobile_header',1)==1?"d-none d-md-block":""}}">
+        <div class="page-header text-center" style="background-image: url('themes/molla/assets/images/page-header-bg.jpg')">
+            <div class="container">
+                <h1 class="page-title">Product<span>Search</span></h1>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2 ">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url('/')}}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Product</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Search</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+    </div>
 
-            <div class="page-content">
+            <div class="page-content {{env('enable_mobile_header',1)==1?"mt-5 mt-md-0 pt-1 pt-md-0":""}}">
                 <div class="container" >
-        			<div class="toolbox">
-        				<div class="toolbox-left">
+        			<div class="toolbox d-flex " style="flex-direction: row">
+        				<div class="toolbox-left" style="flex:1">
                             <a href="#" class="sidebar-toggler"><i class="icon-bars"></i>Filters</a>
         				</div><!-- End .toolbox-left -->
 
-                        <div class="toolbox-center">
-                            <div class="toolbox-info">
-                                {{-- Showing <span>12 of 56</span> Products --}}
-                            </div><!-- End .toolbox-info -->
-                        </div><!-- End .toolbox-center -->
 
-        				<div class="toolbox-right">
+        				<div class="toolbox-right mt-0" style="flex: 1;align-items: flex-end;">
         					{{-- <div class="toolbox-sort">
         						<label for="sortby">Sort by:</label>
         						<div class="select-custom">
@@ -50,8 +47,8 @@
 									</select>
 								</div>
                             </div><!-- End .toolbox-sort --> --}}
-                            <div class="toolbox-layout">
-                             
+                            <div class="toolbox-layout mt-0 text-right">
+
                 						<a href="{{route('grid',['id'=>0])}}" class="btn-layout {{$isgrid==1?"":"active"}}">
                 							<svg width="16" height="10">
                 								<rect x="0" y="0" width="4" height="4"></rect>
@@ -78,19 +75,19 @@
                             @foreach($products as $p)
                             @if ($isgrid==1)
 
-                                <div class="col-12 col-md-4 col-lg-3 col-xl-3">
+                                <div class="col-6 col-md-4 col-lg-3 col-xl-3">
                                     @include(\App\Setting\HomePage::theme('elements.product'),['product'=>$p])
-                                
+
                                 </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
                             @else
-                                <div class="col-12 col-md-4 col-lg-9 col-xl-9">                                 
+                                <div class="col-12 col-md-4 col-lg-9 col-xl-9">
                                     @include(\App\Setting\HomePage::theme('elements.product_list'),['product'=>$p])
                                 </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
                             @endif
                             @endforeach
-                            
 
-                           
+
+
 
                         </div><!-- End .row -->
 
@@ -101,10 +98,10 @@
 
 
                     @if ($products->hasPages())
-                
+
                     <div class="d-flex justify-content-center shadow pt-3" >
                         {{-- {{ $onsale_group->links() }} --}}
-        
+
                         {{ $products->appends($all)->links('pagination.default') }}
                     </div>
                     @endif

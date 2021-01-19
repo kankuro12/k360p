@@ -1,7 +1,7 @@
 
 <div class="filter-item">
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="cat-{{$category->cat_id}}" value="{{$category->cat_id}}" name="categories[]" {{in_array($category->cat_id,$categories)?"checked":""}}>
+        <input type="checkbox" class="custom-control-input" id="cat-{{$category->cat_id}}" value="{{$category->cat_id}}" name="categories[]" {{in_array($category->cat_id,(isset($categories)?$categories:[]))?"checked":""}}>
         <label class="custom-control-label" for="cat-{{$category->cat_id}}" >{{$category->cat_name}}</label>
         @if($category->count() >0)
             <a style="color:black;float:right;" data-toggle="collapse" href="#cat-container-{{$category->cat_id}}" role="button" aria-expanded="true" aria-controls="cat-container-{{$category->cat_id}}">
