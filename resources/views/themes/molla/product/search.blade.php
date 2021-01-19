@@ -11,6 +11,7 @@
     }
 @endphp
 <main class="main">
+
     <div class="{{env('enable_mobile_header',1)==1?"d-none d-md-block":""}}">
         <div class="page-header text-center" style="background-image: url('themes/molla/assets/images/page-header-bg.jpg')">
             <div class="container">

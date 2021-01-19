@@ -369,11 +369,13 @@
     </div><!-- End .header-bottom -->
 </header><!-- End .header -->
 @if(env('enable_mobile_header',1)==1)
-<div class="mobile-header" >
+@if (!Route::is('product.detail') || !Route::is('public.cart'))
+<div class="mobile-header d-block d-md-none" >
     <form action="/search" class="w-100">
         <input type="search" placeholder="Search Product" class="w-100" name="q" value="{{isset($_GET['q'])?$_GET['q']:''}}">
     </form>
 </div>
+@endif
 @endif
 <script>
     var headercolor="{{env('mobile_footer_color','#343A40')}}";

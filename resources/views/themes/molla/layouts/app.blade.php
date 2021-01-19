@@ -200,6 +200,14 @@
 
     @yield('js')
     <script>
+        function goBack () {
+            if (document.referrer.indexOf("{{url('')}}") === 0) {
+                history.back();
+            } else {
+                window.location.href = "{{url('')}}";
+
+            }
+        }
         function dropclick(p){
             console.log(p);
             console.log($('#cat')[0])

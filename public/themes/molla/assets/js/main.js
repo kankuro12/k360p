@@ -355,15 +355,18 @@ $(document).ready(function () {
 
     // Product Image Zoom plugin - product pages
     if ($.fn.elevateZoom) {
-        $("#product-zoom").elevateZoom({
-            gallery: "product-zoom-gallery",
-            galleryActiveClass: "active",
-            zoomType: "inner",
-            cursor: "crosshair",
-            zoomWindowFadeIn: 400,
-            zoomWindowFadeOut: 400,
-            responsive: true,
-        });
+        if(window.innerWidth>576){
+
+            $("#product-zoom").elevateZoom({
+                gallery: "product-zoom-gallery",
+                galleryActiveClass: "active",
+                zoomType: "inner",
+                cursor: "crosshair",
+                zoomWindowFadeIn: 400,
+                zoomWindowFadeOut: 400,
+                responsive: true,
+            });
+        }
 
         // On click change thumbs active item
         $(".product-gallery-item").on("click", function (e) {

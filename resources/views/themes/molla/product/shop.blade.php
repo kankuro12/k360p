@@ -14,6 +14,7 @@
     }
 @endphp
 <main class="main">
+    <div class="{{env('enable_mobile_header',1)==1?"d-none d-md-block":""}}">
         	<div class="page-header text-center" style="background-image: url('themes/molla/assets/images/page-header-bg.jpg')">
         		<div class="container">
         			<h1 class="page-title">Product<span>Shop</span></h1>
@@ -28,8 +29,8 @@
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
-
-            <div class="page-content">
+    </div>
+            <div class="page-content {{env('enable_mobile_header',1)==1?"mt-5 mt-md-0 pt-1 pt-md-0":""}}">
                 <div class="container" >
         			<div class="toolbox d-flex " style="flex-direction: row">
         				<div class="toolbox-left" style="flex:1">

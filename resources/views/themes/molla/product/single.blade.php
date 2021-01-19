@@ -13,6 +13,15 @@
     <meta property="og:image"         content="{{ asset($product->product_images) }}" />
 @endsection
 @section('contant')
+<div class="mobile-header d-flex d-md-none text-white hasbackground" >
+    <span>
+        <button style="background: none;outline:none;border:none;padding:5px;color:white;font-size:2rem;" onclick="goBack();"> < </button>
+    </span>
+    <span style="flex-grow:1;max-width:270px;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;padding:8px 5px;">
+        {{$product->product_name}}
+    </span>
+</div>
+
     <main class="main">
         <div class="page-header text-center d-none d-md-block"
             style="background-image: url({{ asset('themes/molla/assets/images/page-header-bg.jpg') }})">
@@ -30,7 +39,7 @@
             </div><!-- End .container -->
         </nav><!-- End .breadcrumb-nav -->
 
-        <div class="page-content">
+        <div class="page-content pt-md-0 pt-5 mt-1 mt-md-0">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9">
