@@ -41,7 +41,7 @@ class HomeController extends Controller
         $all=$request->all();
 
         $products=$products->where('product_name', 'LIKE', '%' . $request->q . '%')->orWhereRaw(" lower(`tags`) LIKE '%". strtolower ($request->q ). "%'");
-        $products=$products->orWhereIn('category_id',Category::where('cat_name', 'LIKE', '%' . $request->q . '%')->pluck('cat_id')->toArray())->paginate(12);
+        $products=$products->orWhereIn('category_id',Category::where('cat_name', 'LIKE', '%' . $request->q . '%')->pluck('cat_id')->toArray())->paginate(24);
 
         return view(HomePage::theme("product.search"),compact("products",'all'));
 
