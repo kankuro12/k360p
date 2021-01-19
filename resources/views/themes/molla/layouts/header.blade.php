@@ -380,11 +380,11 @@
     var headercolortop={{Route::is('public.home')?240:0}}
 </script>
 
-<div class="mobile-footer d-flex d-md-none" style="background:{{env('mobile_footer_color','#343A40')}} !important;">
+<div class="mobile-footer d-flex d-md-none" style="background:{{env('mobile_footer_color','#fefefe')}} !important;">
     <div class="footer-item">
         <a href="{{ url('/') }}" >
             <div class="icon">
-                <i class="icon-shopping-cart"></i>
+                <img class="m-auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACYElEQVRIid2Uv09TURTHP+fd8l6xPwYSo4FIKBoXkw4WU0sRnppgQGochMnB0cS4aRzBf8G/wQ3i0hpw0AAxIBEH4z9gwsBmlFZKr+27DvTVUtpSZNJvcpZzz/1+zjvv5MK/omTy5plU6lZPY146N5iIVqziSwDldd/f2Fjc8c8SKfeuCK+AsjFe4tP66hf/zOrEPB4fD1XUbhYhg5CpqOJSMjkRrXUpcrHabJeIGqy/eyQgnU5H7Ih+AzIKrFQj1QhppbaAeHw8VDJdWQxp4H3RZsqUIpOCedcpJNDO3A7pHDBWNZ/o1jwRJx/0StGM5exkDXKjoopLAm/NcQCXXDdsa70IjAArumDf7g7rp8CsAcTJ75UKzh07rF8DYwaTaLUvhwDx+HjILukswki18ynfvK5s1gnroFeKTPpf0moSBwCJROaU2Pkcgls/lgZzAAw8s5w89eNqBlAHzJ18DuH6UeZ1GrECOuCVog+tQCkFEkM4F+vvm9/a2tI1QM2cY5m3goxVRI36EHVC89YQ1LVYf9+C6hvofYEwzf62TAZVpfGHdgyRgC7rgvNY2ZU0MOqhTqve/lgQwzf9035gH94WX3sCnwW2/QB6OLyFrrIrv3TBfqTs8lmMtVpb3qFhd65N59Oba8sL9YmhYfceMN+i/vnm2vIcVJ+Kyyn3Qhtz8GS7o9wfzVY99wGWJapN8V/J9+zouT4R6P8AiDY/2lYJ5zvK1UmVre/7ZVVdGXbXDVxtXm484GtDcgCk6QQEPnxcW05B/YgC3oyBHJjdJlcskMGGaGJudg3kCHgzfuY3kwvqMPBDPbgAAAAASUVORK5CYII=">
             </div>
             <div class="text">
                 Home
@@ -392,31 +392,30 @@
         </a>
     </div>
 
+
     <div class="footer-item">
-        <a href="{{ url('') }}" >
-            <div class="icon">
-                <i class="icon-shopping-cart"></i>
-            </div>
-            <div class="text">
-                Category
-            </div>
-        </a>
-    </div>
-    <div class="footer-item">
-        <a href="{{ url('/viewcart') }}">
+        <a href="{{ url('/shops') }}">
           <div class="icon">
-              <i class="icon-shopping-cart"></i>
+            <img class="m-auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAz0lEQVRIie2Uuw3CMBRFj00UqAKjMEJSUAYGALEBTMMi0FKQEWATSIUiK48iQtiAzCcIic/pbF/d+55/8OcGyh5047jTKJgpJAUVXag1CQAlq0sryUEtTMhknWXb42xgSypzhme599YaAaOgUAKMTzU57Uj6hPMZ0rdH2l28si2P0/YEvJ5/wE2ca6pKej7xXpsNQKsMvDqb93YgmqVP3CRI7tFhvdTPP+SvC5D8BZ47T4Ba1Pd3PZxrakIm1X9eDh7/WSUHPTehTOsX+VMcACCdK9xHAFIRAAAAAElFTkSuQmCC">
           </div>
           <div class="text">
               Shop
           </div>
         </a>
       </div>
+      <div class="footer-item">
+        <a href="{{ url('') }}" >
+            <div class="icon">
+                <img class="m-auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAC10lEQVRIibWV22tUVxSHv3XOmZlIUxUi1turNSpJR8eJjAR7Ilrbgpe/QApFRBDxtXhhJD6LWhvxEoS+lUJBfRBvyQiSZKInxgkxM46PRo1mBFvRzCRnrz7ojIO5TRq7ns5e+6zf91ucvc4Wpomw686387oFkRWifAWgwpBAWvPODc+7+XqqeplsY21jU0SMxgW2AoGJ39ICKtdUrbjX1dZTESAWi80ZlarfQH+aysAnIIPKxeoQ+xKJxMikgGjUXaQBLgPRyoTHgbpt39meTN4aGgdwXbfqTUFvgzT8N/GSoGfyX270vCtvAazixpuCtMxWHEAhYoX+OVkGhOgGN6yoB2JNXjozjrEk2nOn3XMADDTLB3HHcQjX15F79Yong4OE6+sQa3qu8Q29qT7GxsYAxDLmCLBDIpHN8yQ0+gIkCBCur+P8mVM8yj7mxK8ttJw6XrHt3Xv305vqKy5Hx4IsdKwqf6vqe3GA4VyO/odpBjIZXg7neDiQrriD4VyuPBVwCmyWyAb3kEBzxTZnEiIHHdDF5eNQu2I5v7eeJdXXz8nTZ2g9exqR6edNVdn18x7SmezHpNHFlojo/2EeABF1UJ6V59KZLA2Nm0rr8ueZ65tnjohkVT82sWzpEo7FDzOQyfDHn39x9PAvFX/kQ/Fmngw+LeVUJeuYEfuahEYLxWO6oKaG1atqCQQc2tpvs2plbcWOF9TUlAPytj/nugCsi7mXEbbB7Abt/oMUvu8XU5fudSR2CkBDY9M3xpiez/erUKPGjnpdbT0WQPed9geoXPw84gBcKF5AJcfVIfahJGerLOAFtHCguC4BEonEiG3sHaDdsxDvyhP8sbOz8904AEAyeWuoOijforSCmsql1YCe+yJIU6rj+otPoBPHutjGNYjEge+LR3gC4QLIVYH43Y5E7yRdTR3r1/8w17fffYfI1yiLPlQ9R8nYftWNZPLq31PV/ws/gCDmruY5dwAAAABJRU5ErkJggg==">            </div>
+            <div class="text">
+                Category
+            </div>
+        </a>
+    </div>
     <div class="footer-item">
       <a href="{{ url('/viewcart') }}">
         <div class="icon">
-            <i class="icon-shopping-cart"></i>
-        </div>
+            <img class="m-auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABrUlEQVRIidWUP0ubURTGf+e+CdgOugilky0URHAKobYZYsCtHToWutSh+AX8BE5+BqFzF+miNkkNNBqrqbYiFIQOglGMYsRCCiFo4j0OEon5y/vm7eAz3cNzeH733sO98J8lgIQjsbeC9Cucl4uDi7u785d+AQLPo9EntsonRQXgwUAhDrz2C2C2Mpl958oOWyNhgY8gr0IvoiN+ARyAfP7g78lh7uTx0NOCKB8Mkjs+ym34ATD1xfb39E/gVH28okBDbUVJqvAuHBmf85wqUglaM5vNfss3AsBIHNX3IFOeAQoV0TTw2TR6ptqXBCqew28I9sqpZqBhBgCbm4l/KOu9xAuys7O2dtYScNPAl14AVmW5tm4JsLDUCwBjUx0B29mVP8Cep3ClVOx/ePuGWgIABI17Aggre4nERVeAxfE0B1FS9XVbABfFNMq+q3SlVDXB+TvATv2hl7FnjtEZVIa7ZivHRnR2a2M162pTvarjCQDCkdiowKSKfv21vppy67efQU3KgsI0ytLY2MQjt353gKjWlmXHUbd+82/anPBGYBIryd8/lgvu/fuua52op0NVvj8MAAAAAElFTkSuQmCC">        </div>
         <div class="text">
             Cart
         </div>
@@ -425,7 +424,7 @@
     <div class="footer-item">
         <a href="{{ route('user.account') }}">
             <div class="icon">
-                <i class="icon-user"></i>
+                <img class="m-auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACDUlEQVRIia2UwWsTQRSHv7drmth6iNAKYi8BRbRQqKmUWoQtFaRKT/4BHoXePJWe+0cIHjx5KbkIVdSDTWywi62rJ1FRD6JFUYyQ1JQkm3keTNS26+529Z2Wmff7vplZZoSIGjs7dbLt+wuIjCs0RLm9lWb+eam0GZUFkLDJU2NTw5bVXkXo2x7Sz4psiMrVdbf4MIxhhU7a/rWdcABFDgEjKlrI52d6EwlGJyaPg5wJCwMDdk/1fCKBqI5HwAEwlnUikUCVbByBqO5PJED4FEdghHeJBBYaGvzdJ9VEAqMyHEegqseSCcR6HUcA8jKR4Onqcgm4E0Ev5o7030okAIzl25eB1t8aVJktFArtpALW1h58BbkZTGfJc0uhxxMpAGjb/hwBuzBq5qKysQQ9Tcnu7lNj2baJIwh8TYcc50Bvi4uKXhCVGYWDAW0tQcuo3CVlFtdXVt5HCo5OT6ez1fosKvPAQJwVdqoBcr1t+wvPyuUvgYK84/RbTe4p5PcA3lkfEDn35FHxVXfg19lKgxv/CAcYVNVF/li4ADiOk9ls6neQyJ8ep1JqDbru8gZ0dlCr7Uv/LzhAU8h0vzvQb3XQ0FdxD/WGRt/HbQLP81pi5BLwIjFWeSzIla0eRjxvqd4d3nUPTk9MDhl0VJQcojlUDiOI6M+7oEoNtCIiFaO8FUu9lMl4rnu/EuT9AYJ7uEwYS1HzAAAAAElFTkSuQmCC">
             </div>
             <div class="text">
                 Account

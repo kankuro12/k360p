@@ -23,6 +23,8 @@
 }
 
 .mobile-footer {
+  -webkit-box-shadow: 0 0 10px 0px black;
+          box-shadow: 0 0 10px 0px black;
   position: fixed;
   bottom: 0px;
   left: 0px;
@@ -39,18 +41,19 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  color: white;
+  color: #343A40;
   text-align: center;
 }
 
 .mobile-footer .footer-item .icon {
-  color: white;
+  color: #343A40;
   font-size: 2.5rem;
 }
 
 .mobile-footer .footer-item .text {
   font-weight: 400;
-  color: white;
+  color: #343A40;
   font-size: 1.2rem;
+  margin-top: 3px;
 }
 /*# sourceMappingURL=mobile.css.map */

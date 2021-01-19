@@ -31,18 +31,13 @@
 
             <div class="page-content">
                 <div class="container" >
-        			<div class="toolbox">
-        				<div class="toolbox-left">
+        			<div class="toolbox d-flex " style="flex-direction: row">
+        				<div class="toolbox-left" style="flex:1">
                             <a href="#" class="sidebar-toggler"><i class="icon-bars"></i>Filters</a>
         				</div><!-- End .toolbox-left -->
 
-                        <div class="toolbox-center">
-                            <div class="toolbox-info">
-                                {{-- Showing <span>12 of 56</span> Products --}}
-                            </div><!-- End .toolbox-info -->
-                        </div><!-- End .toolbox-center -->
 
-        				<div class="toolbox-right">
+        				<div class="toolbox-right mt-0" style="flex: 1;align-items: flex-end;">
         					{{-- <div class="toolbox-sort">
         						<label for="sortby">Sort by:</label>
         						<div class="select-custom">
@@ -53,7 +48,7 @@
 									</select>
 								</div>
                             </div><!-- End .toolbox-sort --> --}}
-                            <div class="toolbox-layout">
+                            <div class="toolbox-layout mt-0 text-right">
 
                 						<a href="{{route('grid',['id'=>0])}}" class="btn-layout {{$isgrid==1?"":"active"}}">
                 							<svg width="16" height="10">
@@ -147,6 +142,36 @@
             $("#max").val(values[1]);
             $("#min").val(values[0]);
         });
+
+    var $scrollTop = $("#scroll-top");
+    var $mobheader=$('.mobile-header');
+
+    $('body').scroll(function (e) {
+
+        console.log('scrolling',$('body')[0].scrollTop);
+        if ($('body')[0].scrollTop >= 400) {
+            $scrollTop.addClass("show");
+
+        } else {
+            $scrollTop.removeClass("show");
+
+
+        }
+
+        if ($('body')[0].scrollTop >= headercolortop) {
+
+            $mobheader.css('background',headercolor);
+            $mobheader.addClass('hasbackground');
+        } else {
+
+            $mobheader.css('background',"transparent");
+            $mobheader.removeClass('hasbackground');
+
+
+        }
+
+
+    });
 </script>
 @endsection
 
