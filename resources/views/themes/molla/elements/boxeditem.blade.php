@@ -3,7 +3,7 @@
     <div class="owl-carousel owl-full carousel-equal-height  cat-owl"  data-owl='{
         "responsive":{
             "0": {
-                "items":1               
+                "items":{{$item->mobile}}
             },
             "480": {
                 "items":{{$item->mobile}}
@@ -22,7 +22,7 @@
             }
         }}'>
 
-        @foreach ($item->products() as $product) 
+        @foreach ($item->products() as $product)
             @include('themes.molla.elements.product',$product)
         @endforeach
     </div><!-- End .owl-carousel -->
