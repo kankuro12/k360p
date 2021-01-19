@@ -130,7 +130,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-6 p-0 py-1">
-                                                    <div style="font-size:1rem;font-weight:600;max-width: calc(100% - 25px);">
+                                                    <div style="font-size:1rem;font-weight:600;max-width: calc(100% - 50px);">
                                                         <a href="{{ route('product.detail',$item->product_id) }}" style="">{{ $item->product->product_name }}</a>
                                                         @if($item->product->stocktype == 0)
                                                             @else
