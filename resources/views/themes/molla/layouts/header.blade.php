@@ -382,7 +382,7 @@
 
 <div class="mobile-footer d-flex d-md-none" style="background:{{env('mobile_footer_color','#343A40')}} !important;">
     <div class="footer-item">
-        <a href="{{ url('/home1') }}" >
+        <a href="{{ url('/') }}" >
             <div class="icon">
                 <i class="icon-shopping-cart"></i>
             </div>
@@ -403,19 +403,23 @@
         </a>
     </div>
     <div class="footer-item">
+      <a href="{{ url('/viewcart') }}">
         <div class="icon">
             <i class="icon-shopping-cart"></i>
         </div>
         <div class="text">
             Cart
         </div>
+      </a>
     </div>
     <div class="footer-item">
-        <div class="icon">
-            <i class="icon-user"></i>
-        </div>
-        <div class="text">
-            Account
-        </div>
+        <a href="{{ route('user.account') }}">
+            <div class="icon">
+                <i class="icon-user"></i>
+            </div>
+            <div class="text">
+                Account
+            </div>
+        </a>
     </div>
 </div>
