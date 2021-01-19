@@ -377,7 +377,7 @@
 @endif
 <script>
     var headercolor="{{env('mobile_footer_color','#343A40')}}";
-    var headercolortop={{Route::is('public.home1')?240:0}}
+    var headercolortop={{Route::is('public.home')?240:0}}
 </script>
 
 <div class="mobile-footer d-flex d-md-none" style="background:{{env('mobile_footer_color','#343A40')}} !important;">
