@@ -42,7 +42,7 @@ Route::get('testo', function () {
     // $current = Onsell::where('started_at','<=',$dt)
     //     ->where('end_at','>=',$dt)->select('sell_id')
     //     ->get();
-    // dd($current->toArray(),$dt,DB::getQueryLog()); 
+    // dd($current->toArray(),$dt,DB::getQueryLog());
     // $date = \Carbon\Carbon::today()->subDays(7);
     // $orders=DB::table('order_items')->where('created_at', '>=', \Carbon\Carbon::now()->subDays(7))
     // ->groupBy('date')
@@ -143,6 +143,11 @@ Route::get('blogs', [
 Route::get('blog/{id}', [
     'uses' => 'HomeController@blogDetail',
     'as' => 'public.blog.detail'
+]);
+
+Route::get('categories', [
+    'uses' => 'HomeController@categories',
+    'as' => 'public.categories'
 ]);
 
 Route::match(['get', 'post'], '/cart', [
@@ -516,7 +521,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
         'uses' => 'admin\DashboardController@tnc'
     ]);
 
-    
+
 
     //shipping settings
     Route::get('/shippings', 'admin\ShippingController@list')->name('admin.shippings');
@@ -603,7 +608,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
     Route::match(['GET', 'POST'], 'clearfix', 'FooterheadController@showItems')->name('clearfix');
     Route::match(['GET', 'POST'], 'clearfix/{id}', 'FooterheadController@showItemsUpdate')->name('clearfix.update');
 
-    
+
 
 
 });
@@ -986,7 +991,7 @@ Route::group(['prefix' => 'admin/element', 'middleware' => 'admin_auth'], functi
     Route::post('/boxed/update/{item}', 'Elements\AdController@updateBoxed')->name('elements.update-boxed');
     Route::get('/boxed/del/{item}', 'Elements\AdController@delBoxed')->name('elements.del-boxed');
 
-    // brand items 
+    // brand items
     Route::post('/brand/save/{section}', 'Elements\BrandController@save')->name('elements.brand-save');
     Route::get('/brand/delete/{id}', 'Elements\BrandController@delete')->name('delete.brand');
 
@@ -1017,15 +1022,15 @@ Route::group(['prefix' => 'admin/orders', 'middleware' => 'admin_auth'], functio
     Route::get('/data/delivery', 'admin\order\WarehouseController@delivery')->name('admin.orders-delivery');
     Route::post('/data/delivery/load', 'admin\order\WarehouseController@loadDelivery')->name('admin.orders-load-delivery');
     Route::post('/data/ondeliver', 'admin\order\WarehouseController@ondelivery')->name('admin.orders-ondelivery');
-    
+
     Route::get('/data/trips', 'admin\order\WarehouseController@trips')->name('admin.orders-trips');
     Route::get('/data/trip/{id}', 'admin\order\WarehouseController@trip')->name('admin.orders-trip');
     Route::get('/data/print/single/{shipping}', 'admin\order\WarehouseController@singlePrint')->name('admin.orders-singlePrint');
     Route::get('/data/print/trip/{id}', 'admin\order\WarehouseController@tripPrint')->name('admin.orders-tripPrint');
     Route::post('/data/print/multiple', 'admin\order\WarehouseController@multiplePrint')->name('admin.orders-multiplePrint');
-    
 
-    
+
+
 });
 
 Route::group(['prefix' => 'admin/account', 'middleware' => 'admin_auth'], function () {
@@ -1050,7 +1055,7 @@ Route::group(['prefix' => 'admin/pickuppoint', 'middleware' => 'admin_auth'], fu
     Route::get('/manage/{point}', 'admin\order\PickupController@manage')->name('admin.manage-pickup');
     Route::post('/update/{point}', 'admin\order\PickupController@edit')->name('admin.update-pickup');
 
-    
+
 });
 
 Route::group(['prefix' => 'vendor/orders', 'middleware' => ['authen', 'type'], 'type' => ['vendor']], function () {

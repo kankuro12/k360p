@@ -406,11 +406,11 @@
         </a>
       </div>
       <div class="footer-item">
-        <a href="{{ url('') }}" >
+        <a href="{{ route('public.categories') }}" >
             <div class="icon">
                 <img class="m-auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAC10lEQVRIibWV22tUVxSHv3XOmZlIUxUi1turNSpJR8eJjAR7Ilrbgpe/QApFRBDxtXhhJD6LWhvxEoS+lUJBfRBvyQiSZKInxgkxM46PRo1mBFvRzCRnrz7ojIO5TRq7ns5e+6zf91ucvc4Wpomw686387oFkRWifAWgwpBAWvPODc+7+XqqeplsY21jU0SMxgW2AoGJ39ICKtdUrbjX1dZTESAWi80ZlarfQH+aysAnIIPKxeoQ+xKJxMikgGjUXaQBLgPRyoTHgbpt39meTN4aGgdwXbfqTUFvgzT8N/GSoGfyX270vCtvAazixpuCtMxWHEAhYoX+OVkGhOgGN6yoB2JNXjozjrEk2nOn3XMADDTLB3HHcQjX15F79Yong4OE6+sQa3qu8Q29qT7GxsYAxDLmCLBDIpHN8yQ0+gIkCBCur+P8mVM8yj7mxK8ttJw6XrHt3Xv305vqKy5Hx4IsdKwqf6vqe3GA4VyO/odpBjIZXg7neDiQrriD4VyuPBVwCmyWyAb3kEBzxTZnEiIHHdDF5eNQu2I5v7eeJdXXz8nTZ2g9exqR6edNVdn18x7SmezHpNHFlojo/2EeABF1UJ6V59KZLA2Nm0rr8ueZ65tnjohkVT82sWzpEo7FDzOQyfDHn39x9PAvFX/kQ/Fmngw+LeVUJeuYEfuahEYLxWO6oKaG1atqCQQc2tpvs2plbcWOF9TUlAPytj/nugCsi7mXEbbB7Abt/oMUvu8XU5fudSR2CkBDY9M3xpiez/erUKPGjnpdbT0WQPed9geoXPw84gBcKF5AJcfVIfahJGerLOAFtHCguC4BEonEiG3sHaDdsxDvyhP8sbOz8904AEAyeWuoOijforSCmsql1YCe+yJIU6rj+otPoBPHutjGNYjEge+LR3gC4QLIVYH43Y5E7yRdTR3r1/8w17fffYfI1yiLPlQ9R8nYftWNZPLq31PV/ws/gCDmruY5dwAAAABJRU5ErkJggg==">            </div>
             <div class="text">
-                Category
+                Categories
             </div>
         </a>
     </div>

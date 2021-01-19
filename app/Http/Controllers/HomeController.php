@@ -253,6 +253,11 @@ class HomeController extends Controller
         $blog = Blog::find($id);
         return view(HomePage::theme("blog.single"))->with(compact('blog'));
     }
+
+    public function categories(){
+        $categories=Category::where('parent_id',null)->get();
+        return view(HomePage::theme("categories"))->with(compact('categories'));
+    }
 }
 
 
