@@ -403,6 +403,16 @@
         </a>
     </div>
     <div class="footer-item">
+        <a href="{{ url('/viewcart') }}">
+          <div class="icon">
+              <i class="icon-shopping-cart"></i>
+          </div>
+          <div class="text">
+              Shop
+          </div>
+        </a>
+      </div>
+    <div class="footer-item">
       <a href="{{ url('/viewcart') }}">
         <div class="icon">
             <i class="icon-shopping-cart"></i>
