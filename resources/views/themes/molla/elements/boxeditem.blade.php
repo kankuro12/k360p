@@ -1,6 +1,7 @@
 <div class="tab-pane p-0 fade show {{$i==0?"active":""}}" id="boxeditems_{{ $item->id }}" role="tabpanel"
     aria-labelledby="trending-all-link">
     <div class="owl-carousel owl-full carousel-equal-height  cat-owl"  data-owl='{
+        "margin":10,
         "responsive":{
             "0": {
                 "items":{{$item->mobile}}
