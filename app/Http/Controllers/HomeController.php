@@ -46,6 +46,8 @@ class HomeController extends Controller
             $data['hasmore']=false;
 
         }
+
+        return response()->json($data);
     }
 
     public function search(Request $request){
