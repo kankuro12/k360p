@@ -66,6 +66,12 @@ Route::get('/', [
     'as' => 'public.home'
 ]);
 
+Route::post('/get-products', [
+    'uses' => 'HomeController@getProducts',
+    'as' => 'public.getProducts'
+]);
+
+
 Route::get('/search', [
     'uses' => 'HomeController@search',
     'as' => 'public.search'
@@ -118,6 +124,9 @@ Route::get('/shop-by-brand/{id}', [
     'uses' => 'HomeController@brand',
     'as' => 'shop-by-brand'
 ]);
+
+
+
 
 Route::get('/latest/', [
     'uses' => 'HomeController@latest',

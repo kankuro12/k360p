@@ -29,6 +29,25 @@ class HomeController extends Controller
         return view(HomePage::theme("sucess"));
     }
 
+    public function getProducts(Request $request){
+        $products=Product::skip(12*$request->page)->take(12);
+        $data=[];
+        if($products->count()>0){
+            $data['hasview']=true;
+            $data['view']=view(HomePage::theme("product.mobile_list_category"),compact('products'))->render();
+        }else{
+            $data['hasview']=false;
+
+        }
+
+        if(Product::count()>(12*($request->page+1))){
+            $data['hasmore']=true;
+        }else{
+            $data['hasmore']=false;
+
+        }
+    }
+
     public function search(Request $request){
         // dd($request);
         $products=Product::where('isverified',1);

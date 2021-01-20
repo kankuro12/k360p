@@ -27,21 +27,17 @@
             </div>
         @endforeach
     </div>
-    @php
-        $products=\App\model\admin\Product::paginate(1);
-    @endphp
+
     <style>
-        .box1{
-            height:300px;
-        }
+
     </style>
+    <div style="font-weight:600;font-size:1.3rem;">
+        Our Products
+    </div>
     <div class="d-block d-md-none">
         <div id="content">
 
-            <div class="box1" style="background-color: rgb(132, 144, 26);"></div>
-            <div class="box1" style="background-color: rgb(180, 0, 160);"></div>
-            <div class="box1" style="background-color: rgb(148, 117, 184);"></div>
-            <div class="box1" style="background-color: rgb(87, 197, 66);"></div>
+
         </div>
             <div id="aloader" class="active">
 
@@ -59,5 +55,32 @@
     @include('themes.molla.layouts.popup')
 @endsection
 @section('js')
+    <script>
+        var hasproduct=true;
+        var productlock=false;
+        var productindex=0;
+        function loadProduct(){
+            if(!productlock && window.innerWidth<=576 && hasproduct){
+                productlock=true;
+                axios.post('{{route("public.getProducts")}}',{page:productindex})
+                .then(function(response){
+                    var data=response.data;
+                    if(data.hasview){
+
+                        $('#content').append(data.view);
+                        productindex+=1;
+
+                    }
+
+                    hasproduct=data.hasmore;
+                    productlock=false;
+                })
+                .catch(function(err){
+                    console.log(err);
+                    productlock=false;
+                });
+            }
+        }
+    </script>
 
 @endsection
