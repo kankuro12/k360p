@@ -103,7 +103,7 @@ class HomeController extends Controller
 
 
 
-        $products=$p->paginate(12)->appends($request->all());
+        $products=$p->paginate(24)->appends($request->all());
         // dd($products->links());
         return view(HomePage::theme("product.shop"),compact("products","max","min",'_min','_max','categories'));
     }
