@@ -30,6 +30,7 @@ class HomeController extends Controller
     }
 
     public function getProducts(Request $request){
+        $p=0;
         if($request->page==0){
             $products=Product::take(12)->get();
 
@@ -40,7 +41,7 @@ class HomeController extends Controller
         $data=[];
         if($products->count()>0){
             $data['hasview']=true;
-            $data['view']=view(HomePage::theme("product.mobile_list_category"),compact('products'))->render();
+            $data['view']=view(HomePage::theme("product.infinte_products"),compact('products','p'))->render();
         }else{
             $data['hasview']=false;
 
