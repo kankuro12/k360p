@@ -32,15 +32,15 @@
 
     </style>
 
-    <div class="d-block d-md-none">
-        <div style="font-weight:600;font-size:1.5rem;">
+    <div class="d-block d-md-none px-2">
+        <div style="font-weight:600;font-size:2rem;">
             Our Products
         </div>
-        <div id="content px-2">
+        <div id="content" >
 
 
         </div>
-            <div id="aloader" class="active">
+            <div id="aloader" class="active text-center" >
 
                 LOADING...
             </div>
