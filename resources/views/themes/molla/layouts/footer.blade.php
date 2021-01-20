@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer d-none d-md-block">
     <div class="cta cta-horizontal cta-horizontal-box bg-dark bg-image" style="background-image: url('assets/images/demos/demo-14/bg-1.jpg');">
         <div class="container-fluid">
             <div class="row align-items-center">
