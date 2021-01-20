@@ -709,7 +709,8 @@ $(document).ready(function () {
 
     $('body').scroll(function (e) {
         newValue = $('body')[0].scrollTop;
-
+        var intViewportHeight = window.innerHeight;
+        console.log(newValue,loaderTop,newValue+intViewportHeight);
 
         if (newValue >= 400) {
             $scrollTop.addClass("show");
@@ -734,10 +735,15 @@ $(document).ready(function () {
 
          if(oldValue - newValue > 0){
             console.log("Down");
-            loaderTop=document.getElementById('aloader').offsetTop;
-            console.log(newValue,loaderTop);
+
 
         }
+
+
+
+
+
+
 
 
         oldValue = newValue;

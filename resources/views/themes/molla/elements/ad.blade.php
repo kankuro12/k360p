@@ -2,7 +2,7 @@
 $ad=$data->getElement();
 @endphp
 @if ($ad != null)
-    <div class="banner banner-overlay">
+    <div class="banner banner-overlay d-none d-md-block">
         <a href="#">
             <picture>
                 <source media="(max-width: 480px)" srcset="{{ asset($ad->image2) }}">
