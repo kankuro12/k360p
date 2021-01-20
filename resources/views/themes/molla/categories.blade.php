@@ -28,7 +28,7 @@
     <div class="page-content  {{env('enable_mobile_header',1)==1?"mt-5 mt-md-0  pt-md-0 pb-md-5 pb-0":""}}" style="border:none;">
         <div class="row">
             <div class="col-3 p-0">
-                <div style="height: calc(100vh - 100px);overflow-y:scroll;word-wrap: break-word;background:#343A40;text-align: center;">
+                <div style="height: calc(100vh - 112px);overflow-y:scroll;word-wrap: break-word;background:#343A40;text-align: center;">
 
                         @php
                             $count=0;;
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="col-9 p-0">
-                <div id="content" style="height: calc(100vh - 100px);overflow-y:scroll;">
+                <div id="content" style="height: calc(100vh - 112px);overflow-y:scroll;">
 
                 </div>
             </div>
