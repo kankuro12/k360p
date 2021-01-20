@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="col-9 p-0">
-                <div id="content" style="height: calc(100vh - 112px);overflow-y:scroll;">
+                <div id="content" style="height: calc(100vh - 115px);overflow-y:scroll;">
 
                 </div>
             </div>
