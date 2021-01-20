@@ -43,7 +43,7 @@
                                     }
                                 @endphp
 
-                                <div style="font-size:0.9rem;color:white; margin:auto;position:absolute;top:50%; transform: translateY(-50%);width:100%;word-wrap: break-word;">
+                                <div style="font-size:0.9rem;color:white; margin:auto;position:absolute;top:50%; transform: translateY(-50%);width:100%;word-wrap: break-word;padding:0px 5px;">
                                     {{$category->cat_name}}
                                 </div>
                             </div>
