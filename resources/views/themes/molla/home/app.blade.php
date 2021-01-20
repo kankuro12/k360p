@@ -31,11 +31,12 @@
     <style>
 
     </style>
-    <div style="font-weight:600;font-size:1.3rem;">
-        Our Products
-    </div>
+
     <div class="d-block d-md-none">
-        <div id="content">
+        <div style="font-weight:600;font-size:1.5rem;">
+            Our Products
+        </div>
+        <div id="content px-2">
 
 
         </div>
@@ -43,9 +44,7 @@
 
                 LOADING...
             </div>
-            <div style="height:60px;">
 
-            </div>
 
     </div>
 
