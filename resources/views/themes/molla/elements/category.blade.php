@@ -11,7 +11,7 @@ $cat=$data->getElement();
 
     <div class="d-none d-md-block">
     @if ($cat->showtitle==1)
-        <h3 class="mb-1 mt-1"><strong>{{$data->name}}</strong></h3>
+        <h3 class="mb-md-1 mt-md-1 "><strong>{{$data->name}}</strong></h3>
         <div class="row mb-1">
             <div class="col-md-4 p-0" >
                 <div style="height:1px;background:red;"></div>
