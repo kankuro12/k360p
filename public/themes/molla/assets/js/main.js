@@ -681,6 +681,7 @@ $(document).ready(function () {
     // Scroll Top Button - Show
     var $scrollTop = $("#scroll-top");
     var $mobheader=$('.mobile-header');
+    var oldValue=0;
     $(window).on("load", function () {
 
         if ($(window).scrollTop() >= 400) {
@@ -707,9 +708,10 @@ $(document).ready(function () {
 
 
     $('body').scroll(function (e) {
+        newValue = $('body')[0].scrollTop;
 
-        console.log('scrolling',$('body')[0].scrollTop);
-        if ($('body')[0].scrollTop >= 400) {
+
+        if (newValue >= 400) {
             $scrollTop.addClass("show");
 
         } else {
@@ -718,7 +720,7 @@ $(document).ready(function () {
 
         }
 
-        if ($('body')[0].scrollTop >= headercolortop) {
+        if (newValue >= headercolortop) {
 
             $mobheader.css('background',headercolor);
             $mobheader.addClass('hasbackground');
@@ -727,8 +729,18 @@ $(document).ready(function () {
             $mobheader.css('background',"transparent");
             $mobheader.removeClass('hasbackground');
 
+        }
+
+
+         if(oldValue - newValue > 0){
+            console.log("Down");
+            loaderTop=document.getElementById('aloader').offsetTop;
+            console.log(newValue,loaderTop);
 
         }
+
+
+        oldValue = newValue;
 
 
     });

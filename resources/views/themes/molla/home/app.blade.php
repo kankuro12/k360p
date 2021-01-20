@@ -59,22 +59,5 @@
     @include('themes.molla.layouts.popup')
 @endsection
 @section('js')
-    <script>
-        function addBoxes (amount=10) {
-            for (i=1; i<=amount; i++) {
-                var randomColor = '#'+('00000'+(Math.random()*0xFFFFFF<<0).toString(16)).slice(-6);
-                $("<div></div>")
-                    .addClass("box1")
-                    .css("background-color", randomColor)
-                    .appendTo("#content");
-            }
 
-        }
-
-        var waypoints = $('#aloader').waypoint(function(direction) {
-                alert(this.element.id + ' hit 95% from top of window from '+direction);
-            }, {
-            offset: '95%'
-        });
-    </script>
 @endsection
