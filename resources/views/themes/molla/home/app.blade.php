@@ -18,7 +18,7 @@
             $c="";
             }
             @endphp
-            <div  $c >
+            <div  {{$c}} >
                 <div class="row">
                     <div class="col-md-{{ $item->row }} " id="section_{{ $item->id }}">
                         @include($item->render() ,['data'=>$item])
