@@ -30,13 +30,25 @@
     @php
         $products=\App\model\admin\Product::paginate(1);
     @endphp
+    <style>
+        .box1{
+            height:300px;
+        }
+    </style>
     <div class="d-block d-md-none">
         <div id="content">
 
-            <div class="box1" style="background-color: rgb(132, 144, 26);"></div><div class="box1" style="background-color: rgb(180, 0, 160);"></div><div class="box1" style="background-color: rgb(148, 117, 184);"></div><div class="box1" style="background-color: rgb(87, 197, 66);"></div><div class="box1" style="background-color: rgb(114, 128, 56);"></div><div class="box1" style="background-color: rgb(127, 132, 138);"></div><div class="box1" style="background-color: rgb(15, 160, 117);"></div><div class="box1" style="background-color: rgb(12, 18, 194);"></div><div class="box1" style="background-color: rgb(219, 226, 224);"></div><div class="box1" style="background-color: rgb(42, 130, 39);"></div><div class="box1" style="background-color: rgb(20, 116, 61);"></div><div class="box1" style="background-color: rgb(188, 64, 188);"></div><div class="box1" style="background-color: rgb(250, 47, 69);"></div><div class="box1" style="background-color: rgb(117, 83, 111);"></div><div class="box1" style="background-color: rgb(85, 239, 61);"></div><div class="box1" style="background-color: rgb(59, 146, 55);"></div><div class="box1" style="background-color: rgb(105, 66, 239);"></div><div class="box1" style="background-color: rgb(62, 203, 74);"></div></div>
+            <div class="box1" style="background-color: rgb(132, 144, 26);"></div>
+            <div class="box1" style="background-color: rgb(180, 0, 160);"></div>
+            <div class="box1" style="background-color: rgb(148, 117, 184);"></div>
+            <div class="box1" style="background-color: rgb(87, 197, 66);"></div>
+        </div>
             <div id="aloader" class="active">
 
                 LOADING...
+            </div>
+            <div style="height:60px;">
+
             </div>
 
     </div>
@@ -48,9 +60,20 @@
 @endsection
 @section('js')
     <script>
+        function addBoxes (amount=10) {
+            for (i=1; i<=amount; i++) {
+                var randomColor = '#'+('00000'+(Math.random()*0xFFFFFF<<0).toString(16)).slice(-6);
+                $("<div></div>")
+                    .addClass("box1")
+                    .css("background-color", randomColor)
+                    .appendTo("#content");
+            }
+
+        }
+
         var waypoints = $('#aloader').waypoint({
             handler: function(direction) {
-                alert(this.element.id + ' hit')
+                addBoxes(10);
             }
         })
     </script>
