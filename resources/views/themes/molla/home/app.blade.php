@@ -71,10 +71,10 @@
 
         }
 
-        var waypoints = $('#aloader').waypoint({
-            handler: function(direction) {
-                addBoxes(10);
-            }
-        })
+        var waypoints = $('#aloader').waypoint(function(direction) {
+                alert(this.element.id + ' hit 95% from top of window from '+direction);
+            }, {
+            offset: '95%'
+        });
     </script>
 @endsection
