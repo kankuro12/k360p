@@ -10,6 +10,9 @@
         .page-wrapper{
             min-height:200px !important;
         }
+        .footer{
+            display:none;
+        }
     }
 </style>
 <main class="main">
