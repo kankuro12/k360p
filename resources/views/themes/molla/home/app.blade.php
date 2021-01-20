@@ -81,6 +81,8 @@
                 });
             }
         }
+
+        loadProduct();
     </script>
 
 @endsection
