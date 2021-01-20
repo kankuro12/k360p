@@ -5,6 +5,7 @@ namespace App\Setting;
 class HomePage
 {
 
+    const version=1;
     const menutype = ['Brand', 'Category', 'Collection', 'Sale'];
     //
     const collectionurl = "/collection-product//";
@@ -76,7 +77,7 @@ class HomePage
     {
         $css = "";
         foreach (self::CSS as $link) {
-            $css .= '<link rel="stylesheet" href="\themes\\' . self::themes . '\\' . $link . '">';
+            $css .= '<link rel="stylesheet" href="\themes\\' . self::themes . '\\' . $link .'?v='.self::version. '">';
         }
         return $css;
     }
@@ -85,7 +86,7 @@ class HomePage
     {
         $css = "";
         foreach (self::JS as $link) {
-            $css .= '<script src="\themes\\' . self::themes . '\\' . $link . '"></script>';
+            $css .= '<script src="\themes\\' . self::themes . '\\' . $link .'?v='.self::version. '"></script>';
         }
         return $css;
     }
