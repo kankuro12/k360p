@@ -258,6 +258,14 @@ class HomeController extends Controller
         $categories=Category::where('parent_id',null)->get();
         return view(HomePage::theme("categories"))->with(compact('categories'));
     }
+
+    public function mobCategories(Request $request){
+        $category=Category::find($request->cat_id);
+        $ids=$category->childList();
+        $products=Product::whereIn('category_id',$ids)->get();
+        return view(HomePage::theme("product.mobile_list_category"))->with(compact('products'));
+
+    }
 }
 
 

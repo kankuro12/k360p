@@ -150,6 +150,11 @@ Route::get('categories', [
     'as' => 'public.categories'
 ]);
 
+Route::post('mob-categories', [
+    'uses' => 'HomeController@mobCategories',
+    'as' => 'public.mob-categories'
+]);
+
 Route::match(['get', 'post'], '/cart', [
     'as' => 'public.cart',
     'uses' => 'user\CartController@addProduct'

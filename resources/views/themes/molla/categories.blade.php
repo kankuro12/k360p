@@ -1,6 +1,17 @@
 @extends('themes.molla.layouts.app')
 @section('title','Categories')
 @section('contant')
+<style>
+    .selected{
+        background: #929292 !important;
+    }
+
+    @media (max-width:576px){
+        .page-wrapper{
+            min-height:200px !important;
+        }
+    }
+</style>
 <main class="main">
     <div class="mobile-header d-flex d-md-none text-white hasbackground" >
         <span>
@@ -11,20 +22,25 @@
         </span>
     </div>
 
-    <div class="page-content  {{env('enable_mobile_header',1)==1?"mt-5 mt-md-0  pt-md-0":""}}" style="border:none;">
+    <div class="page-content  {{env('enable_mobile_header',1)==1?"mt-5 mt-md-0  pt-md-0 pb-md-5 pb-0":""}}" style="border:none;">
         <div class="row">
-            <div class="col-3">
-                <div style="height: calc(100vh - 100px);overflow-y:scroll;word-wrap: break-word;background:#929292;text-align: center;border:1px solid black;padding:5px 0;">
+            <div class="col-3 p-0">
+                <div style="height: calc(100vh - 100px);overflow-y:scroll;word-wrap: break-word;background:#343A40;text-align: center;">
 
-
+                        @php
+                            $count=0;;
+                            $fid=0;
+                        @endphp
                         @foreach ($categories as $category)
-                            <div style="min-height:40px;">
-                                <div>
-                                    <img class="m-auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACYElEQVRIid2Uv09TURTHP+fd8l6xPwYSo4FIKBoXkw4WU0sRnppgQGochMnB0cS4aRzBf8G/wQ3i0hpw0AAxIBEH4z9gwsBmlFZKr+27DvTVUtpSZNJvcpZzz/1+zjvv5MK/omTy5plU6lZPY146N5iIVqziSwDldd/f2Fjc8c8SKfeuCK+AsjFe4tP66hf/zOrEPB4fD1XUbhYhg5CpqOJSMjkRrXUpcrHabJeIGqy/eyQgnU5H7Ih+AzIKrFQj1QhppbaAeHw8VDJdWQxp4H3RZsqUIpOCedcpJNDO3A7pHDBWNZ/o1jwRJx/0StGM5exkDXKjoopLAm/NcQCXXDdsa70IjAArumDf7g7rp8CsAcTJ75UKzh07rF8DYwaTaLUvhwDx+HjILukswki18ynfvK5s1gnroFeKTPpf0moSBwCJROaU2Pkcgls/lgZzAAw8s5w89eNqBlAHzJ18DuH6UeZ1GrECOuCVog+tQCkFEkM4F+vvm9/a2tI1QM2cY5m3goxVRI36EHVC89YQ1LVYf9+C6hvofYEwzf62TAZVpfGHdgyRgC7rgvNY2ZU0MOqhTqve/lgQwzf9035gH94WX3sCnwW2/QB6OLyFrrIrv3TBfqTs8lmMtVpb3qFhd65N59Oba8sL9YmhYfceMN+i/vnm2vIcVJ+Kyyn3Qhtz8GS7o9wfzVY99wGWJapN8V/J9+zouT4R6P8AiDY/2lYJ5zvK1UmVre/7ZVVdGXbXDVxtXm484GtDcgCk6QQEPnxcW05B/YgC3oyBHJjdJlcskMGGaGJudg3kCHgzfuY3kwvqMPBDPbgAAAAASUVORK5CYII=">
+                            <div id="cat_{{$category->cat_id}}" class="cat" style="min-height:50px;position:relative;margin:2px;" class="cat" onclick="catClicked({{$category->cat_id}},this);">
+                                @php
+                                    if($count==0){
+                                        $count+=1;
+                                        $fid=$category->cat_id;
+                                    }
+                                @endphp
 
-                                </div>
-                                <div style="font-size:0.9rem;color:white;">
-
+                                <div style="font-size:0.9rem;color:white; margin:auto;position:absolute;top:50%; transform: translateY(-50%);width:100%;">
                                     {{$category->cat_name}}
                                 </div>
                             </div>
@@ -32,9 +48,31 @@
 
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-9 p-0">
+                <div id="content" style="height: calc(100vh - 100px);overflow-y:scroll;">
 
+                </div>
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        function catClicked(cat_id,ele) {
+            $('.cat').removeClass('selected');
+            $(ele).addClass('selected');
+            axios.post("{{route('public.mob-categories')}}",{cat_id:cat_id})
+            .then(function(response){
+                $('#content').html(response.data);
+            })
+            .catch(function(err){
+                console.log(err.response);
+            });
+        }
+
+       catClicked({{$fid}},document.getElementById('cat_{{$fid}}'));
+
+
+    </script>
+
 @endsection
