@@ -1,7 +1,7 @@
 @extends('themes.molla.layouts.app')
 @section('contant')
 <div style="height:1px;"></div>
-    <div class="d-none d-md-block">
+    <div class="">
 
         @foreach (App\model\admin\HomePageSection::where('parent_id', 0)
                 ->orderBy('order', 'asc')
@@ -47,41 +47,13 @@
     @include('themes.molla.layouts.popup')
 @endsection
 @section('js')
-<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
-<script>
-    // init controller
-    var controller = new ScrollMagic.Controller();
-
-    // build scene
-    var scene = new ScrollMagic.Scene({triggerElement: ".dynamicContent #loader", triggerHook: "onEnter"})
-                    .addTo(controller)
-                    .on("enter", function (e) {
-                        if (!$("#loader").hasClass("active")) {
-                            $("#loader").addClass("active");
-                            if (console){
-                                console.log("loading new items");
-                            }
-                            // simulate ajax call to add content using the function below
-                            setTimeout(addBoxes, 1000, 9);
-                        }
-                    });
-
-    // pseudo function to add new content. In real life it would be done through an ajax request.
-    function addBoxes (amount) {
-        for (i=1; i<=amount; i++) {
-            var randomColor = '#'+('00000'+(Math.random()*0xFFFFFF<<0).toString(16)).slice(-6);
-            $("<div></div>")
-                .addClass("box1")
-                .css("background-color", randomColor)
-                .appendTo(".dynamicContent #content");
-        }
-        // "loading" done -> revert to normal state
-        scene.update(); // make sure the scene gets the new start position
-        $("#loader").removeClass("active");
-    }
-
-    // add some boxes to start with.
-    addBoxes(18);
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js" integrity="sha512-fHXRw0CXruAoINU11+hgqYvY/PcsOWzmj0QmcSOtjlJcqITbPyypc8cYpidjPurWpCnlB8VKfRwx6PIpASCUkQ==" crossorigin="anonymous"></script>
+    <script>
+        var waypoint = new Waypoint({
+            element: document.getElementById('content'),
+            handler: function(direction) {
+                notify(this.id + ' hit,'+direction );
+            }
+        })
+    </script>
 @endsection
