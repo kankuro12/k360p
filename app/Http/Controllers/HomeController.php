@@ -30,7 +30,13 @@ class HomeController extends Controller
     }
 
     public function getProducts(Request $request){
-        $products=Product::skip(12*$request->page)->take(12);
+        if($request->page==0){
+            $products=Product::take(12);
+
+        }else{
+
+            $products=Product::skip(12*$request->page)->take(12);
+        }
         $data=[];
         if($products->count()>0){
             $data['hasview']=true;
