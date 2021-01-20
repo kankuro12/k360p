@@ -31,11 +31,11 @@ class HomeController extends Controller
 
     public function getProducts(Request $request){
         if($request->page==0){
-            $products=Product::take(12);
+            $products=Product::take(12)->get();
 
         }else{
 
-            $products=Product::skip(12*$request->page)->take(12);
+            $products=Product::skip(12*$request->page)->take(12)->get();
         }
         $data=[];
         if($products->count()>0){
