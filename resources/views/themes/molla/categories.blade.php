@@ -16,7 +16,7 @@
     }
 </style>
 <main class="main">
-    <div class="mobile-header d-flex d-md-none text-white hasbackground" >
+    <div class="mobile-header d-flex d-md-none text-white " style="background:#343A40 !important;" >
         <span>
             <button style="background: none;outline:none;border:none;padding:5px;color:white;font-size:2rem;" onclick="goBack();"> < </button>
         </span>
