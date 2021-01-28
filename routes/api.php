@@ -23,7 +23,7 @@ Route::post('test', function (Request $request) {
    echo Str::uuid();
 });
 
-Route::group(['middleware' => ['cors']], function () {
+Route::group(['middleware' => ['CORS']], function () {
     Route::name('api.')->group(function(){
         Route::get('sliders','Api\HomeController@sliders')->name('sliders');
     });
