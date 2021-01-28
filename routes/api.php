@@ -25,6 +25,7 @@ Route::post('test', function (Request $request) {
 
     Route::name('api.')->group(function(){
         Route::get('sliders','Api\HomeController@sliders')->name('sliders');
+        Route::get('categories','Api\HomeController@categories')->name('sliders');
     });
 
-    
+
