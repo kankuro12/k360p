@@ -26,6 +26,7 @@ Route::post('test', function (Request $request) {
     Route::name('api.')->group(function(){
         Route::get('sliders','Api\HomeController@sliders')->name('sliders');
         Route::get('categories','Api\HomeController@categories')->name('cat');
+        Route::get('category/{id}','Api\HomeController@category')->name('cate');
         Route::get('products','Api\HomeController@products')->name('product');
     });
 

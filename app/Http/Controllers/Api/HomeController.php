@@ -23,6 +23,13 @@ class HomeController extends Controller
         return response()->json($categories);
     }
 
+    public function category($id){
+        $category=Category::find($id);
+        $ids=$category->childList();
+        $products=Product::whereIn('category_id',$ids)->select('product_id','product_name','product_images','mark_price')->get();
+        return response()->json($products);
+
+    }
     public function products(){
         $datas=[];
         $items=BoxedItemListDisplay::inRandomOrder()->get();
