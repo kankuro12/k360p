@@ -27,14 +27,14 @@ class HomeController extends Controller
         $datas=[];
         $items=BoxedItemListDisplay::inRandomOrder()->get();
         foreach ($items as $key => $item) {
-            $product=Product::where('category_id',$item->category_id)->orderBy($item->order_by,$item->order==0?"ASC":"DESC")->take($item->count)->get();
+            $product=Product::where('category_id',$item->category_id)->orderBy($item->orderby,$item->order==0?"ASC":"DESC")->take($item->count)->get();
             $data=new ProductWrapper($item->title,$product);
             array_push($datas,$data);
         }
 
         $item1s=BoxedItemListDisplay::inRandomOrder()->get();
         foreach ($item1s as $key => $item) {
-            $product=Product::where('category_id',$item->category_id)->orderBy($item->order_by,$item->order==0?"ASC":"DESC")->take($item->count)->get();
+            $product=Product::where('category_id',$item->category_id)->orderBy($item->orderby,$item->order==0?"ASC":"DESC")->take($item->count)->get();
             $title=Category::find($item->category_id)->cat_name;
             $data=new ProductWrapper($title,$product);
             array_push($datas,$data);
