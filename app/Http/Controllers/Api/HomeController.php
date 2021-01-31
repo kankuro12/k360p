@@ -50,4 +50,10 @@ class HomeController extends Controller
         return response()->json($datas);
 
     }
+
+    public function product($id){
+        $product=Product::find($id);
+        $product->images=$product->images;
+        $return response()->json($product);
+    }
 }
