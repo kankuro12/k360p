@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function sliders(){
-        $sliders=Slider::select('mobile')->get();
+        $sliders=Slider::select('mobile','slider_image')->get();
         return response()->json($sliders);
     }
 
