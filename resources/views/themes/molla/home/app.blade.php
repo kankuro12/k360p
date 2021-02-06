@@ -37,8 +37,6 @@
             Our Products
         </div>
         <div id="content" >
-
-
         </div>
             <div id="aloader" class="active text-center" >
                 LOADING...

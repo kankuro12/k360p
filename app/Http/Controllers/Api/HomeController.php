@@ -60,4 +60,9 @@ class HomeController extends Controller
         $product->images=$product->images;
         return response()->json($product);
     }
+
+    public function search(Request $request){
+        $keyword=$request->keyword;
+        return response()->json(Product::where('product_name','like','%'.$keyword.'%')->get());
+    }
 }

@@ -30,6 +30,8 @@ Route::post('test', function (Request $request) {
         Route::get('products','Api\HomeController@products')->name('products');
         Route::get('allproducts','Api\HomeController@allproducts')->name('allproducts');
         Route::get('product/{id}','Api\HomeController@product')->name('product');
+
+        Route::match(['POST','GET'],'search','Api\HomeController@search')->name('search');
     });
 
 
