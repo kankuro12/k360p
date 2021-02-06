@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function allproduct(){
+    public function allproducts(){
         $allproducts=Product::all();
         return response()->json($allproducts);
     }
