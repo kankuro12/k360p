@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function allproduct(){
+        $allproducts=Product::all();
+        return response()->json($allproducts);
+    }
     public function sliders(){
         $sliders=Slider::select('mobile','slider_image')->get();
         return response()->json($sliders);

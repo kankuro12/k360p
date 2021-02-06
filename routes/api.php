@@ -28,6 +28,7 @@ Route::post('test', function (Request $request) {
         Route::get('categories','Api\HomeController@categories')->name('cat');
         Route::get('category/{id}','Api\HomeController@category')->name('cate');
         Route::get('products','Api\HomeController@products')->name('products');
+        Route::get('allproducts','Api\HomeController@allproducts')->name('allproducts');
         Route::get('product/{id}','Api\HomeController@product')->name('product');
     });
 
