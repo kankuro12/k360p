@@ -7,8 +7,14 @@ use App\Http\Controllers\Controller;
 use App\model\admin\BoxedItemDisplay;
 use App\model\admin\BoxedItemListDisplay;
 use App\model\admin\Category;
+use App\model\admin\Onsell;
 use App\model\admin\Product;
+use App\model\admin\Product_attribute;
+use App\model\admin\Sell_product;
 use App\model\admin\Slider;
+use App\model\ProductAttributeItem;
+use App\model\ProductStock;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -59,7 +65,7 @@ class HomeController extends Controller
         $product=Product::find($id);
         $product->images=$product->images;
         $onsale=$product->onsale();
-        $product->onsale=$product->onsale;
+        $product->onsale=$onsale;
         $selper=0;
         if($onsale){
             $dt = Carbon::now();
