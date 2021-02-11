@@ -111,7 +111,7 @@ class HomeController extends Controller
 
 
     public function listproducts($step){
-        $products=Product::where('id','>',0);
+        $products=Product::where('product_id','>',0);
         if($step==0){
             $products=$products->take(24);
         }else{
