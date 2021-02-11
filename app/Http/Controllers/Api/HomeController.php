@@ -108,4 +108,19 @@ class HomeController extends Controller
         $keyword=$request->keyword;
         return response()->json(Product::where('product_name','like','%'.$keyword.'%')->get());
     }
+
+
+    public function listproducts($step){
+        $products=Product::where('id'>0);
+        if($step==0){
+            $products=$products->take(24);
+        }else{
+            $products=$products->skip(24*$step)->take(24);
+        }
+
+        $data=[];
+        $data['hasmore']=Product::count()>(24*($step+1));
+        $data['products']=$products->get();
+        return response()->json((object)$data);
+    }
 }
