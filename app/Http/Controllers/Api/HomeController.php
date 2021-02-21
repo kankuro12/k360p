@@ -137,6 +137,7 @@ class HomeController extends Controller
             $customlist =\App\CustomListDisplay::where('home_page_Section_id',$section->id)->first();
             $ids=CustomListDisplayItem::where('custom_list_display_id',$customlist->id)->pluck('product_id')->toArray();
             // dd($ids);
+            $section->products=[];
             if(count($ids)>0){
                 $pps=[];
                 $products=Product::wherein('product_id',$ids)->get();
