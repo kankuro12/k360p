@@ -145,8 +145,10 @@ class HomeController extends Controller
                 }
                 $section->products=$pps;
             }
+            if(count( $section->products)>0){
 
-            array_push($data,$section);
+                array_push($data,$section);
+            }
         }
 
         return response()->json($data);
