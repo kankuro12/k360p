@@ -18,6 +18,7 @@ use App\model\admin\Slider;
 use App\model\ProductAttributeItem;
 use App\model\ProductStock;
 use App\Setting\ProductManager;
+use App\Setting\VariantManager;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -93,6 +94,7 @@ class HomeController extends Controller
                 }else{
                     $stock->newprice=$stock->price;
                 }
+                $stock->variantdetail=VariantManager::getDetail($stock->code);
                 array_push($stocks,$stock);
 
             }
