@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\APIModels\ProductWrapper;
+use App\CustomListDisplayItem;
 use App\Http\Controllers\Controller;
 use App\model\admin\BoxedItemDisplay;
 use App\model\admin\BoxedItemListDisplay;
 use App\model\admin\Category;
+use App\model\admin\HomePageSection;
 use App\model\admin\Onsell;
 use App\model\admin\Product;
 use App\model\admin\Product_attribute;
@@ -14,6 +16,7 @@ use App\model\admin\Sell_product;
 use App\model\admin\Slider;
 use App\model\ProductAttributeItem;
 use App\model\ProductStock;
+use App\Setting\ProductManager;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -104,6 +107,9 @@ class HomeController extends Controller
         return response()->json($product);
     }
 
+
+    
+    
     public function search(Request $request){
         $keyword=$request->keyword;
         return response()->json(Product::where('product_name','like','%'.$keyword.'%')->get());
@@ -122,5 +128,27 @@ class HomeController extends Controller
         $data['hasmore']=Product::count()>(24*($step+1));
         $data['products']=$products->get();
         return response()->json((object)$data);
+    }
+
+    public function homePage(){
+        $sections=HomePageSection::where('type',7)->get();
+        $data=[];
+        foreach ($sections as $key => $section) {
+            $customlist =\App\CustomListDisplay::where('home_page_Section_id',$section->id)->first();
+            $ids=CustomListDisplayItem::where('custom_list_display_id',$customlist->id)->pluck('product_id')->toArray();
+            // dd($ids);
+            if(count($ids)>0){
+                $pps=[];
+                $products=Product::wherein('product_id',$ids)->get();
+                foreach ($products as $product) {
+                    array_push($pps,ProductManager::addDetail($product));
+                }
+                $section->products=$pps;
+            }
+
+            array_push($data,$section);
+        }
+
+        return response()->json($data);
     }
 }

@@ -1013,6 +1013,11 @@ Route::group(['prefix' => 'admin/element', 'middleware' => 'admin_auth'], functi
     Route::post('/blog/save/{section}', 'Elements\BrandController@blogSave')->name('elements.blog-save');
     Route::get('/blog/delete/{id}', 'Elements\BrandController@blogDelete')->name('delete.blog');
 
+    //custom section
+    
+    Route::post('/custom/search','Elements\CustomListController@searchProduct' )->name('elements.customlist-search');
+    Route::post('/custom/save/{section}','Elements\CustomListController@save' )->name('elements.customlist-save');
+    Route::get('/custom/remove/{item}','Elements\CustomListController@remove' )->name('elements.customlist-remove');
 });
 
 //admin ordermanagement

@@ -22,7 +22,9 @@ class HomePage
         'Category',
         'MultiCategory',
         'Brand',
-        'Blog'
+        'Blog',
+        'Custom'
+
     ];
     const themes = "molla";
     // const CSS=[

@@ -9,6 +9,7 @@ use App\model\admin\Category;
 use App\model\admin\Collection;
 use App\model\admin\HomePageSection;
 use App\model\admin\Onsell;
+use App\model\admin\Product;
 use App\SliderGroup;
 use Illuminate\Http\Request;
 
@@ -90,7 +91,11 @@ class ElementController extends Controller
                 $blog = Blog::all();
                 return view('admin.elements.blog')->with(compact('blog','section'));
                 break;
-                
+            case 7:
+                // $products=Product::select('product_id','product_name','product_images')->get();
+                $cats=Category::where('parent_id',0)->orWhereNull("parent_id")->get();
+                return view('admin.elements.custom', compact('section','cats'));
+                break;
             default:
                 # code...
                 break;

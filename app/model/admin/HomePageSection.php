@@ -7,6 +7,7 @@ use App\Setting\HomePage;
 use App\SliderGroup;
 use Illuminate\Database\Eloquent\Model;
 use App\BrandDisplay;
+use App\CustomListDisplay;
 
 class HomePageSection extends Model
 {
@@ -55,6 +56,12 @@ class HomePageSection extends Model
                     $boxeditemdisplay->save();
                     return $boxeditemdisplay;
                     break;
+                case 7:
+                    $customlist=new CustomListDisplay();
+                    $customlist->home_page_section_id = $this->id;
+                    $customlist->title = $this->name;
+                    $customlist->save();
+                    return $customlist;
                 default:
                     return null;
                     break;
