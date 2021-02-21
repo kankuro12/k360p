@@ -60,7 +60,7 @@ class VariantManager
         foreach ($split2 as $key => $split) {
             $data=[];
            $split3=explode(':',$split);
-           $data['oid']=(int)$split3[1];
+           $data['opid']=(int)$split3[1];
            $split4=explode("_",$split3[0]);
            $data['vid']=(int)$split4[1];
             array_push($attr,$data);
