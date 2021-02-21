@@ -51,6 +51,25 @@ class VariantManager
         return $product;
     }
 
+    public static function getIds(string $code)
+    {
+        $split1 = explode(">", $code);
+        $product_id = (int)explode("_", $split1[0])[1];
+        $var=[];
+        $split2 = explode("|", $split1[1]);
+        foreach ($split2 as $key => $split) {
+           $split3=explode(':',$split);
+           $item_id=(int)$split3[1];
+           $split4=explode("_",$split3[0]);
+           $attribute_id=(int)$split4[1];
+           $attr=Product_attribute::find($attribute_id)->toArray();
+           $attr['item']=ProductAttributeItem::find($item_id)->toArray();
+           array_push($var,$attr);
+        }
+        
+        return $var;
+    }
+
     public static function MakeCode(array $input,$pid){
         $attr=[];
         $list=$input['attributes'];

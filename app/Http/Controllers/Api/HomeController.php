@@ -94,7 +94,7 @@ class HomeController extends Controller
                 }else{
                     $stock->newprice=$stock->price;
                 }
-                $stock->variantdetail=VariantManager::getDetail($stock->code);
+                $stock->variantdetail=VariantManager::getIds($stock->code);
                 array_push($stocks,$stock);
 
             }
