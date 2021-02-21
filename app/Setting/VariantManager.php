@@ -58,12 +58,12 @@ class VariantManager
         $attr=[];
         $split2 = explode("|", $split1[1]);
         foreach ($split2 as $key => $split) {
-            $attr=[];
+            $data=[];
            $split3=explode(':',$split);
-           $attr['oid']=(int)$split3[1];
+           $data['oid']=(int)$split3[1];
            $split4=explode("_",$split3[0]);
-           $attr['vid']=(int)$split4[1];
-
+           $data['vid']=(int)$split4[1];
+            array_push($attr,$data);
         //    $attr=Product_attribute::find($attribute_id)->toArray();
         //    $attr['item']=ProductAttributeItem::find($item_id)->toArray();
             
