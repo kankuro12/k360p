@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\model\admin\BoxedItemDisplay;
 use App\model\admin\BoxedItemListDisplay;
 use App\model\admin\Category;
+use App\model\admin\Collection;
 use App\model\admin\HomePageSection;
 use App\model\admin\Onsell;
 use App\model\admin\Product;
@@ -80,7 +81,7 @@ class HomeController extends Controller
         if($product->stocktype==1){
             $variants=[];
             foreach (Product_attribute::where('product_id',$product->product_id)->get() as $key => $variant) {
-                $variant->options=ProductAttributeItem::where('product_attribute_id',$variant->id);
+                $variant->options=ProductAttributeItem::where('product_attribute_id',$variant->id)->get();
                 array_push($variants,$variant);
             }
             $product->variants=$variants;
@@ -153,5 +154,9 @@ class HomeController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    public function collection(){
+        return response()->json(Collection::all());
     }
 }

@@ -28,12 +28,16 @@ Route::get('test', function () {
 
         Route::get('homepage','Api\HomeController@homePage')->name('homePage');
         Route::get('sliders','Api\HomeController@sliders')->name('sliders');
+
+        Route::get('collections','Api\HomeController@collection')->name('collection');
+
         Route::get('categories','Api\HomeController@categories')->name('cat');
         Route::get('category/{id}','Api\HomeController@category')->name('cate');
         Route::get('products','Api\HomeController@products')->name('products');
         Route::get('listproducts/{step}','Api\HomeController@listproducts')->name('listproducts');
         Route::get('allproducts','Api\HomeController@allproducts')->name('allproducts');
         Route::get('product/{id}','Api\HomeController@product')->name('product');
+        // Route::get('product/{id}','Api\HomeController@product')->name('product');
 
         Route::match(['POST','GET'],'search','Api\HomeController@search')->name('search');
 
