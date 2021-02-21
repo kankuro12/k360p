@@ -19,8 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //testkits
-Route::post('test', function (Request $request) {
-   echo Str::uuid();
+Route::get('test', function () {
+   echo bcrypt("admin");
 });
 
     Route::name('api.')->group(function(){
@@ -33,11 +33,24 @@ Route::post('test', function (Request $request) {
         Route::get('product/{id}','Api\HomeController@product')->name('product');
 
         Route::match(['POST','GET'],'search','Api\HomeController@search')->name('search');
-        Route::middleware(['auth:api'])->group(function () {
-               Route::get('users/{id}', function ($id) {
-                   echo $id;
-               }); 
+
+        route::prefix('booking')->group(function(){
+            Route::middleware(['auth:api'])->group(function () {     
+                Route::post('checkout',"Api\OrderController@checkout");
+                Route::get('orders', "Api\OrderController@orders"); 
+                Route::get('order/{id}', "Api\OrderController@order");
+         });
         });
+        route::prefix('auth')->group(function(){
+            route::post('loginbyemail',"Api\AuthController@emaillogin");
+            route::post('loginbyphone',"Api\AuthController@phonelogin");
+            route::post('signup',"Api\AuthController@signup");
+            Route::middleware(['auth:api'])->group(function () {
+                Route::get('user',"Api\AuthController@user"); 
+                route::post('changepass',"Api\AuthController@changepass");
+         });
+        });
+        
     });
 
 
