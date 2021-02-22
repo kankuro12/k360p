@@ -167,7 +167,7 @@ class HomeController extends Controller
 
     public function collection($id){
         $collection=Collection::find($id);
-        $ids=Collection_product::where('collection_id',$collection->id)->pluck('product_id');
+        $ids=Collection_product::where('collection_id',$id)->pluck('product_id');
 
         $data=[];
         $products=Product::whereIn('product_id',$ids)->get();;
