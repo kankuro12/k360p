@@ -24,6 +24,7 @@ Route::get('test', function () {
 });
 
     Route::name('api.')->group(function(){
+        
         Route::post('/custom/search','Elements\CustomListController@searchProduct' )->name('elements.customlist-save');
 
         Route::get('homepage','Api\HomeController@homePage')->name('homePage');
