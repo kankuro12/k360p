@@ -9,6 +9,7 @@ use App\model\admin\BoxedItemDisplay;
 use App\model\admin\BoxedItemListDisplay;
 use App\model\admin\Category;
 use App\model\admin\Collection;
+use App\model\admin\Collection_product;
 use App\model\admin\HomePageSection;
 use App\model\admin\Onsell;
 use App\model\admin\Product;
@@ -17,6 +18,7 @@ use App\model\admin\Sell_product;
 use App\model\admin\Slider;
 use App\model\ProductAttributeItem;
 use App\model\ProductStock;
+use App\model\Review;
 use App\Setting\ProductManager;
 use App\Setting\VariantManager;
 use Carbon\Carbon;
@@ -71,6 +73,7 @@ class HomeController extends Controller
         $product->images=$product->images;
         $onsale=$product->onsale();
         $product->onsale=$onsale;
+        $product->ratings=Review::where('prod_id',$id)->get();
         $selper=0;
         if($onsale){
             $dt = Carbon::now();
@@ -158,7 +161,24 @@ class HomeController extends Controller
         return response()->json($data);
     }
 
-    public function collection(){
+    public function collections(){
         return response()->json(Collection::all());
     }
+
+    public function collection($id){
+        $collection=Collection::find($id);
+        $ids=Collection_product::where('collection_id',$collection->id)->pluck('product_id');
+
+        $data=[];
+        $products=Product::whereIn('product_id',$ids)->get();;
+        foreach ($products as $product) {
+            array_push($data,ProductManager::addDetail($product));
+        }
+        $collection->products=$data;
+        return response()->json($collection);
+    }
+
+    
+
+
 }

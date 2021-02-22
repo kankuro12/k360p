@@ -29,7 +29,8 @@ Route::get('test', function () {
         Route::get('homepage','Api\HomeController@homePage')->name('homePage');
         Route::get('sliders','Api\HomeController@sliders')->name('sliders');
 
-        Route::get('collections','Api\HomeController@collection')->name('collection');
+        Route::get('collections','Api\HomeController@collections')->name('collections');
+        Route::get('collection\{id}','Api\HomeController@collection')->name('collection');
 
         Route::get('categories','Api\HomeController@categories')->name('cat');
         Route::get('category/{id}','Api\HomeController@category')->name('cate');
