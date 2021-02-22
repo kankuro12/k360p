@@ -129,10 +129,14 @@ class HomeController extends Controller
         }else{
             $products=$products->skip(24*$step)->take(24);
         }
-
+        $pp=$products->get();
+        $p=[];
+        foreach ($pp as $key => $value) {
+            array_push($p,ProductManager::addDetail($value));
+        }
         $data=[];
         $data['hasmore']=Product::count()>(24*($step+1));
-        $data['products']=$products->get();
+        $data['products']=$p;
         return response()->json((object)$data);
     }
 
