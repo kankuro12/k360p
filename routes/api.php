@@ -30,7 +30,7 @@ Route::get('test', function () {
         Route::get('sliders','Api\HomeController@sliders')->name('sliders');
 
         Route::get('collections','Api\HomeController@collections')->name('collections');
-        Route::get('collection\{id}','Api\HomeController@collection')->name('collection');
+        Route::get('collection/{id}','Api\HomeController@collection')->name('collection');
 
         Route::get('categories','Api\HomeController@categories')->name('cat');
         Route::get('category/{id}','Api\HomeController@category')->name('cate');
