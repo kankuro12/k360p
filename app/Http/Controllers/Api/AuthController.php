@@ -59,7 +59,7 @@ class AuthController extends Controller
         }
         $email=$request->email;
         if($request->filled('email')){
-            $user=User::where($request->email)->first();
+            $user=User::where("email",$request->email)->first();
             if($user!=null){
                 return response()->json(['status'=>false,"message"=>"The Email is Already Used"]);
             }
