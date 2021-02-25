@@ -55,13 +55,13 @@ class AuthController extends Controller
 
         $buyer=VendorUser::where('mobile_number',$request->phone)->first();
         if($buyer!=null){
-            return response()->json(['status'=>false,"message"=>"The Phone no is Already Used"],500);
+            return response()->json(['status'=>false,"message"=>"The Phone no is Already Used"]);
         }
         $email=$request->email;
         if($request->filled('email')){
             $user=User::where("email",$request->email)->first();
             if($user!=null){
-                return response()->json(['status'=>false,"message"=>"The Email is Already Used"],500);
+                return response()->json(['status'=>false,"message"=>"The Email is Already Used"]);
             }
         }else{
             $email=$request->phone."@some.com";
