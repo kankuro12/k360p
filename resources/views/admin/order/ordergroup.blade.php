@@ -16,12 +16,14 @@
             {{$shipping->created_at->diffForHumans()}}
         </strong>
     </td>
+    <td>
     @if ($shipping->shipping_area_id!=null)
         
-    <td>
         {{$shipping->area->name}},<br>  {{$shipping->municipality->name}},<br> {{$shipping->district->name}}, {{$shipping->province->name}}
+        @endif
+        <br>
+        {{$shipping->streetaddress}}
     </td>
-    @endif
     <td>
         {{$shipping->email}}
     </td>
