@@ -98,9 +98,14 @@
                 <p>
                     <strong>Name: </strong>{{ $shipping->name }}
                 </p>
+                
                 <p>
-                    <strong>Address: </strong>{{ $shipping->area->name }}, {{ $shipping->municipality->name }},
+                    <strong>Address: </strong>{{$shipping->streetaddress}}
+                    @if ( $shipping->shipping_area_id!=null)
+                        
+                    {{ $shipping->area->name }}, {{ $shipping->municipality->name }},
                     {{ $shipping->district->name }}, {{ $shipping->province->name }}
+                    @endif
                 </p>
                 <p>
                     <strong>Email: </strong>{{ $shipping->email }}
