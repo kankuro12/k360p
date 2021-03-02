@@ -17,7 +17,12 @@
         </strong>
     </td>
     <td>
+    @if ($shipping->shipping_area_id!=null)
+        
         {{$shipping->area->name}},<br>  {{$shipping->municipality->name}},<br> {{$shipping->district->name}}, {{$shipping->province->name}}
+        @endif
+        <br>
+        {{$shipping->streetaddress}}
     </td>
     <td>
         {{$shipping->email}}

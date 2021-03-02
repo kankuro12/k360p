@@ -52,6 +52,7 @@ class OrderController extends Controller
 
             if($status==1){
                 $vids=[];
+                
                 ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
                 foreach (OrderItem::whereIn('id',$request->id)->get() as  $order) {
                     // $order->pickedup=1;

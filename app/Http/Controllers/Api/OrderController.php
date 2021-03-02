@@ -80,9 +80,14 @@ class OrderController extends Controller
         $orders=ShippingDetail::where('user_id',$user->id)->get();
         $data=[];
         foreach ($orders as $key => $value) {
-            $value->items=OrderItem::where('shipping_detail_id',$value->id)->get();
-            if(count($value->items)>0){
-
+            $items=OrderItem::where('shipping_detail_id',$value->id)->get();
+            $d=[];
+            foreach ($items as $key => $orderitem) {
+                $orderitem->product= Product::where('product_id',$orderitem->product_id)->first();
+                array_push($d,$orderitem);
+            }
+            if(count($items)>0){
+                $value->items=$d;
                 array_push($data,$value);
             }
 
