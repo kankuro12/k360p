@@ -110,6 +110,7 @@ class HomeController extends Controller
                 $product->newprice=$product->mark_price;
             }
         }
+        $product->recom=Product::where('category_id',$product->category_id)->where('product_id','<>',$product->product_id)->get();
         return response()->json($product);
     }
 
