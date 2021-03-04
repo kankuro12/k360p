@@ -183,6 +183,15 @@ class HomeController extends Controller
         return response()->json($collection);
     }
 
+    public function categoryWiseProduct($id){
+        $category=Category::where('cat_id',$id)->first();
+        $ids=$category->childList();
+        $products = Product::whereIn('category_id',$ids)->get();
+        return response()->json($products);
+    }
+
+   
+
     
 
 

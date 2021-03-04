@@ -34,6 +34,8 @@ Route::get('test', function () {
         Route::get('collection/{id}','Api\HomeController@collection')->name('collection');
 
         Route::get('categories','Api\HomeController@categories')->name('cat');
+        Route::get('category/{id}','Api\HomeController@categoryWiseProduct');
+
         Route::get('category/{id}','Api\HomeController@category')->name('cate');
         Route::get('products','Api\HomeController@products')->name('products');
         Route::get('listproducts/{step}','Api\HomeController@listproducts')->name('listproducts');
@@ -47,6 +49,7 @@ Route::get('test', function () {
             Route::middleware(['auth:api'])->group(function () {     
                 Route::post('checkout',"Api\OrderController@checkout");
                 Route::get('orders', "Api\OrderController@orders"); 
+                Route::get('orders/{type}', "Api\OrderController@ordersType"); 
                 Route::get('order/{id}', "Api\OrderController@order");
          });
         });
