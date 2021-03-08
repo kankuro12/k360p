@@ -57,7 +57,12 @@ Route::get('test', function () {
             route::post('loginbyemail',"Api\AuthController@emaillogin");
             route::post('loginbyphone',"Api\AuthController@phonelogin");
             route::post('signup',"Api\AuthController@signup");
-            route::post('forgotpassword',"Api\AuthController@forgot");
+            route::post('forgotpasswordPhone',"Api\AuthController@forgotPhone");
+            route::post('resetpasswordPhone',"Api\AuthController@resetPhone");
+
+            route::post('forgotpasswordEmail',"Api\AuthController@forgotEmail");
+            route::post('resetpasswordEmail',"Api\AuthController@resetEmail");
+            
             Route::middleware(['auth:api'])->group(function () {
                 Route::get('user',"Api\AuthController@user"); 
                 route::post('changepass',"Api\AuthController@changepass");

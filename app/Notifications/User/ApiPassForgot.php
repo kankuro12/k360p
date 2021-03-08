@@ -16,9 +16,19 @@ class ApiPassForgot extends Notification
      *
      * @return void
      */
-    public function __construct()
+    protected  $phone;
+    protected  $code;
+    public function __construct($_phone,$_code)
     {
+        $this->phone=$_phone;
+        $this->code=$_code;
+        return [Aakash::class];
+
+    }
+
+    public function toAakash($notifiable){
     
+        return ['to'=>$this->phone,"text"=>$this->code."\n is Your Password reset Code.\n-".env('APP_NAME','laravel')];
     }
 
     /**
@@ -52,10 +62,5 @@ class ApiPassForgot extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
+   
 }

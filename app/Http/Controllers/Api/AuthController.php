@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Channels\Aakash;
 use App\Http\Controllers\Controller;
 use App\model\VendorUser\VendorUser;
+use App\Notifications\User\ApiPassForgot;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,16 +97,82 @@ class AuthController extends Controller
         }
     }
 
-    public function forgot(Request $request){
+    public function forgotPhone(Request $request){
         $buyer=VendorUser::where('mobile_number',$request->phone)->first();
         if($buyer==null){
             return response('Mobile No Not Found',401);
         }
         $user=User::find($buyer->user_id);
-        $user->activation_token=mt_rand(0000,9999);
+        $reset=$user->id. mt_rand(0000,9999);
+        $user->activation_token=$reset;
         $user->save();
+
+        $data=  ['to'=>$request->phone,"text"=>$reset."\n is Your Password reset Code. Do Not Share it With Unknown Person.\n-".env('APP_NAME','laravel')];
+        Aakash::sendMessage($data);
+
+        // $user->notify(new ApiPassForgot($reset,$request->phone));
+
         return response('ok');
     }
+
+    public function resetPhone(Request $request){
+        $buyer=VendorUser::where('mobile_number',$request->phone)->first();
+        if($buyer==null){
+            return response('Mobile No Not Found',401);
+        }
+        $user=User::find($buyer->user_id);
+        if($user->activation_token!=$request->token){
+            return response('Token Missmatch',401);
+        }else{
+            $user->password=bcrypt($request->password);
+            $user->activation_token="";
+            $user->save();
+        }
+
+        // $user->notify(new ApiPassForgot($reset,$request->phone));
+
+        return response('ok');
+    }
+
+    public function forgotEmail(Request $request){
+       
+
+        $user=User::where('email',$request->email)->first();
+        if($user==null){
+            return response('User with email: '.$request->email.' Not Found',401);
+
+        }
+        $reset=$user->id. mt_rand(0000,9999);
+        $user->activation_token=$reset;
+        $user->save();
+
+        $data=  ['to'=>$request->phone,"text"=>$reset."\n is Your Password reset Code. Do Not Share it With Unknown Person.\n-".env('APP_NAME','laravel')];
+        Aakash::sendMessage($data);
+
+        // $user->notify(new ApiPassForgot($reset,$request->phone));
+
+        return response('ok');
+    }
+
+    public function resetEmail(Request $request){
+        $user=User::where('email',$request->email)->first();
+        if($user==null){
+            return response('User with email: '.$request->email.' Not Found',401);
+
+        }
+        if($user->activation_token!=$request->token){
+            return response('Token Missmatch',401);
+        }else{
+            $user->password=bcrypt($request->password);
+            $user->activation_token="";
+            $user->save();
+        }
+
+        // $user->notify(new ApiPassForgot($reset,$request->phone));
+
+        return response('ok');
+    }
+
 
     
 }

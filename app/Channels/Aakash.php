@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class Aakash
 {
     const url="https://aakashsms.com/admin/public/sms/v3/send";
-    const token="0a8ae61597039acd1adf28e77173614e4ed88e9458a8a48151af51711af176af3";
+    const token="e3d8dccc23900f6d19cd76bcd4f7b5157de6e7312335d2da81c258037bbef9b4";
     /**
      * Send the given notification.
      *
@@ -21,11 +21,17 @@ class Aakash
         // try {
             //code...
             $data = $notification->toAakash($notifiable);
-            $data['auth_token']=self::token;
+            $data['auth_token']=env('aakashsms',"");
             $response = Http::post(self::url,$data);
         // } catch (\Throwable $th) {
         //     //throw $th;
         // }
         // Send notification to the $notifiable instance...
+    }
+
+    public static function sendMessage($data){
+        $data['auth_token']=env('aakashsms',"");
+        $response = Http::post(self::url,$data);
+        return $response;
     }
 }
