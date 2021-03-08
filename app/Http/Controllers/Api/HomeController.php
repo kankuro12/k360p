@@ -110,6 +110,7 @@ class HomeController extends Controller
                 $product->newprice=$product->mark_price;
             }
         }
+        $product->recom=Product::where('category_id',$product->category_id)->where('product_id','<>',$product->product_id)->get();
         return response()->json($product);
     }
 
@@ -181,6 +182,15 @@ class HomeController extends Controller
         $collection->products=$data;
         return response()->json($collection);
     }
+
+    public function categoryWiseProduct($id){
+        $category=Category::where('cat_id',$id)->first();
+        $ids=$category->childList();
+        $products = Product::whereIn('category_id',$ids)->get();
+        return response()->json($products);
+    }
+
+   
 
     
 

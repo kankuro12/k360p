@@ -95,6 +95,26 @@ class OrderController extends Controller
         return response()->json($data);
     }
 
+    public function ordersType($type){
+        $user=Auth::user();
+        $orders=ShippingDetail::where('user_id',$user->id)->get();
+        $data=[];
+        foreach ($orders as $key => $value) {
+            $items=OrderItem::where('shipping_detail_id',$value->id)->where('stage',$type)->get();
+            $d=[];
+            foreach ($items as $key => $orderitem) {
+                $orderitem->product= Product::where('product_id',$orderitem->product_id)->first();
+                array_push($d,$orderitem);
+            }
+            if(count($items)>0){
+                $value->items=$d;
+                array_push($data,$value);
+            }
+
+        }
+        return response()->json($data);
+    }
+
     public function order($id){
         $user=Auth::user();
         $order=ShippingDetail::where('user_id',$user->id)->where('id',$id)->first();
