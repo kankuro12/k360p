@@ -95,5 +95,16 @@ class AuthController extends Controller
         }
     }
 
+    public function forgot(Request $request){
+        $buyer=VendorUser::where('mobile_number',$request->phone)->first();
+        if($buyer==null){
+            return response('Mobile No Not Found',401);
+        }
+        $user=User::find($buyer->user_id);
+        $user->activation_token=mt_rand(0000,9999);
+        $user->save();
+        return response('ok');
+    }
+
     
 }

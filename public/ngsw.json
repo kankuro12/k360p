@@ -1,0 +1,105 @@
+{
+  "configVersion": 1,
+  "timestamp": 1614670589961,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.496f7558cfd23bfde61b.js",
+        "/manifest.webmanifest",
+        "/polyfills.9bbe631df435a5a33b36.js",
+        "/runtime.7b63b9fd40098a2e8207.js",
+        "/styles.7c5aa4b28646eaf4a32c.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/core-style.css",
+        "/assets/gift-box.svg",
+        "/assets/giftbox.svg",
+        "/assets/home.svg",
+        "/assets/home1.svg",
+        "/assets/icons/Luga_Sansar.png",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/m.jpg",
+        "/assets/menu1.svg",
+        "/assets/nodata.png",
+        "/assets/shop.svg",
+        "/assets/shopping-cart.svg",
+        "/assets/user.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/core-style.css": "b7e83ac8946570455431809560dc0166b724218e",
+    "/assets/gift-box.svg": "9b77f52058f4d59116ed1bb872760d09cf90fdda",
+    "/assets/giftbox.svg": "c6416a82c725444f9973517b6a8ef1374888c6ff",
+    "/assets/home.svg": "a03ec6111d12372f018652c6c2a872c1ed2ec5ce",
+    "/assets/home1.svg": "a3993ddd22cc5faf07a4648c32ab49cab29d322a",
+    "/assets/icons/Luga_Sansar.png": "5420021a99db1661582f21031d940d11b1907b74",
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/m.jpg": "f41f90dc982105e4073704d777d095074ef93635",
+    "/assets/menu1.svg": "a6be280bbc68bb4041622c2a70a539789846e860",
+    "/assets/nodata.png": "1b6d87d5996da6f19c75513249f73f4010eaed3b",
+    "/assets/shop.svg": "16047a2c453eff26bdec7cacad5f7f3d1879f399",
+    "/assets/shopping-cart.svg": "a831476324e92ad8a632683896b103735f41aa33",
+    "/assets/user.svg": "7650397666cebfb3e391295e8c46d1687bf44733",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "1e1736f96f715f4b60bead11378b7fea4318525b",
+    "/main.496f7558cfd23bfde61b.js": "aa1dc5dd4782fe154f37d50fee29b021abf4373c",
+    "/manifest.webmanifest": "59b931025909c1caae0bceb7fdeaac26039fb96f",
+    "/polyfills.9bbe631df435a5a33b36.js": "346bc0bcb0b8d7d0b59dc219ffd3072bb0274f4c",
+    "/runtime.7b63b9fd40098a2e8207.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/styles.7c5aa4b28646eaf4a32c.css": "c48b081b9a8c56d74ee013d5a694b18bb6849251"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

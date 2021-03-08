@@ -54,176 +54,292 @@ Route::get('testo', function () {
     // dd($orders,$date);
 });
 
+if(env('useangular',0)==0){
 
-Route::get('grid/{id}', function ($id) {
-    session(['isgrid' => $id]);
-    // dd(session('isgrid'));
-    return redirect()->back();
-})->name('grid');
+    Route::get('grid/{id}', function ($id) {
+        session(['isgrid' => $id]);
+        // dd(session('isgrid'));
+        return redirect()->back();
+    })->name('grid');
+    
+    Route::get('/', [
+        'uses' => 'HomeController@home',
+        'as' => 'public.home'
+    ]);
+    
+    Route::post('/get-products', [
+        'uses' => 'HomeController@getProducts',
+        'as' => 'public.getProducts'
+    ]);
+    
+    
+    Route::get('/search', [
+        'uses' => 'HomeController@search',
+        'as' => 'public.search'
+    ]);
+    
+    Route::get('/home1', [
+        'uses' => 'HomeController@home1',
+        'as' => 'public.home1'
+    ]);
+    
+    Route::get('/home', function(){
+        return redirect()->route('public.home');
+    });
+    
+    Route::get('/about', [
+        'uses' => 'HomeController@about',
+        'as' => 'public.about'
+    ]);
+    
+    Route::get('/ctnc', [
+        'uses' => 'HomeController@ctnc',
+        'as' => 'public.ctnc'
+    ]);
+    
+    Route::get('/vtnc', [
+        'uses' => 'HomeController@ctnc',
+        'as' => 'public.ctnc'
+    ]);
+    
+    Route::get('/pp', [
+        'uses' => 'HomeController@pp',
+        'as' => 'public.pp'
+    ]);
+    
+    Route::get('/contact', [
+        'uses' => 'HomeController@contact',
+        'as' => 'public.contact'
+    ]);
+    Route::get('/shops', [
+        'uses' => 'HomeController@shops',
+        'as' => 'shops'
+    ]);
+    
+    Route::get('/shop-by-category/{id}', [
+        'uses' => 'HomeController@category',
+        'as' => 'shop-by-category'
+    ]);
+    
+    Route::get('/shop-by-brand/{id}', [
+        'uses' => 'HomeController@brand',
+        'as' => 'shop-by-brand'
+    ]);
+    
+    
+    
+    
+    Route::get('/latest/', [
+        'uses' => 'HomeController@latest',
+        'as' => 'latest'
+    ]);
+    
+    
+    Route::get('/product/{id}', [
+        'uses' => 'HomeController@productDetail',
+        'as' => 'product.detail'
+    ]);
+    
+    Route::post('product/stock/get/', [
+        'uses' => 'HomeController@getStock',
+        'as' => 'product.stock'
+    ]);
+    
+    Route::get('blogs', [
+        'uses' => 'HomeController@blogList',
+        'as' => 'public.blog'
+    ]);
+    
+    Route::get('blog/{id}', [
+        'uses' => 'HomeController@blogDetail',
+        'as' => 'public.blog.detail'
+    ]);
+    
+    Route::get('categories', [
+        'uses' => 'HomeController@categories',
+        'as' => 'public.categories'
+    ]);
+    
+    Route::post('mob-categories', [
+        'uses' => 'HomeController@mobCategories',
+        'as' => 'public.mob-categories'
+    ]);
+    
+    Route::match(['get', 'post'], '/cart', [
+        'as' => 'public.cart',
+        'uses' => 'user\CartController@addProduct'
+    ]);
+    Route::match(['get', 'post'], '/getcart', [
+        'as' => 'public.getcart',
+        'uses' => 'user\CartController@getProduct'
+    ]);
+    Route::match(['get', 'post'], '/viewcart', [
+        'as' => 'public.viewcart',
+        'uses' => 'user\CartController@viewCart'
+    ]);
+    Route::get('shipping/charge/{p_id}/{d_id}/{m_id}/{shipping_area_id}', 'user\CheckoutController@getShippingCharge');
+    Route::get('remove/feature/item/{id}', 'user\CartController@cartFeatureItemRemove');
+    Route::get('cart/update-qty/{id}/{qty}', 'user\CartController@updateQtyOfCartItem');
+    Route::get('remove/cart/item/{id}', 'user\CartController@cartItemRemove');
+    
+    // Route::match(['get', 'post'], '/checkout', [
+    //     'as' => 'public.checkout',
+    //     'uses' => 'user\CartController@checkout'
+    // ]);
+    
+    Route::match(['get', 'post'], '/checkout', [
+        'as' => 'public.checkout',
+        'uses' => 'user\CheckoutController@checkout'
+    ]);
+    
+    Route::match(['get', 'post'], '/checkout-as-a-guest', [
+        'as' => 'guest.checkout',
+        'uses' => 'user\CartController@guestCheckout'
+    ]);
+    
+    Route::match(['get', 'post'], '/apply-coupon', [
+        'as' => 'apply.coupon',
+        'uses' => 'user\CartController@applyCoupon'
+    ]);
+    
+    //collections
+    
+    Route::match(['get', 'post'], '/collection-product', [
+        'as' => 'public.collection',
+        'uses' => 'CommonController@collectionProduct'
+    ]);
+    
+    Route::match(['get', 'post'], '/collection-product/{id}', [
+        'as' => 'collection.detail',
+        'uses' => 'CommonController@collectionProductDetail'
+    ]);
+    
+    Route::match(['get', 'post'], '/sale-product', [
+        'as' => 'public.sale',
+        'uses' => 'CommonController@saleProduct'
+    ]);
+    
+    Route::match(['get', 'post'], '/sale-product/{id}', [
+        'as' => 'public.sale.detail',
+        'uses' => 'CommonController@saleProductDetail'
+    ]);
 
-Route::get('/', [
-    'uses' => 'HomeController@home',
-    'as' => 'public.home'
-]);
+    Route::group(['prefix' => 'user', 'middleware' => 'guest'], function () {
+        Route::get('register', [
+            'uses' => 'user\Auth\RegisterController@getRegister',
+            'as' => 'user.getRegister'
+        ]);
+        Route::post('register', [
+            'uses' => 'user\Auth\RegisterController@postRegister',
+            'as' => 'user.postRegister'
+        ]);
+        Route::get('auth/register/activate/{token}', [
+            'uses' => 'user\Auth\LoginController@signupActivate',
+            'as' => 'user.signupActivate'
+        ]);
+        Route::get('login', [
+            'uses' => 'user\Auth\RegisterController@getRegister',
+            'as' => 'user.getLogin'
+        ]);
+        Route::post('login', [
+            'uses' => 'user\Auth\LoginController@postLogin',
+            'as' => 'user.postLogin'
+        ]);
+        Route::get('auth/resend-verification', [
+            'as' => 'user.resend_verification',
+            'uses' => 'user\Auth\RegisterController@resend'
+        ]);
+    });
+    
+    Route::group(['prefix' => 'user', 'middleware' => ['authen', 'type'], 'type' => ['user']], function () {
+        Route::get('logout', [
+            'uses' => 'user\Auth\LoginController@getLogout',
+            'as' => 'user.getLogout'
+        ]);
+    
+        Route::get('dashboard', [
+            'uses' => 'user\DashboardController@dashboard',
+            'as' => 'user.account'
+        ]);
+    
+        Route::match(['get', 'post'], 'account-detail', [
+            'uses' => 'user\DashboardController@accountDetail',
+            'as' => 'account.detail'
+        ]);
+    
+    
+        Route::get('profile', [
+            'uses' => 'user\DashboardController@index',
+            'as' => 'user.profile'
+        ]);
+    
+        Route::get('account', [
+            'uses' => 'user\DashboardController@iframProfile',
+            'as' => 'user.account.profile'
+        ]);
+    
+        Route::match(['get', 'post'], 'order', [
+            'uses' => 'user\DashboardController@recentOrder',
+            'as' => 'user.order'
+        ]);
+    
+        Route::match(['get', 'post'], 'order/item/{id}', [
+            'uses' => 'user\DashboardController@orderItem',
+            'as' => 'user.order.item'
+        ]);
+    
+        Route::match(['get', 'post'], 'full/order/{shipping_detail_id}', [
+            'uses' => 'user\DashboardController@fullOrderDetail',
+            'as' => 'user.full.order'
+        ]);
+    
+    
+        Route::match(['get', 'post'], 'cancelled-order', [
+            'uses' => 'user\DashboardController@cancelOrder',
+            'as' => 'user.cancelled-order'
+        ]);
+        Route::post('review', [
+            'uses' => 'ReviewController@addReview',
+            'as' => 'user.review'
+        ]);
+        Route::post('profile/update', [
+            'uses' => 'user\DashboardController@updateProfile',
+            'as' => 'user.update_profile'
+        ]);
+    
+        Route::match(['get', 'post'], '/checkout', [
+            'uses' => 'user\CheckoutController@index',
+            'as' => 'user.checkout'
+        ]);
+    
+        Route::match(['get', 'post'], '/postcheckout', [
+            'uses' => 'user\CheckoutController@postCheckout',
+            'as' => 'user.postcheckout'
+        ]);
+    
+        Route::match(['get', 'post'], '/wishlist', [
+            'uses' => 'user\DashboardController@wishlist',
+            'as' => 'user.wishlist.page'
+        ]);
+    
+        Route::match(['get', 'post'], '/wishlist/{product_id}', [
+            'uses' => 'user\DashboardController@wishlistProduct',
+            'as' => 'user.wishlist'
+        ]);
+    
+        Route::match(['get', 'post'], '/wishlist/remove/{id}', [
+            'uses' => 'user\DashboardController@wishlistProductRemove',
+            'as' => 'user.wishlist.remove'
+        ]);
+    
+        Route::match(['get', 'post'], '/ratings', [
+            'uses' => 'user\DashboardController@userRatings',
+            'as' => 'user.ratings'
+        ]);
+    });
+}
 
-Route::post('/get-products', [
-    'uses' => 'HomeController@getProducts',
-    'as' => 'public.getProducts'
-]);
 
-
-Route::get('/search', [
-    'uses' => 'HomeController@search',
-    'as' => 'public.search'
-]);
-
-Route::get('/home1', [
-    'uses' => 'HomeController@home1',
-    'as' => 'public.home1'
-]);
-
-Route::get('/home', function(){
-    return redirect()->route('public.home');
-});
-
-Route::get('/about', [
-    'uses' => 'HomeController@about',
-    'as' => 'public.about'
-]);
-
-Route::get('/ctnc', [
-    'uses' => 'HomeController@ctnc',
-    'as' => 'public.ctnc'
-]);
-
-Route::get('/vtnc', [
-    'uses' => 'HomeController@ctnc',
-    'as' => 'public.ctnc'
-]);
-
-Route::get('/pp', [
-    'uses' => 'HomeController@pp',
-    'as' => 'public.pp'
-]);
-
-Route::get('/contact', [
-    'uses' => 'HomeController@contact',
-    'as' => 'public.contact'
-]);
-Route::get('/shops', [
-    'uses' => 'HomeController@shops',
-    'as' => 'shops'
-]);
-
-Route::get('/shop-by-category/{id}', [
-    'uses' => 'HomeController@category',
-    'as' => 'shop-by-category'
-]);
-
-Route::get('/shop-by-brand/{id}', [
-    'uses' => 'HomeController@brand',
-    'as' => 'shop-by-brand'
-]);
-
-
-
-
-Route::get('/latest/', [
-    'uses' => 'HomeController@latest',
-    'as' => 'latest'
-]);
-
-
-Route::get('/product/{id}', [
-    'uses' => 'HomeController@productDetail',
-    'as' => 'product.detail'
-]);
-
-Route::post('product/stock/get/', [
-    'uses' => 'HomeController@getStock',
-    'as' => 'product.stock'
-]);
-
-Route::get('blogs', [
-    'uses' => 'HomeController@blogList',
-    'as' => 'public.blog'
-]);
-
-Route::get('blog/{id}', [
-    'uses' => 'HomeController@blogDetail',
-    'as' => 'public.blog.detail'
-]);
-
-Route::get('categories', [
-    'uses' => 'HomeController@categories',
-    'as' => 'public.categories'
-]);
-
-Route::post('mob-categories', [
-    'uses' => 'HomeController@mobCategories',
-    'as' => 'public.mob-categories'
-]);
-
-Route::match(['get', 'post'], '/cart', [
-    'as' => 'public.cart',
-    'uses' => 'user\CartController@addProduct'
-]);
-Route::match(['get', 'post'], '/getcart', [
-    'as' => 'public.getcart',
-    'uses' => 'user\CartController@getProduct'
-]);
-Route::match(['get', 'post'], '/viewcart', [
-    'as' => 'public.viewcart',
-    'uses' => 'user\CartController@viewCart'
-]);
-
-
-Route::get('shipping/charge/{p_id}/{d_id}/{m_id}/{shipping_area_id}', 'user\CheckoutController@getShippingCharge');
-Route::get('remove/feature/item/{id}', 'user\CartController@cartFeatureItemRemove');
-Route::get('cart/update-qty/{id}/{qty}', 'user\CartController@updateQtyOfCartItem');
-Route::get('remove/cart/item/{id}', 'user\CartController@cartItemRemove');
-
-// Route::match(['get', 'post'], '/checkout', [
-//     'as' => 'public.checkout',
-//     'uses' => 'user\CartController@checkout'
-// ]);
-
-Route::match(['get', 'post'], '/checkout', [
-    'as' => 'public.checkout',
-    'uses' => 'user\CheckoutController@checkout'
-]);
-
-Route::match(['get', 'post'], '/checkout-as-a-guest', [
-    'as' => 'guest.checkout',
-    'uses' => 'user\CartController@guestCheckout'
-]);
-
-Route::match(['get', 'post'], '/apply-coupon', [
-    'as' => 'apply.coupon',
-    'uses' => 'user\CartController@applyCoupon'
-]);
-
-//collections
-
-Route::match(['get', 'post'], '/collection-product', [
-    'as' => 'public.collection',
-    'uses' => 'CommonController@collectionProduct'
-]);
-
-Route::match(['get', 'post'], '/collection-product/{id}', [
-    'as' => 'collection.detail',
-    'uses' => 'CommonController@collectionProductDetail'
-]);
-
-Route::match(['get', 'post'], '/sale-product', [
-    'as' => 'public.sale',
-    'uses' => 'CommonController@saleProduct'
-]);
-
-Route::match(['get', 'post'], '/sale-product/{id}', [
-    'as' => 'public.sale.detail',
-    'uses' => 'CommonController@saleProductDetail'
-]);
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
@@ -692,119 +808,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
 // });
 
 
-Route::group(['prefix' => 'user', 'middleware' => 'guest'], function () {
-    Route::get('register', [
-        'uses' => 'user\Auth\RegisterController@getRegister',
-        'as' => 'user.getRegister'
-    ]);
-    Route::post('register', [
-        'uses' => 'user\Auth\RegisterController@postRegister',
-        'as' => 'user.postRegister'
-    ]);
-    Route::get('auth/register/activate/{token}', [
-        'uses' => 'user\Auth\LoginController@signupActivate',
-        'as' => 'user.signupActivate'
-    ]);
-    Route::get('login', [
-        'uses' => 'user\Auth\RegisterController@getRegister',
-        'as' => 'user.getLogin'
-    ]);
-    Route::post('login', [
-        'uses' => 'user\Auth\LoginController@postLogin',
-        'as' => 'user.postLogin'
-    ]);
-    Route::get('auth/resend-verification', [
-        'as' => 'user.resend_verification',
-        'uses' => 'user\Auth\RegisterController@resend'
-    ]);
-});
 
-Route::group(['prefix' => 'user', 'middleware' => ['authen', 'type'], 'type' => ['user']], function () {
-    Route::get('logout', [
-        'uses' => 'user\Auth\LoginController@getLogout',
-        'as' => 'user.getLogout'
-    ]);
-
-    Route::get('dashboard', [
-        'uses' => 'user\DashboardController@dashboard',
-        'as' => 'user.account'
-    ]);
-
-    Route::match(['get', 'post'], 'account-detail', [
-        'uses' => 'user\DashboardController@accountDetail',
-        'as' => 'account.detail'
-    ]);
-
-
-    Route::get('profile', [
-        'uses' => 'user\DashboardController@index',
-        'as' => 'user.profile'
-    ]);
-
-    Route::get('account', [
-        'uses' => 'user\DashboardController@iframProfile',
-        'as' => 'user.account.profile'
-    ]);
-
-    Route::match(['get', 'post'], 'order', [
-        'uses' => 'user\DashboardController@recentOrder',
-        'as' => 'user.order'
-    ]);
-
-    Route::match(['get', 'post'], 'order/item/{id}', [
-        'uses' => 'user\DashboardController@orderItem',
-        'as' => 'user.order.item'
-    ]);
-
-    Route::match(['get', 'post'], 'full/order/{shipping_detail_id}', [
-        'uses' => 'user\DashboardController@fullOrderDetail',
-        'as' => 'user.full.order'
-    ]);
-
-
-    Route::match(['get', 'post'], 'cancelled-order', [
-        'uses' => 'user\DashboardController@cancelOrder',
-        'as' => 'user.cancelled-order'
-    ]);
-    Route::post('review', [
-        'uses' => 'ReviewController@addReview',
-        'as' => 'user.review'
-    ]);
-    Route::post('profile/update', [
-        'uses' => 'user\DashboardController@updateProfile',
-        'as' => 'user.update_profile'
-    ]);
-
-    Route::match(['get', 'post'], '/checkout', [
-        'uses' => 'user\CheckoutController@index',
-        'as' => 'user.checkout'
-    ]);
-
-    Route::match(['get', 'post'], '/postcheckout', [
-        'uses' => 'user\CheckoutController@postCheckout',
-        'as' => 'user.postcheckout'
-    ]);
-
-    Route::match(['get', 'post'], '/wishlist', [
-        'uses' => 'user\DashboardController@wishlist',
-        'as' => 'user.wishlist.page'
-    ]);
-
-    Route::match(['get', 'post'], '/wishlist/{product_id}', [
-        'uses' => 'user\DashboardController@wishlistProduct',
-        'as' => 'user.wishlist'
-    ]);
-
-    Route::match(['get', 'post'], '/wishlist/remove/{id}', [
-        'uses' => 'user\DashboardController@wishlistProductRemove',
-        'as' => 'user.wishlist.remove'
-    ]);
-
-    Route::match(['get', 'post'], '/ratings', [
-        'uses' => 'user\DashboardController@userRatings',
-        'as' => 'user.ratings'
-    ]);
-});
 
 Route::group(['prefix' => 'vendor', 'middleware' => 'guest'], function () {
     Route::get('register', [
@@ -1130,3 +1134,10 @@ Route::group(['prefix' => 'delivery', 'middleware' => ['authen', 'type'], 'type'
     Route::post('check-otp', 'Delivery\DashboardController@otp')->name('delivery.check-otp');
 });
 
+if(env('useangular',0)==1){
+
+    Route::any('{slug}', function($slug=null)
+    {
+       return view('angular.index',compact('slug'));
+    })->where('slug', '(.*)?');
+}
