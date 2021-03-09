@@ -97,6 +97,29 @@ class AuthController extends Controller
         }
     }
 
+    public function updateUser(Request $request){
+        $user=Auth::user();
+        $buyer=VendorUser::where('user_id',$user->id)->first();
+        $user->email=$request->email;
+        $buyer->mobile_number=$request->phone;
+        $buyer->fname=$request->fname;
+        $buyer->lname=$request->lname;
+        $user->save();
+        $buyer->save();
+        return response('ok');
+    }
+
+    public function profileImage(Request $request){
+        $user=Auth::user();
+        $buyer=VendorUser::where('user_id',$user->id)->first();
+        if($request->hasFile('image')){
+            $buyer->profile_img=$request->image->store('profilepics');
+        }
+        $buyer->save();
+        return "OK";
+    }
+
+
     public function forgotPhone(Request $request){
         $buyer=VendorUser::where('mobile_number',$request->phone)->first();
         if($buyer==null){
@@ -114,6 +137,8 @@ class AuthController extends Controller
 
         return response('ok');
     }
+
+   
 
     public function resetPhone(Request $request){
         $buyer=VendorUser::where('mobile_number',$request->phone)->first();
