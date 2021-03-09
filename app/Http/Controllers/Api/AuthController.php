@@ -106,7 +106,8 @@ class AuthController extends Controller
         $buyer->lname=$request->lname;
         $user->save();
         $buyer->save();
-        return response('ok');
+        return response()->json(['status'=>true]);
+
     }
 
     public function profileImage(Request $request){
@@ -116,14 +117,16 @@ class AuthController extends Controller
             $buyer->profile_img=$request->image->store('profilepics');
         }
         $buyer->save();
-        return "OK";
+        return response()->json(['status'=>true]);
+
     }
 
 
     public function forgotPhone(Request $request){
         $buyer=VendorUser::where('mobile_number',$request->phone)->first();
         if($buyer==null){
-            return response('Mobile No Not Found',401);
+            return response()->json(['status'=>false,"message"=>"Mobile No Not Found"]);
+
         }
         $user=User::find($buyer->user_id);
         $reset=$user->id. mt_rand(0000,9999);
@@ -135,7 +138,8 @@ class AuthController extends Controller
 
         // $user->notify(new ApiPassForgot($reset,$request->phone));
 
-        return response('ok');
+        return response()->json(['status'=>true]);
+
     }
 
    
@@ -143,11 +147,11 @@ class AuthController extends Controller
     public function resetPhone(Request $request){
         $buyer=VendorUser::where('mobile_number',$request->phone)->first();
         if($buyer==null){
-            return response('Mobile No Not Found',401);
+            return response()->json(['status'=>false,"message"=>"Mobile No Not Found"]);
         }
         $user=User::find($buyer->user_id);
         if($user->activation_token!=$request->token){
-            return response('Token Missmatch',401);
+            return response()->json(['status'=>false,"message"=>"Token Expired"]);
         }else{
             $user->password=bcrypt($request->password);
             $user->activation_token="";
@@ -156,7 +160,8 @@ class AuthController extends Controller
 
         // $user->notify(new ApiPassForgot($reset,$request->phone));
 
-        return response('ok');
+        return response()->json(['status'=>true]);
+
     }
 
     public function forgotEmail(Request $request){
