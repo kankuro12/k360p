@@ -170,6 +170,23 @@ class HomeController extends Controller
         return response()->json(Collection::all());
     }
 
+    public function collectionsSummary(){
+        $collections=Collection::all();
+        $data=[];
+        foreach ($collections as $key => $collection) {
+            # code...
+            $collection->products=Collection_product::join('products','products.product_id','=','collection_products.product_id')->where('collection_products.collection_id',$collection->collection_id)->select("products.product_id","products.product_name","products.product_images")->get();
+            array_push($data,$collection);
+        }
+        return response()->json($data);
+        // $allData=[];
+        // foreach ($$collections as $key =>$collection) {
+        //     $ids=Collection_product::where('collection_id',$id)->pluck('product_id');
+        //     $collection->data=Product::whereIn('product_id',$ids)->select('->get()
+        // }
+
+    }
+
     public function collection($id){
         $collection=Collection::find($id);
         $ids=Collection_product::where('collection_id',$id)->pluck('product_id');

@@ -32,6 +32,7 @@ Route::get('test', function () {
 
         Route::get('collections','Api\HomeController@collections')->name('collections');
         Route::get('collection/{id}','Api\HomeController@collection')->name('collection');
+        Route::get('collectionssummary','Api\HomeController@collectionsSummary')->name('collectionssummary');
 
         Route::get('categories','Api\HomeController@categories')->name('cat');
         Route::get('category/{id}','Api\HomeController@categoryWiseProduct');
