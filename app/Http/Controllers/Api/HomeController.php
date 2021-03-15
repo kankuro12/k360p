@@ -169,7 +169,7 @@ class HomeController extends Controller
                 array_push($data,$section);
 
             }
-            elseif($section->type==8){
+            elseif($section->type==9){
                 $section->sliders=\App\MobileSlider::where('home_page_Section_id',$section->id)->get();
                 if($section->sliders->count()>0){
 
