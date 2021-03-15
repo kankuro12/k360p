@@ -23,8 +23,12 @@ class HomePage
         'MultiCategory',
         'Brand',
         'Blog',
-        'Custom'
+    ];
 
+    const mobileSectonType=[
+        'Custom'=>7,
+        'Mobile_AD'=>8,
+        'Mobile_Slider'=>9
     ];
     const themes = "molla";
     // const CSS=[

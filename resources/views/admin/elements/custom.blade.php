@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-content">
 
-                    <h4 class="card-title"> <a href="{{ route('elements') }}"><strong>Homepage Section</strong></a>/
+                    <h4 class="card-title"> <a href="{{ route('elements.mob') }}"><strong>Homepage Section</strong></a>/
                         Custom Section / <strong>{{ $section->name }}</strong></h4>
                     <div>
 
@@ -97,7 +97,7 @@
             $('#searchresult').html("");
          
                 $.ajax({
-                    url: "{{route('elements.customlist-search')}}",
+                    url: "{{route('elements.mob.customlist-search')}}",
                     data: {
                         'name':$('#name').val(),
                         "category":$("#category").val()
@@ -116,7 +116,7 @@
 
         function addItem(id){
             $.ajax({
-                    url: "{{route('elements.customlist-save', ["section"=>$section->id])}}",
+                    url: "{{route('elements.mob.customlist-save', ["section"=>$section->id])}}",
                     data: {
                         'id':id
                     },

@@ -91,11 +91,7 @@ class ElementController extends Controller
                 $blog = Blog::all();
                 return view('admin.elements.blog')->with(compact('blog','section'));
                 break;
-            case 7:
-                // $products=Product::select('product_id','product_name','product_images')->get();
-                $cats=Category::where('parent_id',0)->orWhereNull("parent_id")->get();
-                return view('admin.elements.custom', compact('section','cats'));
-                break;
+          
             default:
                 # code...
                 break;

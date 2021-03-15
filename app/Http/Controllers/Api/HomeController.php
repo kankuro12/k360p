@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\APIModels\ProductWrapper;
 use App\CustomListDisplayItem;
 use App\Http\Controllers\Controller;
+use App\MobileAd;
 use App\model\admin\BoxedItemDisplay;
 use App\model\admin\BoxedItemListDisplay;
 use App\model\admin\Category;
@@ -142,24 +143,39 @@ class HomeController extends Controller
     }
 
     public function homePage(){
-        $sections=HomePageSection::where('type',7)->get();
+        $sections=HomePageSection::where('type','>',6)->orderBy('order','asc')->get();
         $data=[];
         foreach ($sections as $key => $section) {
-            $customlist =\App\CustomListDisplay::where('home_page_Section_id',$section->id)->first();
-            $ids=CustomListDisplayItem::where('custom_list_display_id',$customlist->id)->pluck('product_id')->toArray();
-            // dd($ids);
-            $section->products=[];
-            if(count($ids)>0){
-                $pps=[];
-                $products=Product::wherein('product_id',$ids)->get();
-                foreach ($products as $product) {
-                    array_push($pps,ProductManager::addDetail($product));
-                }
-                $section->products=$pps;
-            }
-            if(count( $section->products)>0){
+            if($section->type==7){
 
+                $customlist =\App\CustomListDisplay::where('home_page_Section_id',$section->id)->first();
+                $ids=CustomListDisplayItem::where('custom_list_display_id',$customlist->id)->pluck('product_id')->toArray();
+                // dd($ids);
+                $section->products=[];
+                if(count($ids)>0){
+                    $pps=[];
+                    $products=Product::wherein('product_id',$ids)->get();
+                    foreach ($products as $product) {
+                        array_push($pps,ProductManager::addDetail($product));
+                    }
+                    $section->products=$pps;
+                }
+                if(count( $section->products)>0){
+    
+                    array_push($data,$section);
+                }
+            }elseif($section->type==8){
+                $section->ad=\App\MobileAd::where('home_page_Section_id',$section->id)->first();
                 array_push($data,$section);
+
+            }
+            elseif($section->type==8){
+                $section->sliders=\App\MobileSlider::where('home_page_Section_id',$section->id)->get();
+                if($section->sliders->count()>0){
+
+                    array_push($data,$section);
+                }
+
             }
         }
 

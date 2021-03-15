@@ -55,9 +55,10 @@ Route::get('test', function () {
          });
         });
         route::prefix('auth')->group(function(){
-            route::post('loginbyemail',"Api\AuthController@emaillogin");
+                route::post('loginbyemail',"Api\AuthController@emaillogin");
             route::post('loginbyphone',"Api\AuthController@phonelogin");
             route::post('signup',"Api\AuthController@signup");
+
             route::post('forgotpasswordPhone',"Api\AuthController@forgotPhone");
             route::post('resetpasswordPhone',"Api\AuthController@resetPhone");
 

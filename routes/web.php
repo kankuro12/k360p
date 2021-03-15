@@ -1021,9 +1021,37 @@ Route::group(['prefix' => 'admin/element', 'middleware' => 'admin_auth'], functi
 
     //custom section
     
-    Route::post('/custom/search','Elements\CustomListController@searchProduct' )->name('elements.customlist-search');
-    Route::post('/custom/save/{section}','Elements\CustomListController@save' )->name('elements.customlist-save');
-    Route::get('/custom/remove/{item}','Elements\CustomListController@remove' )->name('elements.customlist-remove');
+    // Route::post('/custom/search','Elements\CustomListController@searchProduct' )->name('elements.customlist-search');
+    // Route::post('/custom/save/{section}','Elements\CustomListController@save' )->name('elements.customlist-save');
+    // Route::get('/custom/remove/{item}','Elements\CustomListController@remove' )->name('elements.customlist-remove');
+});
+
+Route::group(['prefix' => 'admin/mobileelement', 'middleware' => 'admin_auth'], function () {
+    Route::get('', 'Elements\MobileElementController@index')->name('elements.mob');
+    Route::post('/add', 'Elements\MobileElementController@add')->name('elements.mob.add');
+    Route::get('/del/{section}', 'Elements\MobileElementController@del')->name('elements.mob.del');
+    Route::post('/edit/{section}', 'Elements\MobileElementController@edit')->name('elements.mob.edit');
+    Route::get('/manage/{section}', 'Elements\MobileElementController@manage')->name('elements.mob.manage');
+
+    //sliders
+    Route::post('/slider/add/{section}', 'Elements\MobileSliderController@add')->name('elements.mob.add-slider');
+    Route::post('/slider/save/{section}', 'Elements\MobileSliderController@save')->name('elements.mob.save-slider');
+    Route::post('/slider/del', 'Elements\MobileSliderController@del')->name('elements.mob.del-slider');
+    Route::get('/slider/edit/{slider}', 'Elements\MobileSliderController@edit')->name('elements.mob.edit-slider');
+    Route::post('/slider/update', 'Elements\MobileSliderController@update')->name('elements.mob.update-slider');
+
+    //ad
+
+    Route::post('/ad/save/{section}', 'Elements\MobileAdController@save')->name('elements.mob.save-ad');
+    Route::post('/category/save/{section}', 'Elements\MobileAdController@saveCategory')->name('elements.mob.save-category');
+
+ 
+
+    //XXX custom section
+    
+    Route::post('/custom/search','Elements\CustomListController@searchProduct' )->name('elements.mob.customlist-search');
+    Route::post('/custom/save/{section}','Elements\CustomListController@save' )->name('elements.mob.customlist-save');
+    Route::get('/custom/remove/{item}','Elements\CustomListController@remove' )->name('elements.mob.customlist-remove');
 });
 
 //admin ordermanagement

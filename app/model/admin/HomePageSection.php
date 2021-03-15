@@ -8,6 +8,7 @@ use App\SliderGroup;
 use Illuminate\Database\Eloquent\Model;
 use App\BrandDisplay;
 use App\CustomListDisplay;
+use App\MobileAd;
 
 class HomePageSection extends Model
 {
@@ -57,11 +58,17 @@ class HomePageSection extends Model
                     return $boxeditemdisplay;
                     break;
                 case 7:
-                    $customlist=new CustomListDisplay();
+                    $customlist = new CustomListDisplay();
                     $customlist->home_page_section_id = $this->id;
                     $customlist->title = $this->name;
                     $customlist->save();
                     return $customlist;
+              
+                case 8:
+                    $mobilead = new MobileAd();
+                    $mobilead->home_page_section_id = $this->id;
+                    $mobilead->save();
+                    return $mobilead;
                 default:
                     return null;
                     break;
@@ -129,7 +136,7 @@ class HomePageSection extends Model
             case 5:
                 return HomePage::theme('elements.brand');
                 break;
-            case 6: 
+            case 6:
                 return HomePage::theme('elements.blog');
                 break;
             default:

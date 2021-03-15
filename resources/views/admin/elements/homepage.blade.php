@@ -15,7 +15,7 @@
                         </div>
                         <div class="content-view">
                             <div id="root">
-                                @foreach (\App\model\admin\HomePageSection::where('parent_id',0)->get() as $item )
+                                @foreach (\App\model\admin\HomePageSection::where('parent_id',0)->where('type',"<",7)->get() as $item )
                                 <div id="s_{{$item->id}}">
                                     <div class="row" >
                                         <div class="col-md-4">
