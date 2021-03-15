@@ -91,7 +91,9 @@ class AuthController extends Controller
         $user=Auth::user();
         if(Hash::check($request->password, $user->password)){
             $user->password=bcrypt($request->newpassword);
+            $user->save();
             return response()->json(['status'=>true,'message'=>"Password Changed Sucessfully"]);
+            
         }else{
             return response()->json(['status'=>false,"message"=>"Old Password Not Match"]);
         }
@@ -100,10 +102,9 @@ class AuthController extends Controller
     public function updateUser(Request $request){
         $user=Auth::user();
         $buyer=VendorUser::where('user_id',$user->id)->first();
-        $user->email=$request->email;
-        $buyer->mobile_number=$request->phone;
         $buyer->fname=$request->fname;
         $buyer->lname=$request->lname;
+        $buyer->address=$request->address;
         $user->save();
         $buyer->save();
         return response()->json(['status'=>true]);

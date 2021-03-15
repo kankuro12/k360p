@@ -67,7 +67,8 @@ Route::get('test', function () {
             Route::middleware(['auth:api'])->group(function () {
                 Route::get('user',"Api\AuthController@user"); 
                 Route::post('ProfileImage',"Api\AuthController@profileImage"); 
-                Route::post('updateUser',"Api\AuthController@updateUser"); 
+                // Route::post('updateUser',"Api\AuthController@updateUser"); 
+                Route::post('updateUserInfo',"Api\AuthController@updateUser"); 
                 route::post('changepass',"Api\AuthController@changepass");
          });
 
