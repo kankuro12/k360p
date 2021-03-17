@@ -123,7 +123,6 @@ class AuthController extends Controller
         if ($rating != null) {
             $rating = new Rating();
         }
-        dd(Auth::user());
         $buyer = VendorUser::where('user_id', Auth::user()->id)->first();
 
         $rating->rating = $r->rating;
