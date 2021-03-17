@@ -6,6 +6,7 @@ use App\Channels\Aakash;
 use App\Http\Controllers\Controller;
 use App\model\VendorUser\VendorUser;
 use App\Notifications\User\ApiPassForgot;
+use App\Rating;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -109,6 +110,27 @@ class AuthController extends Controller
         $buyer->save();
         return response()->json(['status'=>true]);
 
+    }
+
+    public function addRreview(Request $r){
+        $r->validate([
+            'rating' =>'required',
+        ]);
+
+        $rating = Rating::where('user_id',Auth::user()->id)->where('product_id',$r->product_id)->first();
+        if($rating!=null){
+            $rating = new Rating();
+        }
+       
+            $rating->rating = $r->rating;  
+            $rating->title =  $r->title;
+            $rating->rating_desc = $r->rating_desc;
+            $rating->user_id = Auth::user()->id;
+            $rating->product_id = $r->product_id;
+            $rating->save();
+            return response()->json(['status'=>true,'rating'=>$rating]);
+            ;
+      
     }
 
     public function profileImage(Request $request){

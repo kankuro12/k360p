@@ -71,6 +71,7 @@ Route::get('test', function () {
                 // Route::post('updateUser',"Api\AuthController@updateUser"); 
                 Route::post('updateUserInfo',"Api\AuthController@updateUser"); 
                 route::post('changepass',"Api\AuthController@changepass");
+                Route::post('addReview',"Api\AuthController@addRreview");
          });
 
         });

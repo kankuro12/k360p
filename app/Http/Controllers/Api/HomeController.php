@@ -20,6 +20,7 @@ use App\model\admin\Slider;
 use App\model\ProductAttributeItem;
 use App\model\ProductStock;
 use App\model\Review;
+use App\Rating;
 use App\Setting\ProductManager;
 use App\Setting\VariantManager;
 use Carbon\Carbon;
@@ -74,7 +75,7 @@ class HomeController extends Controller
         $product->images=$product->images;
         $onsale=$product->onsale();
         $product->onsale=$onsale;
-        $product->ratings=Review::where('prod_id',$id)->get();
+        $product->ratings=Rating::where('product_id',$id)->join('vendor_users',"ratings.user_id","=","vendor_users.user_id")->select('ratings.*','vendor_users.fname','vendor_users.lname','vendor_users.profile_img')->get();
         $selper=0;
         if($onsale){
             $dt = Carbon::now();
@@ -111,7 +112,7 @@ class HomeController extends Controller
                 $product->newprice=$product->mark_price;
             }
         }
-        $product->recom=Product::where('category_id',$product->category_id)->where('product_id','<>',$product->product_id)->get();
+        $product->recom=Product::where('category_id',$product->category_id)->where('product_id','<>',$product->product_id)->take(8)->get();
         return response()->json($product);
     }
 
@@ -172,7 +173,6 @@ class HomeController extends Controller
             elseif($section->type==9){
                 $section->sliders=\App\MobileSlider::where('home_page_Section_id',$section->id)->get();
                 if($section->sliders->count()>0){
-
                     array_push($data,$section);
                 }
 

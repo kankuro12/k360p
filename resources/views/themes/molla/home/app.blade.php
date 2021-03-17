@@ -4,7 +4,7 @@
     <div class="">
 
         @foreach (App\model\admin\HomePageSection::where('parent_id', 0)
-                ->where('type','<>',7)
+                ->where('type','<',7)
                 ->orderBy('order', 'asc')
                 ->get()
             as $item)
