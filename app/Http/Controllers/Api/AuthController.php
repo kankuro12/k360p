@@ -120,7 +120,7 @@ class AuthController extends Controller
         ]);
 
         $rating = Rating::where('user_id', Auth::user()->id)->where('product_id', $r->product_id)->first();
-        if ($rating != null) {
+        if ($rating == null) {
             $rating = new Rating();
         }
         $buyer = VendorUser::where('user_id', Auth::user()->id)->first();
