@@ -121,6 +121,7 @@ class AuthController extends Controller
         if($rating!=null){
             $rating = new Rating();
         }
+            $buyer=VendorUser::where('user_id',Auth::user()->id)->first();
        
             $rating->rating = $r->rating;  
             $rating->title =  $r->title;
@@ -128,8 +129,11 @@ class AuthController extends Controller
             $rating->user_id = Auth::user()->id;
             $rating->product_id = $r->product_id;
             $rating->save();
+            $rating->fname=$buyer->fname;
+            $rating->lname=$buyer->lname;
+            $rating->profile_img=$buyer->profile_img;
             return response()->json(['status'=>true,'rating'=>$rating]);
-            ;
+            
       
     }
 
