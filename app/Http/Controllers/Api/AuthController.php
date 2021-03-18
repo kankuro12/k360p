@@ -228,4 +228,8 @@ class AuthController extends Controller
 
         return response('ok');
     }
+
+    public function myRreview(){
+        return response()->json(['success'=>true,'ratings'=>Rating::where('user_id', Auth::user()->id)->get()]);
+    }
 }
