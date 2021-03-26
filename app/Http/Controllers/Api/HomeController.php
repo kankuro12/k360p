@@ -238,7 +238,7 @@ class HomeController extends Controller
         // $products=Product::join('order_items','order_items.product_id','=',"products.product_id")->select(
         //     DB::raw('order_items.product_id,sum(order_items.qty) as sold')
         // )->groupBy('order_items.product_id')->orderBy('sold')->take($count)->get();
-        $tops=OrderItem::select(DB::raw("sum(qty) as sold,product_id"))->groupBy('product_id')->orderBy('sold')->take($count)->get();
+        $tops=OrderItem::select(DB::raw("sum(qty) as sold,product_id"))->groupBy('product_id')->orderBy('sold','desc')->take($count)->get();
         return response()->json([$tops,"changed"]);
     }
    
