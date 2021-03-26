@@ -17,6 +17,7 @@ use App\model\admin\Product;
 use App\model\admin\Product_attribute;
 use App\model\admin\Sell_product;
 use App\model\admin\Slider;
+use App\model\OrderItem;
 use App\model\ProductAttributeItem;
 use App\model\ProductStock;
 use App\model\Review;
@@ -234,10 +235,11 @@ class HomeController extends Controller
     }
 
     public function top($count=8){
-        $products=Product::join('order_items','order_items.product_id','=',"products.product_id")->select(
-            DB::raw('order_items.product_id,sum(order_items.qty) as sold')
-        )->groupBy('order_items.product_id')->orderBy('sold')->take($count)->get();
-        return response()->json($products);
+        // $products=Product::join('order_items','order_items.product_id','=',"products.product_id")->select(
+        //     DB::raw('order_items.product_id,sum(order_items.qty) as sold')
+        // )->groupBy('order_items.product_id')->orderBy('sold')->take($count)->get();
+        $tops=OrderItem::select(DB::raw("sum(qty) as sold,product_id"))->groupBy('product_id')->orderBy('sold')->take($count)->get();
+        return response()->json([$tops,"changed"]);
     }
    
 
