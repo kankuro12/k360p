@@ -28,6 +28,9 @@ Route::get('test', function () {
         Route::post('/custom/search','Elements\CustomListController@searchProduct' )->name('elements.customlist-save');
 
         Route::get('homepage','Api\HomeController@homePage')->name('homePage');
+        Route::get('featured','Api\HomeController@featured')->name('featured');
+        Route::get('top/{count?}','Api\HomeController@top')->name('top');
+        Route::get('new/{count?}','Api\HomeController@new')->name('new');
         Route::get('sliders','Api\HomeController@sliders')->name('sliders');
 
         Route::get('collections','Api\HomeController@collections')->name('collections');

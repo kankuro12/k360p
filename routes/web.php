@@ -719,6 +719,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
     Route::post('product/update/{product}', 'admin\ProductController@update')->name('admin.update-product');
 
 
+    //XXX manage featured Products
+    Route::get('product/featured','admin\FeaturedController@index')->name('admin.featured-products');
+    Route::get('product/featured/add/{product}','admin\FeaturedController@add')->name('admin.featured-products-add');
+    Route::get('product/featured/remove/{product}','admin\FeaturedController@remove')->name('admin.featured-products-remove');
     //Store Shipping Address
     Route::match(['get', 'post'], '/shipping', [
         'as' => 'admin.store-shipping',

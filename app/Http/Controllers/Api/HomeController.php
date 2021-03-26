@@ -25,6 +25,7 @@ use App\Setting\ProductManager;
 use App\Setting\VariantManager;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -223,6 +224,21 @@ class HomeController extends Controller
         return response()->json($products);
     }
 
+    public function featured(){
+        $products=Product::where('featured',1)->get();
+        $pp=[];
+        foreach ($products as $key => $product) {
+            array_push($pp,ProductManager::addDetail($product));
+        }
+        return response()->json($pp);
+    }
+
+    public function top($count=8){
+        $products=Product::join('order_items','order_items.product_id','=',"products.product_id")->select(
+            DB::raw('order_items.product_id,sum(order_items.qty) as sold')
+        )->groupBy('order_items.product_id')->orderBy('sold')->take($count)->get();
+        return response()->json($products);
+    }
    
 
     
