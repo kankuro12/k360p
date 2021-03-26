@@ -242,8 +242,9 @@ class HomeController extends Controller
         $products=Product::joinSub($tops,'tops', function ($join) {
             $join->on('products.product_id', '=', 'tops.product_id');
         })->select('products.*','tops.sold')->get();
+        
 
-        return response()->json([$products,$tops,"changed"]);
+        return response()->json($products);
     }
    
 
