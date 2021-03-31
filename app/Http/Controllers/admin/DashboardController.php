@@ -58,11 +58,13 @@ class DashboardController extends Controller
     public function about(Request $request){
         $about=AboutUs::first();
         if($request->method()=="POST"){
+            // dd($request->all());
             if($about==null){
                 $about=new AboutUs();
             }
             $about->mini=$request->mini;
             $about->full=$request->full;
+            $about->logo = $request->file('logo')->store('images/backend_images/logo');
             $about->save();
             return redirect()->back();
         }else{

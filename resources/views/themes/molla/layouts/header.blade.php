@@ -106,8 +106,11 @@
                         <span class="sr-only">Toggle mobile menu</span>
                         <i class="icon-bars"></i>
                     </button>
+                    @php
+                       $about=\App\AboutUs::first();
+                    @endphp
                     <a href="/" class="logo">
-                        <img src="{{ asset('images/mart1.png') }}" alt="{{ env('APP_NAME', 'your') }} Logo" width="250"
+                        <img src="{{ asset($about->logo) }}" alt="{{ env('APP_NAME', 'your') }} Logo" width="250"
                         >
                     </a>
                 </div><!-- End .col-xl-3 col-xxl-2 -->
