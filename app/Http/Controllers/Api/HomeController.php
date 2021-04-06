@@ -32,7 +32,11 @@ class HomeController extends Controller
 {
     public function allproducts(){
         $allproducts=Product::all();
-        return response()->json($allproducts);
+        $p=[];
+        foreach ($allproducts as $key => $value) {
+            array_push($p,ProductManager::addDetail($value));
+        }
+        return response()->json($p);
     }
     public function sliders(){
         $sliders=Slider::select('mobile','slider_image')->get();
