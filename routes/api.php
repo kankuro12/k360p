@@ -40,7 +40,7 @@ Route::get('test', function () {
         Route::get('categories','Api\HomeController@categories')->name('cat');
         Route::get('category/{id}','Api\HomeController@categoryWiseProduct');
 
-        Route::get('category/{id}','Api\HomeController@category')->name('cate');
+        // Route::get('category/{id}','Api\HomeController@category')->name('cate');
         Route::get('products','Api\HomeController@products')->name('products');
         Route::get('listproducts/{step}','Api\HomeController@listproducts')->name('listproducts');
         Route::get('allproducts','Api\HomeController@allproducts')->name('allproducts');

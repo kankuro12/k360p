@@ -226,7 +226,7 @@ class HomeController extends Controller
         $category=Category::where('cat_id',$id)->first();
         $ids=$category->childList();
         $products = Product::whereIn('category_id',$ids)->get();
-        return response()->json($products);
+        return response()->json(['products'=>$products,'cate'=>$category]);
     }
 
     public function featured(){

@@ -356,10 +356,16 @@
                                 <span class="sidebar-normal"> Clearfix Info </span>
                             </a>
                         </li>
-                        <li class="{{ (Request::is('admin/footer-head') ? ' active' : '') }}">
+                        <li class="{{ (Request::is('admin/element') ? ' active' : '') }}">
                             <a href="{{ route('elements') }}">
                                 <span class="sidebar-mini"> EL </span>
                                 <span class="sidebar-normal"> Builder </span>
+                            </a>
+                        </li>
+                        <li class="{{ (Request::is('admin/mobileelement') ? ' active' : '') }}">
+                            <a href="{{ url('admin/mobileelement') }}">
+                                <span class="sidebar-mini"> EL </span>
+                                <span class="sidebar-normal"> Mobile Builder </span>
                             </a>
                         </li>
                         <li class="{{ (Route::is('admin.about') ? ' active' : '') }}">
