@@ -233,6 +233,10 @@
 
             }
         }
+
+        if (screen.width <= 699) {
+          document.location = "http://m.bigbyapaar.com/";
+        }
     </script>
 
 </body>
