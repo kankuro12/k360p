@@ -218,9 +218,15 @@
 
                                                 <div class="social-icons social-icons-sm">
                                                     <span class="social-label">Share:</span>
-                                                    <a class="social-icon" href="https://www.facebook.com/sharer/sharer.php?u={{route('product.detail',['id'=>$product->product_id])}}" target="_blank">
+                                                    @if (Auth::check())
+                                                    <a class="social-icon" href="https://www.facebook.com/sharer/sharer.php?href={{route('product.detail',['id'=>$product->product_id,'ref_id'=>$user->id])}}" target="_blank">
                                                         <i class="icon-facebook-f"></i>
                                                     </a>
+                                                    @else
+                                                    <a class="social-icon" href="https://www.facebook.com/sharer/sharer.php?href={{route('product.detail',['id'=>$product->product_id])}}" target="_blank">
+                                                        <i class="icon-facebook-f"></i>
+                                                    </a>
+                                                    @endif
                                                     <a href="#" class="social-icon" title="Twitter" target="_blank"><i
                                                             class="icon-twitter"></i></a>
                                                     <a href="#" class="social-icon" title="Instagram" target="_blank"><i

@@ -17,8 +17,8 @@ use App\model\admin\Attribute_group;
 use App\model\admin\Category;
 use App\Setting\HomePage;
 use App\Setting\VariantManager;
-use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\Input;
 
@@ -138,7 +138,8 @@ class HomeController extends Controller
 
     public function productDetail($id){
         $product = Product::where('product_id',$id)->firstOrFail();
-        return view(HomePage::theme("product.single"))->with(compact('product'));
+        $user=Auth::user();
+        return view(HomePage::theme("product.single"))->with(compact('product','user'));
     }
 
     public function getStock(Request $request){
