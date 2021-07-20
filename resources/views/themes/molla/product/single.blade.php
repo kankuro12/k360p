@@ -154,6 +154,9 @@
                                                     @endif
                                                 @else
                                                     <input type="hidden" name="rate" id="rateofvariant">
+                                                    @if (Request::has('ref_id'))
+                                                        <input type="hidden" name="ref_id" value="{{request()->get('ref_id')}}">
+                                                    @endif
                                                 @endif
                                             @foreach ($product->variants() as $variant)
                                                 <div class="details-filter-row details-row-size">
@@ -219,11 +222,11 @@
                                                 <div class="social-icons social-icons-sm">
                                                     <span class="social-label">Share:</span>
                                                     @if (Auth::check())
-                                                    <a class="social-icon" href="https://www.facebook.com/sharer/sharer.php?href={{route('product.detail',['id'=>$product->product_id,'ref_id'=>$user->id])}}" target="_blank">
+                                                    <a class="social-icon" href="https://www.facebook.com/sharer/sharer.php?u={{route('product.detail',['id'=>$product->product_id,'ref_id'=>$user->id])}}" target="_blank">
                                                         <i class="icon-facebook-f"></i>
                                                     </a>
                                                     @else
-                                                    <a class="social-icon" href="https://www.facebook.com/sharer/sharer.php?href={{route('product.detail',['id'=>$product->product_id])}}" target="_blank">
+                                                    <a class="social-icon" href="https://www.facebook.com/sharer/sharer.php?u={{route('product.detail',['id'=>$product->product_id])}}" target="_blank">
                                                         <i class="icon-facebook-f"></i>
                                                     </a>
                                                     @endif
