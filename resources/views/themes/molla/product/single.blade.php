@@ -154,8 +154,8 @@
                                                     @endif
                                                 @else
                                                     <input type="hidden" name="rate" id="rateofvariant">
-                                                    @if (Request::has('ref_id'))
-                                                        <input type="hidden" name="ref_id" value="{{request()->get('ref_id')}}">
+                                                    @if ($ref_id!=null)
+                                                        <input type="hidden" name="ref_id" value="{{$ref_id}}">
                                                     @endif
                                                 @endif
                                             @foreach ($product->variants() as $variant)

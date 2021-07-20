@@ -136,10 +136,11 @@ class HomeController extends Controller
         return view(HomePage::theme("product.shop"),compact("products","max","min",'_min','_max','categories'));
     }
 
-    public function productDetail($id){
+    public function productDetail($id,Request $request){
         $product = Product::where('product_id',$id)->firstOrFail();
         $user=Auth::user();
-        return view(HomePage::theme("product.single"))->with(compact('product','user'));
+        $ref_id=$request->ref_id;
+        return view(HomePage::theme("product.single"))->with(compact('product','user','ref_id'));
     }
 
     public function getStock(Request $request){
