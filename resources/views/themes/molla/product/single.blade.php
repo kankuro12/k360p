@@ -142,6 +142,9 @@
                                             <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                                             <input type="hidden" name="type" value="{{ $product->stocktype }}">
                                             <input type="hidden" name="varient" id="product_varient">
+                                            @if ($ref_id!=null)
+                                                <input type="hidden" name="ref_id" value="{{$ref_id}}">
+                                            @endif
                                             @if ($product->stocktype == 0)
                                                 @if ($product->promo == 0 && !$onsale)
                                                     <input type="hidden" name="rate" value="{{ $product->mark_price }}">
@@ -154,9 +157,7 @@
                                                     @endif
                                                 @else
                                                     <input type="hidden" name="rate" id="rateofvariant">
-                                                    @if ($ref_id!=null)
-                                                        <input type="hidden" name="ref_id" value="{{$ref_id}}">
-                                                    @endif
+
                                                 @endif
                                             @foreach ($product->variants() as $variant)
                                                 <div class="details-filter-row details-row-size">
