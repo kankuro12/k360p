@@ -99,7 +99,7 @@
                     <p> Delivery/Pickup Points </p>
                 </a>
             </li>
-            
+
             <li class="{{ (Route::is('admin.manage-category1') ? ' active' : '') }}">
                 <a href="{{ route('admin.manage-category1') }}">
                     <i class="material-icons">assignment
@@ -173,6 +173,13 @@
                                 </a>
                             </li>
                         @endfor
+
+                        <li class="{{ (Request::is('admin/orders/referal/users') ? ' active' : '') }}">
+                            <a href="{{ route('admin.referal.user')}}">
+                                <i class="material-icons">phonelink</i>
+                                <p> Referal Users </p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -209,12 +216,12 @@
                                 <p> Attribute Groups </p>
                             </a>
                         </li>
-                   
-                    
+
+
                     </ul>
                 </div>
-            </li>           
-            
+            </li>
+
             <li>
                 <a data-toggle="collapse" href="#collections">
                     <i class="material-icons">business_center</i>
@@ -314,7 +321,7 @@
             <li>
                 <a data-toggle="collapse" href="#homepage">
                     <i class="material-icons">ballot</i>
-                    <p> Homepage 
+                    <p> Homepage
                         <b class="caret"></b>
                     </p>
                 </a>
@@ -399,7 +406,7 @@
                 </a>
                 <div class="collapse" id="setting">
                     <ul class="nav">
-                        
+
                         <li class="{{ (Request::is('admin/shippings') ? ' active' : '') }}">
                             <a href="{{ route('admin.shippings') }}">
                                 <span class="sidebar-mini"> S </span>
@@ -412,7 +419,7 @@
                                 <span class="sidebar-normal"> Packaging</span>
                             </a>
                         </li>
-                       
+
                     </ul>
                 </div>
             </li>

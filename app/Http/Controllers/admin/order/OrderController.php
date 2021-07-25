@@ -52,7 +52,7 @@ class OrderController extends Controller
 
             if($status==1){
                 $vids=[];
-                
+
                 ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
                 foreach (OrderItem::whereIn('id',$request->id)->get() as  $order) {
                     // $order->pickedup=1;
@@ -70,7 +70,7 @@ class OrderController extends Controller
                 }
 
 
-                
+
             }
             if($status==2){
                 ShippingDetail::find($request->sid)->notify(new OnDelivery($request->id));
@@ -116,7 +116,18 @@ class OrderController extends Controller
             $data['count']=count($value);
             array_push($all,$data);
         }
-        
+
         return view('admin.order.receipt',compact('all'));
+    }
+
+    public function referalUsers(){
+        $referalUsers = OrderItem::where('referal_id','!=',null)->distinct()->get(['referal_id']);
+        // dd($referalUsers);
+        return view('admin.order.referal_users',compact('referalUsers'));
+    }
+
+    public function referalUserProducts($id){
+        $referalProduct = OrderItem::where('referal_id',$id)->get();
+        return view('admin.order.referal_product',compact('referalProduct'));
     }
 }

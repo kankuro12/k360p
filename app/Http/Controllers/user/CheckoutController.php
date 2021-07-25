@@ -59,6 +59,7 @@ class CheckoutController extends Controller
 
                 $orderItem->shipping_detail_id = $shippingDetail->id;
                 $orderItem->product_id = $value->product_id;
+                $orderItem->referal_id = $value->referal_id;
                 $orderItem->qty = $value->qty;
                 $orderItem->variant_code = $value->variant_code;
 
@@ -105,10 +106,10 @@ class CheckoutController extends Controller
                 }
             }
             Cart::where('user_email',Auth::user()->email)->delete();
-            Admin::first()->notify(new \App\Notifications\admin\OrderNotification($shippingDetail));	                
+            Admin::first()->notify(new \App\Notifications\admin\OrderNotification($shippingDetail));
             foreach ($vids as $vid) {
-                $vendor=Vendor::find($vid);	                        
-                // dd($vendor->user);	                        
+                $vendor=Vendor::find($vid);
+                // dd($vendor->user);
                 $vendor->notify(new \App\Notifications\Vendor\OrderNotification($shippingDetail));
             }
             return redirect('/viewcart')->with('success','Your order placed successfully!');
@@ -140,7 +141,7 @@ class CheckoutController extends Controller
             $c=[];
             $c['product']=Product::where('product_id',$value->product_id)->select('product_name','product_id','canbundle','vendor_id')->first()->toArray();
             if($c['product']['vendor_id']==null){
-                $c['product']['vendor_id']=0; 
+                $c['product']['vendor_id']=0;
             }
             if($shippingCharge['type']=='s101'){
                 $c['type']="Free Shipping";
@@ -169,7 +170,7 @@ class CheckoutController extends Controller
             }
             if($c['product']['canbundle']==1){
                 array_push($charge_1,$c);
-                
+
             }else{
                 $c['bundleid']=$i;
                 array_push($charge_2,$c);
@@ -182,7 +183,7 @@ class CheckoutController extends Controller
             array_push($charge,$c);
         }
 
-       
+
         if(count($charge_1)>0){
 
             $max=0;
@@ -191,11 +192,11 @@ class CheckoutController extends Controller
                     $max=$cc['price'];
                 }
             }
-    
+
             if(count($bundle)>0){
                 $max=$max/2;
             }
-    
+
             $bundle['bundle'.$i]=[];
             $bundle['bundle'.$i]['shipping']=$max;
             $bundle['bundle'.$i]['product']=[];
@@ -213,5 +214,5 @@ class CheckoutController extends Controller
         return view('themes.molla.user.dashboard.newshipping',['bundles'=>$bundle]);
     }
 
-    
+
 }

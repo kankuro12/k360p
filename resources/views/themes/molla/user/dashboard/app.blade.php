@@ -65,6 +65,7 @@
                 <li><a href="{{ route('user.order') }}" class="waves-effect waves-block"><i class="zmdi zmdi-shopping-cart"></i><span>Orders</span></a></li>
                 <li><a href="{{ route('account.detail') }}" class="waves-effect waves-block"><i class="zmdi zmdi-lock"></i><span>Account Details</span></a></li>
                 <li><a href="{{ route('user.wishlist.page') }}" class="waves-effect waves-block"><i class="zmdi zmdi-assignment"></i><span>Wishlist Items</span></a></li>
+                <li><a href="{{ route('user.referal.product')}}" class="waves-effect waves-block"><i class="zmdi zmdi-assignment"></i><span>My Referal Products</span></a></li>
                 <li><a href="{{ route('user.getLogout') }}" class="waves-effect waves-block" target="_top"><i class="zmdi zmdi-power"></i><span>Sign Out</span></a></li>
             </ul>
         </div>

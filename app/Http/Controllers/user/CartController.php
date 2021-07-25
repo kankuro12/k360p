@@ -42,7 +42,7 @@ class CartController extends Controller
                 if ($stockCheck->quantity >= $qty) {
                     $cartData->qty = $qty;
                     $cartData->save();
-                    // extra feature update 
+                    // extra feature update
                     if ($request->has('extracharge')) {
                         foreach ($request->extracharge as $key => $value) {
                             $chargeCount = ExatraChargeCart::where('extra_charge_id', $value)->where('cart_id', $cartData->id)->count();
@@ -72,7 +72,7 @@ class CartController extends Controller
 
                     $cartData->save();
 
-                    // extra feature update 
+                    // extra feature update
                     if ($request->has('extracharge')) {
                         foreach ($request->extracharge as $key => $value) {
                             $chargeCount = ExatraChargeCart::where('extra_charge_id', $value)->where('cart_id', $cartData->id)->count();
@@ -109,6 +109,7 @@ class CartController extends Controller
             $cartItem->rate = $request->rate;
             $cartItem->session_id = $session_id;
             $cartItem->variant_code = $request->varient;
+            $cartItem->referal_id = $request->ref_id;
             $cartItem->save();
 
             if ($request->has('extracharge')) {
@@ -183,7 +184,7 @@ class CartController extends Controller
 
 
 
-    // guest checkout 
+    // guest checkout
 
     public function guestCheckout(Request $request)
     {
@@ -261,10 +262,10 @@ class CartController extends Controller
 
 
             }
-            Admin::first()->notify(new \App\Notifications\admin\OrderNotification($shippingDetail));	                
+            Admin::first()->notify(new \App\Notifications\admin\OrderNotification($shippingDetail));
             foreach ($vids as $vid) {
-                $vendor=Vendor::find($vid);	                        
-                // dd($vendor->user);	                        
+                $vendor=Vendor::find($vid);
+                // dd($vendor->user);
                 $vendor->notify(new \App\Notifications\Vendor\OrderNotification($shippingDetail));
             }
             Cart::where('session_id', $session_id)->delete();
@@ -288,7 +289,7 @@ class CartController extends Controller
         }else{
             $couponExpire = Coupon::join('coupon_settings','coupons.id','=','coupon_settings.coupon_id')->
             where('coupons.coupon_code',$request->coupon_code)->first();
-            
+
             if(!Carbon::now()->between($couponExpire->start_time,$couponExpire->end_time)){
                 return redirect()->back()->with('warning','This coupon code is expired!');
             }else{
@@ -309,7 +310,7 @@ class CartController extends Controller
                             $issuedTimes->save();
                         } else {
                             $discountAmount = ($total * $couponExpire->discount_percent) / 100;
-                            
+
                             $issuedTimes->issued_number_coupon =  $issuedTimes->issued_number_coupon - 1;
                             $issuedTimes->save();
                         }
@@ -320,7 +321,7 @@ class CartController extends Controller
                     return redirect()->back()->with('success','Coupon code applied successfully!');
                 }
             }
-           
+
         }
 
     }

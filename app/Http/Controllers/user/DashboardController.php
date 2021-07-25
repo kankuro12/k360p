@@ -21,7 +21,7 @@ class DashboardController extends Controller
     }
 
     public function iframProfile(){
-        
+
         $pendingCount = ShippingDetail::join('order_items','shipping_details.id','=','order_items.shipping_detail_id')->where('shipping_details.user_id',Auth::user()->id)->where('order_items.stage',0)->count();
 
         $acceptCount = ShippingDetail::join('order_items','shipping_details.id','=','order_items.shipping_detail_id')->where('shipping_details.user_id',Auth::user()->id)->where('order_items.stage',1)->count();
@@ -55,11 +55,15 @@ class DashboardController extends Controller
         return view(HomePage::theme("user.dashboard.full_order"))->with(compact('orderItem'));
     }
 
+    public function referalProduct(){
+        return view(HomePage::theme('user.dashboard.referal_product'));
+    }
+
     public function cancelOrder(Request $request){
         return view('user.profile.cancellation');
     }
 
-    
+
     public function accountDetail(Request $request){
         if($request->isMethod('post')){
             // dd($request->all());
@@ -117,7 +121,7 @@ class DashboardController extends Controller
         $countRate = Rating::where('user_id',Auth::user()->id)->where('product_id',$r->product_id)->count();
         if($countRate>0){
             $rating = Rating::where('user_id',Auth::user()->id)->where('product_id',$r->product_id)->first();
-            $rating->rating = $r->rating;  
+            $rating->rating = $r->rating;
             $rating->title =  $r->title;
             $rating->rating_desc = $r->rating_desc;
             $rating->user_id = Auth::user()->id;
@@ -126,13 +130,13 @@ class DashboardController extends Controller
             return redirect()->back()->with('success','Your rating has been updated successfully!!');
         }else{
             $rating = new Rating();
-            $rating->rating = $r->rating;  
+            $rating->rating = $r->rating;
             $rating->title =  $r->title;
             $rating->rating_desc = $r->rating_desc;
             $rating->user_id = Auth::user()->id;
             $rating->product_id = $r->product_id;
             $rating->save();
-            return redirect()->back()->with('success','Your rating has been added successfully!!'); 
+            return redirect()->back()->with('success','Your rating has been added successfully!!');
         }
     }
 

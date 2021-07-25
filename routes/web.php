@@ -290,6 +290,11 @@ if(env('useangular',0)==0){
             'as' => 'user.order.item'
         ]);
 
+        Route::match(['get', 'post'], 'referal-product', [
+            'uses' => 'user\DashboardController@referalProduct',
+            'as' => 'user.referal.product'
+        ]);
+
         Route::match(['get', 'post'], 'full/order/{shipping_detail_id}', [
             'uses' => 'user\DashboardController@fullOrderDetail',
             'as' => 'user.full.order'
@@ -1086,7 +1091,9 @@ Route::group(['prefix' => 'admin/orders', 'middleware' => 'admin_auth'], functio
     Route::get('/data/print/trip/{id}', 'admin\order\WarehouseController@tripPrint')->name('admin.orders-tripPrint');
     Route::post('/data/print/multiple', 'admin\order\WarehouseController@multiplePrint')->name('admin.orders-multiplePrint');
 
-
+    // XXX referal orders
+    Route::get('/referal/users', 'admin\order\OrderController@referalUsers')->name('admin.referal.user');
+    Route::get('/referal/users/{id}/products', 'admin\order\OrderController@referalUserProducts')->name('admin.referal.user.product');
 
 });
 

@@ -3,6 +3,7 @@
 @section('content')
 @php
 $user = \App\model\VendorUser\VendorUser::where('user_id',Auth::user()->id)->first();
+$total_ref = App\model\OrderItem::where('referal_id',Auth::user()->id)->count();
 @endphp
 <section class="content">
     <div class="body_scroll">
@@ -76,6 +77,16 @@ $user = \App\model\VendorUser\VendorUser::where('user_id',Auth::user()->id)->fir
                                     <div class="w_icon indigo"><i class="zmdi zmdi-hc-fw"></i></div>
                                     <h4 class="mt-3">{{ $returnCount }}</h4>
                                     <span class="text-muted">Returned Order(s)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="card w_data_1">
+                                <div class="body">
+                                    <div class="w_icon indigo"><i class="zmdi zmdi-favorite"></i></div>
+                                    <h4 class="mt-3">{{ $total_ref }}</h4>
+                                    <span class="text-muted">My Referal(s)</span>
                                 </div>
                             </div>
                         </div>
