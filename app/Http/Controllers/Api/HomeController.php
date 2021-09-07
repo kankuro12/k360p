@@ -293,7 +293,7 @@ class HomeController extends Controller
                     $product->newprice=$product->mark_price;
                 }
             }
-            array_push($arr,$product);
+            array_push($arr,$product->toArray());
         }
 
         dd($arr);
