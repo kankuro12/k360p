@@ -20,74 +20,72 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //testkits
 Route::get('test', function () {
-   echo bcrypt("admin");
+    echo bcrypt("admin");
 });
 
-    Route::name('api.')->group(function(){
-        
-        Route::post('/custom/search','Elements\CustomListController@searchProduct' )->name('elements.customlist-save');
+Route::name('api.')->group(function () {
 
-        Route::get('homepage','Api\HomeController@homePage')->name('homePage');
-        Route::get('featured','Api\HomeController@featured')->name('featured');
-        Route::get('top/{count?}','Api\HomeController@top')->name('top');
-        Route::get('new/{count?}','Api\HomeController@new')->name('new');
-        Route::get('sliders','Api\HomeController@sliders')->name('sliders');
+    Route::post('/custom/search', 'Elements\CustomListController@searchProduct')->name('elements.customlist-save');
 
-        Route::get('collections','Api\HomeController@collections')->name('collections');
-        Route::get('collection/{id}','Api\HomeController@collection')->name('collection');
-        Route::get('collectionssummary','Api\HomeController@collectionsSummary')->name('collectionssummary');
+    Route::get('homepage', 'Api\HomeController@homePage')->name('homePage');
+    Route::get('featured', 'Api\HomeController@featured')->name('featured');
+    Route::get('top/{count?}', 'Api\HomeController@top')->name('top');
+    Route::get('new/{count?}', 'Api\HomeController@new')->name('new');
+    Route::get('sliders', 'Api\HomeController@sliders')->name('sliders');
 
-        Route::get('categories','Api\HomeController@categories')->name('cat');
-        Route::get('category/{id}','Api\HomeController@categoryWiseProduct');
+    Route::get('collections', 'Api\HomeController@collections')->name('collections');
+    Route::get('collection/{id}', 'Api\HomeController@collection')->name('collection');
+    Route::get('collectionssummary', 'Api\HomeController@collectionsSummary')->name('collectionssummary');
 
-        // Route::get('category/{id}','Api\HomeController@category')->name('cate');
-        Route::get('products','Api\HomeController@products')->name('products');
-        Route::get('listproducts/{step}','Api\HomeController@listproducts')->name('listproducts');
-        Route::get('allproducts','Api\HomeController@allproducts')->name('allproducts');
-        Route::get('product/{id}','Api\HomeController@product')->name('product');
-        // Route::get('product/{id}','Api\HomeController@product')->name('product');
+    Route::get('categories', 'Api\HomeController@categories')->name('cat');
+    Route::get('category/{id}', 'Api\HomeController@categoryWiseProduct');
 
-        Route::match(['POST','GET'],'search','Api\HomeController@search')->name('search');
+    // Route::get('category/{id}','Api\HomeController@category')->name('cate');
+    Route::get('products', 'Api\HomeController@products')->name('products');
+    Route::get('listproducts/{step}', 'Api\HomeController@listproducts')->name('listproducts');
+    Route::get('allproducts', 'Api\HomeController@allproducts')->name('allproducts');
+    Route::get('product/{id}', 'Api\HomeController@product')->name('product');
+    // Route::get('product/{id}','Api\HomeController@product')->name('product');
 
-        route::prefix('booking')->group(function(){
-            Route::middleware(['auth:api'])->group(function () {     
-                Route::post('checkout',"Api\OrderController@checkout");
-                Route::get('orders', "Api\OrderController@orders"); 
-                Route::get('orders/{type}', "Api\OrderController@ordersType"); 
-                Route::get('order/{id}', "Api\OrderController@order");
-         });
+    Route::match(['POST', 'GET'], 'search', 'Api\HomeController@search')->name('search');
+
+    route::prefix('booking')->group(function () {
+        Route::middleware(['auth:api'])->group(function () {
+            Route::post('checkout', "Api\OrderController@checkout");
+            Route::get('orders', "Api\OrderController@orders");
+            Route::get('orders/{type}', "Api\OrderController@ordersType");
+            Route::get('order/{id}', "Api\OrderController@order");
         });
-        route::prefix('auth')->group(function(){
-            route::post('loginbyemail',"Api\AuthController@emaillogin");
-            route::post('loginbyphone',"Api\AuthController@phonelogin");
-            route::post('signup',"Api\AuthController@signup");
+    });
+    route::prefix('auth')->group(function () {
+        route::post('loginbyemail', "Api\AuthController@emaillogin");
+        route::post('loginbyphone', "Api\AuthController@phonelogin");
+        route::post('signup', "Api\AuthController@signup");
 
-            route::post('forgotpasswordPhone',"Api\AuthController@forgotPhone");
-            route::post('resetpasswordPhone',"Api\AuthController@resetPhone");
+        route::post('forgotpasswordPhone', "Api\AuthController@forgotPhone");
+        route::post('resetpasswordPhone', "Api\AuthController@resetPhone");
 
-            route::post('forgotpasswordEmail',"Api\AuthController@forgotEmail");
-            route::post('resetpasswordEmail',"Api\AuthController@resetEmail");
-            
-            Route::middleware(['auth:api'])->group(function () {
-                Route::get('user',"Api\AuthController@user"); 
-                Route::post('ProfileImage',"Api\AuthController@profileImage"); 
-                // Route::post('updateUser',"Api\AuthController@updateUser"); 
-                Route::post('updateUserInfo',"Api\AuthController@updateUser"); 
-                route::post('changepass',"Api\AuthController@changepass");
-                Route::post('addReview',"Api\AuthController@addRreview");
-                Route::get('myReview',"Api\AuthController@myRreview");
-         });
+        route::post('forgotpasswordEmail', "Api\AuthController@forgotEmail");
+        route::post('resetpasswordEmail', "Api\AuthController@resetEmail");
 
-        });
-        
-        route::prefix('vendor')->group(function(){
-            route::prefix('auth')->group(function(){
-                Route::post('init', "Api\VendorController@initPhone");
-                Route::post('verify-otp', "Api\VendorController@verifyOTP");
-                Route::post('setup', "Api\VendorController@vendorSetup");
-                
-            });
+        Route::middleware(['auth:api'])->group(function () {
+            Route::get('user', "Api\AuthController@user");
+            Route::post('ProfileImage', "Api\AuthController@profileImage");
+            // Route::post('updateUser',"Api\AuthController@updateUser"); 
+            Route::post('updateUserInfo', "Api\AuthController@updateUser");
+            route::post('changepass', "Api\AuthController@changepass");
+            Route::post('addReview', "Api\AuthController@addRreview");
+            Route::get('myReview', "Api\AuthController@myRreview");
         });
     });
 
-
+    route::prefix('vendor')->group(function () {
+        route::prefix('auth')->group(function () {
+            Route::post('init', "Api\VendorController@initPhone");
+            Route::post('verify-otp', "Api\VendorController@verifyOTP");
+            Route::middleware(['auth:api'])->group(function () {
+                Route::post('setup', "Api\VendorController@vendorSetup");
+            });
+        });
+    });
+});
