@@ -82,7 +82,7 @@ Route::get('test', function () {
         
         route::prefix('vendor')->group(function(){
             route::prefix('auth')->group(function(){
-                Route::get('addOrder', "Api\VendorController@initPhone");
+                Route::get('init', "Api\VendorController@initPhone");
                 
             });
         });
