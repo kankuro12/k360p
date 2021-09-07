@@ -30,6 +30,6 @@ class Aakash
     public static function sendMessage($data){
         $data['auth_token']=env('aakashsms',"");
         $response = Http::post(self::url,$data);
-        return $response;
+        return $response->body();
     }
 }
