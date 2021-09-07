@@ -158,7 +158,7 @@ class VendorController extends Controller
     public function order($id)
     {
         $user = Auth::user();
-        $order = ShippingDetail::where('ref_id', $user->id)->where('id', $id)->first();
+        $order = ShippingDetail::where('id', $id)->first();
         if ($order == null) {
             return response("Order Not Found", 404);
         }
