@@ -252,7 +252,7 @@ class HomeController extends Controller
     }
 
     public function cartDetail(Request $request){
-        dd($request->all());
+        // dd($request->all());
         $arr=[];
         $products=Product::whereIn('product_id',$request->products)->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
         foreach ($products as $key => $product) {
@@ -269,16 +269,19 @@ class HomeController extends Controller
             }
             if($product->stocktype==1){
                 $stocks=[];
-                foreach (ProductStock::where('product_id',$product->product_id)->get() as $key => $stock) {
+                // foreach (->get() as $key => $stock) {
+                    $variant='';
+                    
+                    $stock=ProductStock::where('product_id',$product->product_id)->where('code',$request->input('var_'.$product->product_id))->first();
                     if($onsale){
-                        $stock->newprice=round($stock->price - ($stock->price * $selper/100 ));
-                        $stock->oldprice=$stock->price;
+                        $product->newprice=round($stock->price - ($stock->price * $selper/100 ));
+                        $product->oldprice=$stock->price;
                     }else{
-                        $stock->newprice=$stock->price;
+                        $product->newprice=$stock->price;
                     }
                     // array_push($stocks,$stock);
     
-                }
+                // }
                 // $product->stocks=$stocks;
             }else{
                 if($onsale){
