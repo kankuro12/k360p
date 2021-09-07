@@ -258,7 +258,7 @@ class HomeController extends Controller
             $onsale=$product->onsale();
             $product->onsale=$onsale;
             $selper=0;
-            $product->variants=[];
+            // $product->variants=[];
             if($onsale){
                 $dt = Carbon::now();
                 $current =Onsell::where('started_at','<=',$dt)
@@ -267,12 +267,6 @@ class HomeController extends Controller
                 $selper=  Sell_product::where('product_id',$product->product_id)->whereIn('sell_id',$current)->first()->sale_discount;
             }
             if($product->stocktype==1){
-                // $variants=[];
-                // foreach (Product_attribute::where('product_id',$product->product_id)->get() as $key => $variant) {
-                //     $variant->options=ProductAttributeItem::where('product_attribute_id',$variant->id);
-                //     array_push($variants,$variant);
-                // }
-                // $product->variants=$variants;
                 $stocks=[];
                 foreach (ProductStock::where('product_id',$product->product_id)->get() as $key => $stock) {
                     if($onsale){
