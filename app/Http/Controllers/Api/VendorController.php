@@ -58,7 +58,8 @@ class VendorController extends Controller
         try {
             Aakash::sendMessage( ['to'=>$vendor->phone_number,"text"=>"Your Activation Code is ".$user->activation_token]);
         } catch (\Throwable $th) {
-            //throw $th;
+            return response()->json(['success'=>false]);
+
         }
         return response()->json(['success'=>true]);
     }
