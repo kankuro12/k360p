@@ -270,15 +270,16 @@ class HomeController extends Controller
             if($product->stocktype==1){
                 $stocks=[];
                 // foreach (->get() as $key => $stock) {
-                    $variant='';
+                    $variant=$request->input('var_'.$product->product_id);
                     
-                    $stock=ProductStock::where('product_id',$product->product_id)->where('code',$request->input('var_'.$product->product_id))->first();
+                    $stock=ProductStock::where('product_id',$product->product_id)->where('code',$variant)->first();
                     if($onsale){
                         $product->newprice=round($stock->price - ($stock->price * $selper/100 ));
                         $product->oldprice=$stock->price;
                     }else{
                         $product->newprice=$stock->price;
                     }
+                    $product->variant=VariantManager::getDetail($variant);
                     // array_push($stocks,$stock);
     
                 // }
