@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
+/public/back
 /public/storage
+/public/product
 /public/profilepics
 /public/image
 /public/images
