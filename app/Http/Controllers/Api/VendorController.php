@@ -9,6 +9,7 @@ use App\model\VendorUser\VendorUser;
 use App\Notifications\User\ApiPassForgot;
 use App\Rating;
 use App\User;
+use App\VendorVerification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -41,18 +42,26 @@ class VendorController extends Controller
             $user->activation_token = $reset;
             $user->save();
         } else {
-            $user = new User();
-            $user->email = "xx_" . $request->phone;
-            $user->password = bcrypt("xx_");
-            $reset = $user->id . mt_rand(0000, 9999);
-            $user->role_id = 2;
-            $user->activation_token = $reset;
-            $user->save();
-
+            $buyer = VendorUser::where('mobile_number', $request->phone)->first();
             $vendor = new Vendor();
-            $vendor->name = $request->phone;
-            $vendor->address = "";
             $vendor->phone_number = $request->phone;
+            if ($buyer == null) {
+                $user = new User();
+                $user->email = "xx_" . $request->phone;
+                $user->password = bcrypt("xx_");
+                $reset = $user->id . mt_rand(0000, 9999);
+                $user->role_id = 2;
+                $user->activation_token = $reset;
+                $user->save();
+                $vendor->name = $request->phone;
+                $vendor->address = "";
+            } else {
+                $user = User::where('id', $buyer->user_id)->first();
+                $vendor->name = $buyer->fname . ' ' . $buyer->lname;
+                $vendor->address = $buyer->address;
+            }
+
+
             $vendor->stage = -1;
             $vendor->user_id = $user->id;
             $vendor->save();
@@ -69,8 +78,8 @@ class VendorController extends Controller
     public function verifyOTP(Request $request)
     {
         $vendor = Vendor::where('phone_number', $request->phone)->first();
-        $token='';
-        $user="";
+        $token = '';
+        $user = "";
         if ($vendor == null) {
             return response()->json(['status' => false, "message" => "Mobile Number Not Found"]);
         }
@@ -83,7 +92,7 @@ class VendorController extends Controller
             $user->save();
             $token = $user->createToken('logintoken')->accessToken;
         }
-        return response()->json(['status' => true,'token'=>$token,'user'=>$user,'vendor'=>$vendor]);
+        return response()->json(['status' => true, 'token' => $token, 'user' => $user, 'vendor' => $vendor]);
     }
 
 
@@ -105,5 +114,40 @@ class VendorController extends Controller
             }
         }
         return response()->json(['acc' => null, 'user' => null, 'status' => false, 'token' => ""]);
+    }
+
+    public function vendorSetup(Request $request)
+    {
+        if (!Auth::check()) {
+            return response()->json(['status' => false, "message" => "Please Login"]);
+        } else {
+            $user = Auth::user();
+            $vendor = Vendor::where('user_id', $user->id);
+            $vendor->name = $request->name;
+            $vendor->address = $request->address;
+            $vendor->storename = $request->storename;
+
+            $verification = VendorVerification::where('vendor_id', $vendor->id)->first();
+            if ($verification == null) {
+                $verification = new VendorVerification();
+            }
+            $verification->bankaccount = $request->bankaccount;
+            $verification->bankname = $request->bankname;
+            $verification->vendor_id = $vendor->id;
+            if ($request->hasFile('reg')) {
+                $verification->registration = $request->file('image')->store('images/vendor_images/verification');
+            } else {
+                $verification->registration = '';
+            }
+            if ($request->hasFile('citi')) {
+                $verification->citizenship = $request->file('image1')->store('images/vendor_images/verification');
+            } else {
+                $verification->citizenship = '';
+            }
+            $verification->save();
+            $vendor->stage = 3;
+            $vendor->save();
+            return response()->json(['status' => true, "message" => "Vendor Updated Sucessfully"]);
+        }
     }
 }

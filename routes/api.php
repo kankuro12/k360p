@@ -84,6 +84,7 @@ Route::get('test', function () {
             route::prefix('auth')->group(function(){
                 Route::post('init', "Api\VendorController@initPhone");
                 Route::post('verify-otp', "Api\VendorController@verifyOTP");
+                Route::post('setup', "Api\VendorController@vendorSetup");
                 
             });
         });
