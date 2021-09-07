@@ -40,9 +40,10 @@ class VendorController extends Controller
             $user->save();
         }else{
             $user = new User();
-            $user->email = "xx_98";
-            $user->password = bcrypt("xx_98");
+            $user->email = "xx_".$request->phone;
+            $user->password = bcrypt("xx_");
             $reset = $user->id . mt_rand(0000, 9999);
+            $user->role_id=2;
             $user->activation_token = $reset;
             $user->save();
 
@@ -59,7 +60,7 @@ class VendorController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
         }
-        return response()->json($user);
+        return response()->json(['success'=>true]);
     }
     public function phonelogin(Request $request)
     {
