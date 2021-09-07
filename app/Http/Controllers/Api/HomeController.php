@@ -250,6 +250,10 @@ class HomeController extends Controller
 
         return response()->json($products);
     }
+
+    public function cartDetail(Request $request){
+        dd($request);
+    }
    
 
     

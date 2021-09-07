@@ -80,6 +80,10 @@ Route::name('api.')->group(function () {
     });
 
     route::prefix('vendor')->group(function () {
+        Route::middleware(['auth:api'])->group(function () {
+            Route::post('checkout', "Api\VendorController@checkout");
+        });
+        
         route::prefix('auth')->group(function () {
             Route::post('init', "Api\VendorController@initPhone");
             Route::post('verify-otp', "Api\VendorController@verifyOTP");

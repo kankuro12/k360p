@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Channels\Aakash;
 use App\Http\Controllers\Controller;
+use App\model\admin\Product;
+use App\model\OrderItem;
+use App\model\ProductStock;
+use App\model\ShippingDetail;
 use App\model\Vendor\Vendor;
 use App\model\VendorUser\VendorUser;
 use App\Notifications\User\ApiPassForgot;
@@ -148,6 +152,87 @@ class VendorController extends Controller
             $vendor->stage = 3;
             $vendor->save();
             return response()->json(['status' => true, "message" => "Vendor Updated Sucessfully"]);
+        }
+    }
+
+    public function order($id)
+    {
+        $user = Auth::user();
+        $order = ShippingDetail::where('ref_id', $user->id)->where('id', $id)->first();
+        if ($order == null) {
+            return response("Order Not Found", 404);
+        }
+
+        return response()->json($order);
+    }
+
+    public function checkout(Request $request)
+    {
+        if (!Auth::check()) {
+            return response()->json(['status' => false, "message" => "Please Login"]);
+        } else {
+            $user = Auth::user();
+            $shipping = new ShippingDetail();
+            if($request->filled('me')){
+                
+                $shipping->user_id = $user->id;
+            }
+            $shipping->email = $request->email??'';
+            $shipping->name = $request->name;
+            $shipping->phone = $request->phone;
+            $shipping->order_message = $request->order_message ?? "";
+            $shipping->streetaddress = $request->streetaddress;
+            $shipping->province_id = $request->province_id;
+            $shipping->district_id = $request->district_id;
+            $shipping->municipality_id = $request->municipality_id;
+            $shipping->shipping_area_id = $request->shipping_area_id;
+            $shipping->shipping_charge = $request->shipping_charge ?? 0;
+            $shipping->otp = mt_rand(00000, 99999);
+            $shipping->save();
+            $vids = [];
+            // dd($request->items);
+            foreach ($request->items as $item) {
+                $value = (object)$item;
+                $productDetail = Product::where('product_id', $value->id)->first();
+                $orderItem = new OrderItem();
+                $orderItem->shipping_detail_id = $shipping->id;
+
+                $orderItem->product_id = $value->id;
+                $orderItem->qty = $value->qty;
+                $orderItem->variant_code = $value->variant_code;
+                $vendor_id = $productDetail->vendor_id;
+                if ($vendor_id != null && $vendor_id != 0) {
+                    $orderItem->vendor_id = $vendor_id;
+
+                    if (!in_array($vendor_id, $vids)) {
+                        array_push($vids, $vendor_id);
+                    }
+                } else {
+                    $orderItem->ismainstore = 1;
+                }
+
+                $orderItem->stage = 0;
+                $orderItem->issimple = $productDetail->stocktype;
+                $orderItem->rate = $value->rate;
+
+                $orderItem->discount = 0;
+                $orderItem->deliverytype = $request->delivery_type ?? 0;
+
+                if ($value->variant_code != null) {
+                    $variantStock = ProductStock::where('product_id', $value->id)->where('code', $value->variant_code)->first();
+                    $variantStock->qty = $variantStock->qty - $value->qty;
+                    $variantStock->save();
+                } else {
+                    $stockStatus = Product::where('product_id', $value->id)->first();
+                    $stockStatus->quantity = $stockStatus->quantity - $value->qty;
+                    $stockStatus->save();
+                }
+                if(!$request->filled('me')){
+                    $orderItem->referal_id=$user->id;
+                }
+                $orderItem->save();
+            }
+            return response()->json(['order' => $shipping]);
         }
     }
 }
