@@ -35,7 +35,7 @@ class VendorController extends Controller
         $user=null;
         $r=null;
         if ($vendor != null) {
-            $user=User::where('id',$vendor->user_id);
+            $user=User::where('id',$vendor->user_id)->first();
             $reset = $user->id . mt_rand(0000, 9999);
             $user->activation_token = $reset;
             $user->save();
