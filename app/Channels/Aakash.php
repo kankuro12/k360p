@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class Aakash
 {
-    const url="https://aakashsms.com/admin/public/sms/v3/send";
+    const url="https://sms.aakashsms.com/sms/v3/send";
     /**
      * Send the given notification.
      *
