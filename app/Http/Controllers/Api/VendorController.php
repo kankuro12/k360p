@@ -69,8 +69,10 @@ class VendorController extends Controller
     public function verifyOTP(Request $request)
     {
         $vendor = Vendor::where('phone_number', $request->phone)->first();
+        $token='';
+        $user="";
         if ($vendor == null) {
-            return response()->json(['status' => false, "message" => "Mobile No Not Found"]);
+            return response()->json(['status' => false, "message" => "Mobile Number Not Found"]);
         }
         $user = User::find($vendor->user_id);
         if ($user->activation_token != $request->token) {
@@ -79,9 +81,13 @@ class VendorController extends Controller
             $user->password = bcrypt($request->password);
             $user->activation_token = "";
             $user->save();
+            $token = $user->createToken('logintoken')->accessToken;
         }
-        return response()->json(['status' => true]);
+        return response()->json(['status' => true,'token'=>$token,'user'=>$user,'vendor'=>$vendor]);
     }
+
+
+
     public function phonelogin(Request $request)
     {
         $buyer = Vendor::where('phone_number', $request->phone)->first();
