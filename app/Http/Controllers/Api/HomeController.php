@@ -252,6 +252,8 @@ class HomeController extends Controller
     }
 
     public function cartDetail(Request $request){
+        $arr=[];
+
         dd($request);
     }
    

@@ -40,6 +40,8 @@ Route::name('api.')->group(function () {
     Route::get('categories', 'Api\HomeController@categories')->name('cat');
     Route::get('category/{id}', 'Api\HomeController@categoryWiseProduct');
 
+    //XXX Cart Detail
+    Route::post('cart-detail','Api\HomeController@cartDetail' );
     // Route::get('category/{id}','Api\HomeController@category')->name('cate');
     Route::get('products', 'Api\HomeController@products')->name('products');
     Route::get('listproducts/{step}', 'Api\HomeController@listproducts')->name('listproducts');
