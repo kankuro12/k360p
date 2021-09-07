@@ -62,8 +62,8 @@ class VendorController extends Controller
             return response()->json(['success'=>false]);
 
         }
-        // return response()->json(['success'=>true,'req'=>$r]);
-        return $r;
+        return response()->json(['success'=>true]);
+        // return $r;
     }
     public function phonelogin(Request $request)
     {
