@@ -33,6 +33,7 @@ class VendorController extends Controller
     public function initPhone(Request $request){
         $vendor = Vendor::where('phone_number', $request->phone)->first();
         $user=null;
+        $r=null;
         if ($vendor != null) {
             $user=User::where('id',$vendor->user_id);
             $reset = $user->id . mt_rand(0000, 9999);
@@ -56,9 +57,9 @@ class VendorController extends Controller
             $vendor->save();
         }
         try {
-            Aakash::sendMessage( ['to'=>$vendor->phone_number,"text"=>"Your Activation Code is ".$user->activation_token]);
+            $r=Aakash::sendMessage( ['to'=>$vendor->phone_number,"text"=>"Your Activation Code is ".$user->activation_token]);
         } catch (\Throwable $th) {
-            return response()->json(['success'=>false]);
+            return response()->json(['success'=>false,'req'=>$r]);
 
         }
         return response()->json(['success'=>true]);
