@@ -47,7 +47,7 @@ class VendorController extends Controller
             $user->save();
 
             $vendor = new Vendor();
-            $vendor->name = "";
+            $vendor->name = $request->phone;
             $vendor->address = "";
             $vendor->phone_number = $request->phone;
             $vendor->stage = -1;
