@@ -59,10 +59,10 @@ class VendorController extends Controller
         try {
             $r=Aakash::sendMessage( ['to'=>$vendor->phone_number,"text"=>"Your Activation Code is ".$user->activation_token]);
         } catch (\Throwable $th) {
-            return response()->json(['success'=>false,'req'=>$r]);
+            return response()->json(['success'=>false]);
 
         }
-        return response()->json(['success'=>true]);
+        return response()->json(['success'=>true,'req'=>$r]);
     }
     public function phonelogin(Request $request)
     {
