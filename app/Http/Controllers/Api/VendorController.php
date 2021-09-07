@@ -31,10 +31,10 @@ class AuthController extends Controller
     }
 
     public function initPhone(Request $request){
-        $buyer = Vendor::where('phone_number', $request->phone)->first();
+        $vendor = Vendor::where('phone_number', $request->phone)->first();
         $user=null;
-        if ($buyer != null) {
-            $user=User::where('id',$buyer->user_id);
+        if ($vendor != null) {
+            $user=User::where('id',$vendor->user_id);
             $reset = $user->id . mt_rand(0000, 9999);
             $user->activation_token = $reset;
             $user->save();
@@ -46,13 +46,18 @@ class AuthController extends Controller
             $user->activation_token = $reset;
             $user->save();
 
-            $buyer = new Vendor();
-            $buyer->name = "";
-            $buyer->address = "";
-            $buyer->phone_number = "";
-            $buyer->stage = -1;
-            $buyer->user_id = $user->id;
-            $buyer->save();
+            $vendor = new Vendor();
+            $vendor->name = "";
+            $vendor->address = "";
+            $vendor->phone_number = $request->phone;
+            $vendor->stage = -1;
+            $vendor->user_id = $user->id;
+            $vendor->save();
+        }
+        try {
+            Aakash::sendMessage( ['to'=>$vendor->phone_number,"text"=>"Your Activation Code is ".$user->activation_token]);
+        } catch (\Throwable $th) {
+            //throw $th;
         }
         return response()->json($user);
     }
