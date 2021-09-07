@@ -267,12 +267,12 @@ class HomeController extends Controller
                 $selper=  Sell_product::where('product_id',$product->product_id)->whereIn('sell_id',$current)->first()->sale_discount;
             }
             if($product->stocktype==1){
-                $variants=[];
-                foreach (Product_attribute::where('product_id',$product->product_id)->get() as $key => $variant) {
-                    $variant->options=ProductAttributeItem::where('product_attribute_id',$variant->id);
-                    array_push($variants,$variant);
-                }
-                $product->variants=$variants;
+                // $variants=[];
+                // foreach (Product_attribute::where('product_id',$product->product_id)->get() as $key => $variant) {
+                //     $variant->options=ProductAttributeItem::where('product_attribute_id',$variant->id);
+                //     array_push($variants,$variant);
+                // }
+                // $product->variants=$variants;
                 $stocks=[];
                 foreach (ProductStock::where('product_id',$product->product_id)->get() as $key => $stock) {
                     if($onsale){
@@ -281,10 +281,10 @@ class HomeController extends Controller
                     }else{
                         $stock->newprice=$stock->price;
                     }
-                    array_push($stocks,$stock);
+                    // array_push($stocks,$stock);
     
                 }
-                $product->stocks=$stocks;
+                // $product->stocks=$stocks;
             }else{
                 if($onsale){
                     $product->newprice=round($product->mark_price - ($product->mark_price * $selper/100 ));
