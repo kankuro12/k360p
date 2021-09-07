@@ -47,7 +47,12 @@ class RegisterController extends Controller
             'phone_number' => $request->phone_number,
             'user_id' => $user->id,
         ]);
-        $user->notify(new SignupActivate($user));
+        try {
+            //code...
+            $user->notify(new SignupActivate($user));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
         Auth::logout();
         if (Auth::attempt(['email' => $user->email, 'password' => $request->password, 'active' => 1])) {
