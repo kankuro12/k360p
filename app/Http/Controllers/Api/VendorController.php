@@ -30,21 +30,22 @@ class VendorController extends Controller
         return response()->json(['acc' => $buyer, 'user' => $user, 'status' => $okk, 'token' => $token]);
     }
 
-    public function initPhone(Request $request){
+    public function initPhone(Request $request)
+    {
         $vendor = Vendor::where('phone_number', $request->phone)->first();
-        $user=null;
-        $r=null;
+        $user = null;
+        $r = null;
         if ($vendor != null) {
-            $user=User::where('id',$vendor->user_id)->first();
+            $user = User::where('id', $vendor->user_id)->first();
             $reset = $user->id . mt_rand(0000, 9999);
             $user->activation_token = $reset;
             $user->save();
-        }else{
+        } else {
             $user = new User();
-            $user->email = "xx_".$request->phone;
+            $user->email = "xx_" . $request->phone;
             $user->password = bcrypt("xx_");
             $reset = $user->id . mt_rand(0000, 9999);
-            $user->role_id=2;
+            $user->role_id = 2;
             $user->activation_token = $reset;
             $user->save();
 
@@ -57,13 +58,29 @@ class VendorController extends Controller
             $vendor->save();
         }
         try {
-            $r=Aakash::sendMessage( ['to'=>$vendor->phone_number,"text"=>"Your Activation Code is ".$user->activation_token]);
+            $r = Aakash::sendMessage(['to' => $vendor->phone_number, "text" => "Your Activation Code is " . $user->activation_token]);
         } catch (\Throwable $th) {
-            return response()->json(['success'=>false]);
-
+            return response()->json(['success' => false]);
         }
-        return response()->json(['success'=>true]);
+        return response()->json(['success' => true]);
         // return $r;
+    }
+
+    public function verifyOTP(Request $request)
+    {
+        $vendor = Vendor::where('phone_number', $request->phone)->first();
+        if ($vendor == null) {
+            return response()->json(['status' => false, "message" => "Mobile No Not Found"]);
+        }
+        $user = User::find($vendor->user_id);
+        if ($user->activation_token != $request->token) {
+            return response()->json(['status' => false, "message" => "Token Expired"]);
+        } else {
+            $user->password = bcrypt($request->password);
+            $user->activation_token = "";
+            $user->save();
+        }
+        return response()->json(['status' => true]);
     }
     public function phonelogin(Request $request)
     {
