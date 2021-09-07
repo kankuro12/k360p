@@ -122,7 +122,7 @@ class VendorController extends Controller
             return response()->json(['status' => false, "message" => "Please Login"]);
         } else {
             $user = Auth::user();
-            $vendor = Vendor::where('user_id', $user->id);
+            $vendor = Vendor::where('user_id', $user->id)->first();
             $vendor->name = $request->name;
             $vendor->address = $request->address;
             $vendor->storename = $request->storename;
