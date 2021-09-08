@@ -91,6 +91,7 @@ Route::name('api.')->group(function () {
             Route::post('verify-otp', "Api\VendorController@verifyOTP");
             Route::middleware(['auth:api'])->group(function () {
                 Route::post('setup', "Api\VendorController@vendorSetup");
+                Route::post('user', "Api\VendorController@vendorUser");
             });
         });
     });

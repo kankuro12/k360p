@@ -244,4 +244,20 @@ class VendorController extends Controller
             return response()->json(['order' => $shipping]);
         }
     }
+
+    public function vendorUser(){
+        $user=Auth::user();
+        $vendor=Vendor::where('user_id',$user->id)->first();
+        $verification = VendorVerification::where('vendor_id', $vendor->id)->first();
+        if($verification!=null){
+
+            $vendor->bankaccount = $verification->bankaccount;
+            $vendor->bankname = $verification->bankname;
+        }else{
+            $vendor->bankaccount ='';
+            $vendor->bankname = '';
+        }
+        return response()->json(['status' => true,  'user' => $user, 'vendor' => $vendor]);
+
+    }
 }
