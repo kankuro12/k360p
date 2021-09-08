@@ -256,7 +256,7 @@ class HomeController extends Controller
         // return response()->json($request->all());
         $arr=[];
         // $products=Product::whereIn('product_id',$request->product)->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
-        foreach ($request->products as $key => $p) {
+        foreach ($request->product as $key => $p) {
             $product=Product::where('product_id',$p->id)->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
             $onsale=$product->onsale();
             $product->onsale=$onsale;
