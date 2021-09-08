@@ -255,11 +255,11 @@ class HomeController extends Controller
     public function cartDetail(Request $request){
         
         // return response()->json($request->all());
-        HomePage::ddh($request);
+        // HomePage::ddh($request);
         $arr=[];
         // $products=Product::whereIn('product_id',$request->product)->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
         foreach ($request->product as $key => $p) {
-            $product=Product::where('product_id',$p->id)->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
+            $product=Product::where('product_id',$p['id'])->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
             $onsale=$product->onsale();
             $product->onsale=$onsale;
             $selper=0;
@@ -274,7 +274,7 @@ class HomeController extends Controller
             if($product->stocktype==1){
                 $stocks=[];
                 // foreach (->get() as $key => $stock) {
-                    $variant=$p->v;
+                    $variant=$p['v'];
                     
                     $stock=ProductStock::where('product_id',$product->product_id)->where('code',$variant)->first();
                     if($onsale){
