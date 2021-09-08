@@ -91,9 +91,8 @@ class VendorController extends Controller
         if ($user->activation_token != $request->token) {
             return response()->json(['status' => false, "message" => "Token Expired"]);
         } else {
-            $user->password = bcrypt($request->password);
-            $user->activation_token = "";
-            $user->save();
+            // $user->activation_token = "";
+            // $user->save();
             $token = $user->createToken('logintoken')->accessToken;
         }
         return response()->json(['status' => true, 'token' => $token, 'user' => $user, 'vendor' => $vendor]);
