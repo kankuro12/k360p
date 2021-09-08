@@ -254,6 +254,7 @@ class HomeController extends Controller
     public function cartDetail(Request $request){
         
         // return response()->json($request->all());
+        dd($request);
         $arr=[];
         // $products=Product::whereIn('product_id',$request->product)->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
         foreach ($request->product as $key => $p) {
