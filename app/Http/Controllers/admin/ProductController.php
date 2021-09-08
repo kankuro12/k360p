@@ -430,8 +430,7 @@ class ProductController extends Controller
         $product->tags = $data['tags'];
         $product->featured = $data['featured']??0;
         $product->canbundle = $data['canbundle']??0;
-        if($data['quantity']!=null){
-
+        if($request->filled('quantity')){
             $product->quantity = $data['quantity'];
         }
 
