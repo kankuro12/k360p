@@ -275,7 +275,7 @@ class HomeController extends Controller
                 $stocks=[];
                 // foreach (->get() as $key => $stock) {
                     $variant=$p['v'];
-                    
+                    $product->variant=$variant;
                     $stock=ProductStock::where('product_id',$product->product_id)->where('code',$variant)->first();
                     if($onsale){
                         $product->newprice=round($stock->price - ($stock->price * $selper/100 ));
@@ -283,7 +283,7 @@ class HomeController extends Controller
                     }else{
                         $product->newprice=$stock->price;
                     }
-                    $product->variant=VariantManager::codeToString($variant);
+                    $product->variants=VariantManager::codeToString($variant);
                     // array_push($stocks,$stock);
     
                 // }
