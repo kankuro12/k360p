@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Channels\Aakash;
 use App\Http\Controllers\Controller;
 use App\model\admin\Product;
+use App\model\admin\VendorWithdrawl;
 use App\model\OrderItem;
 use App\model\ProductStock;
 use App\model\ShippingDetail;
@@ -94,6 +95,12 @@ class VendorController extends Controller
             // $user->activation_token = "";
             // $user->save();
             $token = $user->createToken('logintoken')->accessToken;
+        }
+        $verification = VendorVerification::where('vendor_id', $vendor->id)->first();
+        if($verification!=null){
+
+            $vendor->bankaccount = $verification->bankaccount;
+            $vendor->bankname = $verification->bankname;
         }
         return response()->json(['status' => true, 'token' => $token, 'user' => $user, 'vendor' => $vendor]);
     }
