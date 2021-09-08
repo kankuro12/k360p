@@ -283,7 +283,7 @@ class HomeController extends Controller
                     }else{
                         $product->newprice=$stock->price;
                     }
-                    $product->variants=VariantManager::codeToString($variant);
+                    $product->variants=VariantManager::codeToStringName($variant);
                     // array_push($stocks,$stock);
     
                 // }

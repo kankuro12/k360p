@@ -29,6 +29,24 @@ class VariantManager
       
         return $var;
     }
+
+    public static function codeToStringName(string $code){
+        $split1 = explode(">", $code);   
+        $var=[];
+        $split2 = explode("|", $split1[1]);
+        foreach ($split2 as $key => $split) {
+           $split3=explode(':',$split);
+           $item_id=(int)$split3[1];
+           $split4=explode("_",$split3[0]);
+           $attribute_id=(int)$split4[1];
+            $attr=[];
+           $attr['attribute']=Product_attribute::where('id',$attribute_id)->select('id','name')->first()->toArray();
+           $attr['item']=ProductAttributeItem::where('id',$item_id)->select('id','name')->first()->toArray();
+           array_push($var,$attr);
+        }
+      
+        return $var;
+    }
     
     ///
     public static function getDetail(string $code)
