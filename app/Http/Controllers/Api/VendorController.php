@@ -101,6 +101,9 @@ class VendorController extends Controller
 
             $vendor->bankaccount = $verification->bankaccount;
             $vendor->bankname = $verification->bankname;
+        }else{
+            $vendor->bankaccount ='';
+            $vendor->bankname = '';
         }
         return response()->json(['status' => true, 'token' => $token, 'user' => $user, 'vendor' => $vendor]);
     }
