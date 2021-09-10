@@ -56,8 +56,10 @@ class VendorController extends Controller
                 $user->password = bcrypt("xx_");
                 $reset = $user->id . mt_rand(0000, 9999);
                 $user->role_id = 2;
+                $user->save();
                 $user->activation_token = $reset;
                 $user->save();
+
                 $vendor->name = $request->phone;
                 $vendor->address = "";
             } else {

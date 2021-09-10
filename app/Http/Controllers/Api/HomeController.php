@@ -128,7 +128,32 @@ class HomeController extends Controller
     
     public function search(Request $request){
         $keyword=$request->keyword;
-        return response()->json(Product::where('product_name','like','%'.$keyword.'%')->get());
+        $products=Product::where('product_name','like','%'.$keyword.'%')->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
+        foreach ($products as $key => $product) {
+            $onsale=$product->onsale();
+            $product->onsale=$onsale;
+            $selper=0;
+            // $product->variants=[];
+            if($onsale){
+                $dt = Carbon::now();
+                $current =Onsell::where('started_at','<=',$dt)
+                ->where('end_at','>=',$dt)->select('sell_id')
+                ->get();
+                $selper=  Sell_product::where('product_id',$product->product_id)->whereIn('sell_id',$current)->first()->sale_discount;
+            }
+            if($product->stocktype==1){
+                $product->stocks=ProductStock::select(DB::raw("max(price),min(price)"))->where('product_id',$product->product_id)->first();
+            }else{
+                if($onsale){
+                    $product->newprice=round($product->mark_price - ($product->mark_price * $selper/100 ));
+                    $product->oldprice=$product->mark_price;
+                }else{
+                    $product->newprice=$product->mark_price;
+                }
+            }
+            array_push($arr,$product);
+        }
+        return response()->json($arr);
     }
 
 
