@@ -141,7 +141,7 @@ class HomeController extends Controller
             $products=$products->skip(24*$step)->take(24);
         }
         $pp=$products->get();
-        foreach ($products as $key => $product) {
+        foreach ($pp as $key => $product) {
             $onsale=$product->onsale();
             $product->onsale=$onsale;
             $selper=0;
