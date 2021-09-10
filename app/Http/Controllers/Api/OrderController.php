@@ -106,7 +106,7 @@ class OrderController extends Controller
         }
         $data=[];
         foreach ($orders as $key => $value) {
-            $shipping=ShippingDetail::where('id',$key);
+            $shipping=ShippingDetail::where('id',$key)->first();
             $shipping->item=$value;
             array_push($data,$shipping);
         }
