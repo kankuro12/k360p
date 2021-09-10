@@ -134,7 +134,7 @@ class HomeController extends Controller
         $keyword=$request->keyword;
         $step=$request->step;
         $arr=[];
-        $products=Product::where('product_name','like','%'.$keyword.'%')->select('product_name','product_id','sell_price','mark_price','stocktype');
+        $products=Product::where('product_name','like','%'.$keyword.'%')->select('product_name','product_id','sell_price','mark_price','stocktype','product_images');
         if($step==0){
             $products=$products->take(24);
         }else{
