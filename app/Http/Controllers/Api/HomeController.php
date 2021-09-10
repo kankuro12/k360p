@@ -167,7 +167,7 @@ class HomeController extends Controller
         }
         $data=[];
         $data['products']=$arr;
-        $data['hasmore']=Product::count()>(24*($step+1));
+        $data['hasmore']=Product::where('product_name','like','%'.$keyword.'%')->count()>(24*($step+1));
         return response()->json((object)$data);
     }
 
