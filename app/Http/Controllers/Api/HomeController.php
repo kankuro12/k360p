@@ -132,8 +132,15 @@ class HomeController extends Controller
     
     public function newsearch(Request $request){
         $keyword=$request->keyword;
+        $step=$request->step;
         $arr=[];
         $products=Product::where('product_name','like','%'.$keyword.'%')->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
+        if($step==0){
+            $products=$products->take(24);
+        }else{
+            $products=$products->skip(24*$step)->take(24);
+        }
+        $pp=$products->get();
         foreach ($products as $key => $product) {
             $onsale=$product->onsale();
             $product->onsale=$onsale;
@@ -158,7 +165,10 @@ class HomeController extends Controller
             }
             array_push($arr,$product);
         }
-        return response()->json($arr);
+        $data=[];
+        $data['products']=$arr;
+        $data['hasmore']=Product::count()>(24*($step+1));
+        return response()->json((object)$data);
     }
 
 
