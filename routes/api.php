@@ -56,7 +56,7 @@ Route::name('api.')->group(function () {
         Route::middleware(['auth:api'])->group(function () {
             Route::post('checkout', "Api\OrderController@checkout");
             Route::get('orders', "Api\OrderController@orders");
-            Route::get('orders/{type}', "Api\OrderController@ordersType");
+            Route::match(['GET','POST'],'orders/{type}', "Api\OrderController@ordersType");
             Route::get('order/{id}', "Api\OrderController@order");
         });
     });
@@ -85,6 +85,7 @@ Route::name('api.')->group(function () {
     route::prefix('vendor')->group(function () {
         Route::middleware(['auth:api'])->group(function () {
             Route::post('checkout', "Api\VendorController@checkout");
+            Route::get('orders/{status}', "Api\VendorController@orders");
         });
         
         route::prefix('auth')->group(function () {
