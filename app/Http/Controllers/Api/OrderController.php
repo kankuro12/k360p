@@ -98,7 +98,7 @@ class OrderController extends Controller
     public function ordersType(Request $request,$type){
         $user=Auth::user();
         $orders=[];
-        $order_query=OrderItem::where('stage',$type);
+        $order_query=OrderItem::where('stage',$type)->join('products','products.product_id','=','order_items.product_id');
         if($request->filled('vendor')){
             $orders=$order_query->where('referal_id',$user->id)->get()->groupBy('shipping_detail_id');
         }else{
