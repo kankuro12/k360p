@@ -154,7 +154,7 @@ class HomeController extends Controller
                 $selper=  Sell_product::where('product_id',$product->product_id)->whereIn('sell_id',$current)->first()->sale_discount;
             }
             if($product->stocktype==1){
-                $product->stocks=ProductStock::select(DB::raw("max(price),min(price)"))->where('product_id',$product->product_id)->first();
+                $product->stocks=ProductStock::select(DB::raw("max(price) as max,min(price) as min"))->where('product_id',$product->product_id)->first();
             }else{
                 if($onsale){
                     $product->newprice=round($product->mark_price - ($product->mark_price * $selper/100 ));
