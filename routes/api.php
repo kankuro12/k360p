@@ -50,6 +50,7 @@ Route::name('api.')->group(function () {
     // Route::get('product/{id}','Api\HomeController@product')->name('product');
 
     Route::match(['POST', 'GET'], 'search', 'Api\HomeController@search')->name('search');
+    Route::match(['POST', 'GET'], 'newsearch', 'Api\HomeController@newsearch')->name('search');
 
     route::prefix('booking')->group(function () {
         Route::middleware(['auth:api'])->group(function () {
