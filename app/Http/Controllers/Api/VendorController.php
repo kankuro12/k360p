@@ -182,7 +182,12 @@ class VendorController extends Controller
         if (!Auth::check()) {
             return response()->json(['status' => false, "message" => "Please Login"]);
         } else {
+
             $user = Auth::user();
+            $vendor=Vendor::where('user_id',$user->id)->first();
+            if($vendor->step<3){
+                return response()->json(['status'=>false,'msg'=>"This Reseller Cannot Use This feature Yet"]);
+            }
             $shipping = new ShippingDetail();
             if($request->filled('me')){
                 
