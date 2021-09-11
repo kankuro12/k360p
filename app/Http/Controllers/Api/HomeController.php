@@ -186,7 +186,7 @@ class HomeController extends Controller
             $products=$products->where('product_name','like','%'.$keyword.'%');
         }
         if($request->filled('category')){
-            $cat=Category::find($id);
+            $cat=Category::find($request->category);
             $ids=$cat->childList();
             $products=$products->whereIn('product_id',$ids);
         }
