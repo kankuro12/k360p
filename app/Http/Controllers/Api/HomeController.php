@@ -188,7 +188,7 @@ class HomeController extends Controller
         if($request->filled('category')){
             $cat=Category::find($id);
             $ids=$cat->childList();
-            $products=$products->whereIn('id',$ids);
+            $products=$products->whereIn('product_id',$ids);
         }
         $tempquery=$products;
 
