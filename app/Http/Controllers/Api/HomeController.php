@@ -181,7 +181,7 @@ class HomeController extends Controller
         $step=$request->step;
         $arr=[];
         $cat=null;
-        $products=Product::where('id','>',0);
+        $products=Product::where('product_id','>',0);
         if($request->filled('keyword')){
             $products=$products->where('product_name','like','%'.$keyword.'%');
         }
