@@ -56,6 +56,52 @@ class HomeController extends Controller
         return response()->json($products);
 
     }
+    public function categoryCustom($id){
+        $category=Category::find($id);
+        $ids=$category->childList();
+        $products=Product::whereIn('product_id',$id)->select('product_name','product_id','sell_price','mark_price','stocktype')->get();
+
+        // $products=Product::whereIn('category_id',$ids)->select('product_id','product_name','product_images','mark_price')->get();
+        foreach ($products as $key => $product) {
+            // $product=Product::where('product_id',$p['id'])->select('product_name','product_id','sell_price','mark_price','stocktype')->first();
+            $onsale=$product->onsale();
+            $product->onsale=$onsale;
+            $selper=0;
+            // $product->variants=[];
+            if($onsale){
+                $dt = Carbon::now();
+                $current =Onsell::where('started_at','<=',$dt)
+                ->where('end_at','>=',$dt)->select('sell_id')
+                ->get();
+                $selper=  Sell_product::where('product_id',$product->product_id)->whereIn('sell_id',$current)->first()->sale_discount;
+            }
+            if($product->stocktype==1){
+                $stocks=[];
+                // foreach (->get() as $key => $stock) {
+                    $variant=$p['v'];
+                    $product->variant=$variant;
+                    $stock=ProductStock::where('product_id',$product->product_id)->where('code',$variant)->first();
+                    if($onsale){
+                        $product->newprice=round($stock->price - ($stock->price * $selper/100 ));
+                        $product->oldprice=$stock->price;
+                    }else{
+                        $product->newprice=$stock->price;
+                    }
+                    $product->variants=VariantManager::codeToStringName($variant);
+                   
+            }else{
+                if($onsale){
+                    $product->newprice=round($product->mark_price - ($product->mark_price * $selper/100 ));
+                    $product->oldprice=$product->mark_price;
+                }else{
+                    $product->newprice=$product->mark_price;
+                }
+            }
+            array_push($arr,$product);
+        }
+        return response()->json($products);
+
+    }
     public function products(){
         $datas=[];
         $items=BoxedItemListDisplay::inRandomOrder()->get();
@@ -134,13 +180,25 @@ class HomeController extends Controller
         $keyword=$request->keyword;
         $step=$request->step;
         $arr=[];
-        $products=Product::where('product_name','like','%'.$keyword.'%')->select('product_name','product_id','sell_price','mark_price','stocktype','product_images');
+        $cat=null;
+        $products=Product::where('id','>',0);
+        if($request->filled('keyword')){
+            $products=$products->where('product_name','like','%'.$keyword.'%');
+        }
+        if($request->filled('category')){
+            $cat=Category::find($id);
+            $ids=$cat->childList();
+            $products=$products->whereIn('id',$ids);
+        }
+        $tempquery=$products;
+
         if($step==0){
             $products=$products->take(24);
         }else{
             $products=$products->skip(24*$step)->take(24);
         }
-        $pp=$products->get();
+
+        $pp=$products->select('product_name','product_id','sell_price','mark_price','stocktype','product_images')->get();
         foreach ($pp as $key => $product) {
             $onsale=$product->onsale();
             $product->onsale=$onsale;
@@ -167,7 +225,10 @@ class HomeController extends Controller
         }
         $data=[];
         $data['products']=$arr;
-        $data['hasmore']=Product::where('product_name','like','%'.$keyword.'%')->count()>(24*($step+1));
+        $data['hasmore']=$products->count()>(24*($step+1));
+        if($request->filled('category')){
+            $data['category']=$cat;
+        }
         return response()->json((object)$data);
     }
 
