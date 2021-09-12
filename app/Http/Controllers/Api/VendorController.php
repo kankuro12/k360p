@@ -131,6 +131,16 @@ class VendorController extends Controller
         return response()->json(['acc' => null, 'user' => null, 'status' => false, 'token' => ""]);
     }
 
+    public function profileImage(Request $request)
+    {
+        $user = Auth::user();
+        $vendor = Vendor::where('user_id', $user->id)->first();
+        if ($request->hasFile('image')) {
+            $vendor->logo = $request->image->store('vendor/profilepics');
+        }
+        $vendor->save();
+        return response()->json(['status' => true]);
+    }
     public function vendorSetup(Request $request)
     {
         if (!Auth::check()) {
@@ -141,7 +151,9 @@ class VendorController extends Controller
             $vendor->name = $request->name;
             $vendor->address = $request->address;
             $vendor->storename = $request->storename;
-
+            if($vendor->stage<3){
+                $vendor->logo="vendorlogo.png";
+            }
             $verification = VendorVerification::where('vendor_id', $vendor->id)->first();
             if ($verification == null) {
                 $verification = new VendorVerification();
