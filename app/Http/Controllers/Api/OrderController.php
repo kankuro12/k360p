@@ -102,15 +102,15 @@ class OrderController extends Controller
         if($request->filled('vendor')){
             $orders=$order_query->where('referal_id',$user->id)
             ->select('order_items.*','products.product_images','products.product_name')
-            ->get()->groupBy('shipping_detail_id');
+            ->orderBy('id','desc')->get()->groupBy('shipping_detail_id');
         }else{
             $orders=$order_query->join('shipping_details','shipping_details.id','=','order_items.shipping_detail_id')->where('shipping_details.user_id',$user->id)
             ->select('order_items.*','products.product_images','products.product_name')
-            ->get()->groupBy('shipping_detail_id');
+            ->orderBy('id','desc')->get()->groupBy('shipping_detail_id');
         }
         $data=[];
         foreach ($orders as $key => $value) {
-            $shipping=ShippingDetail::where('id',$key)->orderBy('id','desc')->first();
+            $shipping=ShippingDetail::where('id',$key)->first();
             $shipping->items=$value;
             array_push($data,$shipping);
         }
