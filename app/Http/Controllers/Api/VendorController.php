@@ -272,7 +272,7 @@ class VendorController extends Controller
 
             $vendor->bankaccount = $verification->bankaccount;
             $vendor->bankname = $verification->bankname;
-            $vendor->citi = $verification->bankname;
+            $vendor->citi = $verification->citizenship;
         }else{
             $vendor->bankaccount ='';
             $vendor->bankname = '';
