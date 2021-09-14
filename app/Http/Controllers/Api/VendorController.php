@@ -18,7 +18,7 @@ use App\VendorVerification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use App\Setting\HomePage;
 class VendorController extends Controller
 {
     public function emaillogin(Request $request)
@@ -162,12 +162,12 @@ class VendorController extends Controller
             $verification->bankname = $request->bankname;
             $verification->vendor_id = $vendor->id;
             if ($request->hasFile('reg')) {
-                $verification->registration = $request->file('image')->store('images/vendor_images/verification');
+                $verification->registration = $request->file('reg')->store('images/vendor_images/verification');
             } else {
                 $verification->registration = '';
             }
             if ($request->hasFile('citi')) {
-                $verification->citizenship = $request->file('image1')->store('images/vendor_images/verification');
+                $verification->citizenship = $request->file('citi')->store('images/vendor_images/verification');
             } else {
                 $verification->citizenship = '';
             }
@@ -272,6 +272,7 @@ class VendorController extends Controller
 
             $vendor->bankaccount = $verification->bankaccount;
             $vendor->bankname = $verification->bankname;
+            $vendor->citi = $verification->bankname;
         }else{
             $vendor->bankaccount ='';
             $vendor->bankname = '';
