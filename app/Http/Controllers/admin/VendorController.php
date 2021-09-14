@@ -89,10 +89,10 @@ class VendorController extends Controller
         $vendor=Vendor::find($id);
         $vendor->verified=$status;
         $vendor->save();
-        if($status==1){
+        // if($status==1){
 
-            $vendor->notify(new Verified());
-        }
+        //     $vendor->notify(new Verified());
+        // }
         return redirect()->back();
     }
 
