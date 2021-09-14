@@ -25,10 +25,12 @@ class VendorController extends Controller
         foreach($_vendors as $vendor){
             $vendordetail = Vendor::where('user_id',$vendor->id)->first();
             // dd($vendordetail->name);
-            $vendor->name = $vendordetail->name;
-            $vendor->phone = $vendordetail->phone_number;
-            $vendor->verified = $vendordetail->verified;
-            array_push($vendors,$vendor);
+            if($vendordetail!=null){
+                $vendor->name = $vendordetail->name;
+                $vendor->phone = $vendordetail->phone_number;
+                $vendor->verified = $vendordetail->verified;
+                array_push($vendors,$vendor);
+            }
         }
         // dd($vendors);
         return view('admin.vendorlist')->with(compact('vendors'));
