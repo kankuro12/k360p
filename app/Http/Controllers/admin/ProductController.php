@@ -165,6 +165,7 @@ class ProductController extends Controller
             $product->quantity = $data['quantity'];
             $product->tags = $data['tags'];
             $product->status = "";
+            $product->referal_per = $data['referal_per'];
             $product->isverified = 1;
             if($request->weight<env('maxbundableweight',6)){
                 $product->canbundle=true;
@@ -430,6 +431,7 @@ class ProductController extends Controller
         $product->tags = $data['tags'];
         $product->featured = $data['featured']??0;
         $product->canbundle = $data['canbundle']??0;
+        $product->referal_per = $data['referal_per'];
         if($request->filled('quantity')){
             $product->quantity = $data['quantity'];
         }

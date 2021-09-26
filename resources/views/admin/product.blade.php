@@ -23,13 +23,13 @@
                                       </a>
                                     </h5>
                                   </div>
-                              
+
                                   <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body" style="padding: 1rem;">
                                         <div class="row">
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    
+
                                                     <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
                                                         name="stocktype" data-style="btn btn-primary " title="Select Stock Type"
                                                         data-size="3" required>
@@ -38,7 +38,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                       
+
                                             <div class="col-md-6 pr-md-1">
                                                 <div class="form-group label-floating">
                                                     <label > <strong>Product Name</strong> </label>
@@ -49,7 +49,7 @@
                                         <div class="row">
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                  
+
                                                     <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
                                                         name="brand_id" data-style="btn btn-primary " title="Select Product Brand"
                                                         data-size="3">
@@ -57,10 +57,10 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                       
+
                                             <div class="col-md-6 pr-md-1">
                                                 <div class="form-group">
-                                                   
+
                                                     <select class="selectpicker" data-live-search="true" id="exampleFormControlSelect1"
                                                         name="category_id" data-style="btn btn-primary " title="Select Product Category"
                                                         data-size="3" required>
@@ -69,7 +69,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                       
+
                                         <div class="row">
                                             <div class="col-md-6 pr-md-1">
                                                 <div class="form-group label-floating">
@@ -77,7 +77,7 @@
                                                     <input type="text" class="form-control" value="" name="product_sku" placeholder="Enter Product SKU">
                                                 </div>
                                             </div>
-                                      
+
                                             <div class="col-md-6 pr-md-1">
                                                 <div class="form-group label-floating">
                                                     <label ><strong>Product Quantity</strong> </label>
@@ -96,14 +96,14 @@
                                                     <input required type="number" min="0" class="form-control" value="" name="mark_price" placeholder="Enter Product Price">
                                                 </div>
                                             </div>
-                                        
+
                                             <div class="col-md-4 pr-md-1">
                                                 <div class="form-group label-floating">
                                                     <label ><strong>Product sale Price</strong> </label>
                                                     <input required type="number" min="0" class="form-control" value="" name="sell_price" placeholder="Enter Product Promotional Price">
                                                 </div>
                                             </div>
-                                        
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -111,7 +111,16 @@
                                                 <div class="form-control">
                                                     <input name="tags" class="form-control" required data-role="tagsinput" name="attributeitem" id="attributeitem" required />
                                                 </div>
-                                
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group label-floating">
+                                                    <label ><strong>Product Referal Percentage</strong> </label>
+                                                    <input type="number" min="0" class="form-control" value="" name="referal_per" placeholder="Enter referal percentage">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -141,9 +150,9 @@
                                                             {{ $item->name}}</option>
                                                     @endforeach
                                                 </select>
-                                
+
                                             </div>
-                                
+
                                         </div>
                                         <div >
                                             <div class="row">
@@ -157,21 +166,21 @@
                                                     <div class="form-group">
                                                         <label for=""> <strong> Length <span class="d_class"></span> </strong> </label>
                                                         <input  type="number" step="0.01" name="l" class="form-control"  placeholder="Enter Package Length" >
-                                
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for=""> <strong>Height <span class="d_class"></span></strong> </label>
                                                         <input  type="number" step="0.01" name="h" class="form-control" placeholder="Enter Package Height" >
-                                
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for=""> <strong>width <span class="d_class"></span></strong> </label>
                                                         <input  type="number" step="0.01" name="w" class="form-control" placeholder="Enter Package Length">
-                                
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,11 +217,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
+
                                     </div>
                                   </div>
                                 </div>
-                                <div class="card card-collapse" style="margin:5px 0px;"> 
+                                <div class="card card-collapse" style="margin:5px 0px;">
                                     <div class="card-header" style="color:white;background:#9C27B0;padding-bottom:0.5rem;border-radius:7px;" role="tab" id="headerfour">
                                       <h5 class="mb-0">
                                         <a class="collapsed" style="color:white;" data-toggle="collapse" href="#collapsefour" aria-expanded="false" aria-controls="collapseThree">
@@ -223,7 +232,7 @@
                                     </div>
                                     <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
                                       <div class="card-body"  style="padding: 1rem;">
-                                        
+
                                           <div class="row">
                                               <div class="col-md-4 col-sm-12">
                                                   <label for=""> <strong>Primary Image (800 x 600)</strong> </label>
@@ -252,7 +261,7 @@
                                                                   <div style="position: relative">
                                                                       <div >
                                                                           <input onchange="loadImage(this,{{$i}})" v="{{$i}}" style="display:none;" name="product_images[]" type="file" id="gal_{{$i}}" accept="image/*"/>
-                                                                          <img src="{{ asset('images/backend_images/add_image.png') }}" alt="..." id="gal_img_{{$i}}" 
+                                                                          <img src="{{ asset('images/backend_images/add_image.png') }}" alt="..." id="gal_img_{{$i}}"
                                                                           onclick="document.getElementById('gal_{{$i}}').click();">
                                                                       </div>
                                                                       <div style="position: absolute;top:0px;right:0px;">
@@ -268,8 +277,8 @@
                                                           @endfor
                                                       </div>
                                                   </div>
-              
-                                                  
+
+
                                               </div>
                                           </div>
                                           <div class="row">
@@ -283,11 +292,11 @@
                                     </div>
                                   </div>
                             </div>
-                              
-                              
-                            
-                            
-                            
+
+
+
+
+
                         </form>
                     </div>
                 </div>
@@ -305,11 +314,11 @@
             console.log(input,i);
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-                
+
                 reader.onload = function(e) {
                 $('#gal_img_'+i).attr('src', e.target.result);
                 }
-                var FileSize = input.files[0].size  / 1024; 
+                var FileSize = input.files[0].size  / 1024;
                 if(FileSize>{{env('productimage_size')}}){
                     alert('Image Size Cannot Be Greater than 600kb');
                     document.getElementById('gal_img_'+i).src='{{ asset('images/backend_images/add_image.png') }}';

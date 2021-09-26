@@ -982,6 +982,14 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['authen', 'type'], 'type' =
 
     Route::post('/message/seen/{message}', 'Vendor\DashBoardController@message')->name('vendor.markread-message');
     Route::get('/messages', 'Vendor\DashBoardController@messages')->name('vendor.messages');
+
+
+
+    // XXX vendor make a orders
+    Route::get('/product/order', 'Vendor\MakeAOrderController@index')->name('vendor.product.order.index');
+    Route::post('/custom/product/search','Elements\CustomListController@searchProduct' )->name('vendor.product.search');
+
+
 });
 
 //Password reset routes

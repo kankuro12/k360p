@@ -212,6 +212,14 @@
                                                     value="{{ $productdetail->sell_price }}" class="cc"
                                                     placeholder="Enter Product Price">
                                             </p>
+
+                                            <p class="prod-desc"><strong>Product Referal Percentage : </strong>
+                                                <input  type="number" step="0.01" name="referal_per"
+                                                    value="{{ $productdetail->referal_per }}" class="cc"
+                                                    placeholder="Enter Product Referal Percentage">
+                                            </p>
+
+
                                             <p class="prod-desc"><strong>Tags: </strong>
                                             <div class="cc">
                                                 <input value="{{ $productdetail->tags }}" name="tags" class="cc" required

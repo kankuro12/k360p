@@ -19,7 +19,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
         </span>
     </span>
 @endif
-    
+
 </a>
 </div>
 <div class="sidebar-wrapper">
@@ -30,15 +30,15 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
     <div class="info">
         <a data-toggle="collapse" href="#collapseExample" class="collapsed">
             <span id="vendorname">
-                
-                
+
+
             </span>
             <b class="caret"></b>
         </a>
         <div class="clearfix"></div>
         <div class="collapse" id="collapseExample">
             <ul class="nav">
-                
+
                 <li>
                     <a href="{{ url('vendor/edit-profile/'.Auth::user()->id) }}">
                         <span class="sidebar-mini"> EP </span>
@@ -75,7 +75,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                         <span class="sidebar-normal"> My Finance </span>
                     </a>
                 </li>
-                
+
 
                 <li >
                     <a href="/vendor/messages">
@@ -85,11 +85,11 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 </li>
                 <li >
                     <a href="{{route('vendor.getLogout')}}">
-                        <span class="sidebar-mini"> LG </span>  
+                        <span class="sidebar-mini"> LG </span>
                         <span class="sidebar-normal"> Log Out </span>
                     </a>
                 </li>
-                
+
             </ul>
         </div>
     </div>
@@ -184,6 +184,25 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                     <a href="{{ route('vendor.sale-products') }}">
                         <span class="sidebar-mini"> SP </span>
                         <span class="sidebar-normal"> Sale Products </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <a data-toggle="collapse" href="#moa">
+            <i class="material-icons">shopping_cart
+            </i>
+            <p> Make a Order
+                <b class="caret"></b>
+            </p>
+        </a>
+        <div class="collapse" id="moa">
+            <ul class="nav">
+                <li class="{{ (Request::is('vendor/product/order') ? ' active' : '') }}">
+                    <a href="{{ route('vendor.product.order.index') }}">
+                        <span class="sidebar-mini"> MO </span>
+                        <span class="sidebar-normal"> Make a Order </span>
                     </a>
                 </li>
             </ul>

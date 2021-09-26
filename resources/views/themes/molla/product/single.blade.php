@@ -238,6 +238,9 @@
                                                     <a href="#" class="social-icon" title="Pinterest" target="_blank"><i
                                                             class="icon-pinterest"></i></a>
                                                 </div>
+                                                @if (Auth::check())
+                                                  <small class="text-success"> Sharing is on. Share for make a referal number. </small>
+                                                @endif
                                             </div><!-- End .product-details-footer -->
                                     </div><!-- End .product-details -->
                                 </div><!-- End .col-md-6 -->

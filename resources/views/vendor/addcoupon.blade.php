@@ -16,7 +16,7 @@
                             </strong>
                             / Add Coupon -
                             <small class="category">Issue Coupon Here</small>
-                        </h4>  
+                        </h4>
                         @csrf
                         <input type="hidden" value="{{ Auth::user()->id }}">
                         <div class="row">
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                     <div class="card-content">
                         <h4 class="card-title">Coupon Setting -
                             <small class="category">Set Coupon Parameters Here</small>
-                        </h4>  
+                        </h4>
                         <div class="row">
                             <div class="col-md-8 pr-md-1">
                                 <div class="form-group">
@@ -84,7 +84,7 @@
                                 <label class="control-label">Discount Percentage %</label>
                                 <input type="text" class="form-control" name="discount_percent" value="" id="discount_percent"disabled/>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 pr-md-1">
@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
             </div>
         </div>
@@ -167,5 +167,5 @@
         }
     });
 
-</script>    
+</script>
 @endsection
