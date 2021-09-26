@@ -15,9 +15,9 @@ class CreateVendorOrderItemsTable extends Migration
     {
         Schema::create('vendor_order_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
+            $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('product_id')->on('products')->onUpdate('cascade')->onDelete('set null');
-            $table->unsignedBigInteger('vendor_order_id');
+            $table->integer('vendor_order_id')->unsigned();
             $table->foreign('vendor_order_id')->references('id')->on('vendor_orders')->onDelete('cascade');
             $table->timestamps();
         });
