@@ -15,8 +15,8 @@ class CreateCategoryShippingGroupsTable extends Migration
     {
         Schema::create('category_shipping_groups', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('shipping_group_id');
+            $table->integer('category_id');
+            $table->integer('shipping_group_id');
             $table->integer('type')->default(0);
             $table->decimal('per')->default(0);
             $table->decimal('flat')->default(0);
