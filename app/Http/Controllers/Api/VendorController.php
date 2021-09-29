@@ -288,4 +288,13 @@ class VendorController extends Controller
         return response()->json(['status' => true,  'user' => $user, 'vendor' => $vendor,'acc'=>$account]);
 
     }
+
+    public function withdraw(){
+        $user=Auth::user();
+        $vendor=Vendor::where('user_id',$user->id)->first();
+        $account=AdminVendorAccount::where('vendor_id',$vendor->id)->first();
+        $withdraws=VendorWithdrawl::where('vendor_id',$vendor->id)->get();
+        return response()->json(['status' => true, 'withdraws' => $withdraws,'acc'=>$account]);
+
+    }
 }

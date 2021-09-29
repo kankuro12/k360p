@@ -86,6 +86,7 @@ Route::name('api.')->group(function () {
         Route::middleware(['auth:api'])->group(function () {
             Route::post('checkout', "Api\VendorController@checkout");
             Route::get('orders/{status}', "Api\VendorController@orders");
+            Route::get('account/withdraw', "Api\VendorController@withdraw");
             Route::post('ProfileImage', "Api\VendorController@profileImage");
 
         });
