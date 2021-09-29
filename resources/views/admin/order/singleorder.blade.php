@@ -67,7 +67,7 @@ $product=$order->product;
                         @endphp
                         <div class="col-md-9">
                             @if ($ref_user != null)
-                            {{ $ref_user->fname }} {{ $ref_user->lname }}
+                            {{ $ref_user->name }} 
                             @else
                                 ----
                             @endif
