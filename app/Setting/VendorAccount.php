@@ -15,13 +15,19 @@ class VendorAccount
     
     public $vendor;
     public $vendorAccount;
-    public function __construct($vendor_id)
+    public function __construct($vendor_id,$ref=false)
     {
-        $this->vendor=Vendor::find($vendor_id);
-        $this->vendorAccount=AdminVendorAccount::where('vendor_id',$vendor_id)->first();
+        if($ref){
+            $this->vendor=Vendor::where('user_id',$vendor_id)->first();
+
+        }else{
+
+            $this->vendor=Vendor::find($vendor_id);
+        }
+        $this->vendorAccount=AdminVendorAccount::where('vendor_id',$this->vendor->id)->first();
         if($this->vendorAccount==null){
             $this->vendorAccount=new AdminVendorAccount();
-            $this->vendorAccount->vendor_id=$vendor_id;
+            $this->vendorAccount->vendor_id=$this->vendor->id;
             $this->vendorAccount->amount=0;
             $this->vendorAccount->save();
         }

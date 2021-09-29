@@ -100,7 +100,7 @@ class OrderController extends Controller
                             $account->addOrder($id);
                         }
                         if ($id->referal_id != null) {
-                            $account = new VendorAccount($id->referal_id);
+                            $account = new VendorAccount($id->referal_id,true);
                             $account->addOrderRef($id);
                         }
                     }
