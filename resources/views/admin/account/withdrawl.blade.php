@@ -43,7 +43,7 @@
                         <label >
                             Amount
                         </label>
-                        <input class="form-control" required min="{{env('minwithdrawl',100)}}" max="{{$account->withdraw()}}" type="number" name="amount" id="amount" required>
+                        <input class="form-control" required min="{{env('minwithdrawl',100)}}" value="{{$account->withdraw()}}" max="{{$account->withdraw()}}" type="number" name="amount" id="amount" required>
                     </div>
                     @foreach ($attributes as $attribute)
                     <div class="col-md-6">
