@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Channels\Aakash;
 use App\Http\Controllers\Controller;
 use App\model\admin\Product;
+use App\model\admin\VendorAccount as AdminVendorAccount;
 use App\model\admin\VendorWithdrawl;
 use App\model\OrderItem;
 use App\model\ProductStock;
@@ -19,6 +20,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Setting\HomePage;
+use App\Setting\VendorAccount;
+
 class VendorController extends Controller
 {
     public function emaillogin(Request $request)
@@ -281,7 +284,8 @@ class VendorController extends Controller
             $vendor->bankaccount ='';
             $vendor->bankname = '';
         }
-        return response()->json(['status' => true,  'user' => $user, 'vendor' => $vendor]);
+        $account=AdminVendorAccount::where('vendor_id',$vendor->id)->first();
+        return response()->json(['status' => true,  'user' => $user, 'vendor' => $vendor,'acc'=>$account]);
 
     }
 }
