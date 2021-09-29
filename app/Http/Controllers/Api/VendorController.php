@@ -198,7 +198,11 @@ class VendorController extends Controller
             $user = Auth::user();
             $vendor=Vendor::where('user_id',$user->id)->first();
             if($vendor->stage<3){
-                return response()->json(['status'=>false,'msg'=>"This Reseller Cannot Use This feature Yet"]);
+                return response()->json(['status'=>false,'msg'=>"You Cannot Use This feature Yet"]);
+            }
+            if($vendor->verified==0){
+                return response()->json(['status'=>false,'msg'=>"Account Not Verified"]);
+
             }
             $shipping = new ShippingDetail();
             if($request->filled('me')){

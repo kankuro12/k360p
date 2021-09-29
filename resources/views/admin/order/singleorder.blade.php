@@ -63,7 +63,7 @@ $product=$order->product;
                     <div class="row">
                         <div class="col-md-3 text-right"> <strong>Referal User:</strong> </div>
                         @php
-                            $ref_user = \App\model\vendoruser\VendorUser::where('user_id',$order->referal_id)->first();
+                            $ref_user = \App\model\vendor\Vendor::where('user_id',$order->referal_id)->first();
                         @endphp
                         <div class="col-md-9">
                             @if ($ref_user != null)
