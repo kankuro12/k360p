@@ -48,11 +48,14 @@ class OrderController extends Controller
        
         OrderItem::whereIn('id', $request->id)
             ->update(['stage' => $status]);
-        if ($status == 1) {
-            ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
-        }
-        if ($status == 5) {
-            ShippingDetail::find($request->sid)->notify(new RejectOrder($request->id));
+        $referal_id=OrderItem::whereIn('id', $request->id)->select('referal_id')->first()->referal_id;
+        if($referal_id==null){
+            if ($status == 1) {
+                ShippingDetail::find($request->sid)->notify(new OrderComfirmation($request->id));
+            }
+            if ($status == 5) {
+                ShippingDetail::find($request->sid)->notify(new RejectOrder($request->id));
+            }
         }
 
         return response()->json(
