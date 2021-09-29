@@ -112,6 +112,12 @@ class DashboardController extends Controller
                 if($id->vendor_id!=null && $id->vendor_id!=0){
                     $account=new VendorAccount($id->vendor_id);
                     $account->addOrder($id);
+                    
+
+                }
+                if($id->referal_id!=null){
+                    $account=new VendorAccount($id->referal_id);
+                    $account->addOrderRef($id);
                 }
             }
             $data['items']=$ids;

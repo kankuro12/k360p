@@ -33,7 +33,7 @@
                                        <td class="text-center">{{ $vendor->name }}</td>
                                        <td class="text-center">{{ $vendor->email }}</td>
                                        <td class="text-center">{{ $vendor->phone_number }}</td>
-                                       <td><input type="checkbox" name="featured" value='{{ $vendor->verified }}' onchange="setverified(this)" data-id ="{{ $vendor->id }}" @if($vendor->verified == 1) checked  @endif >
+                                       <td><input type="checkbox" name="featured" value='{{ $vendor->verified }}' onchange="setverified(this)" data-id ="{{ $vendor->user_id }}" @if($vendor->verified == 1) checked  @endif >
                                         <span class="label label-primary @if ($vendor->verified == 0)hidden @endif">Verified</span> 
                                         </td>
                                        @if ($vendor->active == 0)

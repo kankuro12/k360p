@@ -52,6 +52,16 @@ class VendorAccount
 
     }
 
+    public function addOrderRef(OrderItem $order){
+        // dd($order);
+        
+        $referal_per=Product::where('product_id',$order->product_id)->select('referal_per')->first()->referal_per;
+        $this->vendorAccount->amount+=   (int)((($order->qty*$order->rate)*$referal_per)/100);
+        $this->vendorAccount->save();
+
+
+    }
+
     public function total(){
       
         return OrderPayment::where('vendor_id',$this->vendor->id)->sum('vendoramount');
