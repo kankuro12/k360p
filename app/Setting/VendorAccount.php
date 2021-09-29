@@ -69,7 +69,6 @@ class VendorAccount
     }
 
     public function total(){
-      
         return OrderPayment::where('vendor_id',$this->vendor->id)->sum('vendoramount');
     }
 

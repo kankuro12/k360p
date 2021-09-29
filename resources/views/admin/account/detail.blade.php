@@ -89,7 +89,7 @@
                         
                         <div class="content-view">
                             <div class="toolbox">
-                                @if ($account->total()>=env('minwithdrawl',100))
+                                @if ($account->withdraw()>=env('minwithdrawl',100))
                                                         
                                     <a href="{{route('admin.withdrawl',['id'=>$id])}}" class="btn btn-primary">Add WithDrawl</a>
                                 
