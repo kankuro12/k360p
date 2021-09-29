@@ -15,6 +15,7 @@ use App\Notifications\User\RejectOrder;
 use App\Notifications\Vendor\OrderAccepted;
 use App\Notifications\Vendor\OrderPickedup;
 use App\Setting\OrderManager;
+use App\Setting\VendorAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -88,6 +89,24 @@ class OrderController extends Controller
             }
             if ($status == 5) {
                 ShippingDetail::find($request->sid)->notify(new RejectOrder($request->id));
+            }
+        } else {
+            if ($status == 4) {
+                $collection = OrderItem::whereIn('id', $request->id)->get()->groupBy('shipping_detail_id');
+                foreach ($collection as $key => $value) {
+                    foreach ($value as $id) {
+                        array_push($ids, $id->id);
+                        if ($id->vendor_id != null && $id->vendor_id != 0) {
+                            $account = new VendorAccount($id->vendor_id);
+                            $account->addOrder($id);
+                        }
+                        if ($id->referal_id != null) {
+                            $account = new VendorAccount($id->referal_id);
+                            $account->addOrderRef($id);
+                        }
+                    }
+                    
+                }
             }
         }
 
