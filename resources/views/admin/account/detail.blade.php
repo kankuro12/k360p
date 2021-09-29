@@ -40,7 +40,7 @@
                                             <th class="text-left">Owner Name</th>
                                             <th class="text-left">Store Name</th>
                                             <th class="text-left">Total </th>
-                                            <th class="text-left">Withdrawable</th>
+                                            <th class="text-left">Withdrawable/<br>Referal</th>
                                             
                                         </tr>
                                     </thead>
