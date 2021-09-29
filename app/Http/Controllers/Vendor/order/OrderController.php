@@ -62,7 +62,8 @@ class OrderController extends Controller
             [
                 'id' => $request->id,
                 'count' => OrderItem::where('vendor_id', $request->user()->vendor->id)->where('shipping_detail_id', $request->sid)->where('stage', $request->current)->count(),
-                'sid' => $request->sid
+                'sid' => $request->sid,
+                'referal_id'=>$referal_id
             ]
         );
     }
