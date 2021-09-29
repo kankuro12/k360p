@@ -16,6 +16,7 @@ use App\Notifications\Vendor\OrderAccepted;
 use App\Notifications\Vendor\OrderPickedup;
 use App\Setting\OrderManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -23,7 +24,7 @@ class OrderController extends Controller
         $stages=OrderManager::stages;
         //where('ismainstore',1)->
         $all=[];
-        $collection=OrderItem::where('stage',$status)->get()->groupBy('shipping_detail_id');
+        $collection=OrderItem::where('stage',$status)->select(DB::raw(' order_items.*, (select name from vendors where user_id=order_items.referal_id) as referal_name'))->get()->groupBy('shipping_detail_id');
         foreach ($collection as $key => $value) {
             $data=[];
             $data['shipping']=ShippingDetail::find($key);

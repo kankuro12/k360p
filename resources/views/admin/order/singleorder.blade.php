@@ -53,15 +53,26 @@ $product=$order->product;
                         <div class="col-md-9"> {{\App\Setting\OrderManager::delivertype[ $order->deliverytype] }} Delivery</div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-3 text-right"> <strong>Referal ID:</strong> </div>
                         <div class="col-md-9"> {{ $order->referal_id }}</div>
                     </div>
-                </div>
-                <div class="col-md-6">
+                </div> --}}
+                @if ($order->referal_name!=null)
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3 text-right"> <strong>Refered By:</strong> </div>
+                          
+                            <div class="col-md-9">
+                                {{$order->referal_name}}
+                            </div>
+                        </div>
+                    </div> 
+                @endif
+                {{-- <div class="col-md-6">
                     <div class="row">
-                        <div class="col-md-3 text-right"> <strong>Referal User:</strong> </div>
+                        <div class="col-md-3 text-right"> <strong>Refered By:</strong> </div>
                         @php
                             $ref_user = \App\model\vendor\Vendor::where('user_id',$order->referal_id)->first();
                         @endphp
@@ -73,7 +84,7 @@ $product=$order->product;
                             @endif
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div>
                     <form  method="post" id="order-form-{{$order->id}}">
