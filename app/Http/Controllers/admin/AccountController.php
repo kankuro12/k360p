@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class AccountController extends Controller
 {
     public function index(){
-        $vendors=Vendor::all();
+        $vendors=Vendor::where('stage','>',2)->get();
         
         return view('admin.account.index',compact('vendors'));
     }
