@@ -32,7 +32,7 @@
                                         <td>{{ $no++ }}</td>
                                        <td class="text-center">{{ $vendor->name }}</td>
                                        <td class="text-center">{{ $vendor->email }}</td>
-                                       <td class="text-center">{{ $vendor->phone_number }}</td>
+                                       <td class="text-center">{{ $vendor->phone }}</td>
                                        <td><input type="checkbox" name="featured" value='{{ $vendor->verified }}' onchange="setverified(this)" data-id ="{{ $vendor->id }}" @if($vendor->verified == 1) checked  @endif >
                                         <span class="label label-primary @if ($vendor->verified == 0)hidden @endif">Verified</span> 
                                         </td>
@@ -41,8 +41,8 @@
                                        @else
                                             <td class="text-center"><span class="label label-success">Active</span></td>
                                        @endif
-                                       <td class="text-center"><a class="btn btn-primary" href="{{ url('admin/vendor-details/'. $vendor->user_id) }}">View</a></td>
-                                       <td class="text-center"><a class="btn btn-success" href="{{ route('admin.detail',['id'=> $vendor->id]) }}">Finance</a></td>
+                                       <td class="text-center"><a class="btn btn-primary" href="{{ url('admin/vendor-details/'. $vendor->id) }}">View</a></td>
+                                       <td class="text-center"><a class="btn btn-success" href="{{ route('admin.detail',['id'=> $vendor->vendor->id]) }}">Finance</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

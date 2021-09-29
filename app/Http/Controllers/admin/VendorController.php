@@ -20,19 +20,20 @@ use App\VendorMessage;
 class VendorController extends Controller
 {
     public function getVendor(){
-        $_vendors = User::where('role_id', 2)->get();
-        $vendors=[];
-        foreach($_vendors as $vendor){
-            $vendordetail = Vendor::where('user_id',$vendor->id)->first();
-            // dd($vendordetail->name);
-            if($vendordetail!=null){
-                $vendor->name = $vendordetail->name;
-                $vendor->phone = $vendordetail->phone_number;
-                $vendor->verified = $vendordetail->verified;
-                array_push($vendors,$vendor);
-            }
-        }
+        // $_vendors = User::where('role_id', 2)->get();
+        // $vendors=[];
+        // foreach($_vendors as $vendor){
+        //     $vendordetail = Vendor::where('user_id',$vendor->id)->first();
+        //     // dd($vendordetail->name);
+        //     if($vendordetail!=null){
+        //         $vendor->name = $vendordetail->name;
+        //         $vendor->phone = $vendordetail->phone_number;
+        //         $vendor->verified = $vendordetail->verified;
+        //         array_push($vendors,$vendor);
+        //     }
+        // }
         // dd($vendors);
+        $vendors=Vendor::join('users','users.id','=','vendors.user_id')->select('users.email','vendors.name','vendors.phone_number','vendors.verified','vendors.user_id','vendors.id')->where('stage','>',2)->get();
         return view('admin.vendorlist')->with(compact('vendors'));
     }
     public function setVerified(Request $request){
