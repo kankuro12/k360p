@@ -93,6 +93,7 @@ Route::name('api.')->group(function () {
         
         route::prefix('auth')->group(function () {
             Route::post('init', "Api\VendorController@initPhone");
+            Route::post('phonelogin', "Api\VendorController@phonelogin");
             Route::post('verify-otp', "Api\VendorController@verifyOTP");
             Route::middleware(['auth:api'])->group(function () {
                 Route::post('setup', "Api\VendorController@vendorSetup");

@@ -85,6 +85,8 @@ class VendorController extends Controller
         // return $r;
     }
 
+  
+
     public function verifyOTP(Request $request)
     {
         $vendor = Vendor::where('phone_number', $request->phone)->first();
