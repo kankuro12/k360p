@@ -123,9 +123,11 @@ class VendorController extends Controller
         $user = null;
         $okk = false;
         $token = "";
+        $psw=bcrypt($request->password);
         if ($buyer != null) {
             $user = User::find($buyer->user_id);
             if ($user != null) {
+
                 if ((Hash::check($request->password, $user->password))) {
                     $okk = true;
                     $token = $user->createToken('logintoken')->accessToken;
@@ -133,7 +135,7 @@ class VendorController extends Controller
                 }
             }
         }
-        return response()->json(['acc' => null, 'user' => null, 'status' => false, 'token' => ""]);
+        return response()->json(['data'=>$psw,'res'=>$request->all(),'acc' => null, 'user' => null, 'status' => false, 'token' => ""]);
     }
 
     public function profileImage(Request $request)
