@@ -129,13 +129,22 @@ class VendorController extends Controller
             if ($user != null) {
 
                 if ((Hash::check($request->password, $user->password))) {
-                    $okk = true;
                     $token = $user->createToken('logintoken')->accessToken;
-                    return response()->json(['acc' => $buyer, 'user' => $user, 'status' => $okk, 'token' => $token]);
+                    $verification = VendorVerification::where('vendor_id', $vendor->id)->first();
+                    if($verification!=null){
+            
+                        $vendor->bankaccount = $verification->bankaccount;
+                        $vendor->bankname = $verification->bankname;
+                    }else{
+                        $vendor->bankaccount ='';
+                        $vendor->bankname = '';
+                    }
+                    return response()->json(['status' => true, 'token' => $token, 'user' => $user, 'vendor' => $vendor]);
                 }
             }
         }
-        return response()->json(['data'=>$psw,'res'=>$request->all(),'acc' => $buyer, 'user' => $user, 'status' => $okk, 'token' => $token]);
+        //'data'=>$psw,'res'=>$request->all(),
+        return response()->json(['acc' => $buyer, 'user' => $user, 'status' => $okk, 'token' => $token]);
     }
 
     public function profileImage(Request $request)
