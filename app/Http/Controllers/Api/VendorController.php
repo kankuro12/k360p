@@ -128,7 +128,7 @@ class VendorController extends Controller
             $user = User::find($buyer->user_id);
             if ($user != null) {
 
-                if ( $user->password==$psw) {
+                if ((Hash::check($request->password, $user->password))) {
                     $okk = true;
                     $token = $user->createToken('logintoken')->accessToken;
                     return response()->json(['acc' => $buyer, 'user' => $user, 'status' => $okk, 'token' => $token]);
