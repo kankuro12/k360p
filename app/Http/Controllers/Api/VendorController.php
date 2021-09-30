@@ -119,7 +119,7 @@ class VendorController extends Controller
 
     public function phonelogin(Request $request)
     {
-        $buyer = Vendor::where('phone_number', $request->phone)->first();
+        $buyer = Vendor::where('phone_number', strval($request->phone))->first();
         $user = null;
         $okk = false;
         $token = "";
