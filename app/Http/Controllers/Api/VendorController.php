@@ -135,7 +135,7 @@ class VendorController extends Controller
                 }
             }
         }
-        return response()->json(['data'=>$psw,'res'=>$request->all(),'acc' => null, 'user' => null, 'status' => false, 'token' => ""]);
+        return response()->json(['data'=>$psw,'res'=>$request->all(),'acc' => $buyer, 'user' => $user, 'status' => $okk, 'token' => $token]);
     }
 
     public function profileImage(Request $request)
