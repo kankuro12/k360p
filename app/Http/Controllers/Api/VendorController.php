@@ -119,13 +119,13 @@ class VendorController extends Controller
 
     public function phonelogin(Request $request)
     {
-        $buyer = Vendor::where('phone_number', strval($request->phone))->first();
+        $vendor = Vendor::where('phone_number', strval($request->phone))->first();
         $user = null;
         $okk = false;
         $token = "";
         $psw=bcrypt($request->password);
-        if ($buyer != null) {
-            $user = User::find($buyer->user_id);
+        if ($vendor != null) {
+            $user = User::find($vendor->user_id);
             if ($user != null) {
 
                 if ((Hash::check($request->password, $user->password))) {
