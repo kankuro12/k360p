@@ -84,6 +84,9 @@ class AccountController extends Controller
 
         $account=AdminVendorAccount::where('vendor_id',$id)->first();
         $account->amount-=$request->amount;
+        if($account->amount<0){
+            $account->amount=0;
+        }
         $account->save();
 
 

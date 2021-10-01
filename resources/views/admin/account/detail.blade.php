@@ -39,8 +39,8 @@
                                             <th class="text-left">Vendor ID</th>
                                             <th class="text-left">Owner Name</th>
                                             <th class="text-left">Store Name</th>
-                                            <th class="text-left">Total </th>
-                                            <th class="text-left">Withdrawable/<br>Referal</th>
+                                            <th class="text-left">Pending </th>
+                                            <th class="text-left">Withdrawable</th>
                                             
                                         </tr>
                                     </thead>
@@ -60,7 +60,7 @@
                                                     {{$vendor->storename}}
                                                 </td>
                                                 <td>
-                                                    {{$account->total()}}
+                                                    {{$account->pending()}}
                                                 </td>
                                                 <td>
                                                     {{$account->withdraw()}}
