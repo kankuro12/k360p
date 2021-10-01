@@ -78,8 +78,14 @@ class VendorAccount
     public function withdraw(){
         $currentDate = \Carbon\Carbon::now();
         $old = $currentDate->subDays(7);
-        $ref = ReferalPayment::where('created_at','<=',$old)->sum('amount') - VendorWithdrawl::where('vendor_id',$this->vendor->id)->sum('admount');
+        $ref = ReferalPayment::where('created_at','<=',$old)->sum('amount') - VendorWithdrawl::where('vendor_id',$this->vendor->id)->sum('amount');
         return $this->vendorAccount->amount + $ref;
+    }
+
+    public function pending(){
+        $currentDate = \Carbon\Carbon::now();
+        $old = $currentDate->subDays(7);
+        return ReferalPayment::where('created_at','>',$old)->sum('amount') ;
     }
 
     public function withdrawls(){
