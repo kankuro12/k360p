@@ -87,7 +87,8 @@ class VendorController extends Controller
 
     public function initPhonePass(Request $request)
     {
-        $vendor = Vendor::where('phone_number',strval( $request->phone))->first();
+        $phone=strval($request->phone);
+        $vendor = Vendor::where('phone_number',$phone)->first();
         $user = null;
         $r = null;
         if ($vendor != null) {
@@ -98,12 +99,12 @@ class VendorController extends Controller
             return response()->json(['status' => false,'message'=>"Vendor Already Exist"]);
 
         } else {
-            $buyer = VendorUser::where('mobile_number', $request->phone)->first();
+            $buyer = VendorUser::where('mobile_number', $phone)->first();
             $vendor = new Vendor();
-            $vendor->phone_number = $request->phone;
+            $vendor->phone_number = $phone;
             if ($buyer == null) {
                 $user = new User();
-                $user->email = "xx_" . $request->phone;
+                $user->email = "xx_" . $phone;
                 $user->password = bcrypt($request->password);
                 $user->role_id = 2;
                 $user->save();
@@ -111,13 +112,14 @@ class VendorController extends Controller
                 $user->activation_token = $reset;
                 $user->save();
 
-                $vendor->name = $request->phone;
+                $vendor->name = $phone;
                 $vendor->address = "";
             } else {
                 $user = User::where('id', $buyer->user_id)->first();
                 $vendor->name = $buyer->fname . ' ' . $buyer->lname;
                 $vendor->address = $buyer->address;
             }
+            $vendor->phone_number = $phone;
             $vendor->stage = -1;
             $vendor->user_id = $user->id;
             $vendor->save();
