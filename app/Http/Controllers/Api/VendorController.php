@@ -85,6 +85,54 @@ class VendorController extends Controller
         // return $r;
     }
 
+    public function initPhonePass(Request $request)
+    {
+        $vendor = Vendor::where('phone_number', $request->phone)->first();
+        $user = null;
+        $r = null;
+        if ($vendor != null) {
+            // $user = User::where('id', $vendor->user_id)->first();
+            // $reset = $user->id . mt_rand(0000, 9999);
+            // $user->activation_token = $reset;
+            // $user->save();
+            return response()->json(['status' => false,'message'=>"Vendor Already Exist"]);
+
+        } else {
+            $buyer = VendorUser::where('mobile_number', $request->phone)->first();
+            $vendor = new Vendor();
+            $vendor->phone_number = $request->phone;
+            if ($buyer == null) {
+                $user = new User();
+                $user->email = "xx_" . $request->phone;
+                $user->password = bcrypt($request->password);
+                $reset = $user->id . mt_rand(0000, 9999);
+                $user->role_id = 2;
+                $user->save();
+                $user->activation_token = $reset;
+                $user->save();
+
+                $vendor->name = $request->phone;
+                $vendor->address = "";
+            } else {
+                $user = User::where('id', $buyer->user_id)->first();
+                $vendor->name = $buyer->fname . ' ' . $buyer->lname;
+                $vendor->address = $buyer->address;
+            }
+            $vendor->stage = -1;
+            $vendor->user_id = $user->id;
+            $vendor->save();
+            $token = $user->createToken('logintoken')->accessToken;
+
+            return response()->json(['status' => true,'token'=>$token]);
+        }
+        // try {
+        //     $r = Aakash::sendMessage(['to' => $vendor->phone_number, "text" => "Your Activation Code is " . $user->activation_token]);
+        // } catch (\Throwable $th) {
+        //     return response()->json(['status' => false]);
+        // }
+        // return $r;
+    }
+
   
 
     public function verifyOTP(Request $request)
