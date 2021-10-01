@@ -151,7 +151,14 @@ class AuthController extends Controller
 
     public function forgotPhone(Request $request)
     {
-        $buyer = VendorUser::where('mobile_number', $request->phone)->first();
+        $buyer=null;
+        if($request->isset('vendor')){
+
+            $buyer = Vendor::where('phone_number', $request->phone)->first();
+        }else{
+            $buyer = VendorUser::where('mobile_number', $request->phone)->first();
+
+        }
         if ($buyer == null) {
             return response()->json(['status' => false, "message" => "Mobile No Not Found"]);
         }
@@ -172,10 +179,18 @@ class AuthController extends Controller
 
     public function resetPhone(Request $request)
     {
-        $buyer = VendorUser::where('mobile_number', $request->phone)->first();
+        $buyer=null;
+        if($request->isset('vendor')){
+
+            $buyer = Vendor::where('phone_number', $request->phone)->first();
+        }else{
+            $buyer = VendorUser::where('mobile_number', $request->phone)->first();
+
+        }
+
         if ($buyer == null) {
             return response()->json(['status' => false, "message" => "Mobile No Not Found"]);
-        }
+        }        
         $user = User::find($buyer->user_id);
         if ($user->activation_token != $request->token) {
             return response()->json(['status' => false, "message" => "Token Expired"]);
