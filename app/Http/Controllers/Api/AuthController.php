@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Channels\Aakash;
 use App\Http\Controllers\Controller;
+use App\model\Vendor\Vendor;
 use App\model\VendorUser\VendorUser;
 use App\Notifications\User\ApiPassForgot;
 use App\Rating;
