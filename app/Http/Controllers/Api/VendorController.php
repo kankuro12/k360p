@@ -105,13 +105,13 @@ class VendorController extends Controller
                 $user = new User();
                 $user->email = "xx_" . $request->phone;
                 $user->password = bcrypt($request->password);
-                $reset = $user->id . mt_rand(0000, 9999);
                 $user->role_id = 2;
                 $user->save();
+                $reset = $user->id . mt_rand(0000, 9999);
                 $user->activation_token = $reset;
                 $user->save();
 
-                $vendor->name = "";
+                $vendor->name = $request->phone;
                 $vendor->address = "";
             } else {
                 $user = User::where('id', $buyer->user_id)->first();
