@@ -8,6 +8,7 @@ use App\model\admin\VendorWithdrawl;
 use App\model\OrderItem;
 use App\model\Vendor\Vendor;
 use App\OrderPayment;
+use App\ReferalPayment;
 use Illuminate\Database\Eloquent\Model;
 
 class VendorAccount
@@ -62,8 +63,10 @@ class VendorAccount
         // dd($order);
         
         $referal_per=Product::where('product_id',$order->product_id)->select('referal_per')->first()->referal_per;
-        $this->vendorAccount->amount+=   (int)((($order->qty*$order->rate)*$referal_per)/100);
-        $this->vendorAccount->save();
+        $ref=new ReferalPayment();
+        $ref->amount=  (int)((($order->qty*$order->rate)*$referal_per)/100);
+        $ref->vendor_id=$this->vendor->id;
+        $ref->save();
 
 
     }
@@ -73,7 +76,10 @@ class VendorAccount
     }
 
     public function withdraw(){
-        return $this->vendorAccount->amount;
+        $currentDate = \Carbon\Carbon::now();
+        $old = $currentDate->subDays(7);
+        $ref = ReferalPayment::where('created_at','<=',$old)->sum('amount') - VendorWithdrawl::where('vendor_id',$this->vendor->id)->sum('admount');
+        return $this->vendorAccount->amount + $ref;
     }
 
     public function withdrawls(){
