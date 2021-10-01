@@ -14,6 +14,7 @@ use App\model\Vendor\Vendor;
 use App\model\VendorUser\VendorUser;
 use App\Notifications\User\ApiPassForgot;
 use App\Rating;
+use App\ReferalPayment;
 use App\User;
 use App\VendorVerification;
 use Illuminate\Http\Request;
@@ -370,9 +371,12 @@ class VendorController extends Controller
     public function withdraw(){
         $user=Auth::user();
         $vendor=Vendor::where('user_id',$user->id)->first();
-        $account=AdminVendorAccount::where('vendor_id',$vendor->id)->first();
+        $account=new VendorAccount($user->id);
         $withdraws=VendorWithdrawl::where('vendor_id',$vendor->id)->get();
-        return response()->json(['status' => true, 'withdraws' => $withdraws,'acc'=>$account]);
+        return response()->json(['status' => true, 'withdraws' => $withdraws,'acc'=>[
+            'amount'=>$account->withdraw(),
+            'pending'=>$account->pending(),
+        ]]);
 
     }
 }
