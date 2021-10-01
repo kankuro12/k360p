@@ -87,7 +87,7 @@ class VendorController extends Controller
 
     public function initPhonePass(Request $request)
     {
-        $vendor = Vendor::where('phone_number', $request->phone)->first();
+        $vendor = Vendor::where('phone_number',strval( $request->phone))->first();
         $user = null;
         $r = null;
         if ($vendor != null) {
@@ -111,7 +111,7 @@ class VendorController extends Controller
                 $user->activation_token = $reset;
                 $user->save();
 
-                $vendor->name = $request->phone;
+                $vendor->name = "";
                 $vendor->address = "";
             } else {
                 $user = User::where('id', $buyer->user_id)->first();
