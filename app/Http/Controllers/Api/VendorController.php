@@ -123,7 +123,7 @@ class VendorController extends Controller
             $vendor->save();
             $token = $user->createToken('logintoken')->accessToken;
 
-            return response()->json(['status' => true,'token'=>$token]);
+            return $this->getData($token,$user);
         }
         // try {
         //     $r = Aakash::sendMessage(['to' => $vendor->phone_number, "text" => "Your Activation Code is " . $user->activation_token]);
@@ -133,6 +133,21 @@ class VendorController extends Controller
         // return $r;
     }
 
+    private function getData($token,$user){
+        $vendor=Vendor::where('user_id',$user->id)->first();
+        $verification = VendorVerification::where('vendor_id', $vendor->id)->first();
+        if($verification!=null){
+
+            $vendor->bankaccount = $verification->bankaccount;
+            $vendor->bankname = $verification->bankname;
+            $vendor->citi = $verification->citizenship;
+        }else{
+            $vendor->bankaccount ='';
+            $vendor->bankname = '';
+        }
+        $account=AdminVendorAccount::where('vendor_id',$vendor->id)->first();
+        return response()->json(['status' => true,  'user' => $user, 'vendor' => $vendor,'acc'=>$account,'token'=>$token]);
+    }
   
 
     public function verifyOTP(Request $request)
