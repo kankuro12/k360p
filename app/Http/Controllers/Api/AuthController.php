@@ -152,7 +152,7 @@ class AuthController extends Controller
     public function forgotPhone(Request $request)
     {
         $buyer=null;
-        if($request->isset('vendor')){
+        if($request->filled('vendor')){
 
             $buyer = Vendor::where('phone_number', $request->phone)->first();
         }else{
@@ -180,7 +180,7 @@ class AuthController extends Controller
     public function resetPhone(Request $request)
     {
         $buyer=null;
-        if($request->isset('vendor')){
+        if($request->filled('vendor')){
 
             $buyer = Vendor::where('phone_number', $request->phone)->first();
         }else{
