@@ -371,7 +371,7 @@ class VendorController extends Controller
     public function withdraw(){
         $user=Auth::user();
         $vendor=Vendor::where('user_id',$user->id)->first();
-        $account=new VendorAccount($user->id);
+        $account=new VendorAccount($vendor->id);
         $withdraws=VendorWithdrawl::where('vendor_id',$vendor->id)->get();
         return response()->json(['status' => true, 'withdraws' => $withdraws,'acc'=>[
             'amount'=>$account->withdraw(),
